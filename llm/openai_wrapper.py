@@ -27,23 +27,32 @@ Reply with Yes or No, followed by a one-line reason.
     )
     return response.choices[0].message.content.strip()
 
-
-def analyze_sentiment(review_excerpt: str) -> str:
-    """Return 'Yes' or 'No' recommendation with a short explanation."""
+def analyze_sentiment(title: str, subtext: str) -> str:
+    """Return whether the reviewer recommends the movie as Yes, No or Maybe."""
     prompt = f"""
-Here is a short excerpt from a film review:
+You are an expert assistant analysing film reviews from the blog
+baradwajrangan.wordpress.com. Some posts on this site are not
+actual movie reviews while others, like the one on "DNA" by Nelson,
+are strongly negative. Keep these nuances in mind.
 
-"""
-{review_excerpt}
-"""
+Below are the post title and a short blurb from the review:
 
-Based on this, does the reviewer recommend the movie?
-Reply only with Yes or No and a one-line explanation.
+Title:
+"""{title}"""
+
+Subtext:
+"""{subtext}"""
+
+Determine whether the author recommends watching the movie.
+Look for sarcasm or negative phrasing.
+If the snippet does not appear to actually contain a movie review,
+reply with "No – not a review".
+Otherwise answer "Yes", "No" or "Maybe" followed by a concise reason.
 """
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.3,
+        temperature=0.2,
     )
     return response.choices[0].message.content.strip()
 
