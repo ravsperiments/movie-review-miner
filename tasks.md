@@ -8,13 +8,13 @@
 - [ ] Add retry/backoff logic for network failures
 
 #### 🧠 Milestone 2: Sentiment Analysis
-- [ ] Choose LLM source (OpenAI or local LLaMA)
-- [ ] Implement \`analyze_sentiment()\` in \`llm/openai_wrapper.py\` or \`llm/llama_wrapper.py\`
-- [ ] Design and test prompt: “Does the author recommend this movie?”
-- [ ] Tag each post as positive or not
+- [x] Choose LLM source (OpenAI or local LLaMA)
+- [x] Implement \`analyze_sentiment()\` in \`llm/openai_wrapper.py\` or \`llm/llama_wrapper.py\`
+- [x] Design and test prompt: “Does the author recommend this movie?”
+- [x] Tag each post as positive or not
 
 #### 🎬 Milestone 3: Curation & Output
-- [ ] Store positively reviewed movies in \`curated_movies.json\`
+- [x] Store movie reviews in Supabase database
 - [ ] Add function to pretty-print or export results (e.g. CSV, markdown)
 - [ ] Optionally group results by year or genre
 
