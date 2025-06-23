@@ -1,7 +1,11 @@
 import sqlite3
 from typing import Dict, List, Tuple
 
+from utils.logger import get_logger
+
 DB_PATH = "reviews.db"
+
+logger = get_logger(__name__)
 
 
 def init_db(db_path: str = DB_PATH) -> None:
@@ -22,6 +26,7 @@ def init_db(db_path: str = DB_PATH) -> None:
     )
     conn.commit()
     conn.close()
+    logger.debug("Database initialised at %s", db_path)
 
 
 def save_post(post: Dict[str, str], db_path: str = DB_PATH) -> None:
@@ -49,6 +54,7 @@ def save_post(post: Dict[str, str], db_path: str = DB_PATH) -> None:
             ),
         )
         conn.commit()
+    logger.debug("Saved post to %s", db_path)
 
 
 def update_recommendation(link: str, recommendation: str, db_path: str = DB_PATH) -> None:
@@ -58,6 +64,7 @@ def update_recommendation(link: str, recommendation: str, db_path: str = DB_PATH
             (recommendation, link),
         )
         conn.commit()
+    logger.debug("Updated recommendation for %s", link)
 
 
 def fetch_unanalyzed(db_path: str = DB_PATH) -> List[Tuple[str, str]]:
@@ -66,5 +73,7 @@ def fetch_unanalyzed(db_path: str = DB_PATH) -> List[Tuple[str, str]]:
         cur.execute(
             "SELECT link, full_review FROM posts WHERE recommendation IS NULL"
         )
-        return cur.fetchall()
+        rows = cur.fetchall()
+        logger.debug("Fetched %d unanalyzed posts", len(rows))
+        return rows
 
