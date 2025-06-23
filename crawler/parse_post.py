@@ -1,7 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
+from requests.exceptions import RequestException
+
+from utils.logger import get_logger
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
+
+logger = get_logger(__name__)
 
 def parse_post(url, max_chars=1200):
     """
@@ -10,8 +15,13 @@ def parse_post(url, max_chars=1200):
     - Short review blurb (1st paragraph)
     - Full review excerpt (2nd paragraph and beyond)
     """
-    res = requests.get(url, headers=HEADERS)
-    res.raise_for_status()
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=10)
+        res.raise_for_status()
+    except RequestException as e:
+        logger.error("Failed fetching %s: %s", url, e)
+        raise
+
     soup = BeautifulSoup(res.text, "html.parser")
 
     # Extract Title
@@ -36,6 +46,8 @@ def parse_post(url, max_chars=1200):
 
     short_review = paragraphs[0].get_text(strip=True) if len(paragraphs) >= 1 else ""
     full_review = " ".join(p.get_text(strip=True) for p in paragraphs[1:])
+
+    logger.debug("Parsed post '%s' (%s chars)", title, len(full_review))
 
     return {
         "title": title,

@@ -1,9 +1,14 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from openai.error import OpenAIError
+
+from utils.logger import get_logger
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+logger = get_logger(__name__)
 
 
 def is_film_review(title: str, short_review: str) -> str:
@@ -25,12 +30,17 @@ Short Review Snippet:
 """{short_review}"""
 '''
 
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-    )
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+        )
+        logger.debug("is_film_review response: %s", response)
+        return response.choices[0].message.content.strip()
+    except OpenAIError as e:
+        logger.error("OpenAI is_film_review failed: %s", e)
+        raise
 
 
 def analyze_sentiment(title: str, subtext: str) -> str:
@@ -56,10 +66,15 @@ Subtext:
 """{subtext}"""
 '''
 
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-    )
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+        )
+        logger.debug("analyze_sentiment response: %s", response)
+        return response.choices[0].message.content.strip()
+    except OpenAIError as e:
+        logger.error("OpenAI analyze_sentiment failed: %s", e)
+        raise
 
