@@ -2,39 +2,33 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# Load API key from .env
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 def is_film_review(title: str, short_review: str) -> str:
-    """
-    Uses GPT to decide if this blog post looks like a film review.
-    Returns: 'Yes – ...' or 'No – ...'
-    """
+    """Return 'Yes' or 'No' along with a short explanation."""
     prompt = f"""
 Given the following blog post metadata:
 
 Title:
-\"\"\"{title}\"\"\"
+"""{title}"""
 
 Short Review Snippet:
-\"\"\"{short_review}\"\"\"
+"""{short_review}"""
 
 Does this appear to be a film review?
 Reply with Yes or No, followed by a one-line reason.
 """
-
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
     )
-
     return response.choices[0].message.content.strip()
 
 def analyze_sentiment(title: str, subtext: str) -> str:
     """Return whether the reviewer recommends the movie as Yes, No or Maybe."""
-
     prompt = f"""
 You are an expert assistant analysing film reviews from the blog
 baradwajrangan.wordpress.com. Some posts on this site are not
@@ -55,11 +49,10 @@ If the snippet does not appear to actually contain a movie review,
 reply with "No – not a review".
 Otherwise answer "Yes", "No" or "Maybe" followed by a concise reason.
 """
-
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
     )
-
     return response.choices[0].message.content.strip()
+
