@@ -9,17 +9,22 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def is_film_review(title: str, short_review: str) -> str:
     """Return 'Yes' or 'No' along with a short explanation."""
     prompt = f'''
-Given the following blog post metadata:
+You are a classifier that determines whether a blog post is a film review.
+
+Rules:
+- If the title contains phrases like "Readers Write In", "Readers Write", or similar, it is *not* a film review.
+- Otherwise, if the title and snippet suggest the post is about the plot, direction, performances, or overall quality of a specific movie, it *is* a review.
+- If unclear or off-topic, mark it as *not* a review.
+
+Respond with "Yes" or "No", followed by a one-line reason.
 
 Title:
 """{title}"""
 
 Short Review Snippet:
 """{short_review}"""
-
-Does this appear to be a film review?
-Reply with Yes or No, followed by a one-line reason.
 '''
+
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
@@ -27,28 +32,30 @@ Reply with Yes or No, followed by a one-line reason.
     )
     return response.choices[0].message.content.strip()
 
+
 def analyze_sentiment(title: str, subtext: str) -> str:
     """Return whether the reviewer recommends the movie as Yes, No or Maybe."""
     prompt = f'''
-You are an expert assistant analysing film reviews from the blog
-baradwajrangan.wordpress.com. Some posts on this site are not
-actual movie reviews while others, like the one on "DNA" by Nelson,
-are strongly negative. Keep these nuances in mind.
+You are a sentiment analyzer tuned to the writing style of film critic Baradwaj Rangan (BR).
+Classify the review as one of: "Yes", "No", or "Maybe" based on how the movie is ultimately portrayed.
 
-Below are the post title and a short blurb from the review:
+Guidelines:
+- Respond "Yes" if the review has no significant negative remarks or ends with an overall positive impression.
+- Respond "No" if the review includes strong negative critique that outweighs any praise.
+- Respond "Maybe" if the review is balanced, equivocating, or mildly critical but suggests it's still watchable.
+- If the snippet does not appear to be a movie review at all, reply with "No – not a review".
+
+Only respond with one of: Yes, No, Maybe, or No – not a review.
+
+Below are the post title and a short excerpt from the review:
 
 Title:
 """{title}"""
 
 Subtext:
 """{subtext}"""
-
-Determine whether the author recommends watching the movie.
-Look for sarcasm or negative phrasing.
-If the snippet does not appear to actually contain a movie review,
-reply with "No – not a review".
-Otherwise answer "Yes", "No" or "Maybe" followed by a concise reason.
 '''
+
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
