@@ -29,8 +29,8 @@ def main():
                 print("⏭️ Skipping: Not a review post.\n")
                 continue
 
-            # Step 2: Sentiment analysis
-            sentiment = analyze_sentiment(data["full_review"])
+            # Step 2: Sentiment analysis using title and subtext
+            sentiment = analyze_sentiment(data["title"], data["short_review"])
             print(f"🤖 Sentiment: {sentiment}\n")
 
             # Only keep recommended movies
