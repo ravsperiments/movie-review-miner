@@ -1,3 +1,5 @@
+"""Asynchronous crawler that stores blog links into Supabase."""
+
 import asyncio
 import requests
 from bs4 import BeautifulSoup
@@ -19,6 +21,8 @@ def extract_post_text(html: str) -> str:
     return content.get_text(separator="\n", strip=True) if content else ""
 
 async def crawl_blog_links():
+    """Crawl blog pages and persist new review links."""
+
     # Fetch all existing links from Supabase
     existing_links = set()
     try:

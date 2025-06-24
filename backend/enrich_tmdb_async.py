@@ -1,3 +1,5 @@
+"""Link Supabase reviews to TMDb entries and update movie metadata."""
+
 import asyncio
 from db.review_queries import (
     get_unenriched_links,
@@ -11,6 +13,8 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 async def enrich_reviews():
+    """Populate movie_id and metadata for any unenriched reviews."""
+
     reviews = get_unenriched_links()
     logger.info("Found %s reviews without movie linkage", len(reviews))
 

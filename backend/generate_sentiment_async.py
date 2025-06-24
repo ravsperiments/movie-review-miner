@@ -1,3 +1,5 @@
+"""Utility script to backfill sentiment for previously stored reviews."""
+
 import asyncio
 from db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
 from llm.openai_wrapper import analyze_sentiment
@@ -6,6 +8,8 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 async def enrich_sentiment():
+    """Fetch reviews lacking sentiment and populate that field."""
+
     reviews = get_reviews_missing_sentiment()
     logger.info(f"🔍 Found {len(reviews)} reviews without sentiment.")
 

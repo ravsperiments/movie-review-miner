@@ -1,4 +1,6 @@
 
+"""Database helpers for managing movie records in Supabase."""
+
 from datetime import datetime
 from db.supabase_client import supabase
 from utils.logger import get_logger
@@ -6,6 +8,7 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 def get_movie_by_title(title: str) -> dict | None:
+    """Return a movie record by title if it exists."""
     try:
         result = (
             supabase.table("movies")
@@ -20,6 +23,7 @@ def get_movie_by_title(title: str) -> dict | None:
         return None
 
 def create_movie(title: str) -> str:
+    """Insert a new movie row and return its UUID."""
     try:
         result = (
             supabase.table("movies")
@@ -32,6 +36,7 @@ def create_movie(title: str) -> str:
         raise
 
 def update_movie_metadata(movie_id: str, metadata: dict):
+    """Update release year, language and genre for a movie."""
     try:
         update = {
             "release_year": metadata.get("release_year"),

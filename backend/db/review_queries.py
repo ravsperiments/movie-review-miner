@@ -1,3 +1,5 @@
+"""Query helpers for interacting with review rows in Supabase."""
+
 from datetime import datetime
 from db.supabase_client import supabase
 from utils.logger import get_logger
