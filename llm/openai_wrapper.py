@@ -63,3 +63,23 @@ Subtext:
     )
     return response.choices[0].message.content.strip()
 
+
+def extract_movie_title(post_title: str) -> str:
+    """Extract the name of the movie being reviewed, if any."""
+    prompt = f'''
+You are an assistant that extracts movie titles from blog post headlines on the film blog baradwajrangan.wordpress.com.
+
+Given the following blog post title:
+"""{post_title}"""
+
+Return ONLY the name of the movie being reviewed. Do not include the director or actor names, and do not include quotes or additional commentary. If no movie title is present, return "None".
+'''
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
+    )
+    return response.choices[0].message.content.strip()
+
+
