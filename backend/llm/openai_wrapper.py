@@ -114,11 +114,16 @@ Given the following blog post title:
 Return ONLY the name of the movie being reviewed. Do not include the director or actor names, and do not include quotes or additional commentary. If no movie title is present, return "None".
 '''
 
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0,
-    )
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+        logger.debug("extract_movie_title response: %s", response)
+        return response.choices[0].message.content.strip()
+    except OpenAIError as e:
+        logger.error("OpenAI extract_movie_title failed: %s", e)
+        raise
 
 

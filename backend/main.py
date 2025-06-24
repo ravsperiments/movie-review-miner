@@ -47,9 +47,11 @@ def crawl_and_store() -> None:
                 movie_title = extract_movie_title(data['title'])
                 if movie_title.lower() == "none":
                     movie_title = None
-                print(movie_title)
+                logger.debug("Extracted movie title: %s", movie_title)
             except Exception as e:
-                print(f"⚠️ Error extracting movie title from: {data['title']} — {e}")
+                logger.error(
+                    "Error extracting movie title from '%s': %s", data['title'], e
+                )
                 movie_title = None
 
             # Step 3: Sentiment analysis using LLM
@@ -62,12 +64,15 @@ def crawl_and_store() -> None:
                 logger.error("Sentiment analysis failed: %s", e)
                 sentiment = None
 
-            print(f"✅ RECOMMENDED")
-            print(f"Blog Title: {data['title']} by {reviewer}\n")
-            print(f"Movie Title: {movie_title}\n")
-            print(f"Sentiment: {sentiment}\n")
-            print(f"Short Review:\n{data['short_review']}\n")
-            print(f"Full Review Excerpt:\n{data['full_review']}\n")
+            logger.info(
+                "RECOMMENDED: %s by %s | Movie: %s | Sentiment: %s",
+                data["title"],
+                reviewer,
+                movie_title,
+                sentiment,
+            )
+            logger.debug("Short Review: %s", data["short_review"])
+            logger.debug("Full Review Excerpt: %s", data["full_review"])
 
             if sentiment is not None:
                 store_review({
