@@ -1,22 +1,28 @@
 """Link Supabase reviews to TMDb entries and update movie metadata."""
 
 import asyncio
-from db.review_queries import get_unenriched_links, update_review_with_movie_id
+from db.review_queries import (
+    get_unenriched_links,
+    update_review_with_movie_id,
+)
 from db.movie_queries import get_movie_by_title, create_movie, update_movie_metadata
 from llm.openai_wrapper import extract_movie_title
 from tmdb.tmdb_api import search_tmdb  # abstract your TMDb API call here
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 async def enrich_reviews():
     """Populate movie_id and metadata for any unenriched reviews."""
 
     reviews = get_unenriched_links()
-    print(f"🔍 Found {len(reviews)} reviews without movie linkage.")
+    logger.info("Found %s reviews without movie linkage", len(reviews))
 
     for review in reviews:
         try:
             title = extract_movie_title(review["blog_title"])
             if not title:
-                print(f"❌ Skipping {review['id']} - no movie title extracted")
+                logger.warning("Skipping %s - no movie title extracted", review["id"])
                 continue
 
             movie = get_movie_by_title(title)
@@ -31,9 +37,9 @@ async def enrich_reviews():
             if metadata:
                 update_movie_metadata(movie_id, metadata)
 
-            print(f"✅ Enriched review {review['id']} with movie {title}")
+            logger.info("Enriched review %s with movie %s", review["id"], title)
         except Exception as e:
-            print(f"❌ Failed to enrich review {review.get('id', '?')}: {e}")
+            logger.error("Failed to enrich review %s: %s", review.get("id", "?"), e)
 
 if __name__ == "__main__":
     asyncio.run(enrich_reviews())
