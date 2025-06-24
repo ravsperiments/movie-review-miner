@@ -12,9 +12,11 @@
 - [x] Implement \`analyze_sentiment()\` in \`llm/openai_wrapper.py\` or \`llm/llama_wrapper.py\`
 - [x] Design and test prompt: “Does the author recommend this movie?”
 - [x] Tag each post as positive or not
+- [x] Provide async script to enrich sentiment for reviews missing data
 
 #### 🎬 Milestone 3: Curation & Output
 - [x] Store movie reviews in Supabase database
+- [x] Enrich reviews with movie metadata from TMDb
 - [ ] Add function to pretty-print or export results (e.g. CSV, markdown)
 - [ ] Optionally group results by year or genre
 
