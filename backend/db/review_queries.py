@@ -1,0 +1,80 @@
+from datetime import datetime
+from db.supabase_client import supabase
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+def get_latest_post_date() -> datetime | None:
+    """Fetch the most recent post_date stored in Supabase."""
+    try:
+        result = supabase.table("reviews") \
+            .select("post_date") \
+            .order("post_date", desc=True) \
+            .limit(1) \
+            .execute()
+        
+        latest_post_date_str = result.data[0]["post_date"] if result.data else None
+        if latest_post_date_str:
+            return datetime.strptime(latest_post_date_str, "%Y-%m-%d")
+    except Exception as e:
+        logger.error("Failed to fetch latest post_date: %s", e)
+    return None
+
+
+def get_links_after_date(min_post_date: datetime) -> set[str]:
+    """
+    Fetch all review links from Supabase where post_date >= min_post_date.
+
+    Args:
+        min_post_date: The cutoff date for filtering reviews.
+
+    Returns:
+        A set of URLs (strings).
+    """
+    try:
+        result = (
+            supabase.table("reviews")
+            .select("link, post_date")
+            .gte("post_date", min_post_date.strftime("%Y-%m-%d"))
+            .execute()
+        )
+        return {r["link"] for r in result.data if "link" in r}
+    except Exception as e:
+        logger.error("Failed to fetch links after %s: %s", min_post_date, e)
+        return set()
+    
+def get_unenriched_links() -> list[dict]:
+    """
+    Fetch all reviews from Supabase where movie_id is null.
+
+    Returns:
+        A list of dicts with keys 'id', 'link', and 'blog_title'.
+    """
+    try:
+        result = (
+            supabase.table("reviews")
+            .select("id, link, blog_title, movie_id")
+            .is_('movie_id', None)
+            .execute()
+        )
+        return [
+            {
+                "id": r["id"],
+                "link": r["link"],
+                "blog_title": r.get("blog_title", "")
+            }
+            for r in result.data
+            if "id" in r and "link" in r
+        ]
+    except Exception as e:
+        logger.error("Failed to fetch unenriched links: %s", e)
+        return []
+
+def update_review_with_movie_id(review_id: str, movie_id: str):
+    """Update review with associated movie UUID."""
+    try:
+        supabase.table("reviews").update({"movie_id": movie_id}).eq("id", review_id).execute()
+    except Exception as e:
+        logger.error("Failed to update review %s with movie_id %s: %s", review_id, movie_id, e)
+
+

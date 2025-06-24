@@ -1,5 +1,6 @@
 """Helpers for downloading and parsing individual blog posts."""
-
+import re
+from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
@@ -40,9 +41,25 @@ def parse_post(url: str, max_chars: int = 1200):
     title_tag = soup.select_one("div#header-about h1")
     title = title_tag.get_text(strip=True) if title_tag else "Untitled"
 
-    # Extract the publication date from <time> or <span class='published'>
-    date_tag = soup.select_one("time.entry-date") or soup.select_one("span.published")
-    post_date = date_tag.get_text(strip=True) if date_tag else ""
+    # Date from <em> elements, e.g. <em>Posted on June 20, 2025</em>
+    post_date = ""
+    for em in soup.select("div.post p.fl em"):
+        text = em.get_text(strip=True)
+        match = re.search(r"Posted on (\w+ \d{1,2}, \d{4})", text)
+        if match:
+            date_str = match.group(1)
+            try:
+                dt = datetime.strptime(date_str, "%B %d, %Y").date()
+                post_date = dt.isoformat()
+                break
+            except ValueError:
+                logger.warning("Failed to parse date string: %s", date_str)
+
+    # Fallback: extract date from URL if missing
+    if not post_date:
+        m = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
+        if m:
+            post_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
 
     # Extract the reviewer's name if one is mentioned
     author_tag = (
@@ -65,7 +82,7 @@ def parse_post(url: str, max_chars: int = 1200):
 
     return {
         "title": title,
-        "date": post_date,
+        "post_date": post_date,
         "reviewer": reviewer,
         "short_review": short_review,
         "full_review": full_review[:max_chars]

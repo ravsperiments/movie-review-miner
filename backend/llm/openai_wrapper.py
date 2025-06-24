@@ -3,7 +3,7 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from openai.error import OpenAIError
+from openai import OpenAIError
 
 from utils.logger import get_logger
 
@@ -50,7 +50,7 @@ Short Review Snippet:
             temperature=0.2,
         )
         logger.debug("is_film_review response: %s", response)
-        return response.choices[0].message.content.strip()
+        return response.choices[0].message.content.strip().lower().startswith("yes")
     except OpenAIError as e:
         # Surface any API errors to the caller
         logger.error("OpenAI is_film_review failed: %s", e)
