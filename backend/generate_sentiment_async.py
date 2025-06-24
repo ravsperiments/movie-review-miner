@@ -1,15 +1,26 @@
-# generate_sentiment_async.py
-from db.store_review import supabase
-from llm.openai_wrapper import analyze_sentiment
 import asyncio
+from db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
+from llm.openai_wrapper import analyze_sentiment
+from utils.logger import get_logger
 
-async def process_sentiment(record):
-    sentiment = analyze_sentiment(record["blog_title"], record["subtext"])
-    supabase.table("reviews").update({"sentiment": sentiment}).eq("id", record["id"]).execute()
+logger = get_logger(__name__)
 
-async def main():
-    records = supabase.table("reviews").select("*").is_("sentiment", "null").execute().data
-    await asyncio.gather(*(process_sentiment(r) for r in records))
+async def enrich_sentiment():
+    reviews = get_reviews_missing_sentiment()
+    logger.info(f"🔍 Found {len(reviews)} reviews without sentiment.")
+
+    for review in reviews:
+        try:
+            title = review.get("blog_title") or ""
+            subtext = review.get("short_review") or ""
+            sentiment = analyze_sentiment(title, subtext)
+            if sentiment:
+                update_sentiment_for_review(review["id"], sentiment)
+                logger.info(f"✅ Updated sentiment for: {title} -> {sentiment}")
+            else:
+                logger.warning(f"⚠️ No sentiment returned for: {title}")
+        except Exception as e:
+            logger.error(f"❌ Failed sentiment analysis for {title}: {e}")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(enrich_sentiment())

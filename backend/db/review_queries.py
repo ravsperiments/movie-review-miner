@@ -77,4 +77,23 @@ def update_review_with_movie_id(review_id: str, movie_id: str):
     except Exception as e:
         logger.error("Failed to update review %s with movie_id %s: %s", review_id, movie_id, e)
 
+def get_reviews_missing_sentiment() -> list[dict]:
+    """Fetch all reviews that do not yet have sentiment."""
+    try:
+        result = (
+            supabase.table("reviews")
+            .select("id, blog_title, short_review, sentiment")
+            .is_('sentiment', None)
+            .execute()
+        )
+        return result.data or []
+    except Exception as e:
+        logger.error("Failed to fetch reviews without sentiment: %s", e)
+        return []
 
+def update_sentiment_for_review(review_id: str, sentiment: str):
+    """Update the sentiment for a given review ID."""
+    try:
+        supabase.table("reviews").update({"sentiment": sentiment}).eq("id", review_id).execute()
+    except Exception as e:
+        logger.error("Failed to update sentiment for review %s: %s", review_id, e)
