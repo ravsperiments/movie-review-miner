@@ -1,3 +1,5 @@
+"""Link Supabase reviews to TMDb entries and update movie metadata."""
+
 import asyncio
 from db.review_queries import get_unenriched_links, update_review_with_movie_id
 from db.movie_queries import get_movie_by_title, create_movie, update_movie_metadata
@@ -5,6 +7,8 @@ from llm.openai_wrapper import extract_movie_title
 from tmdb.tmdb_api import search_tmdb  # abstract your TMDb API call here
 
 async def enrich_reviews():
+    """Populate movie_id and metadata for any unenriched reviews."""
+
     reviews = get_unenriched_links()
     print(f"🔍 Found {len(reviews)} reviews without movie linkage.")
 
