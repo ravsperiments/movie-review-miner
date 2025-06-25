@@ -2,9 +2,11 @@
 
 import os
 import requests
+from utils.logger import get_logger
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 TMDB_API_URL = "https://api.themoviedb.org/3"
+logger = get_logger(__name__)
 
 def get_movie_metadata(movie_title):
     if not TMDB_API_KEY:
@@ -36,5 +38,5 @@ def get_movie_metadata(movie_title):
             "title": movie.get("title"),
         }
     except Exception as e:
-        print(f"❌ TMDb metadata fetch failed for '{movie_title}': {e}")
+        logger.error("TMDb metadata fetch failed for '%s': %s", movie_title, e)
         return {}

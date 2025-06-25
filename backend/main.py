@@ -89,7 +89,7 @@ def crawl_and_store() -> None:
             logger.error("Error processing %s: %s", link, e)
 
 def main():
-    print("🎬 Starting Movie Review Miner...\n")
+    logger.info("\U0001F3AC Starting Movie Review Miner...")
     crawl_and_store()
 
 
