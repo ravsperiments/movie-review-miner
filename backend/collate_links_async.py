@@ -41,7 +41,7 @@ async def crawl_blog_links():
             res = requests.get(link, timeout=10)
             res.raise_for_status()
             extracted_text = parse_post(link)
-            print(extracted_text)
+            logger.debug("Parsed post data: %s", extracted_text)
 
             if not extracted_text:
                 logger.warning("No content extracted from %s", link)
