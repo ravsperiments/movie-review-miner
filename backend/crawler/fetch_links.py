@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 
 from utils.logger import get_logger
 from utils.io_helpers import write_failure
+from db.review_queries import get_latest_post_date, get_links_posted_after_date
 
 BASE_URL = "https://baradwajrangan.wordpress.com"
 CONCURRENT_FETCHES = 10
@@ -26,7 +27,6 @@ HEADERS = {
 def extract_links_from_html(html: str, page: int) -> list[tuple[int, int, str]]:
     soup = BeautifulSoup(html, "html.parser")
 
-    # Combined selector for page 1 and paginated pages
     anchors = soup.select(
         "div.featured_content h2 a[rel='bookmark'], div.post h2 a[rel='bookmark']"
     )
@@ -46,24 +46,13 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
             async with semaphore:
                 async with async_timeout.timeout(10):
                     async with session.get(url, headers=HEADERS) as response:
-                        logger.debug("Status code for page %s: %s", page, response.status)
-                        logger.debug("Headers: %s", response.headers)
-
                         html = await response.text()
 
-                        logger.debug("Fetched HTML length for page %s: %s", page, len(html))
                         if page == 1 and attempt == 1:
                             with open("debug_page_1.html", "w") as f:
                                 f.write(html)
-
 
                         logger.info("Page %s attempt %s length=%s", page, attempt, len(html))
-
-                        # Write debug file even if empty
-                        if page == 1 and attempt == 1:
-                            with open("debug_page_1.html", "w") as f:
-                                f.write(html)
-
                         return extract_links_from_html(html, page)
 
         except Exception as e:
@@ -74,15 +63,30 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
     write_failure("failed_pages.txt", str(page), "max retries")
     return []
 
-
 async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list[tuple[int, int, str]]:
+    """
+    Fetch blog post links between start_page and end_page.
+    Stops early if a recent link (already stored) is encountered.
+    """
+    latest_date = get_latest_post_date()
+    recent_links = get_links_posted_after_date(latest_date) if latest_date else set()
+    logger.info("Latest post date: %s — Loaded %s recent links", latest_date, len(recent_links))
+
     connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
+    all_links: list[tuple[int, int, str]] = []
+
     async with aiohttp.ClientSession(connector=connector) as session:
-        tasks = [fetch_listing_page(session, page) for page in range(start_page, end_page + 1)]
-        links: list[tuple[int, int, str]] = []
-        for task in tqdm(asyncio.as_completed(tasks), total=len(tasks)):
-            links.extend(await task)
-        return links
+        for page in range(start_page, end_page + 1):
+            page_links = await fetch_listing_page(session, page)
+
+            for triple in page_links:
+                if triple[2] in recent_links:
+                    logger.info("Encountered known link: %s — stopping fetch early.", triple[2])
+                    return all_links
+                all_links.append(triple)
+
+    logger.info("Fetched total of %s links before early stop or completion", len(all_links))
+    return all_links
 
 def get_post_links(page: int) -> list[str]:
     """

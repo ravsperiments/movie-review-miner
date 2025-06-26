@@ -23,7 +23,7 @@ def get_latest_post_date() -> datetime | None:
     return None
 
 
-def get_links_after_date(min_post_date: datetime) -> set[str]:
+def get_links_posted_after_date(min_post_date: datetime) -> set[str]:
     """
     Fetch all review links from Supabase where post_date >= min_post_date.
 
