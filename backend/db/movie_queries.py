@@ -54,8 +54,8 @@ def get_movies_missing_metadata() -> list[dict]:
     """Return movies that do not yet have TMDb metadata."""
     try:
         result = (
-            supabase.table("movies")
-            .select("id, title, release_year, language, genre, popularity, poster_path")
+            supabase.table("movies_with_review_year")
+            .select("id, title, release_year, language, genre, review_year")
             .is_("release_year", None)
             .execute()
         )
