@@ -22,8 +22,8 @@
 - [x] Add progress bar with \`tqdm\`
 - [x] Add logging to file
 
-#### 🧵 Milestone 5: Task Queue Orchestration
-- [x] Create RQ setup with `run_worker.py` and `enqueue_tasks.py`
+#### 🧵 Milestone 5: Async Batch Orchestration
+- [x] Replaced RQ setup with asyncio.gather
 - [x] Add subprocess-safe job runner using `parse_post_subprocess.py`
 - [ ] Modify `get_post_links()` to support pagination (page-wise crawling)
 - [ ] Create `enqueue_link_batches()` to enqueue one job per page (e.g. `get_post_links_batch(page)`)
@@ -32,8 +32,8 @@
 - [ ] Create `save_to_db(data)` function to persist parsed results
 - [ ] Chain parsing jobs to enqueue `save_to_db()` with parsed result
 - [ ] Add fallback to store failed results in `failed_links.txt` or log file
-- [ ] Use RQ job metadata to track status and timing
-- [ ] Optionally add job dependency using `depends_on` to enforce fetch → parse → save order
+- [ ] Use logging to track status and timing
+- [ ] Ensure tasks run in the correct order
 - [ ] Implement CLI to reprocess failed links (retry mode)
 
 #### 🚀 Milestone 6: Polish
