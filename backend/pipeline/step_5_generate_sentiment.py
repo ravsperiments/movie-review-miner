@@ -17,6 +17,7 @@ def generate_sentiment() -> None:
             sentiment = analyze_sentiment(
                 review.get("blog_title", ""),
                 review.get("short_review", ""),
+                review.get("full_excerpt", ""),
             )
 
             if not sentiment:
@@ -36,3 +37,8 @@ def generate_sentiment() -> None:
                 "Sentiment analysis failed for %s: %s", review.get("id"), e, exc_info=True
             )
             write_failure("failed_sentiment.txt", str(review.get("id")), e)
+
+if __name__ == "__main__":
+    import warnings
+    warnings.filterwarnings("ignore", category=RuntimeWarning)
+    generate_sentiment()
