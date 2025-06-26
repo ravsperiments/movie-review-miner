@@ -7,18 +7,27 @@ from tqdm import tqdm
 
 logger = get_logger(__name__)
 
+CONCURRENT_REQUESTS = 5
+semaphore = asyncio.Semaphore(CONCURRENT_REQUESTS)
+
+async def _enrich_movie(movie: dict) -> None:
+    try:
+        async with semaphore:
+            metadata = await search_tmdb(movie["title"])
+        if metadata:
+            update_movie_metadata(movie["id"], metadata)
+            logger.info("Updated metadata for %s", movie["title"])
+        else:
+            logger.warning("No metadata found for %s", movie["title"])
+    except Exception as e:
+        logger.error("TMDb enrichment failed for %s: %s", movie.get("title"), e)
+
+
 async def enrich_metadata() -> None:
     """Fill in metadata for movies lacking it using TMDb."""
     movies = get_movies_missing_metadata()
     logger.info("Enriching metadata for %s movies", len(movies))
 
-    for movie in tqdm(movies):
-        try:
-            metadata = await search_tmdb(movie["title"])
-            if metadata:
-                update_movie_metadata(movie["id"], metadata)
-                logger.info("Updated metadata for %s", movie["title"])
-            else:
-                logger.warning("No metadata found for %s", movie["title"])
-        except Exception as e:
-            logger.error("TMDb enrichment failed for %s: %s", movie.get("title"), e)
+    tasks = [_enrich_movie(movie) for movie in movies]
+    await asyncio.gather(*tasks, return_exceptions=True)
+    logger.info("Metadata enrichment complete")

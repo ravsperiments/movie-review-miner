@@ -5,10 +5,14 @@ from tqdm.asyncio import tqdm
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
+from utils.logger import get_logger
+
 BASE_URL = "https://baradwajrangan.wordpress.com"
 CONCURRENT_FETCHES = 10
 MAX_RETRIES = 3
 semaphore = asyncio.Semaphore(CONCURRENT_FETCHES)
+
+logger = get_logger(__name__)
 
 HEADERS = {
     "User-Agent": (
@@ -34,25 +38,25 @@ def extract_links_from_html(html: str, page: int) -> list[tuple[int, int, str]]:
 
 async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[tuple[int, int, str]]:
     url = BASE_URL if page == 1 else f"{BASE_URL}/page/{page}/"
-    print(f"🌐 Fetching: {url}")  # log URL
+    logger.info("Fetching %s", url)
 
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             async with semaphore:
                 async with async_timeout.timeout(10):
                     async with session.get(url, headers=HEADERS) as response:
-                        print(f"✅ Status code for page {page}: {response.status}")
-                        print(f"✅ Headers: {response.headers}")
+                        logger.debug("Status code for page %s: %s", page, response.status)
+                        logger.debug("Headers: %s", response.headers)
 
                         html = await response.text()
 
-                        print(f"✅ Fetched HTML length for page {page}: {len(html)}")
+                        logger.debug("Fetched HTML length for page %s: %s", page, len(html))
                         if page == 1 and attempt == 1:
                             with open("debug_page_1.html", "w") as f:
                                 f.write(html)
 
 
-                        print(f"📄 Page {page}, attempt {attempt}, length={len(html)}")
+                        logger.info("Page %s attempt %s length=%s", page, attempt, len(html))
 
                         # Write debug file even if empty
                         if page == 1 and attempt == 1:
@@ -62,10 +66,10 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
                         return extract_links_from_html(html, page)
 
         except Exception as e:
-            print(f"⚠️ Attempt {attempt} failed for page {page}: {e}")
+            logger.warning("Attempt %s failed for page %s: %s", attempt, page, e)
             await asyncio.sleep(2 ** (attempt - 1))
 
-    print(f"❌ Giving up on page {page} after {MAX_RETRIES} retries")
+    logger.error("Giving up on page %s after %s retries", page, MAX_RETRIES)
     return []
 
 
