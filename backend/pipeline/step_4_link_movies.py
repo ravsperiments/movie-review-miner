@@ -24,3 +24,8 @@ def link_movies() -> None:
             logger.info("Linked review %s -> movie %s", review["id"], title)
         except Exception as e:
             logger.error("Movie link failed for %s: %s", review.get("id"), e)
+
+if __name__ == "__main__":
+    import warnings
+    warnings.filterwarnings("ignore", category=RuntimeWarning)
+    link_movies()
