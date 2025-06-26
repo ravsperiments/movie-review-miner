@@ -2,6 +2,7 @@
 from db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
 from llm.openai_wrapper import analyze_sentiment
 from utils.logger import get_logger
+from utils.io_helpers import write_failure
 from tqdm import tqdm
 
 logger = get_logger(__name__)
@@ -20,4 +21,7 @@ def generate_sentiment() -> None:
             else:
                 logger.warning("No sentiment returned for review %s", review["id"])
         except Exception as e:
-            logger.error("Sentiment analysis failed for %s: %s", review.get("id"), e)
+            logger.error(
+                "Sentiment analysis failed for %s: %s", review.get("id"), e, exc_info=True
+            )
+            write_failure("failed_sentiment.txt", str(review.get("id")), e)
