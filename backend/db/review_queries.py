@@ -23,7 +23,7 @@ def get_latest_post_date() -> datetime | None:
     return None
 
 
-def get_links_posted_after_date(min_post_date: datetime) -> set[str]:
+def get_recent_links() -> set[str]:
     """
     Fetch all review links from Supabase where post_date >= min_post_date.
 
@@ -35,14 +35,13 @@ def get_links_posted_after_date(min_post_date: datetime) -> set[str]:
     """
     try:
         result = (
-            supabase.table("reviews")
+            supabase.table("recent_review_links")
             .select("link, post_date")
-            .gte("post_date", min_post_date.strftime("%Y-%m-%d"))
             .execute()
         )
         return {r["link"] for r in result.data if "link" in r}
     except Exception as e:
-        logger.error("Failed to fetch links after %s: %s", min_post_date, e)
+        logger.error("Failed to fetch recent links", e)
         return set()
     
 def get_links_without_movieid() -> list[dict]:

@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 from utils.logger import get_logger
 from utils.io_helpers import write_failure
-from db.review_queries import get_latest_post_date, get_links_posted_after_date
+from db.review_queries import get_latest_post_date, get_recent_links
 
 BASE_URL = "https://baradwajrangan.wordpress.com"
 CONCURRENT_FETCHES = 10
@@ -68,9 +68,7 @@ async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list
     Fetch blog post links between start_page and end_page.
     Stops early if a recent link (already stored) is encountered.
     """
-    latest_date = get_latest_post_date()
-    recent_links = get_links_posted_after_date(latest_date) if latest_date else set()
-    logger.info("Latest post date: %s — Loaded %s recent links", latest_date, len(recent_links))
+    recent_links = get_recent_links()
 
     connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
     all_links: list[tuple[int, int, str]] = []
