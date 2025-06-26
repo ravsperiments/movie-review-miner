@@ -14,7 +14,7 @@ def generate_sentiment() -> None:
 
     for review in tqdm(reviews):
         try:
-            sentiment = analyze_sentiment(review.get("blog_title", ""), review.get("short_review", ""))
+            sentiment = analyze_sentiment(review.get("blog_title", ""), review.get("short_review", ""), review.get("full_excerpt", ""))
             if sentiment:
                 update_sentiment_for_review(review["id"], sentiment.split()[0])
                 logger.info("Updated sentiment for %s -> %s", review["id"], sentiment)
@@ -25,3 +25,8 @@ def generate_sentiment() -> None:
                 "Sentiment analysis failed for %s: %s", review.get("id"), e, exc_info=True
             )
             write_failure("failed_sentiment.txt", str(review.get("id")), e)
+
+if __name__ == "__main__":
+    import warnings
+    warnings.filterwarnings("ignore", category=RuntimeWarning)
+    generate_sentiment()

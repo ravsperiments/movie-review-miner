@@ -57,7 +57,7 @@ Short Review Snippet:
         raise
 
 
-def analyze_sentiment(title: str, subtext: str) -> str:
+def analyze_sentiment(title: str, subtext: str, fullreview: str) -> str:
     """Classify the sentiment of a review as Yes, No or Maybe.
 
     Args:
@@ -87,6 +87,9 @@ Title:
 
 Subtext:
 """{subtext}"""
+
+Full Review:
+"""{fullreview}"""
 '''
 
     try:
