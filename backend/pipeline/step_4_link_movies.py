@@ -3,6 +3,7 @@ from db.review_queries import get_unenriched_links, update_review_with_movie_id
 from db.movie_queries import get_movie_by_title, create_movie
 from llm.openai_wrapper import extract_movie_title
 from utils.logger import get_logger
+from tqdm import tqdm
 
 logger = get_logger(__name__)
 
@@ -11,7 +12,7 @@ def link_movies() -> None:
     reviews = get_unenriched_links()
     logger.info("Linking movies for %s reviews", len(reviews))
 
-    for review in reviews:
+    for review in tqdm(reviews):
         try:
             title = extract_movie_title(review.get("blog_title", ""))
             if not title or title.lower() == "none":

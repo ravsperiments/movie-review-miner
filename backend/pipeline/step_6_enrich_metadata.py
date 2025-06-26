@@ -3,6 +3,7 @@ import asyncio
 from db.movie_queries import get_movies_missing_metadata, update_movie_metadata
 from tmdb.tmdb_api import search_tmdb
 from utils.logger import get_logger
+from tqdm import tqdm
 
 logger = get_logger(__name__)
 
@@ -11,7 +12,7 @@ async def enrich_metadata() -> None:
     movies = get_movies_missing_metadata()
     logger.info("Enriching metadata for %s movies", len(movies))
 
-    for movie in movies:
+    for movie in tqdm(movies):
         try:
             metadata = await search_tmdb(movie["title"])
             if metadata:

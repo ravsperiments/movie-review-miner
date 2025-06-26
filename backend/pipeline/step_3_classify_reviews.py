@@ -2,6 +2,7 @@
 from db.review_queries import get_unclassified_reviews, update_is_film_review
 from llm.openai_wrapper import is_film_review
 from utils.logger import get_logger
+from tqdm import tqdm
 
 logger = get_logger(__name__)
 
@@ -10,7 +11,7 @@ def classify_reviews() -> None:
     reviews = get_unclassified_reviews()
     logger.info("Classifying %s reviews", len(reviews))
 
-    for review in reviews:
+    for review in tqdm(reviews):
         try:
             result = is_film_review(review.get("blog_title", ""), review.get("short_review", ""))
             update_is_film_review(review["id"], bool(result))

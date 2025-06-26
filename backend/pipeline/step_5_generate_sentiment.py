@@ -2,6 +2,7 @@
 from db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
 from llm.openai_wrapper import analyze_sentiment
 from utils.logger import get_logger
+from tqdm import tqdm
 
 logger = get_logger(__name__)
 
@@ -10,7 +11,7 @@ def generate_sentiment() -> None:
     reviews = get_reviews_missing_sentiment()
     logger.info("Generating sentiment for %s reviews", len(reviews))
 
-    for review in reviews:
+    for review in tqdm(reviews):
         try:
             sentiment = analyze_sentiment(review.get("blog_title", ""), review.get("short_review", ""))
             if sentiment:

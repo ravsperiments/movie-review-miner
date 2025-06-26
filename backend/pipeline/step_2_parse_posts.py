@@ -2,6 +2,7 @@
 import asyncio
 import aiohttp
 import async_timeout
+from tqdm.asyncio import tqdm
 from crawler.parse_post import parse_post_async
 from db.store_review import store_review_if_missing
 from utils.logger import get_logger
@@ -41,4 +42,5 @@ async def parse_posts(urls: list[str]) -> None:
         return
     async with aiohttp.ClientSession() as session:
         tasks = [_parse_and_store(session, url) for url in urls]
-        await asyncio.gather(*tasks)
+        for task in tqdm(asyncio.as_completed(tasks), total=len(tasks)):
+            await task

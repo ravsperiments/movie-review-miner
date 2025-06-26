@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import async_timeout
+from tqdm.asyncio import tqdm
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
@@ -72,9 +73,10 @@ async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list
     connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_listing_page(session, page) for page in range(start_page, end_page + 1)]
-        results = await asyncio.gather(*tasks)
-        all_links = [item for sublist in results for item in sublist]
-        return all_links
+        links: list[tuple[int, int, str]] = []
+        for task in tqdm(asyncio.as_completed(tasks), total=len(tasks)):
+            links.extend(await task)
+        return links
 
 def get_post_links(page: int) -> list[str]:
     """
