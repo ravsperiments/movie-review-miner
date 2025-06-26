@@ -9,6 +9,4 @@ requests
 supabase
 httpx
 async-timeout>=4.0
-rq
-
 
