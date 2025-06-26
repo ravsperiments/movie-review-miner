@@ -12,8 +12,8 @@ async def search_tmdb(title: str, year: str | None = None) -> dict | None:
     """Search TMDb for movie metadata by title, preferring matches by release year."""
     url = f"{TMDB_BASE_URL}/search/movie"
     params = {"query": title}
-    if year:
-        params["year"] = year  # Helps filter but doesn't guarantee
+    #if year:
+        #params["year"] = year  # Helps filter but doesn't guarantee
 
     headers = {
         "Authorization": f"Bearer {TMDB_API_KEY}",

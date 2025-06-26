@@ -59,6 +59,8 @@ def get_movies_missing_metadata() -> list[dict]:
             .is_("release_year", None)
             .execute()
         )
+        print(f"Returned %s movies without metadata", len(result.data))
+        logger.info("Returned %s movies without metadata", len(result.data))
         return [r for r in result.data if not r.get("release_year")]
     except Exception as e:
         logger.error("Failed to fetch movies without metadata: %s", e)
