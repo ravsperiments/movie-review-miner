@@ -135,3 +135,14 @@ def get_post_date_for_movie(movie_id: str) -> dict | None:
         .execute()
     )
     return result.data[0] if result.data else None
+
+
+def get_links_with_title_tbd() -> list[dict]:
+    result = (
+        supabase.table("reviews")
+        .select("id, link")
+        .eq("blog_title", "TBD")
+        .execute()
+    )
+    return result.data if result.data else None
+

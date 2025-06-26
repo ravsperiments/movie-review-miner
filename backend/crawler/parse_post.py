@@ -10,6 +10,7 @@ def parse_post(url: str) -> dict:
     response = requests.get(url, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
+    print("parse_post")
 
     # Extract title
     title = soup.select_one("#header-about h1")
@@ -51,9 +52,11 @@ import aiohttp
 
 async def parse_post_async(session: aiohttp.ClientSession, url: str) -> dict:
     async with session.get(url, timeout=10) as response:
+        print("in parse_post")
         response.raise_for_status()
         text = await response.text()
         soup = BeautifulSoup(text, "html.parser")
+      
 
         # Extract title
         title = soup.select_one("#header-about h1")
@@ -95,7 +98,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--url", required=True, help="URL of the blog post")
     args = parser.parse_args()
-
+    print(args.url)
     try:
         print(f"[DEBUG] Parsing {args.url}", file=sys.stderr, flush=True)
         post_data = parse_post(args.url)

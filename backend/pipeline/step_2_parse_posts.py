@@ -3,10 +3,13 @@ import asyncio
 import aiohttp
 import async_timeout
 from tqdm.asyncio import tqdm
+
 from crawler.parse_post import parse_post_async
 from db.store_review import store_review_if_missing
+from db.review_queries import get_links_with_title_tbd
 from utils.logger import get_logger
 from utils.io_helpers import write_failure
+import json
 
 logger = get_logger(__name__)
 
@@ -20,7 +23,7 @@ async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
         try:
             async with semaphore:
                 async with async_timeout.timeout(10):
-                    data = await parse_post_async(session, url)
+                    data = await parse_post_async(session, url["link"])
             review = {
                 "link": data["url"],
                 "blog_title": data["title"],
@@ -32,10 +35,10 @@ async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
             logger.info("Stored review from %s", url)
             return
         except Exception as e:
-            logger.warning("Attempt %s failed for %s: %s", attempt, url, e)
+            logger.warning("Attempt %s failed for %s: %s", attempt, url["link"], e)
             await asyncio.sleep(2 ** (attempt - 1))
-    logger.error("Failed to parse %s", url, exc_info=True)
-    write_failure("failed_post_links.txt", url, "max retries")
+    logger.error("Failed to parse %s", url["link"], exc_info=True)
+    write_failure("failed_post_links.txt", url["link"], "max retries")
 
 async def parse_posts(urls: list[str]) -> None:
     """Parse and store a list of blog post URLs."""
@@ -50,3 +53,8 @@ async def parse_posts(urls: list[str]) -> None:
         if failures:
             logger.error("%s posts failed to parse", failures)
         logger.info("Parsing complete")
+
+if __name__ == "__main__":
+    urls = get_links_with_title_tbd()
+    print(f"[DEBUG] URLs from DB: {urls[0]}")
+    asyncio.run(parse_posts(urls))
