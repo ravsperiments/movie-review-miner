@@ -1,89 +1,105 @@
-"""Helpers for downloading and parsing individual blog posts."""
-import re
-from datetime import datetime
+import argparse
+import json
 import requests
 from bs4 import BeautifulSoup
-from requests.exceptions import RequestException
+import re
+import sys
 
-from utils.logger import get_logger
+# --- SYNC version (unchanged) ---
+def parse_post(url: str) -> dict:
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, "html.parser")
 
-# Minimal headers so the request resembles that of a browser
-HEADERS = {"User-Agent": "Mozilla/5.0"}
+    # Extract title
+    title = soup.select_one("#header-about h1")
+    title = title.get_text(strip=True) if title else "unknown"
 
-# Module level logger to report parsing progress
-logger = get_logger(__name__)
+    # Extract date
+    date_text = soup.select_one(".date-comments em")
+    date = date_text.get_text(strip=True).replace("Posted on ", "") if date_text else "unknown"
 
+    # Extract short review (first paragraph inside .entry)
+    short_review = ""
+    entry_div = soup.select_one("div.entry")
+    if entry_div:
+        paragraphs = entry_div.find_all("p")
+        if paragraphs:
+            short_review = paragraphs[0].get_text(strip=True)
 
-def parse_post(url: str, max_chars: int = 1200):
-    """Return structured data extracted from a blog post.
-
-    Args:
-        url: The full URL of the post to parse.
-        max_chars: Maximum number of characters of review text to return.
-
-    Returns:
-        A dictionary with keys ``title``, ``date``, ``reviewer``,
-        ``short_review`` and ``full_review``.
-    """
-    try:
-        # Retrieve the raw HTML for the post
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        res.raise_for_status()
-    except RequestException as e:
-        # Bubble up the error after logging it for visibility
-        logger.error("Failed fetching %s: %s", url, e)
-        raise
-
-    # Parse the returned HTML
-    soup = BeautifulSoup(res.text, "html.parser")
-
-    # Extract the title from the header
-    title_tag = soup.select_one("div#header-about h1")
-    title = title_tag.get_text(strip=True) if title_tag else "Untitled"
-
-    # Date from <em> elements, e.g. <em>Posted on June 20, 2025</em>
-    post_date = ""
-    for em in soup.select("div.post p.fl em"):
-        text = em.get_text(strip=True)
-        match = re.search(r"Posted on (\w+ \d{1,2}, \d{4})", text)
-        if match:
-            date_str = match.group(1)
-            try:
-                dt = datetime.strptime(date_str, "%B %d, %Y").date()
-                post_date = dt.isoformat()
-                break
-            except ValueError:
-                logger.warning("Failed to parse date string: %s", date_str)
-
-    # Fallback: extract date from URL if missing
-    if not post_date:
-        m = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
-        if m:
-            post_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-
-    # Extract the reviewer's name if one is mentioned
-    author_tag = (
-        soup.select_one("span.author a")
-        or soup.select_one("a[rel='author']")
-        or soup.select_one("span.fn")
-    )
-    reviewer = author_tag.get_text(strip=True) if author_tag else ""
-
-    # Extract all paragraph tags from the main content
-    content_div = soup.select_one("div.entry")
-    paragraphs = content_div.find_all("p") if content_div else []
-
-    # First paragraph often contains a short overview or teaser
-    short_review = paragraphs[0].get_text(strip=True) if len(paragraphs) >= 1 else ""
-    # Combine remaining paragraphs into the full review text
-    full_review = " ".join(p.get_text(strip=True) for p in paragraphs[1:])
-
-    logger.debug("Parsed post '%s' (%s chars)", title, len(full_review))
+    # Extract full review (all <p> in .entry except trailer/links)
+    full_review = ""
+    if entry_div:
+        paras = entry_div.find_all("p")
+        filtered = [
+            p.get_text(strip=True)
+            for p in paras
+            if not p.find("a") and "watch the trailer" not in p.get_text(strip=True).lower()
+        ]
+        full_review = "\n\n".join(filtered)
 
     return {
+        "url": url,
         "title": title,
-        "post_date": post_date,
-        "reviewer": reviewer,
-        "short_review": short_review,
-        "full_review": full_review[:max_chars]
+        "summary": short_review,
+        "date": date,
+        "full_review": full_review
     }
+
+# --- ASYNC version for batch processing ---
+import aiohttp
+
+async def parse_post_async(session: aiohttp.ClientSession, url: str) -> dict:
+    async with session.get(url, timeout=10) as response:
+        response.raise_for_status()
+        text = await response.text()
+        soup = BeautifulSoup(text, "html.parser")
+
+        # Extract title
+        title = soup.select_one("#header-about h1")
+        title = title.get_text(strip=True) if title else "unknown"
+
+        # Extract date
+        date_text = soup.select_one(".date-comments em")
+        date = date_text.get_text(strip=True).replace("Posted on ", "") if date_text else "unknown"
+
+        # Extract short review (first paragraph inside .entry)
+        short_review = ""
+        entry_div = soup.select_one("div.entry")
+        if entry_div:
+            paragraphs = entry_div.find_all("p")
+            if paragraphs:
+                short_review = paragraphs[0].get_text(strip=True)
+
+        # Extract full review (all <p> in .entry except trailer/links)
+        full_review = ""
+        if entry_div:
+            paras = entry_div.find_all("p")
+            filtered = [
+                p.get_text(strip=True)
+                for p in paras
+                if not p.find("a") and "watch the trailer" not in p.get_text(strip=True).lower()
+            ]
+            full_review = "\n\n".join(filtered)
+
+        return {
+            "url": url,
+            "title": title,
+            "summary": short_review,
+            "date": date,
+            "full_review": full_review
+        }
+
+# --- CLI for sync version ---
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--url", required=True, help="URL of the blog post")
+    args = parser.parse_args()
+
+    try:
+        print(f"[DEBUG] Parsing {args.url}", file=sys.stderr, flush=True)
+        post_data = parse_post(args.url)
+        print(json.dumps(post_data), flush=True)
+    except Exception as e:
+        print(f"[ERROR] {e}", file=sys.stderr, flush=True)
+        exit(1)

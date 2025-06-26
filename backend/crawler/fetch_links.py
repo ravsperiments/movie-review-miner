@@ -1,56 +1,88 @@
-"""Utilities for scraping blog post links from Baradwaj Rangan's site."""
-
-import requests
+import asyncio
+import aiohttp
+import async_timeout
 from bs4 import BeautifulSoup
-from requests.exceptions import RequestException
+from urllib.parse import urljoin
 
-from utils.logger import get_logger
-
-# Base address of the WordPress blog to crawl
 BASE_URL = "https://baradwajrangan.wordpress.com"
-# Minimal headers so our requests look like those of a browser
-HEADERS = {"User-Agent": "Mozilla/5.0"}
+CONCURRENT_FETCHES = 10
+MAX_RETRIES = 3
+semaphore = asyncio.Semaphore(CONCURRENT_FETCHES)
 
-# Module level logger reused by all functions
-logger = get_logger(__name__)
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/122.0.0.0 Safari/537.36"
+    )
+}
 
+def extract_links_from_html(html: str, page: int) -> list[tuple[int, int, str]]:
+    soup = BeautifulSoup(html, "html.parser")
 
-def get_post_links(max_pages: int = 5, start_page: int = 1, start_index: int = 0):
-    """Yield blog post links starting from the given page and index.
+    # Combined selector for page 1 and paginated pages
+    anchors = soup.select(
+        "div.featured_content h2 a[rel='bookmark'], div.post h2 a[rel='bookmark']"
+    )
 
-    Args:
-        max_pages: Highest listing page number to crawl.
-        start_page: Which page to begin crawling from.
-        start_index: Index on the start page from which to resume.
+    return [
+        (page, idx, urljoin(BASE_URL, a["href"]))
+        for idx, a in enumerate(anchors)
+        if a.get("href")
+    ]
 
-    Yields:
-        A tuple of ``(page_num, idx, url)`` for each discovered post.
-    """
+async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[tuple[int, int, str]]:
+    url = BASE_URL if page == 1 else f"{BASE_URL}/page/{page}/"
+    print(f"🌐 Fetching: {url}")  # log URL
 
-    for page_num in range(start_page, max_pages + 1):
-        url = f"{BASE_URL}/page/{page_num}/"
-        logger.info("Scanning %s", url)
-
+    for attempt in range(1, MAX_RETRIES + 1):
         try:
-            # Retrieve the HTML for the listing page
-            res = requests.get(url, headers=HEADERS, timeout=10)
-            res.raise_for_status()
-        except RequestException as e:
-            # Stop crawling if any page fails to load
-            logger.error("Error fetching page %s: %s", page_num, e)
-            break
+            async with semaphore:
+                async with async_timeout.timeout(10):
+                    async with session.get(url, headers=HEADERS) as response:
+                        print(f"✅ Status code for page {page}: {response.status}")
+                        print(f"✅ Headers: {response.headers}")
 
-        soup = BeautifulSoup(res.text, "html.parser")
+                        html = await response.text()
 
-        # Links to individual posts live inside <h2> tags under div.post
-        link_tags = soup.select("div.post h2 a[rel='bookmark']")
-        for idx, a in enumerate(link_tags):
-            # Skip links on the first page until we reach the start index
-            if page_num == start_page and idx < start_index:
-                continue
-            href = a.get("href")
-            if href:
-                logger.debug("Found link: %s", href)
-                yield page_num, idx, href
+                        print(f"✅ Fetched HTML length for page {page}: {len(html)}")
+                        if page == 1 and attempt == 1:
+                            with open("debug_page_1.html", "w") as f:
+                                f.write(html)
 
 
+                        print(f"📄 Page {page}, attempt {attempt}, length={len(html)}")
+
+                        # Write debug file even if empty
+                        if page == 1 and attempt == 1:
+                            with open("debug_page_1.html", "w") as f:
+                                f.write(html)
+
+                        return extract_links_from_html(html, page)
+
+        except Exception as e:
+            print(f"⚠️ Attempt {attempt} failed for page {page}: {e}")
+            await asyncio.sleep(2 ** (attempt - 1))
+
+    print(f"❌ Giving up on page {page} after {MAX_RETRIES} retries")
+    return []
+
+
+async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list[tuple[int, int, str]]:
+    connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
+    async with aiohttp.ClientSession(connector=connector) as session:
+        tasks = [fetch_listing_page(session, page) for page in range(start_page, end_page + 1)]
+        results = await asyncio.gather(*tasks)
+        all_links = [item for sublist in results for item in sublist]
+        return all_links
+
+def get_post_links(page: int) -> list[str]:
+    """
+    Sync wrapper for fetch_listing_page(). Used in RQ jobs.
+    """
+    async def run():
+        async with aiohttp.ClientSession() as session:
+            results = await fetch_listing_page(session, page)
+            return [url for (_, _, url) in results]
+
+    return asyncio.run(run())

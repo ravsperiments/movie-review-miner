@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  worker:
+    image: movie-rq-worker
+    depends_on:
+      - redis
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - REDIS_URL=redis://redis:6379
+    command: ["rq", "worker", "default"]
+
