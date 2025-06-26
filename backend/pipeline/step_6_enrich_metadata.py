@@ -3,6 +3,7 @@ import asyncio
 from db.movie_queries import get_movies_missing_metadata, update_movie_metadata
 from tmdb.tmdb_api import search_tmdb
 from utils.logger import get_logger
+from utils.io_helpers import write_failure
 from tqdm import tqdm
 
 logger = get_logger(__name__)
@@ -20,7 +21,10 @@ async def _enrich_movie(movie: dict) -> None:
         else:
             logger.warning("No metadata found for %s", movie["title"])
     except Exception as e:
-        logger.error("TMDb enrichment failed for %s: %s", movie.get("title"), e)
+        logger.error(
+            "TMDb enrichment failed for %s: %s", movie.get("title"), e, exc_info=True
+        )
+        write_failure("failed_tmdb.txt", movie.get("title", ""), e)
 
 
 async def enrich_metadata() -> None:

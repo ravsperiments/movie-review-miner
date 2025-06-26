@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 from utils.logger import get_logger
+from utils.io_helpers import write_failure
 
 BASE_URL = "https://baradwajrangan.wordpress.com"
 CONCURRENT_FETCHES = 10
@@ -70,6 +71,7 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
             await asyncio.sleep(2 ** (attempt - 1))
 
     logger.error("Giving up on page %s after %s retries", page, MAX_RETRIES)
+    write_failure("failed_pages.txt", str(page), "max retries")
     return []
 
 

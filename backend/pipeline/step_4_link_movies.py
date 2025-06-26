@@ -3,6 +3,7 @@ from db.review_queries import get_unenriched_links, update_review_with_movie_id
 from db.movie_queries import get_movie_by_title, create_movie
 from llm.openai_wrapper import extract_movie_title
 from utils.logger import get_logger
+from utils.io_helpers import write_failure
 from tqdm import tqdm
 
 logger = get_logger(__name__)
@@ -24,7 +25,10 @@ def link_movies() -> None:
             update_review_with_movie_id(review["id"], movie_id)
             logger.info("Linked review %s -> movie %s", review["id"], title)
         except Exception as e:
-            logger.error("Movie link failed for %s: %s", review.get("id"), e)
+            logger.error(
+                "Movie link failed for %s: %s", review.get("id"), e, exc_info=True
+            )
+            write_failure("failed_movie_linking.txt", str(review.get("id")), e)
 
 if __name__ == "__main__":
     import warnings

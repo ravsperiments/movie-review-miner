@@ -6,6 +6,7 @@ from tqdm.asyncio import tqdm
 from crawler.parse_post import parse_post_async
 from db.store_review import store_review_if_missing
 from utils.logger import get_logger
+from utils.io_helpers import write_failure
 
 logger = get_logger(__name__)
 
@@ -33,9 +34,8 @@ async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
         except Exception as e:
             logger.warning("Attempt %s failed for %s: %s", attempt, url, e)
             await asyncio.sleep(2 ** (attempt - 1))
-    logger.error("Failed to parse %s", url)
-    with open("failed_post_links.txt", "a") as f:
-        f.write(f"{url}\n")
+    logger.error("Failed to parse %s", url, exc_info=True)
+    write_failure("failed_post_links.txt", url, "max retries")
 
 async def parse_posts(urls: list[str]) -> None:
     """Parse and store a list of blog post URLs."""
