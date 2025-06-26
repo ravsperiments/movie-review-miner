@@ -1,0 +1,272 @@
+2025-06-26 10:09:01,622 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Cblog_title%2Cshort_review%2Csentiment&sentiment=is.null "HTTP/2 200 OK"
+2025-06-26 10:09:01,800 | INFO | __main__ | Generating sentiment for 1000 reviews
+2025-06-26 10:09:02,925 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:03,317 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.3258930c-4f2f-47f5-8bdc-a576f16f9422 "HTTP/2 200 OK"
+2025-06-26 10:09:03,322 | INFO | __main__ | Updated sentiment for 3258930c-4f2f-47f5-8bdc-a576f16f9422 -> Maybe
+2025-06-26 10:09:03,743 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:03,745 | INFO | __main__ | Skipping sentiment for 11b0ac1b-1c49-4b59-81e0-153e5f146a8f -> No – not a review.
+2025-06-26 10:09:04,209 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:04,227 | INFO | __main__ | Skipping sentiment for 5e491e9f-0444-49cf-84a3-019a7e3f733d -> No - not a review
+2025-06-26 10:09:04,819 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:04,821 | INFO | __main__ | Skipping sentiment for 9a369ca6-4729-419c-b787-1da62ba26566 -> No – not a review.
+2025-06-26 10:09:05,213 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:05,486 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.3b3487d8-6af2-4a71-ac95-d7cf5cdb1d2b "HTTP/2 200 OK"
+2025-06-26 10:09:05,488 | INFO | __main__ | Updated sentiment for 3b3487d8-6af2-4a71-ac95-d7cf5cdb1d2b -> Maybe
+2025-06-26 10:09:06,098 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:06,101 | INFO | __main__ | Skipping sentiment for c986e542-0b7a-4cc3-b33c-8f095a2c80d1 -> No – not a review.
+2025-06-26 10:09:06,388 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:06,528 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.96e8470f-c836-4b96-9758-4c0629486079 "HTTP/2 200 OK"
+2025-06-26 10:09:06,532 | INFO | __main__ | Updated sentiment for 96e8470f-c836-4b96-9758-4c0629486079 -> No
+2025-06-26 10:09:06,918 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:06,921 | INFO | __main__ | Skipping sentiment for 45270dda-d62e-4a35-896a-3a7290e8652a -> No - not a review
+2025-06-26 10:09:07,326 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:07,672 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.49e09063-64bc-477c-bd22-b8bfde189b6f "HTTP/2 200 OK"
+2025-06-26 10:09:07,674 | INFO | __main__ | Updated sentiment for 49e09063-64bc-477c-bd22-b8bfde189b6f -> Yes
+2025-06-26 10:09:08,802 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:08,925 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.a88f4d02-d0ae-46e6-9000-75deb2883260 "HTTP/2 200 OK"
+2025-06-26 10:09:08,926 | INFO | __main__ | Updated sentiment for a88f4d02-d0ae-46e6-9000-75deb2883260 -> Yes
+2025-06-26 10:09:10,018 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:10,021 | INFO | __main__ | Skipping sentiment for 74f8b69b-4bd3-41ad-8e20-cdbb97c864ac -> No – not a review.
+2025-06-26 10:09:10,488 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:10,490 | INFO | __main__ | Skipping sentiment for fd46fd85-bcf5-48fb-abb8-0d3407080d91 -> No – not a review.
+2025-06-26 10:09:11,019 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:11,306 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.357b45e1-8714-4f6f-93c9-20edcdc47945 "HTTP/2 200 OK"
+2025-06-26 10:09:11,308 | INFO | __main__ | Updated sentiment for 357b45e1-8714-4f6f-93c9-20edcdc47945 -> No
+2025-06-26 10:09:11,841 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:11,844 | INFO | __main__ | Skipping sentiment for b6953fa0-82c9-4616-b537-eefd5a7410ef -> No – not a review.
+2025-06-26 10:09:12,548 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:12,551 | INFO | __main__ | Skipping sentiment for 15afb435-1cbd-44fa-97f7-ff3c6762fc66 -> No – not a review.
+2025-06-26 10:09:13,572 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:13,574 | INFO | __main__ | Skipping sentiment for a376b8bc-9efb-4855-8ebd-86dd04150987 -> No - not a review
+2025-06-26 10:09:13,983 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:14,290 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.f8f38285-fbe5-40e1-8624-b5d717fcd72d "HTTP/2 200 OK"
+2025-06-26 10:09:14,292 | INFO | __main__ | Updated sentiment for f8f38285-fbe5-40e1-8624-b5d717fcd72d -> Yes
+2025-06-26 10:09:14,729 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:14,731 | INFO | __main__ | Skipping sentiment for cb70d1f8-d699-4d60-b709-0c91b4081426 -> No – not a review.
+2025-06-26 10:09:15,733 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:15,736 | INFO | __main__ | Skipping sentiment for c7f58de3-cfd0-4008-91ae-e9f91c2c6c23 -> No – not a review
+2025-06-26 10:09:16,136 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:16,138 | INFO | __main__ | Skipping sentiment for 545ba030-a5f8-4aea-b58f-564a803c41cc -> No - not a review
+2025-06-26 10:09:16,645 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:16,764 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.2cbe319a-896f-4330-9b09-6b73d298ce52 "HTTP/2 200 OK"
+2025-06-26 10:09:16,766 | INFO | __main__ | Updated sentiment for 2cbe319a-896f-4330-9b09-6b73d298ce52 -> Maybe
+2025-06-26 10:09:17,491 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:17,498 | INFO | __main__ | Skipping sentiment for e3eda3f0-68ab-4391-b97e-949fb7e31d29 -> No – not a review.
+2025-06-26 10:09:18,325 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:18,596 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.8de65b04-ee3b-45dd-869c-d468122bfbce "HTTP/2 200 OK"
+2025-06-26 10:09:18,597 | INFO | __main__ | Updated sentiment for 8de65b04-ee3b-45dd-869c-d468122bfbce -> No
+2025-06-26 10:09:19,192 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:19,195 | INFO | __main__ | Skipping sentiment for a0e64dd0-155d-465d-8b34-4aa92c2a88f3 -> No – not a review
+2025-06-26 10:09:19,569 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:19,839 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.f742ee41-5053-4742-a3c7-32fa7f512a5b "HTTP/2 200 OK"
+2025-06-26 10:09:19,843 | INFO | __main__ | Updated sentiment for f742ee41-5053-4742-a3c7-32fa7f512a5b -> Yes
+2025-06-26 10:09:20,187 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:20,339 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.69f24272-fdc7-49db-a592-90e6fe7065eb "HTTP/2 200 OK"
+2025-06-26 10:09:20,346 | INFO | __main__ | Updated sentiment for 69f24272-fdc7-49db-a592-90e6fe7065eb -> Yes
+2025-06-26 10:09:20,720 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:20,963 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.90a2042a-a195-49db-ae3b-3b594d08ec3a "HTTP/2 200 OK"
+2025-06-26 10:09:20,965 | INFO | __main__ | Updated sentiment for 90a2042a-a195-49db-ae3b-3b594d08ec3a -> Yes
+2025-06-26 10:09:21,410 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:21,559 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.3d4b9895-2a44-45ba-8a40-b3c45f63ce47 "HTTP/2 200 OK"
+2025-06-26 10:09:21,562 | INFO | __main__ | Updated sentiment for 3d4b9895-2a44-45ba-8a40-b3c45f63ce47 -> Yes
+2025-06-26 10:09:22,284 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:22,289 | INFO | __main__ | Skipping sentiment for dbaec12b-c6a5-42f3-9ce5-3ea949d05e54 -> No - not a review
+2025-06-26 10:09:22,788 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:23,076 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.fb533023-0f0e-464b-aa7d-ab99e7ff76b8 "HTTP/2 200 OK"
+2025-06-26 10:09:23,078 | INFO | __main__ | Updated sentiment for fb533023-0f0e-464b-aa7d-ab99e7ff76b8 -> No
+2025-06-26 10:09:23,404 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:23,524 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.52f54db9-b164-406f-af3c-b7a0943c96dc "HTTP/2 200 OK"
+2025-06-26 10:09:23,526 | INFO | __main__ | Updated sentiment for 52f54db9-b164-406f-af3c-b7a0943c96dc -> Maybe
+2025-06-26 10:09:23,914 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:24,042 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.6325e8a4-d7a5-4580-a93c-fa154152d0a9 "HTTP/2 200 OK"
+2025-06-26 10:09:24,043 | INFO | __main__ | Updated sentiment for 6325e8a4-d7a5-4580-a93c-fa154152d0a9 -> Yes
+2025-06-26 10:09:24,591 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:24,619 | INFO | __main__ | Skipping sentiment for d94f665f-2e54-413e-bb81-fb099d9a0638 -> No – not a review.
+2025-06-26 10:09:25,115 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:25,120 | INFO | __main__ | Skipping sentiment for 509be36c-b214-4698-a557-fdfe7ef8e18b -> No – not a review.
+2025-06-26 10:09:25,504 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:25,509 | INFO | __main__ | Skipping sentiment for 36f94390-21db-4a6e-8c7f-f0cf5d1e5d79 -> No – not a review.
+2025-06-26 10:09:25,863 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:25,865 | INFO | __main__ | Skipping sentiment for dd329bfb-7858-4e0a-9960-5955f0ecc2c9 -> No – not a review
+2025-06-26 10:09:26,578 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:26,581 | INFO | __main__ | Skipping sentiment for ac21e45c-2dae-4d0f-8382-c2811e568c7e -> No – not a review
+2025-06-26 10:09:26,976 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:26,986 | INFO | __main__ | Skipping sentiment for c12863cb-5113-44b3-bb10-38fbc5ad326b -> No - not a review
+2025-06-26 10:09:27,450 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:27,453 | INFO | __main__ | Skipping sentiment for 69f74769-8a46-4159-b1cd-e1d62926f6cc -> No - not a review
+2025-06-26 10:09:28,034 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:28,170 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.567fd48e-3b77-41b7-9827-f86479cf6dbb "HTTP/2 200 OK"
+2025-06-26 10:09:28,171 | INFO | __main__ | Updated sentiment for 567fd48e-3b77-41b7-9827-f86479cf6dbb -> Maybe
+2025-06-26 10:09:28,639 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:28,642 | INFO | __main__ | Skipping sentiment for 039c7af7-7534-4da5-b52f-478540c6ecc0 -> No – not a review
+2025-06-26 10:09:29,013 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:29,344 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.53c23988-88e4-4ad3-8549-48984323a3f7 "HTTP/2 200 OK"
+2025-06-26 10:09:29,346 | INFO | __main__ | Updated sentiment for 53c23988-88e4-4ad3-8549-48984323a3f7 -> Maybe
+2025-06-26 10:09:29,669 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:29,671 | INFO | __main__ | Skipping sentiment for e6ca24c5-56bd-481f-95c6-3028a4c064c8 -> No – not a review
+2025-06-26 10:09:30,161 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:30,163 | INFO | __main__ | Skipping sentiment for c1d92fe5-2002-4c06-893e-5ca87a28f198 -> No – not a review
+2025-06-26 10:09:30,648 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:30,783 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.5901f1ad-6b31-4d88-bacc-186ab66c4218 "HTTP/2 200 OK"
+2025-06-26 10:09:30,785 | INFO | __main__ | Updated sentiment for 5901f1ad-6b31-4d88-bacc-186ab66c4218 -> No
+2025-06-26 10:09:31,673 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:31,810 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.952c8611-2d1b-4675-ab4f-012a8f0085bc "HTTP/2 200 OK"
+2025-06-26 10:09:31,813 | INFO | __main__ | Updated sentiment for 952c8611-2d1b-4675-ab4f-012a8f0085bc -> Yes
+2025-06-26 10:09:32,313 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:32,422 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.e9ffcb85-602b-4194-bc71-44b8536bcb7a "HTTP/2 200 OK"
+2025-06-26 10:09:32,424 | INFO | __main__ | Updated sentiment for e9ffcb85-602b-4194-bc71-44b8536bcb7a -> Maybe
+2025-06-26 10:09:32,927 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:33,062 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.0b34ed7a-e219-4290-9353-17fc907b74b4 "HTTP/2 200 OK"
+2025-06-26 10:09:33,064 | INFO | __main__ | Updated sentiment for 0b34ed7a-e219-4290-9353-17fc907b74b4 -> Yes
+2025-06-26 10:09:33,439 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:33,441 | INFO | __main__ | Skipping sentiment for ef700913-a019-4e61-934f-4dddf5aaffa9 -> No - not a review
+2025-06-26 10:09:33,816 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:33,818 | INFO | __main__ | Skipping sentiment for bcb57851-975e-4c8a-9bb8-64f02d24a241 -> No – not a review.
+2025-06-26 10:09:34,143 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:34,279 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.17013435-b689-454b-9b06-a3d39fdf5db8 "HTTP/2 200 OK"
+2025-06-26 10:09:34,280 | INFO | __main__ | Updated sentiment for 17013435-b689-454b-9b06-a3d39fdf5db8 -> No
+2025-06-26 10:09:34,605 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:34,606 | INFO | __main__ | Skipping sentiment for b706e21f-a681-4d9a-994f-0812ed002c01 -> No – not a review
+2025-06-26 10:09:34,937 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:34,939 | INFO | __main__ | Skipping sentiment for 7dabd874-fc87-4c0b-93dd-487632f51444 -> No - not a review
+2025-06-26 10:09:35,438 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:35,446 | INFO | __main__ | Skipping sentiment for 30fdfd52-e912-4e7b-9aee-d0c1836f0a08 -> No – not a review.
+2025-06-26 10:09:36,121 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:36,126 | INFO | __main__ | Skipping sentiment for 903e6fd1-aa23-4cca-8788-b6671be88d73 -> No – not a review
+2025-06-26 10:09:36,492 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:36,496 | INFO | __main__ | Skipping sentiment for 453ed1d2-e67b-4904-9c79-c59ca54ff1a1 -> No – not a review
+2025-06-26 10:09:37,213 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:37,352 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.36f8dd6a-0079-4d71-afae-6172e9684ab4 "HTTP/2 200 OK"
+2025-06-26 10:09:37,359 | INFO | __main__ | Updated sentiment for 36f8dd6a-0079-4d71-afae-6172e9684ab4 -> Yes
+2025-06-26 10:09:38,242 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:38,408 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.a3f3b70c-455d-421a-8571-4dea6889a420 "HTTP/2 200 OK"
+2025-06-26 10:09:38,410 | INFO | __main__ | Updated sentiment for a3f3b70c-455d-421a-8571-4dea6889a420 -> Yes
+2025-06-26 10:09:38,915 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:39,076 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.4be4f989-94e9-4cc7-8f8b-ac5cfa3be8b6 "HTTP/2 200 OK"
+2025-06-26 10:09:39,078 | INFO | __main__ | Updated sentiment for 4be4f989-94e9-4cc7-8f8b-ac5cfa3be8b6 -> Yes
+2025-06-26 10:09:39,501 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:39,639 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.3ea1c093-f234-4af0-a57c-c51b60c1f090 "HTTP/2 200 OK"
+2025-06-26 10:09:39,645 | INFO | __main__ | Updated sentiment for 3ea1c093-f234-4af0-a57c-c51b60c1f090 -> Yes
+2025-06-26 10:09:40,449 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:40,741 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.fae00bac-f3cc-4ef4-ad47-ef8ac9d99ec1 "HTTP/2 200 OK"
+2025-06-26 10:09:40,742 | INFO | __main__ | Updated sentiment for fae00bac-f3cc-4ef4-ad47-ef8ac9d99ec1 -> No
+2025-06-26 10:09:41,352 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:41,493 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.5af5a189-308b-4c79-a570-e8a92a53842a "HTTP/2 200 OK"
+2025-06-26 10:09:41,494 | INFO | __main__ | Updated sentiment for 5af5a189-308b-4c79-a570-e8a92a53842a -> Yes
+2025-06-26 10:09:41,835 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:41,967 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.dd5f2110-3741-45e4-a41d-aec5f35dba51 "HTTP/2 200 OK"
+2025-06-26 10:09:41,969 | INFO | __main__ | Updated sentiment for dd5f2110-3741-45e4-a41d-aec5f35dba51 -> Maybe
+2025-06-26 10:09:42,357 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:42,360 | INFO | __main__ | Skipping sentiment for db03fbbe-c74a-4280-b0c5-2f0ee12a0bf3 -> No – not a review
+2025-06-26 10:09:42,861 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:42,863 | INFO | __main__ | Skipping sentiment for 5b39fcfb-01bf-44d8-acd6-8289e45e25a0 -> No – not a review.
+2025-06-26 10:09:43,320 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:43,321 | INFO | __main__ | Skipping sentiment for b3e579a7-db18-4b8f-9d74-84920ea348a1 -> No – not a review
+2025-06-26 10:09:43,682 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:43,803 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.fb41075d-abd4-473b-9571-78e3fcbf45a4 "HTTP/2 200 OK"
+2025-06-26 10:09:43,805 | INFO | __main__ | Updated sentiment for fb41075d-abd4-473b-9571-78e3fcbf45a4 -> No
+2025-06-26 10:09:44,190 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:44,342 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.4681c80a-20d1-458e-a764-4371c9257887 "HTTP/2 200 OK"
+2025-06-26 10:09:44,344 | INFO | __main__ | Updated sentiment for 4681c80a-20d1-458e-a764-4371c9257887 -> Maybe
+2025-06-26 10:09:44,703 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:44,836 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.3aadc760-b842-4797-8b21-db837a8a5f59 "HTTP/2 200 OK"
+2025-06-26 10:09:44,837 | INFO | __main__ | Updated sentiment for 3aadc760-b842-4797-8b21-db837a8a5f59 -> No
+2025-06-26 10:09:45,161 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:45,164 | INFO | __main__ | Skipping sentiment for 37a8207f-d72e-45ae-ad47-377f4654df41 -> No – not a review
+2025-06-26 10:09:45,688 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:45,694 | INFO | __main__ | Skipping sentiment for 598412ae-f6f7-4b20-b417-499093ea5d46 -> No - not a review
+2025-06-26 10:09:46,080 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:46,111 | INFO | __main__ | Skipping sentiment for b4186db0-da18-475e-bc81-a0f8fc9c1aba -> No - not a review
+2025-06-26 10:09:47,114 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:47,134 | INFO | __main__ | Skipping sentiment for b565c477-ff66-41cc-a43c-c6481865f796 -> No – not a review
+2025-06-26 10:09:47,793 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:47,795 | INFO | __main__ | Skipping sentiment for 3e1c8495-9b95-4473-998e-49c6780b6fbd -> No – not a review
+2025-06-26 10:09:48,392 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:48,409 | INFO | __main__ | Skipping sentiment for a889a43f-a98b-40c1-aefe-7020bcac996f -> No - not a review
+2025-06-26 10:09:48,862 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:49,014 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.7a1a11ba-25c9-42b0-87cb-ecc8ac720e10 "HTTP/2 200 OK"
+2025-06-26 10:09:49,015 | INFO | __main__ | Updated sentiment for 7a1a11ba-25c9-42b0-87cb-ecc8ac720e10 -> Maybe
+2025-06-26 10:09:50,006 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:50,144 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.2d716137-6712-4918-a272-e8639d3b24ca "HTTP/2 200 OK"
+2025-06-26 10:09:50,147 | INFO | __main__ | Updated sentiment for 2d716137-6712-4918-a272-e8639d3b24ca -> Maybe
+2025-06-26 10:09:50,626 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:50,773 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.c4e7efc5-06a5-4d19-8951-cf92db5a6852 "HTTP/2 200 OK"
+2025-06-26 10:09:50,774 | INFO | __main__ | Updated sentiment for c4e7efc5-06a5-4d19-8951-cf92db5a6852 -> No
+2025-06-26 10:09:51,563 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:51,690 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.d4f3fb96-c0d1-442d-8c88-f9ce15f015ca "HTTP/2 200 OK"
+2025-06-26 10:09:51,693 | INFO | __main__ | Updated sentiment for d4f3fb96-c0d1-442d-8c88-f9ce15f015ca -> Yes
+2025-06-26 10:09:52,078 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:52,214 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.735015d0-b061-4fa1-9568-4d7fab5c3054 "HTTP/2 200 OK"
+2025-06-26 10:09:52,216 | INFO | __main__ | Updated sentiment for 735015d0-b061-4fa1-9568-4d7fab5c3054 -> Maybe
+2025-06-26 10:09:52,648 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:52,652 | INFO | __main__ | Skipping sentiment for 22aaf7cf-a845-4e1b-8fdb-a90b5e17735c -> No – not a review
+2025-06-26 10:09:52,972 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:52,973 | INFO | __main__ | Skipping sentiment for cb26c330-6ac4-41a3-8907-1cd22e41db2b -> No – not a review
+2025-06-26 10:09:53,456 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:53,590 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.eaa4eca1-f827-4a6c-ae4a-535b8235d454 "HTTP/2 200 OK"
+2025-06-26 10:09:53,595 | INFO | __main__ | Updated sentiment for eaa4eca1-f827-4a6c-ae4a-535b8235d454 -> No
+2025-06-26 10:09:53,900 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:53,904 | INFO | __main__ | Skipping sentiment for 30d7ddf0-b17a-4368-a70f-e848c79fa22f -> No – not a review
+2025-06-26 10:09:54,295 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:54,301 | INFO | __main__ | Skipping sentiment for 56301c24-028c-4aa4-a2f0-e2353868a7d7 -> No - not a review
+2025-06-26 10:09:54,736 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:54,871 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.ad3ee32b-0e0a-46f4-bcb7-0f7bb7a34e41 "HTTP/2 200 OK"
+2025-06-26 10:09:54,872 | INFO | __main__ | Updated sentiment for ad3ee32b-0e0a-46f4-bcb7-0f7bb7a34e41 -> Yes
+2025-06-26 10:09:55,370 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:55,372 | INFO | __main__ | Skipping sentiment for b89fd59b-7770-480a-a0c5-c804929f99fd -> No – not a review.
+2025-06-26 10:09:55,870 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:55,873 | INFO | __main__ | Skipping sentiment for edf79c36-078d-4738-bf18-0dd2772af110 -> No - not a review
+2025-06-26 10:09:56,468 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:56,470 | INFO | __main__ | Skipping sentiment for f3b3388c-fcd1-43e5-92dd-3eb6cf613403 -> No – not a review.
+2025-06-26 10:09:56,909 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:56,935 | INFO | __main__ | Skipping sentiment for e719349e-cdab-4b0e-a015-cc706fa731e2 -> No - not a review
+2025-06-26 10:09:57,315 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:57,486 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.0f999263-a90b-4837-a613-7af3e1798aab "HTTP/2 200 OK"
+2025-06-26 10:09:57,487 | INFO | __main__ | Updated sentiment for 0f999263-a90b-4837-a613-7af3e1798aab -> No
+2025-06-26 10:09:57,882 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:58,016 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.1edb4526-e312-4a00-ae20-fd73c13379d3 "HTTP/2 200 OK"
+2025-06-26 10:09:58,018 | INFO | __main__ | Updated sentiment for 1edb4526-e312-4a00-ae20-fd73c13379d3 -> Maybe
+2025-06-26 10:09:58,403 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:58,571 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.f010add1-9561-4835-9a5f-89feb944ec1c "HTTP/2 200 OK"
+2025-06-26 10:09:58,573 | INFO | __main__ | Updated sentiment for f010add1-9561-4835-9a5f-89feb944ec1c -> Maybe
+2025-06-26 10:09:58,895 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:58,898 | INFO | __main__ | Skipping sentiment for 00c25250-e5a3-4e31-8e8b-46b2a022848f -> No – not a review
+2025-06-26 10:09:59,254 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:09:59,393 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.63fb15aa-e139-408b-bb86-bd505315d400 "HTTP/2 200 OK"
+2025-06-26 10:09:59,395 | INFO | __main__ | Updated sentiment for 63fb15aa-e139-408b-bb86-bd505315d400 -> Maybe
+2025-06-26 10:09:59,925 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:00,066 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.e6b77838-4fe6-4920-849d-18ccab40651e "HTTP/2 200 OK"
+2025-06-26 10:10:00,078 | INFO | __main__ | Updated sentiment for e6b77838-4fe6-4920-849d-18ccab40651e -> Yes
+2025-06-26 10:10:00,601 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:00,757 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.2c8dea48-9393-4b7a-b84c-45e33ddb7757 "HTTP/2 200 OK"
+2025-06-26 10:10:00,758 | INFO | __main__ | Updated sentiment for 2c8dea48-9393-4b7a-b84c-45e33ddb7757 -> Yes
+2025-06-26 10:10:01,139 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:01,336 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.0ab312b8-b245-42e7-926c-e8c984c904d0 "HTTP/2 200 OK"
+2025-06-26 10:10:01,337 | INFO | __main__ | Updated sentiment for 0ab312b8-b245-42e7-926c-e8c984c904d0 -> Maybe
+2025-06-26 10:10:01,804 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:01,807 | INFO | __main__ | Skipping sentiment for 7043d818-3dc1-4ffe-92d5-bca872e5bbd2 -> No – not a review.
+2025-06-26 10:10:02,266 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:02,409 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.18940d16-7f75-4c85-83b2-e46edcc83021 "HTTP/2 200 OK"
+2025-06-26 10:10:02,417 | INFO | __main__ | Updated sentiment for 18940d16-7f75-4c85-83b2-e46edcc83021 -> No
+2025-06-26 10:10:02,829 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:02,976 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.400e4dd7-f4e1-4c8d-928c-dbba3a88825d "HTTP/2 200 OK"
+2025-06-26 10:10:02,977 | INFO | __main__ | Updated sentiment for 400e4dd7-f4e1-4c8d-928c-dbba3a88825d -> Yes
+2025-06-26 10:10:03,648 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:03,651 | INFO | __main__ | Skipping sentiment for 43a98f0a-873c-494b-b42b-94b1bdad4d5a -> No – not a review
+2025-06-26 10:10:04,283 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:04,296 | INFO | __main__ | Skipping sentiment for 194ea3a5-e896-422e-bb9c-082820a4a156 -> No – not a review
+2025-06-26 10:10:04,775 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:04,777 | INFO | __main__ | Skipping sentiment for d63a8dea-d2f0-4bad-8e04-f5d148d6c314 -> No - not a review
+2025-06-26 10:10:05,697 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:05,719 | INFO | __main__ | Skipping sentiment for 9c044e1f-ab52-4518-aa9c-25f475b35560 -> No - not a review
+2025-06-26 10:10:06,055 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:06,191 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.a9e8ad46-8399-4ada-8c18-5288d639d6eb "HTTP/2 200 OK"
+2025-06-26 10:10:06,192 | INFO | __main__ | Updated sentiment for a9e8ad46-8399-4ada-8c18-5288d639d6eb -> Maybe
+2025-06-26 10:10:06,483 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:06,654 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.1168d3e6-44fe-42cb-8fef-01aaa9e1bcd5 "HTTP/2 200 OK"
+2025-06-26 10:10:06,655 | INFO | __main__ | Updated sentiment for 1168d3e6-44fe-42cb-8fef-01aaa9e1bcd5 -> No
+2025-06-26 10:10:07,104 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:07,108 | INFO | __main__ | Skipping sentiment for 344f014c-838b-4bed-9ffc-527665a1907e -> No – not a review
+2025-06-26 10:10:07,492 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 10:10:07,690 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.908d0599-188b-4b42-b289-b2eecf6945c1 "HTTP/2 200 OK"
+2025-06-26 10:10:07,692 | INFO | __main__ | Updated sentiment for 908d0599-188b-4b42-b289-b2eecf6945c1 -> Maybe

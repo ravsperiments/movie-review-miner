@@ -87,6 +87,7 @@ def get_reviews_missing_sentiment() -> list[dict]:
             supabase.table("reviews")
             .select("id, blog_title, short_review, sentiment")
             .is_('sentiment', None)
+            .eq("is_film_review", True)
             .execute()
         )
         return result.data or []
