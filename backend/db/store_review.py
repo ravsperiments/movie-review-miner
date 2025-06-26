@@ -22,3 +22,17 @@ def store_review(review: dict) -> None:
     except Exception as e:
         logger.error("DB Insert failed: %s", e)
         raise
+
+def store_review_if_missing(review: dict) -> None:
+    """Insert review only if the link does not already exist."""
+    try:
+        exists = (
+            supabase.table("reviews").select("id").eq("link", review["link"]).execute()
+        )
+        if exists.data:
+            logger.info("Review already stored for %s", review["link"])
+            return
+        store_review(review)
+    except Exception as e:
+        logger.error("Store review check failed for %s: %s", review.get("link"), e)
+        raise
