@@ -14,12 +14,24 @@ def generate_sentiment() -> None:
 
     for review in tqdm(reviews):
         try:
-            sentiment = analyze_sentiment(review.get("blog_title", ""), review.get("short_review", ""), review.get("full_excerpt", ""))
-            if sentiment:
-                update_sentiment_for_review(review["id"], sentiment.split()[0])
+            sentiment = analyze_sentiment(
+                review.get("blog_title", ""),
+                review.get("short_review", ""),
+                review.get("full_excerpt", ""),
+            )
+
+            if not sentiment:
+                logger.warning("No sentiment returned for review %s", review["id"])
+                continue
+
+            clean = sentiment.strip()
+            if clean in {"Yes", "No", "Maybe"}:
+                update_sentiment_for_review(review["id"], clean)
                 logger.info("Updated sentiment for %s -> %s", review["id"], sentiment)
             else:
-                logger.warning("No sentiment returned for review %s", review["id"])
+                logger.info(
+                    "Skipping sentiment for %s -> %s", review["id"], sentiment
+                )
         except Exception as e:
             logger.error(
                 "Sentiment analysis failed for %s: %s", review.get("id"), e, exc_info=True
