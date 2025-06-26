@@ -49,7 +49,7 @@ Short Review Snippet:
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
         )
-        logger.debug("is_film_review response: %s", response)
+        #logger.debug("is_film_review response: %s", response)
         return response.choices[0].message.content.strip().lower().startswith("yes")
     except OpenAIError as e:
         # Surface any API errors to the caller
@@ -96,7 +96,7 @@ Subtext:
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
         )
-        logger.debug("analyze_sentiment response: %s", response)
+        #logger.debug("analyze_sentiment response: %s", response)
         return response.choices[0].message.content.strip()
     except OpenAIError as e:
         logger.error("OpenAI analyze_sentiment failed: %s", e)
@@ -120,7 +120,7 @@ Return ONLY the name of the movie being reviewed. Do not include the director or
             messages=[{"role": "user", "content": prompt}],
             temperature=0,
         )
-        logger.debug("extract_movie_title response: %s", response)
+        #logger.debug("extract_movie_title response: %s", response)
         return response.choices[0].message.content.strip()
     except OpenAIError as e:
         logger.error("OpenAI extract_movie_title failed: %s", e)
