@@ -42,6 +42,8 @@ def update_movie_metadata(movie_id: str, metadata: dict):
             "release_year": metadata.get("release_year"),
             "language": metadata.get("language"),
             "genre": metadata.get("genre"),
+            "popularity": metadata.get("popularity"),
+            "poster_path": metadata.get("poster_path")
         }
         supabase.table("movies").update(update).eq("id", movie_id).execute()
     except Exception as e:
@@ -53,7 +55,8 @@ def get_movies_missing_metadata() -> list[dict]:
     try:
         result = (
             supabase.table("movies")
-            .select("id, title, release_year, language, genre")
+            .select("id, title, release_year, language, genre, popularity, poster_path")
+            .is_("release_year", None)
             .execute()
         )
         return [r for r in result.data if not r.get("release_year")]

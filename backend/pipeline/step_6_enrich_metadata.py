@@ -1,6 +1,7 @@
 """Step 6: use TMDb to enrich movie metadata."""
 import asyncio
 from db.movie_queries import get_movies_missing_metadata, update_movie_metadata
+from db.review_queries import get_post_date_for_movie
 from tmdb.tmdb_api import search_tmdb
 from utils.logger import get_logger
 from utils.io_helpers import write_failure
@@ -14,7 +15,7 @@ semaphore = asyncio.Semaphore(CONCURRENT_REQUESTS)
 async def _enrich_movie(movie: dict) -> None:
     try:
         async with semaphore:
-            metadata = await search_tmdb(movie["title"])
+            metadata = await search_tmdb(movie["title"], movie["year"])
         if metadata:
             update_movie_metadata(movie["id"], metadata)
             logger.info("Updated metadata for %s", movie["title"])
@@ -32,6 +33,18 @@ async def enrich_metadata() -> None:
     movies = get_movies_missing_metadata()
     logger.info("Enriching metadata for %s movies", len(movies))
 
+    for movie in movies:
+        post_date = get_post_date_for_movie(movie["id"])
+        year = post_date["post_date"][:4] if post_date else None
+
+        #  enrich the dict itself
+        movie["year"] = year
+
     tasks = [_enrich_movie(movie) for movie in movies]
     await asyncio.gather(*tasks, return_exceptions=True)
     logger.info("Metadata enrichment complete")
+
+if __name__ == "__main__":
+    import warnings
+    warnings.filterwarnings("ignore", category=RuntimeWarning)
+    asyncio.run(enrich_metadata())

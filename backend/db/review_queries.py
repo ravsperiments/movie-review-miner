@@ -124,3 +124,15 @@ def update_is_film_review(review_id: str, value: bool) -> None:
         supabase.table("reviews").update({"is_film_review": value}).eq("id", review_id).execute()
     except Exception as e:
         logger.error("Failed to update is_film_review for %s: %s", review_id, e)
+
+
+def get_post_date_for_movie(movie_id: str) -> dict | None:
+    result = (
+        supabase.table("reviews")
+        .select("id, post_date")
+        .eq("movie_id", movie_id)
+        .order("post_date", desc=False)
+        .limit(1)
+        .execute()
+    )
+    return result.data[0] if result.data else None
