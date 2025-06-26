@@ -1,5 +1,5 @@
 """Step 4: extract movie titles and link reviews to movies."""
-from db.review_queries import get_unenriched_links, update_review_with_movie_id
+from db.review_queries import get_links_without_movieid, update_review_with_movie_id
 from db.movie_queries import get_movie_by_title, create_movie
 from llm.openai_wrapper import extract_movie_title
 from utils.logger import get_logger
@@ -10,7 +10,7 @@ logger = get_logger(__name__)
 
 def link_movies() -> None:
     """Extract movie titles for reviews and link them to movie records."""
-    reviews = get_unenriched_links()
+    reviews = get_links_without_movieid()
     logger.info("Linking movies for %s reviews", len(reviews))
 
     for review in tqdm(reviews):

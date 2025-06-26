@@ -45,7 +45,7 @@ def get_links_after_date(min_post_date: datetime) -> set[str]:
         logger.error("Failed to fetch links after %s: %s", min_post_date, e)
         return set()
     
-def get_unenriched_links() -> list[dict]:
+def get_links_without_movieid() -> list[dict]:
     """
     Fetch all reviews from Supabase where movie_id is null.
 
@@ -70,7 +70,7 @@ def get_unenriched_links() -> list[dict]:
             if "id" in r and "link" in r
         ]
     except Exception as e:
-        logger.error("Failed to fetch unenriched links: %s", e)
+        logger.error("Failed to fetch links without moview id: %s", e)
         return []
 
 def update_review_with_movie_id(review_id: str, movie_id: str):
