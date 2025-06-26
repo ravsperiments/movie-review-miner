@@ -2,11 +2,14 @@
 
 import os
 
+from utils.logger import get_logger
+
 FAILED_LINKS_FILE = "failed_links.txt"
 
 def main():
+    logger = get_logger(__name__)
     if not os.path.exists(FAILED_LINKS_FILE):
-        print("No failed_links.txt file found.")
+        logger.info("No failed_links.txt file found.")
         return
 
     with open(FAILED_LINKS_FILE, "r") as f:
@@ -15,17 +18,17 @@ def main():
     total = len(links)
     unique_links = set(links)
 
-    print(f"\n🔍 Failed Links Analysis")
-    print(f"------------------------")
-    print(f"Total failures recorded: {total}")
-    print(f"Unique failed links:     {len(unique_links)}")
+    logger.info("\nFailed Links Analysis")
+    logger.info("------------------------")
+    logger.info("Total failures recorded: %s", total)
+    logger.info("Unique failed links:     %s", len(unique_links))
 
     if total > len(unique_links):
-        print("⚠️ Some links failed multiple times.")
+        logger.warning("Some links failed multiple times.")
 
-    print("\nSample failed links:")
+    logger.info("\nSample failed links:")
     for link in list(unique_links)[:10]:
-        print(f" - {link}")
+        logger.info(" - %s", link)
 
 if __name__ == "__main__":
     main()

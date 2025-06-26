@@ -34,13 +34,19 @@ async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
             logger.warning("Attempt %s failed for %s: %s", attempt, url, e)
             await asyncio.sleep(2 ** (attempt - 1))
     logger.error("Failed to parse %s", url)
+    with open("failed_post_links.txt", "a") as f:
+        f.write(f"{url}\n")
 
 async def parse_posts(urls: list[str]) -> None:
     """Parse and store a list of blog post URLs."""
     if not urls:
         logger.info("No new posts to parse")
         return
+    logger.info("Parsing %s posts", len(urls))
     async with aiohttp.ClientSession() as session:
         tasks = [_parse_and_store(session, url) for url in urls]
-        for task in tqdm(asyncio.as_completed(tasks), total=len(tasks)):
-            await task
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        failures = sum(isinstance(r, Exception) for r in results)
+        if failures:
+            logger.error("%s posts failed to parse", failures)
+        logger.info("Parsing complete")

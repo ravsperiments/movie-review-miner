@@ -8,6 +8,7 @@ logger = get_logger(__name__)
 
 async def fetch_links(start_page: int = 1, end_page: int = 279) -> list[str]:
     """Fetch new blog post links skipping ones already stored."""
+    logger.info("Fetching links from pages %s to %s", start_page, end_page)
     latest_date = get_latest_post_date()
     existing_links = get_links_after_date(latest_date) if latest_date else set()
     logger.info("Loaded %s existing links", len(existing_links))

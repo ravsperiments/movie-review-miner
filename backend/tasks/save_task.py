@@ -4,6 +4,7 @@ import uuid
 import json
 from pathlib import Path
 from db.supabase_client import create_client
+from utils.logger import get_logger
 from datetime import datetime
 
 # Optional: for Supabase DB insert
@@ -29,7 +30,8 @@ def save_parsed_post(post_data: dict):
 
     supabase = create_client(supabase_url, supabase_key)
 
-    print(f"[INFO] Saving to Supabase: {post_data.get('title', '')[:50]}")
+    logger = get_logger(__name__)
+    logger.info("Saving to Supabase: %s", post_data.get('title', '')[:50])
 
     data = {
         "link": post_data["url"],
@@ -40,9 +42,9 @@ def save_parsed_post(post_data: dict):
 
     try:
         response = supabase.table("test_reviews").insert(data).execute()
-        print(f"[INFO] Inserted: {response}")
+        logger.info("Inserted: %s", response)
     except Exception as e:
-        print(f"[ERROR] Failed to save post: {e}", flush=True)
+        logger.error("Failed to save post: %s", e)
         with open("failed_links.txt", "a") as f:
             f.write(f"[supabase_error] {post_data['url']} error: {e}\n")
 
