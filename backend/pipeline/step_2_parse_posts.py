@@ -5,10 +5,11 @@ import async_timeout
 from tqdm.asyncio import tqdm
 
 from crawler.parse_post import parse_post_async
-from db.store_review import store_review_if_missing
 from db.review_queries import get_links_with_title_tbd
+from db.crud import upsert_review
 from utils.io_helpers import write_failure
 from utils import StepLogger
+from utils.retries import run_with_retries
 from db.pipeline_logger import log_step_result
 import json
 
@@ -18,47 +19,51 @@ MAX_RETRIES = 3
 semaphore = asyncio.Semaphore(CONCURRENT_REQUESTS)
 
 async def _parse_and_store(
-    session: aiohttp.ClientSession, url: str, step_logger: StepLogger
+    session: aiohttp.ClientSession,
+    url: dict,
+    step_logger: StepLogger,
+    attempt: int = 1,
 ) -> None:
     """Parse a blog post URL and persist the result."""
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            async with semaphore:
-                async with async_timeout.timeout(10):
-                    data = await parse_post_async(session, url["link"])
-            review = {
-                "link": data["url"],
-                "blog_title": data["title"],
-                "short_review": data["summary"],
-                "full_excerpt": data["full_review"],
-                "post_date": data["date"],
-            }
-            store_review_if_missing(review)
-            step_logger.metrics["saved_count"] += 1
-            step_logger.logger.info("Stored review from %s", url)
-            log_step_result(
-                "parse_post",
-                link_id=url.get("id"),
-                attempt_number=attempt,
-                status="success",
-                result_data={"link": review["link"]},
-            )
-            return
-        except Exception as e:
-            step_logger.logger.warning(
-                "Attempt %s failed for %s: %s", attempt, url["link"], e
-            )
-            log_step_result(
-                "parse_post",
-                link_id=url.get("id"),
-                attempt_number=attempt,
-                status="failure",
-                error_message=str(e),
-            )
-            await asyncio.sleep(2 ** (attempt - 1))
-    step_logger.metrics["failed_count"] += 1
-    step_logger.logger.error("Failed to parse %s", url["link"], exc_info=True)
-    write_failure("failed_post_links.txt", url["link"], "max retries")
+    try:
+        async with semaphore:
+            async with async_timeout.timeout(10):
+                data = await parse_post_async(session, url["link"])
+
+        for key in ["url", "title", "summary", "full_review", "date"]:
+            if key not in data:
+                raise ValueError(f"Missing {key}")
+
+        review = {
+            "link": data["url"],
+            "blog_title": data["title"],
+            "short_review": data["summary"],
+            "full_excerpt": data["full_review"],
+            "post_date": data["date"],
+        }
+
+        await upsert_review(review)
+        step_logger.metrics["saved_count"] += 1
+        step_logger.logger.info("Stored review from %s", url["link"])
+        log_step_result(
+            "parse_post",
+            link_id=url.get("id"),
+            attempt_number=attempt,
+            status="success",
+            result_data={"link": review["link"]},
+        )
+    except Exception as e:
+        step_logger.logger.warning(
+            "Attempt %s failed for %s: %s", attempt, url["link"], e
+        )
+        log_step_result(
+            "parse_post",
+            link_id=url.get("id"),
+            attempt_number=attempt,
+            status="failure",
+            error_message=str(e),
+        )
+        raise
 
 async def parse_posts(urls: list[str]) -> None:
     """Parse and store a list of blog post URLs."""
@@ -67,11 +72,33 @@ async def parse_posts(urls: list[str]) -> None:
         step_logger.logger.info("No new posts to parse")
         step_logger.finalize()
         return
-    step_logger.metrics["input_count"] = len(urls)
-    step_logger.logger.info("Parsing %s posts", len(urls))
+    unique = {u["link"]: u for u in urls}.values()
+    step_logger.metrics["input_count"] = len(list(unique))
+    step_logger.logger.info("Parsing %s posts", step_logger.metrics["input_count"])
     async with aiohttp.ClientSession() as session:
-        tasks = [_parse_and_store(session, url, step_logger) for url in urls]
-        await asyncio.gather(*tasks, return_exceptions=True)
+        tasks = [
+            run_with_retries(
+                _parse_and_store,
+                args=[session, url, step_logger],
+                max_retries=MAX_RETRIES,
+            )
+            for url in unique
+        ]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    for result, url in zip(results, unique):
+        if isinstance(result, Exception):
+            step_logger.metrics["failed_count"] += 1
+            step_logger.logger.error("Failed to parse %s", url["link"], exc_info=True)
+            write_failure("failed_post_links.txt", url["link"], str(result))
+            log_step_result(
+                "parse_post",
+                link_id=url.get("id"),
+                attempt_number=MAX_RETRIES,
+                status="failure",
+                error_message=str(result),
+            )
+
     step_logger.metrics["processed_count"] = step_logger.metrics["saved_count"] + step_logger.metrics["failed_count"]
     step_logger.logger.info("Parsing complete")
     step_logger.finalize()
