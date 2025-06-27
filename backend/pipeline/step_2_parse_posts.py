@@ -105,5 +105,4 @@ async def parse_posts(urls: list[str]) -> None:
 
 if __name__ == "__main__":
     urls = get_links_with_title_tbd()
-    print(f"[DEBUG] URLs from DB: {urls[0]}")
     asyncio.run(parse_posts(urls))
