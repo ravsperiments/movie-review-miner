@@ -2,6 +2,7 @@ import json
 import logging
 from pathlib import Path
 from utils.logger import get_logger
+from db.pipeline_logger import log_step_result
 
 class StepLogger:
     """Helper to log per-step metrics and summary."""
@@ -41,5 +42,14 @@ class StepLogger:
         data.append(self.metrics)
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
+        try:
+            log_step_result(
+                self.step_name,
+                attempt_number=1,
+                status="success",
+                result_data=self.metrics,
+            )
+        except Exception as e:  # noqa: BLE001
+            self.logger.error("Failed to log step summary: %s", e)
         self.logger.removeHandler(self._handler)
         self._handler.close()
