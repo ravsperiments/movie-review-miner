@@ -4,6 +4,7 @@ from db.movie_queries import get_movie_by_title, create_movie
 from llm.openai_wrapper import extract_movie_title
 from utils.io_helpers import write_failure
 from utils import StepLogger
+from db.pipeline_logger import log_step_result
 from tqdm import tqdm
 
 def link_movies() -> None:
@@ -26,13 +27,29 @@ def link_movies() -> None:
             movie_id = movie["id"] if movie else create_movie(title)
             update_review_with_movie_id(review["id"], movie_id)
             step_logger.metrics["saved_count"] += 1
-            step_logger.logger.info("Linked review %s -> movie %s", review["id"], title)
+            step_logger.logger.info(
+                "Linked review %s -> movie %s", review["id"], title
+            )
+            log_step_result(
+                "link_movie",
+                link_id=review.get("id"),
+                movie_id=movie_id,
+                attempt_number=1,
+                status="success",
+            )
         except Exception as e:
             step_logger.metrics["failed_count"] += 1
             step_logger.logger.error(
                 "Movie link failed for %s: %s", review.get("id"), e, exc_info=True
             )
             write_failure("failed_movie_linking.txt", str(review.get("id")), e)
+            log_step_result(
+                "link_movie",
+                link_id=review.get("id"),
+                attempt_number=1,
+                status="failure",
+                error_message=str(e),
+            )
         finally:
             step_logger.metrics["processed_count"] += 1
     step_logger.finalize()

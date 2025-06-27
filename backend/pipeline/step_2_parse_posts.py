@@ -9,6 +9,7 @@ from db.store_review import store_review_if_missing
 from db.review_queries import get_links_with_title_tbd
 from utils.io_helpers import write_failure
 from utils import StepLogger
+from db.pipeline_logger import log_step_result
 import json
 
 
@@ -35,10 +36,24 @@ async def _parse_and_store(
             store_review_if_missing(review)
             step_logger.metrics["saved_count"] += 1
             step_logger.logger.info("Stored review from %s", url)
+            log_step_result(
+                "parse_post",
+                link_id=url.get("id"),
+                attempt_number=attempt,
+                status="success",
+                result_data={"link": review["link"]},
+            )
             return
         except Exception as e:
             step_logger.logger.warning(
                 "Attempt %s failed for %s: %s", attempt, url["link"], e
+            )
+            log_step_result(
+                "parse_post",
+                link_id=url.get("id"),
+                attempt_number=attempt,
+                status="failure",
+                error_message=str(e),
             )
             await asyncio.sleep(2 ** (attempt - 1))
     step_logger.metrics["failed_count"] += 1

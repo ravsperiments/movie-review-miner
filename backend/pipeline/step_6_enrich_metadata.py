@@ -5,6 +5,7 @@ from db.review_queries import get_post_date_for_movie
 from tmdb.tmdb_api import search_tmdb
 from utils.io_helpers import write_failure
 from utils import StepLogger
+from db.pipeline_logger import log_step_result
 from tqdm import tqdm
 
 CONCURRENT_REQUESTS = 5
@@ -18,14 +19,34 @@ async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
             update_movie_metadata(movie["id"], metadata)
             step_logger.metrics["saved_count"] += 1
             step_logger.logger.info("Updated metadata for %s", movie["title"])
+            log_step_result(
+                "enrich_metadata",
+                movie_id=movie.get("id"),
+                attempt_number=1,
+                status="success",
+            )
         else:
             step_logger.logger.warning("No metadata found for %s", movie["title"])
+            log_step_result(
+                "enrich_metadata",
+                movie_id=movie.get("id"),
+                attempt_number=1,
+                status="failure",
+                error_message="No metadata",
+            )
     except Exception as e:
         step_logger.metrics["failed_count"] += 1
         step_logger.logger.error(
             "TMDb enrichment failed for %s: %s", movie.get("title"), e, exc_info=True
         )
         write_failure("failed_tmdb.txt", movie.get("title", ""), e)
+        log_step_result(
+            "enrich_metadata",
+            movie_id=movie.get("id"),
+            attempt_number=1,
+            status="failure",
+            error_message=str(e),
+        )
 
 
 async def enrich_metadata() -> None:
