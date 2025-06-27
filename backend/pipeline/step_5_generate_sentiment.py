@@ -1,16 +1,16 @@
 """Step 5: run sentiment analysis on movie reviews."""
 from db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
 from llm.openai_wrapper import analyze_sentiment
-from utils.logger import get_logger
 from utils.io_helpers import write_failure
+from utils import StepLogger
 from tqdm import tqdm
-
-logger = get_logger(__name__)
 
 def generate_sentiment() -> None:
     """Generate sentiment labels for reviews lacking them."""
+    step_logger = StepLogger("step_5_generate_sentiment")
     reviews = get_reviews_missing_sentiment()
-    logger.info("Generating sentiment for %s reviews", len(reviews))
+    step_logger.metrics["input_count"] = len(reviews)
+    step_logger.logger.info("Generating sentiment for %s reviews", len(reviews))
 
     for review in tqdm(reviews):
         try:
@@ -21,22 +21,31 @@ def generate_sentiment() -> None:
             )
 
             if not sentiment:
-                logger.warning("No sentiment returned for review %s", review["id"])
+                step_logger.logger.warning(
+                    "No sentiment returned for review %s", review["id"]
+                )
                 continue
 
             clean = sentiment.strip()
             if clean in {"Yes", "No", "Maybe"}:
                 update_sentiment_for_review(review["id"], clean)
-                logger.info("Updated sentiment for %s -> %s", review["id"], sentiment)
+                step_logger.metrics["saved_count"] += 1
+                step_logger.logger.info(
+                    "Updated sentiment for %s -> %s", review["id"], sentiment
+                )
             else:
-                logger.info(
+                step_logger.logger.info(
                     "Skipping sentiment for %s -> %s", review["id"], sentiment
                 )
         except Exception as e:
-            logger.error(
+            step_logger.metrics["failed_count"] += 1
+            step_logger.logger.error(
                 "Sentiment analysis failed for %s: %s", review.get("id"), e, exc_info=True
             )
             write_failure("failed_sentiment.txt", str(review.get("id")), e)
+        finally:
+            step_logger.metrics["processed_count"] += 1
+    step_logger.finalize()
 
 if __name__ == "__main__":
     import warnings

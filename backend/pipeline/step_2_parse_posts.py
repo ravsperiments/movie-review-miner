@@ -7,17 +7,18 @@ from tqdm.asyncio import tqdm
 from crawler.parse_post import parse_post_async
 from db.store_review import store_review_if_missing
 from db.review_queries import get_links_with_title_tbd
-from utils.logger import get_logger
 from utils.io_helpers import write_failure
+from utils import StepLogger
 import json
 
-logger = get_logger(__name__)
 
 CONCURRENT_REQUESTS = 10
 MAX_RETRIES = 3
 semaphore = asyncio.Semaphore(CONCURRENT_REQUESTS)
 
-async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
+async def _parse_and_store(
+    session: aiohttp.ClientSession, url: str, step_logger: StepLogger
+) -> None:
     """Parse a blog post URL and persist the result."""
     for attempt in range(1, MAX_RETRIES + 1):
         try:
@@ -32,27 +33,33 @@ async def _parse_and_store(session: aiohttp.ClientSession, url: str) -> None:
                 "post_date": data["date"],
             }
             store_review_if_missing(review)
-            logger.info("Stored review from %s", url)
+            step_logger.metrics["saved_count"] += 1
+            step_logger.logger.info("Stored review from %s", url)
             return
         except Exception as e:
-            logger.warning("Attempt %s failed for %s: %s", attempt, url["link"], e)
+            step_logger.logger.warning(
+                "Attempt %s failed for %s: %s", attempt, url["link"], e
+            )
             await asyncio.sleep(2 ** (attempt - 1))
-    logger.error("Failed to parse %s", url["link"], exc_info=True)
+    step_logger.metrics["failed_count"] += 1
+    step_logger.logger.error("Failed to parse %s", url["link"], exc_info=True)
     write_failure("failed_post_links.txt", url["link"], "max retries")
 
 async def parse_posts(urls: list[str]) -> None:
     """Parse and store a list of blog post URLs."""
+    step_logger = StepLogger("step_2_parse_posts")
     if not urls:
-        logger.info("No new posts to parse")
+        step_logger.logger.info("No new posts to parse")
+        step_logger.finalize()
         return
-    logger.info("Parsing %s posts", len(urls))
+    step_logger.metrics["input_count"] = len(urls)
+    step_logger.logger.info("Parsing %s posts", len(urls))
     async with aiohttp.ClientSession() as session:
-        tasks = [_parse_and_store(session, url) for url in urls]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-        failures = sum(isinstance(r, Exception) for r in results)
-        if failures:
-            logger.error("%s posts failed to parse", failures)
-        logger.info("Parsing complete")
+        tasks = [_parse_and_store(session, url, step_logger) for url in urls]
+        await asyncio.gather(*tasks, return_exceptions=True)
+    step_logger.metrics["processed_count"] = step_logger.metrics["saved_count"] + step_logger.metrics["failed_count"]
+    step_logger.logger.info("Parsing complete")
+    step_logger.finalize()
 
 if __name__ == "__main__":
     urls = get_links_with_title_tbd()
