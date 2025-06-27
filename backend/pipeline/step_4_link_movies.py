@@ -2,33 +2,40 @@
 from db.review_queries import get_links_without_movieid, update_review_with_movie_id
 from db.movie_queries import get_movie_by_title, create_movie
 from llm.openai_wrapper import extract_movie_title
-from utils.logger import get_logger
 from utils.io_helpers import write_failure
+from utils import StepLogger
 from tqdm import tqdm
-
-logger = get_logger(__name__)
 
 def link_movies() -> None:
     """Extract movie titles for reviews and link them to movie records."""
+    step_logger = StepLogger("step_4_link_movies")
     reviews = get_links_without_movieid()
-    logger.info("Linking movies for %s reviews", len(reviews))
+    step_logger.metrics["input_count"] = len(reviews)
+    step_logger.logger.info("Linking movies for %s reviews", len(reviews))
 
     for review in tqdm(reviews):
         try:
             title = extract_movie_title(review.get("blog_title", ""))
             if not title or title.lower() == "none":
-                logger.info("No movie title found for review %s", review.get("id"))
+                step_logger.logger.info(
+                    "No movie title found for review %s", review.get("id")
+                )
                 continue
 
             movie = get_movie_by_title(title)
             movie_id = movie["id"] if movie else create_movie(title)
             update_review_with_movie_id(review["id"], movie_id)
-            logger.info("Linked review %s -> movie %s", review["id"], title)
+            step_logger.metrics["saved_count"] += 1
+            step_logger.logger.info("Linked review %s -> movie %s", review["id"], title)
         except Exception as e:
-            logger.error(
+            step_logger.metrics["failed_count"] += 1
+            step_logger.logger.error(
                 "Movie link failed for %s: %s", review.get("id"), e, exc_info=True
             )
             write_failure("failed_movie_linking.txt", str(review.get("id")), e)
+        finally:
+            step_logger.metrics["processed_count"] += 1
+    step_logger.finalize()
 
 if __name__ == "__main__":
     import warnings

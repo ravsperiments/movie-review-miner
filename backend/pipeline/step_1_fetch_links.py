@@ -2,23 +2,29 @@
 import asyncio
 from crawler.fetch_links import get_post_links_async
 from db.store_review import store_blog_post_urls
-from utils.logger import get_logger
+from utils import StepLogger
 
-logger = get_logger(__name__)
 
 async def fetch_links(start_page: int = 1, end_page: int = 279) -> list[str]:
+    """Fetch blog post links and persist them."""
+    step_logger = StepLogger("step_1_fetch_links")
     links = await get_post_links_async(start_page, end_page)
-    logger.info("Discovered %s new links", len(links))
+    step_logger.metrics["input_count"] = len(links)
+    step_logger.logger.info("Discovered %s new links", len(links))
 
-    stored = 0
     for link in links:
+        step_logger.metrics["processed_count"] += 1
         try:
             store_blog_post_urls({"link": link[2], "blog_title": "TBD"})
-            stored += 1
+            step_logger.metrics["saved_count"] += 1
         except Exception as e:
-            logger.warning("Failed to store link: %s (%s)", link, e)
+            step_logger.metrics["failed_count"] += 1
+            step_logger.logger.warning("Failed to store link: %s (%s)", link, e)
 
-    logger.info("Stored %s links to DB", stored)
+    step_logger.logger.info(
+        "Stored %s links to DB", step_logger.metrics["saved_count"]
+    )
+    step_logger.finalize()
     return links
 
 if __name__ == "__main__":
