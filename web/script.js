@@ -3,6 +3,7 @@
 // Pagination state
 let currentPage = 1;
 const pageSize = 10;
+let totalPages = 1;
 
 async function loadReviews(page = currentPage) {
   currentPage = page;
@@ -85,24 +86,15 @@ async function loadReviews(page = currentPage) {
     list.appendChild(div);
   });
 
-  function updatePagination(total) {
-    const prevBtn = document.getElementById('prev-page');
-    const nextBtn = document.getElementById('next-page');
-    const info = document.getElementById('page-info');
-    const totalPages = Math.ceil(total / pageSize) || 1;
-    info.textContent = `Page ${currentPage} of ${totalPages}`;
-    prevBtn.disabled = currentPage <= 1;
-    nextBtn.disabled = currentPage >= totalPages;
-  }
-  updatePagination(count || 0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadReviews();
-  document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage > 1) loadReviews(currentPage - 1);
-  });
-  document.getElementById('next-page').addEventListener('click', () => {
-    loadReviews(currentPage + 1);
-  });
+  const sentinel = document.getElementById('scroll-sentinel');
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && currentPage < totalPages) {
+      loadReviews(currentPage + 1);
+    }
+  }, { rootMargin: '200px' });
+  observer.observe(sentinel);
 });

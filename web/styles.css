@@ -169,23 +169,6 @@ body {
   text-decoration: underline;
 }
 
-/* Pagination controls */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
-}
-.pagination button {
-  padding: 0.5rem 1rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-}
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
 
 /* Responsive adjustments for mobile screens */
 @media (max-width: 768px) {

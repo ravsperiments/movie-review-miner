@@ -13,4 +13,4 @@
 - [x] Fixed card dimensions: posters at 342×489 px with `object-fit: cover`, local placeholder
 - [x] Truncate reviews to 4 lines with CSS clamp and add "Read full" links
 - [x] Display metadata inline (Language, Sentiment) with equal flex cells and `<h4>` labels
-- [x] Add pagination controls and implement paged loading of reviews
+- [x] Replace pagination with infinite scrolling (auto-load on scroll using IntersectionObserver)
