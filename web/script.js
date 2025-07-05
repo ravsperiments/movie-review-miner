@@ -1,6 +1,11 @@
 
 
-async function loadReviews() {
+// Pagination state
+let currentPage = 1;
+const pageSize = 10;
+
+async function loadReviews(page = currentPage) {
+  currentPage = page;
   const list = document.getElementById('review-list');
   list.textContent = 'Loading reviews...';
 
@@ -14,12 +19,15 @@ async function loadReviews() {
     return;
   }
 
-  let data, error;
+  let data, error, count;
   try {
-    ({ data, error } = await supabase
+    const from = (currentPage - 1) * pageSize;
+    const to = from + pageSize - 1;
+    ({ data, error, count } = await supabase
       .from('vw_flat_movie_reviews')
-      .select('*')
-      .limit(10));
+      .select('*', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(from, to));
   } catch (err) {
     console.error('Unexpected error querying reviews', err);
     list.textContent = `Unexpected error querying reviews: ${err.message}`;
@@ -76,6 +84,25 @@ async function loadReviews() {
     div.appendChild(content);
     list.appendChild(div);
   });
+
+  function updatePagination(total) {
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const info = document.getElementById('page-info');
+    const totalPages = Math.ceil(total / pageSize) || 1;
+    info.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
+  }
+  updatePagination(count || 0);
 }
 
-document.addEventListener('DOMContentLoaded', loadReviews);
+document.addEventListener('DOMContentLoaded', () => {
+  loadReviews();
+  document.getElementById('prev-page').addEventListener('click', () => {
+    if (currentPage > 1) loadReviews(currentPage - 1);
+  });
+  document.getElementById('next-page').addEventListener('click', () => {
+    loadReviews(currentPage + 1);
+  });
+});
