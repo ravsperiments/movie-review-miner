@@ -41,3 +41,21 @@ body {
   padding: 0 2.5rem;
   font-family: 'Poppins', sans-serif;
 }
+
+.reviews {
+  margin-top: 1rem;
+}
+
+.review {
+  border: 1px solid #dee2e7;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.review img.poster {
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
+}
