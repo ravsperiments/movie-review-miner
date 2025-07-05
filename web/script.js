@@ -8,7 +8,9 @@ let totalPages = 1;
 async function loadReviews(page = currentPage) {
   currentPage = page;
   const list = document.getElementById('review-list');
-  list.textContent = 'Loading reviews...';
+  if (page === 1) {
+    list.textContent = 'Loading reviews...';
+  }
 
   let supabase;
   try {
@@ -16,7 +18,9 @@ async function loadReviews(page = currentPage) {
     supabase = module.supabase;
   } catch (err) {
     console.error('Error loading Supabase config', err);
-    list.textContent = `Error initializing Supabase: ${err.message}`;
+    if (page === 1) {
+      list.textContent = `Error initializing Supabase: ${err.message}`;
+    }
     return;
   }
 
@@ -31,22 +35,30 @@ async function loadReviews(page = currentPage) {
       .range(from, to));
   } catch (err) {
     console.error('Unexpected error querying reviews', err);
-    list.textContent = `Unexpected error querying reviews: ${err.message}`;
+    if (page === 1) {
+      list.textContent = `Unexpected error querying reviews: ${err.message}`;
+    }
     return;
   }
 
   if (error) {
     console.error('Error loading reviews', error);
-    list.textContent = `Failed to load reviews: ${error.message}`;
+    if (page === 1) {
+      list.textContent = `Failed to load reviews: ${error.message}`;
+    }
     return;
   }
 
   if (!data || data.length === 0) {
-    list.textContent = 'No reviews found. Make sure the backend pipeline has run.';
+    if (page === 1) {
+      list.textContent = 'No reviews found. Make sure the backend pipeline has run.';
+    }
     return;
   }
 
-  list.textContent = '';
+  if (page === 1) {
+    list.textContent = '';
+  }
   data.forEach((movie) => {
     const div = document.createElement('div');
     div.className = 'review';
@@ -86,6 +98,8 @@ async function loadReviews(page = currentPage) {
     list.appendChild(div);
   });
 
+  // Update total pages for infinite scroll
+  totalPages = Math.ceil((count || 0) / pageSize) || 1;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
