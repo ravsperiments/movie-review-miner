@@ -1,0 +1,43 @@
+body {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 1rem;
+}
+
+.markdown h1:not([class]) {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: var(--spacing-scalable-xl, 2rem);
+}
+
+.markdown h3.header-sidebar-hide,
+.markdown h3:not([class]) {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: var(--spacing-scalable-xl, 1.5rem);
+}
+
+.markdown ol:not([class]),
+.markdown p:not([class]),
+.markdown ul:not([class]) {
+  color: var(--color-text-1, #333);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.multi-language .tile .lang-native {
+  color: var(--color-text-2, #555);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.ais-SearchBox-input {
+  box-shadow: none;
+  padding: 0 2.5rem;
+  font-family: 'Poppins', sans-serif;
+}
