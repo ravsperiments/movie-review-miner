@@ -5,7 +5,21 @@ let currentPage = 1;
 const pageSize = 10;
 let totalPages = 1;
 
-async function loadReviews(page = currentPage) {
+// Observer instance for infinite loading
+let observer;
+
+// Batch-loading control: auto-load up to this many pages per batch,
+// then require manual click to continue.
+const autoBatchSize = 5;
+let pagesLoadedInBatch = 0;
+
+/**
+ * Load a page of reviews.
+ * @param {number} page - page number to load
+ * @param {boolean} manual - whether this load was manually triggered (resets batch counter)
+ */
+async function loadReviews(page = currentPage, manual = false) {
+  if (manual) pagesLoadedInBatch = 0;
   currentPage = page;
   const list = document.getElementById('review-list');
   if (page === 1) {
@@ -98,15 +112,31 @@ async function loadReviews(page = currentPage) {
     list.appendChild(div);
   });
 
+  // Track pages loaded in current batch and show manual trigger if needed
+  pagesLoadedInBatch += 1;
+  const loadMoreBtn = document.getElementById('load-more');
+  if (pagesLoadedInBatch >= autoBatchSize && currentPage < totalPages) {
+    observer.unobserve(document.getElementById('scroll-sentinel'));
+    loadMoreBtn.hidden = false;
+  }
+
   // Update total pages for infinite scroll
   totalPages = Math.ceil((count || 0) / pageSize) || 1;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initial load + infinite observer
   loadReviews();
   const sentinel = document.getElementById('scroll-sentinel');
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && currentPage < totalPages) {
+  const loadMoreBtn = document.getElementById('load-more');
+  loadMoreBtn.hidden = true;
+  loadMoreBtn.addEventListener('click', () => {
+    loadMoreBtn.hidden = true;
+    observer.observe(sentinel);
+    if (currentPage < totalPages) loadReviews(currentPage + 1, true);
+  });
+  observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && currentPage < totalPages && pagesLoadedInBatch < autoBatchSize) {
       loadReviews(currentPage + 1);
     }
   }, { rootMargin: '200px' });

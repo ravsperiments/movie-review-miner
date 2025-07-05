@@ -2,11 +2,58 @@
   margin: 0 0 0.5rem !important;
 }
 
+/* Root-level variables */
+:root {
+  /* Set header height to match picovoice.ai navbar (default: 4rem = 64px) */
+  --site-header-height: 4rem;
+}
+
 /* Make all elements use border-box sizing */
 html { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
 .review-content h3 {
   margin: 0 0 0.5rem !important;
+}
+
+/* Sticky site header */
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: var(--site-header-height);
+  padding: 0 1rem;
+  border-bottom: 1px solid #dee2e7;
+}
+
+/* Site footer */
+.site-footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Load more button */
+#load-more {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  background-color: #377DFF;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+#load-more:hover {
+  background-color: #255dbf;
 }
 
 /* Style for language and sentiment subheadings */
@@ -44,7 +91,6 @@ body {
   background-color: #ffffff;
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  padding: 1rem;
 }
 
 /* Layout wrapper for reviews and future side pane */
@@ -58,11 +104,18 @@ body {
 
  .markdown h1:not([class]) {
   font-family: 'Poppins', sans-serif;
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
   margin: 2rem 0 1rem;
-  border-bottom: 1px solid #dee2e7;
-  padding-bottom: 0.5rem;
+}
+
+/* Header title inside site-header: smaller size and no underline */
+.site-header h1 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
  .markdown h3.header-sidebar-hide,
@@ -200,5 +253,6 @@ body {
     max-width: 100%;
     padding: 0.5rem 1rem 0.5rem 2rem;
     box-sizing: border-box;
+    width: 100%;
   }
 }

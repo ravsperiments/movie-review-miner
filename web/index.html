@@ -12,18 +12,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="markdown">
+  <header class="site-header">
+    <h1>Movie Review Miner</h1>
+    <div class="search">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" class="ais-SearchBox-input" placeholder="Search movies...">
+    </div>
+  </header>
+
   <div class="layout">
     <div class="main-content">
-      <h1>Movie Review Miner</h1>
-      <div class="search">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" class="ais-SearchBox-input" placeholder="Search movies...">
-      </div>
       <div id="review-list" class="reviews"></div>
       <div id="scroll-sentinel"></div>
+      <button id="load-more" hidden>Load more reviews</button>
     </div>
     <!-- side pane (25%) can go here in the future -->
   </div>
+  <footer class="site-footer">
+    © 2025 Movie Review Miner
+  </footer>
 
   <script type="module" src="script.js"></script>
 </body>
