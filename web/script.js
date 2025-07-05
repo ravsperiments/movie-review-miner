@@ -1,18 +1,43 @@
-import { supabase } from './supabase.js';
+
 
 async function loadReviews() {
   const list = document.getElementById('review-list');
-  const { data, error } = await supabase
-    .from('vw_flat_movie_reviews')
-    .select('*')
-    .limit(10);
+  list.textContent = 'Loading reviews...';
 
-  if (error) {
-    console.error('Error loading reviews', error);
-    list.textContent = 'Failed to load reviews';
+  let supabase;
+  try {
+    const module = await import('./supabase.js');
+    supabase = module.supabase;
+  } catch (err) {
+    console.error('Error loading Supabase config', err);
+    list.textContent = `Error initializing Supabase: ${err.message}`;
     return;
   }
 
+  let data, error;
+  try {
+    ({ data, error } = await supabase
+      .from('vw_flat_movie_reviews')
+      .select('*')
+      .limit(10));
+  } catch (err) {
+    console.error('Unexpected error querying reviews', err);
+    list.textContent = `Unexpected error querying reviews: ${err.message}`;
+    return;
+  }
+
+  if (error) {
+    console.error('Error loading reviews', error);
+    list.textContent = `Failed to load reviews: ${error.message}`;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    list.textContent = 'No reviews found. Make sure the backend pipeline has run.';
+    return;
+  }
+
+  list.textContent = '';
   data.forEach((movie) => {
     const div = document.createElement('div');
     div.className = 'review';
@@ -22,13 +47,30 @@ async function loadReviews() {
     if (movie.poster_path) {
       img.src = `https://image.tmdb.org/t/p/w342/${movie.poster_path}`;
       img.alt = movie.title || '';
+    } else {
+      // Local placeholder image
+      img.src = new URL('./Noimage.svg.png', import.meta.url).href;
+      img.alt = 'No image available';
     }
 
     const content = document.createElement('div');
     content.className = 'review-content';
     const title = movie.title || movie.blog_title || 'Untitled';
     const reviewText = movie.short_review || movie.review || '';
-    content.innerHTML = `<h4>${title}</h4><p>${reviewText}</p>`;
+    // Render title, language, sentiment, truncated review, and 'Read full' link
+    const readLink = movie.link
+      ? `<a href="${movie.link}" target="_blank" class="read-full">Read full</a>`
+      : '';
+    const language = movie.language || 'Unknown';
+    const sentiment = movie.sentiment || 'Unknown';
+    content.innerHTML =
+      '<h3>' + title + '</h3>' +
+      '<div class="review-meta">' +
+        '<div><h4>Language:</h4><span>' + language + '</span></div>' +
+        '<div><h4>Sentiment:</h4><span>' + sentiment + '</span></div>' +
+      '</div>' +
+      '<p>' + reviewText + '</p>' +
+      readLink;
 
     div.appendChild(img);
     div.appendChild(content);

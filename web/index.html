@@ -7,14 +7,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Material Symbols for search icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,1,0" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="markdown">
-  <h1>Movie Review Miner</h1>
-  <div class="search">
-    <input type="text" class="ais-SearchBox-input" placeholder="Search movies...">
+  <div class="layout">
+    <div class="main-content">
+      <h1>Movie Review Miner</h1>
+      <div class="search">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" class="ais-SearchBox-input" placeholder="Search movies...">
+      </div>
+      <div id="review-list" class="reviews"></div>
+    </div>
+    <!-- side pane (25%) can go here in the future -->
   </div>
-  <div id="review-list" class="reviews"></div>
 
   <script type="module" src="script.js"></script>
 </body>
