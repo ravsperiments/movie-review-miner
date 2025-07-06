@@ -115,7 +115,8 @@ async function loadReviews(page = currentPage) {
   pagesLoadedInBatch += 1;
   const loadMoreBtn = document.getElementById('load-more');
   if (pagesLoadedInBatch >= autoBatchSize && currentPage < totalPages) {
-    observer.unobserve(document.getElementById('scroll-sentinel'));
+    // stop automatic infinite-loading until user clicks to resume
+    observer.disconnect();
     loadMoreBtn.hidden = false;
   }
 
