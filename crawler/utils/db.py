@@ -3,7 +3,7 @@
 import sqlite3
 from typing import Dict, List, Tuple
 
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 # Path to the SQLite database file
 DB_PATH = "reviews.db"

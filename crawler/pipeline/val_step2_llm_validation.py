@@ -1,5 +1,5 @@
 """Step 3b: placeholder for additional LLM based validations."""
-from utils import StepLogger
+from crawler.utils import StepLogger
 
 
 def validate_reviews() -> None:

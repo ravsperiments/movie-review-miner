@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from .supabase_client import supabase
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

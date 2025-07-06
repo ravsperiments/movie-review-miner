@@ -5,8 +5,8 @@ from tqdm.asyncio import tqdm
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-from utils.logger import get_logger
-from utils.io_helpers import write_failure
+from crawler.utils.logger import get_logger
+from crawler.utils.io_helpers import write_failure
 from db.review_queries import get_latest_post_date, get_recent_links
 
 BASE_URL = "https://baradwajrangan.wordpress.com"

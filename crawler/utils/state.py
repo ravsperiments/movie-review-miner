@@ -3,7 +3,7 @@
 import json
 from typing import Dict
 
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 # JSON file on disk used to store progress information
 STATE_FILE = "state.json"

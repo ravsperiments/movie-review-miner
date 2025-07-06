@@ -1,7 +1,7 @@
 """Helper functions for persisting reviews to Supabase."""
 
 from db.supabase_client import supabase
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 # Logger for database interactions
 logger = get_logger(__name__)

@@ -2,7 +2,7 @@ import asyncio
 import random
 from typing import Any, Callable, Iterable
 
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

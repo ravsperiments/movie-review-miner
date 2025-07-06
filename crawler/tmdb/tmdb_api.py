@@ -1,6 +1,6 @@
 import os
 import aiohttp
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 import json
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")

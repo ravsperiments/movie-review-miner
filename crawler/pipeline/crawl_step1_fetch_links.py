@@ -2,7 +2,7 @@
 import asyncio
 from crawler.scraper.fetch_links import get_post_links_async
 from db.store_review import store_blog_post_urls
-from utils import StepLogger
+from crawler.utils import StepLogger
 
 
 async def fetch_links(start_page: int = 1, end_page: int = 279, reviewer: str = "baradwajrangan") -> list[str]:

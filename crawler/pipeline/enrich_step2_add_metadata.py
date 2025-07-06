@@ -3,8 +3,8 @@ import asyncio
 from db.movie_queries import get_movies_missing_metadata, update_movie_metadata
 from db.review_queries import get_post_date_for_movie
 from tmdb.tmdb_api import search_tmdb
-from utils.io_helpers import write_failure
-from utils import StepLogger
+from crawler.utils.io_helpers import write_failure
+from crawler.utils import StepLogger
 from db.pipeline_logger import log_step_result
 from tqdm import tqdm
 

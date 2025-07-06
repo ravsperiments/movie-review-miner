@@ -10,7 +10,7 @@ from pipeline import (
     enrich_step1_generate_sentiment,
     enrich_step2_add_metadata,
 )
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 logger = get_logger(__name__)
 

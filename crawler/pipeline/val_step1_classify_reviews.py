@@ -1,8 +1,8 @@
 """Step 3: classify parsed posts as film reviews."""
 from db.review_queries import get_unclassified_reviews, update_is_film_review
 from llm.openai_wrapper import is_film_review
-from utils.io_helpers import write_failure
-from utils import StepLogger
+from crawler.utils.io_helpers import write_failure
+from crawler.utils import StepLogger
 from db.pipeline_logger import log_step_result
 from tqdm import tqdm
 

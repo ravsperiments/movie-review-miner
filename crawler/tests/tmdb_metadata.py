@@ -2,7 +2,7 @@
 
 import os
 import requests
-from utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 TMDB_API_URL = "https://api.themoviedb.org/3"

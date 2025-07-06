@@ -7,9 +7,9 @@ from tqdm.asyncio import tqdm
 from crawler.scraper.parse_post import parse_post_async
 from db.review_queries import get_links_with_title_tbd
 from db.crud import upsert_review
-from utils.io_helpers import write_failure
-from utils import StepLogger
-from utils.retries import run_with_retries
+from crawler.utils.io_helpers import write_failure
+from crawler.utils import StepLogger
+from crawler.utils.retries import run_with_retries
 from db.pipeline_logger import log_step_result
 import json
 
