@@ -12,7 +12,9 @@ async def fetch_links(start_page: int = 1, end_page: int = 279, reviewer: str = 
     step_logger.metrics["input_count"] = len(links)
     step_logger.logger.info("Discovered %s new links", len(links))
 
+    processed_links = []
     for link in links:
+        processed_links.append({"link": link[2]})
         step_logger.metrics["processed_count"] += 1
         try:
             store_blog_post_urls({"link": link[2], "blog_title": "TBD", "reviewer": reviewer})
@@ -25,7 +27,7 @@ async def fetch_links(start_page: int = 1, end_page: int = 279, reviewer: str = 
         "Stored %s links to DB", step_logger.metrics["saved_count"]
     )
     step_logger.finalize()
-    return links
+    return processed_links
 
 if __name__ == "__main__":
     import warnings

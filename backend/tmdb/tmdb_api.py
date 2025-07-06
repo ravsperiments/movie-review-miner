@@ -39,7 +39,7 @@ async def search_tmdb(title: str, year: str | None = None) -> dict | None:
                 if year:
                     for result in results:
                         release_date = result.get("release_date", "")
-                        if release_date.startswith(year):
+                        if release_date.startswith(str(year)):
                             selected = result
                             break
 
