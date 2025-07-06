@@ -10,6 +10,10 @@
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.2;
+  /* Override clamp on this intro p */
+  display: block !important;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
 }
 
 /* Root-level variables */
