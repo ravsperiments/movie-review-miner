@@ -1,11 +1,11 @@
 """Step 6: use TMDb to enrich movie metadata."""
 import asyncio
-from db.movie_queries import get_movies_missing_metadata, update_movie_metadata
-from db.review_queries import get_post_date_for_movie
+from crawler.db.movie_queries import get_movies_missing_metadata, update_movie_metadata
+from crawler.db.review_queries import get_post_date_for_movie
 from tmdb.tmdb_api import search_tmdb
 from crawler.utils.io_helpers import write_failure
 from crawler.utils import StepLogger
-from db.pipeline_logger import log_step_result
+from crawler.db.pipeline_logger import log_step_result
 from tqdm import tqdm
 
 CONCURRENT_REQUESTS = 5

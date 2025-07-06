@@ -2,7 +2,7 @@
 """Database helpers for managing movie records in Supabase."""
 
 from datetime import datetime
-from db.supabase_client import supabase
+from crawler.db.supabase_client import supabase
 from crawler.utils.logger import get_logger
 
 logger = get_logger(__name__)

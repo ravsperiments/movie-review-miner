@@ -1,7 +1,7 @@
 """Step 1: fetch blog post links from the source site and save in supabase."""
 import asyncio
 from crawler.scraper.fetch_links import get_post_links_async
-from db.store_review import store_blog_post_urls
+from crawler.db.store_review import store_blog_post_urls
 from crawler.utils import StepLogger
 
 
