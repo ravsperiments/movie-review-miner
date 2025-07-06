@@ -4,7 +4,7 @@ import os
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 
 # Load credentials defined in the .env file
 load_dotenv()  # load your SUPABASE_URL and SUPABASE_KEY from .env

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from openai import OpenAIError
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 
 # Load API credentials from .env and create the OpenAI client
 load_dotenv()

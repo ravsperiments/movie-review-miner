@@ -17,20 +17,24 @@ def classify_reviews() -> None:
     for review in tqdm(reviews):
         step_logger.metrics["processed_count"] += 1
         try:
-            result = is_film_review(
+            llm_response = is_film_review(
                 review.get("blog_title", ""), review.get("short_review", "")
             )
-            update_is_film_review(review["id"], bool(result))
+            is_film_review_flag = llm_response.lower().startswith("yes")
+            update_is_film_review(review["id"], is_film_review_flag)
             step_logger.metrics["saved_count"] += 1
             step_logger.logger.info(
-                "Updated review %s -> %s", review["id"], result
+                "Updated review %s -> %s", review["id"], is_film_review_flag
             )
             log_step_result(
                 "classify_review",
                 link_id=review.get("id"),
                 attempt_number=1,
                 status="success",
-                result_data={"is_film_review": bool(result)},
+                result_data={
+                    "is_film_review": is_film_review_flag,
+                    "llm_raw_response": llm_response,
+                },
             )
         except Exception as e:
             step_logger.metrics["failed_count"] += 1

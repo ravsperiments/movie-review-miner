@@ -1,8 +1,8 @@
 import json
 import logging
 from pathlib import Path
-from utils.logger import get_logger
-from db.pipeline_logger import log_step_result
+from .logger import get_logger
+from ..db.pipeline_logger import log_step_result
 
 class StepLogger:
     """Helper to log per-step metrics and summary."""
