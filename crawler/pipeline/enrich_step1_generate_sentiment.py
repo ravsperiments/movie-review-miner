@@ -1,6 +1,6 @@
 """Step 5: run sentiment analysis on movie reviews."""
 from crawler.db.review_queries import get_reviews_missing_sentiment, update_sentiment_for_review
-from llm.openai_wrapper import analyze_sentiment
+from crawler.llm.openai_wrapper import analyze_sentiment
 from crawler.utils.io_helpers import write_failure
 from crawler.utils import StepLogger
 from crawler.db.pipeline_logger import log_step_result

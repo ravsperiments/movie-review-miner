@@ -1,7 +1,7 @@
 """Step 4: extract movie titles and link reviews to movies."""
 from crawler.db.review_queries import get_links_without_movieid, update_review_with_movie_id
 from crawler.db.movie_queries import get_movie_by_title, create_movie
-from llm.openai_wrapper import extract_movie_title
+from crawler.llm.openai_wrapper import extract_movie_title
 from crawler.utils.io_helpers import write_failure
 from crawler.utils import StepLogger
 from crawler.db.pipeline_logger import log_step_result
