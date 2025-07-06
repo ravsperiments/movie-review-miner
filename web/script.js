@@ -14,12 +14,11 @@ const autoBatchSize = 5;
 let pagesLoadedInBatch = 0;
 
 /**
- * Load a page of reviews.
+ * Load a single page of reviews.
  * @param {number} page - page number to load
- * @param {boolean} manual - whether this load was manually triggered (resets batch counter)
  */
-async function loadReviews(page = currentPage, manual = false) {
-  if (manual) pagesLoadedInBatch = 0;
+async function loadReviews(page = currentPage) {
+  // continue batch until threshold, batch reset on manual click
   currentPage = page;
   const list = document.getElementById('review-list');
   if (page === 1) {
@@ -126,14 +125,17 @@ async function loadReviews(page = currentPage, manual = false) {
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initial load + infinite observer
+  pagesLoadedInBatch = 0;
   loadReviews();
   const sentinel = document.getElementById('scroll-sentinel');
   const loadMoreBtn = document.getElementById('load-more');
   loadMoreBtn.hidden = true;
   loadMoreBtn.addEventListener('click', () => {
+    // reset batch counter and load next page, then resume auto-loading
+    pagesLoadedInBatch = 0;
     loadMoreBtn.hidden = true;
+    if (currentPage < totalPages) loadReviews(currentPage + 1);
     observer.observe(sentinel);
-    if (currentPage < totalPages) loadReviews(currentPage + 1, true);
   });
   observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting && currentPage < totalPages && pagesLoadedInBatch < autoBatchSize) {
