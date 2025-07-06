@@ -97,7 +97,7 @@ async function loadReviews(page = currentPage) {
     const content = document.createElement('div');
     content.className = 'review-content';
     // Show movie title above the review title (if this is a blog review title)
-    const movieTitleLine = movie.title && movie.blog_title
+    const movieTitleLine = movie.title
       ? '<p class="movie-title-grey">' + movie.title + '</p>'
       : '';
     const title = movie.blog_title || movie.title || 'Untitled';
