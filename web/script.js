@@ -96,13 +96,15 @@ async function loadReviews(page = currentPage) {
     const content = document.createElement('div');
     content.className = 'review-content';
     // movie title line (grey) above the main title
-    if (movie.title) {
+
+    console.log(movie.movie_title);
+    if (movie.movie_title) {
       const mt = document.createElement('p');
       mt.className = 'movie-title-grey';
-      mt.textContent = movie.title;
+      mt.textContent = movie.movie_title;
       content.appendChild(mt);
     }
-    const title = movie.blog_title || movie.title || 'Untitled';
+    const title = movie.blog_title || movie.movie_title || 'Untitled';
     const h3 = document.createElement('h3');
     h3.textContent = title;
     content.appendChild(h3);
