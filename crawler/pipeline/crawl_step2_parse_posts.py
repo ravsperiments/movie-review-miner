@@ -4,7 +4,7 @@ import aiohttp
 import async_timeout
 from tqdm.asyncio import tqdm
 
-from crawler.parse_post import parse_post_async
+from crawler.scraper.parse_post import parse_post_async
 from db.review_queries import get_links_with_title_tbd
 from db.crud import upsert_review
 from utils.io_helpers import write_failure

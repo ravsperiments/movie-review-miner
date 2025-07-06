@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from typing import Callable, Awaitable, List
 
 import aiohttp
-from crawler.fetch_links import SOURCES as LINK_SOURCES
-from crawler.parse_post import SOURCES as PARSE_SOURCES
+from crawler.scraper.fetch_links import SOURCES as LINK_SOURCES
+from crawler.scraper.parse_post import SOURCES as PARSE_SOURCES
 
 
 @dataclass
