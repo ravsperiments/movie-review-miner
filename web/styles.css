@@ -2,6 +2,16 @@
   margin: 0 0 0.5rem !important;
 }
 
+/* Movie title above the review title */
+.movie-title-grey {
+  margin: 0 0 0.25rem;
+  color: #777;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
 /* Root-level variables */
 :root {
   /* Set header height to match picovoice.ai navbar (default: 4rem = 64px) */

@@ -96,15 +96,20 @@ async function loadReviews(page = currentPage) {
 
     const content = document.createElement('div');
     content.className = 'review-content';
-    const title = movie.title || movie.blog_title || 'Untitled';
+    // Show movie title above the review title (if this is a blog review title)
+    const movieTitleLine = movie.title && movie.blog_title
+      ? '<p class="movie-title-grey">' + movie.title + '</p>'
+      : '';
+    const title = movie.blog_title || movie.title || 'Untitled';
     const reviewText = movie.short_review || movie.review || '';
-    // Render title, language, sentiment, truncated review, and 'Read full' link
+    // Render titles, metadata, truncated review, and 'Read full' link
     const readLink = movie.link
       ? `<a href="${movie.link}" target="_blank" class="read-full">Read full</a>`
       : '';
     const language = movie.language || 'Unknown';
     const sentiment = movie.sentiment || 'Unknown';
     content.innerHTML =
+      movieTitleLine +
       '<h3>' + title + '</h3>' +
       '<div class="review-meta">' +
         '<div><h4>Language:</h4><span>' + language + '</span></div>' +
