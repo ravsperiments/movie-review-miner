@@ -15,7 +15,7 @@ def _initialise() -> None:
     if _INITIALISED:
         return
 
-    log_dir = Path("logs")
+    log_dir = Path("crawler/logs")
     log_dir.mkdir(exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")

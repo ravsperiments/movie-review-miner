@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 # Directory to store failure logs
-FAILURES_DIR = Path("failures")
+FAILURES_DIR = Path("crawler/failures")
 FAILURES_DIR.mkdir(parents=True, exist_ok=True)
 
 # Timestamp used in failure filenames for the current run

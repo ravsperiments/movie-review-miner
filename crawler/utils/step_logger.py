@@ -18,7 +18,7 @@ class StepLogger:
             "failed_count": 0,
             "notes": [],
         }
-        step_log = Path("logs") / f"{step_name}.log"
+        step_log = Path("crawler/logs") / f"{step_name}.log"
         step_log.parent.mkdir(parents=True, exist_ok=True)
         handler = logging.FileHandler(step_log)
         formatter = logging.Formatter(
@@ -33,7 +33,7 @@ class StepLogger:
 
     def finalize(self) -> None:
         """Append metrics to the pipeline summary file and close handler."""
-        summary_path = Path("logs") / "pipeline_summary.json"
+        summary_path = Path("crawler/logs") / "pipeline_summary.json"
         if summary_path.exists():
             with open(summary_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
