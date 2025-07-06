@@ -2,7 +2,7 @@
 
 // Pagination state
 let currentPage = 1;
-const pageSize = 10;
+const pageSize = 2;
 let totalPages = 1;
 
 // Observer instance for infinite loading
@@ -12,6 +12,8 @@ let observer;
 // then require manual click to continue.
 const autoBatchSize = 5;
 let pagesLoadedInBatch = 0;
+let loadMoreBtn;
+
 
 /**
  * Load a single page of reviews.
@@ -20,6 +22,11 @@ let pagesLoadedInBatch = 0;
 async function loadReviews(page = currentPage) {
   // continue batch until threshold, batch reset on manual click
   currentPage = page;
+  
+  if (loadMoreBtn) {
+    loadMoreBtn.hidden = true; // hide it unless we explicitly unhide later
+  }
+
   const list = document.getElementById('review-list');
   if (page === 1) {
     list.textContent = 'Loading reviews...';
@@ -111,17 +118,28 @@ async function loadReviews(page = currentPage) {
     list.appendChild(div);
   });
 
+    // Update total pages for infinite scroll
+    totalPages = Math.ceil((count || 0) / pageSize) || 1;
+
+    // Debug log
+    console.log({
+      currentPage,
+      totalPages,
+      pagesLoadedInBatch,
+      autoBatchSize,
+      shouldPause: pagesLoadedInBatch >= autoBatchSize && currentPage < totalPages
+    });
+
   // Track pages loaded in current batch and show manual trigger if needed
   pagesLoadedInBatch += 1;
-  const loadMoreBtn = document.getElementById('load-more');
+  //const loadMoreBtn = document.getElementById('load-more');
+  
   if (pagesLoadedInBatch >= autoBatchSize && currentPage < totalPages) {
     // stop automatic infinite-loading until user clicks to resume
     observer.disconnect();
     loadMoreBtn.hidden = false;
   }
 
-  // Update total pages for infinite scroll
-  totalPages = Math.ceil((count || 0) / pageSize) || 1;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -129,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pagesLoadedInBatch = 0;
   loadReviews();
   const sentinel = document.getElementById('scroll-sentinel');
-  const loadMoreBtn = document.getElementById('load-more');
+  loadMoreBtn = document.getElementById('load-more');
   loadMoreBtn.hidden = true;
   loadMoreBtn.addEventListener('click', () => {
     // reset batch counter and load next page, then resume auto-loading
