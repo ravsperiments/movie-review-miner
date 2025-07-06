@@ -51,7 +51,6 @@ async function loadReviews(page = currentPage) {
     ({ data, error, count } = await supabase
       .from('vw_flat_movie_reviews')
       .select('*', { count: 'exact' })
-      .order('created_at', { ascending: false })
       .range(from, to));
   } catch (err) {
     console.error('Unexpected error querying reviews', err);
@@ -96,27 +95,39 @@ async function loadReviews(page = currentPage) {
 
     const content = document.createElement('div');
     content.className = 'review-content';
-    // Show movie title above the review title (if this is a blog review title)
-    const movieTitleLine = movie.title
-      ? '<p class="movie-title-grey">' + movie.title + '</p>'
-      : '';
+    // movie title line (grey) above the main title
+    if (movie.title) {
+      const mt = document.createElement('p');
+      mt.className = 'movie-title-grey';
+      mt.textContent = movie.title;
+      content.appendChild(mt);
+    }
     const title = movie.blog_title || movie.title || 'Untitled';
-    const reviewText = movie.short_review || movie.review || '';
-    // Render titles, metadata, truncated review, and 'Read full' link
-    const readLink = movie.link
-      ? `<a href="${movie.link}" target="_blank" class="read-full">Read full</a>`
-      : '';
+    const h3 = document.createElement('h3');
+    h3.textContent = title;
+    content.appendChild(h3);
+    // metadata
+    const meta = document.createElement('div');
+    meta.className = 'review-meta';
     const language = movie.language || 'Unknown';
     const sentiment = movie.sentiment || 'Unknown';
-    content.innerHTML =
-      movieTitleLine +
-      '<h3>' + title + '</h3>' +
-      '<div class="review-meta">' +
-        '<div><h4>Language:</h4><span>' + language + '</span></div>' +
-        '<div><h4>Sentiment:</h4><span>' + sentiment + '</span></div>' +
-      '</div>' +
-      '<p>' + reviewText + '</p>' +
-      readLink;
+    meta.innerHTML =
+      '<div><h4>Language:</h4><span>' + language + '</span></div>' +
+      '<div><h4>Sentiment:</h4><span>' + sentiment + '</span></div>';
+    content.appendChild(meta);
+    // review excerpt
+    const p = document.createElement('p');
+    p.textContent = movie.short_review || movie.review || '';
+    content.appendChild(p);
+    // read full link
+    if (movie.link) {
+      const a = document.createElement('a');
+      a.href = movie.link;
+      a.target = '_blank';
+      a.className = 'read-full';
+      a.textContent = 'Read full';
+      content.appendChild(a);
+    }
 
     div.appendChild(img);
     div.appendChild(content);
