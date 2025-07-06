@@ -20,7 +20,7 @@ def classify_reviews() -> None:
             llm_response = is_film_review(
                 review.get("blog_title", ""), review.get("short_review", "")
             )
-            is_film_review_flag = llm_response.lower().startswith("yes")
+            is_film_review_flag = llm_response
             update_is_film_review(review["id"], is_film_review_flag)
             step_logger.metrics["saved_count"] += 1
             step_logger.logger.info(

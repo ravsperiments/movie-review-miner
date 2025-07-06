@@ -50,7 +50,7 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
 
                         if page == 1 and attempt == 1:
                             with open("crawler/debug_page_1.html", "w") as f:
-            f.write(response.text)
+                                f.write(response.text)
 
                         logger.info("Page %s attempt %s length=%s", page, attempt, len(html))
                         return extract_links_from_html(html, page)
