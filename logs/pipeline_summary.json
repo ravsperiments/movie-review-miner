@@ -1,0 +1,394 @@
+[
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 339,
+    "processed_count": 339,
+    "saved_count": 339,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 11,
+    "processed_count": 11,
+    "saved_count": 11,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 163,
+    "processed_count": 163,
+    "saved_count": 11,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 133,
+    "processed_count": 15,
+    "saved_count": 15,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 152,
+    "processed_count": 152,
+    "saved_count": 1,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 123,
+    "processed_count": 5,
+    "saved_count": 5,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 4,
+    "processed_count": 4,
+    "saved_count": 4,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 151,
+    "processed_count": 151,
+    "saved_count": 1,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 123,
+    "processed_count": 5,
+    "saved_count": 5,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 150,
+    "processed_count": 150,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 123,
+    "processed_count": 5,
+    "saved_count": 5,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 150,
+    "processed_count": 150,
+    "saved_count": 1,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 123,
+    "processed_count": 5,
+    "saved_count": 5,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_5_generate_sentiment",
+    "input_count": 149,
+    "processed_count": 149,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_6_enrich_metadata",
+    "input_count": 123,
+    "processed_count": 5,
+    "saved_count": 5,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_1_fetch_links",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_2_parse_posts",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3_classify_reviews",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_3b_llm_validation",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  },
+  {
+    "step": "step_4_link_movies",
+    "input_count": 0,
+    "processed_count": 0,
+    "saved_count": 0,
+    "failed_count": 0,
+    "notes": []
+  }
+]

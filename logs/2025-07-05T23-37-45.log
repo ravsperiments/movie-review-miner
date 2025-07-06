@@ -1,0 +1,1288 @@
+2025-07-05 23:37:45,966 | INFO | __main__ | Starting crawl stage
+2025-07-05 23:37:46,405 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/recent_review_links?select=link%2Cpost_date "HTTP/2 200 OK"
+2025-07-05 23:37:46,409 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com
+2025-07-05 23:37:46,505 | INFO | crawler.sources.baradwajrangan_links | Page 1 attempt 1 length=197714
+2025-07-05 23:37:46,538 | INFO | crawler.sources.baradwajrangan_links | Skipping known link: https://baradwajrangan.wordpress.com/2025/07/05/readers-write-in-824-love-actually/
+2025-07-05 23:37:46,538 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/2/
+2025-07-05 23:37:46,575 | INFO | crawler.sources.baradwajrangan_links | Page 2 attempt 1 length=210983
+2025-07-05 23:37:46,605 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/3/
+2025-07-05 23:37:46,631 | INFO | crawler.sources.baradwajrangan_links | Page 3 attempt 1 length=215790
+2025-07-05 23:37:46,660 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/4/
+2025-07-05 23:37:46,684 | INFO | crawler.sources.baradwajrangan_links | Page 4 attempt 1 length=211877
+2025-07-05 23:37:46,708 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/5/
+2025-07-05 23:37:46,728 | INFO | crawler.sources.baradwajrangan_links | Page 5 attempt 1 length=212243
+2025-07-05 23:37:46,752 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/6/
+2025-07-05 23:37:46,775 | INFO | crawler.sources.baradwajrangan_links | Page 6 attempt 1 length=211353
+2025-07-05 23:37:46,801 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/7/
+2025-07-05 23:37:46,828 | INFO | crawler.sources.baradwajrangan_links | Page 7 attempt 1 length=212149
+2025-07-05 23:37:46,851 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/8/
+2025-07-05 23:37:46,870 | INFO | crawler.sources.baradwajrangan_links | Page 8 attempt 1 length=210452
+2025-07-05 23:37:46,892 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/9/
+2025-07-05 23:37:46,919 | INFO | crawler.sources.baradwajrangan_links | Page 9 attempt 1 length=209879
+2025-07-05 23:37:46,941 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/10/
+2025-07-05 23:37:46,960 | INFO | crawler.sources.baradwajrangan_links | Page 10 attempt 1 length=209115
+2025-07-05 23:37:46,984 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/11/
+2025-07-05 23:37:47,002 | INFO | crawler.sources.baradwajrangan_links | Page 11 attempt 1 length=211261
+2025-07-05 23:37:47,042 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/12/
+2025-07-05 23:37:47,066 | INFO | crawler.sources.baradwajrangan_links | Page 12 attempt 1 length=211628
+2025-07-05 23:37:47,088 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/13/
+2025-07-05 23:37:47,110 | INFO | crawler.sources.baradwajrangan_links | Page 13 attempt 1 length=212079
+2025-07-05 23:37:47,133 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/14/
+2025-07-05 23:37:47,150 | INFO | crawler.sources.baradwajrangan_links | Page 14 attempt 1 length=212411
+2025-07-05 23:37:47,172 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/15/
+2025-07-05 23:37:47,192 | INFO | crawler.sources.baradwajrangan_links | Page 15 attempt 1 length=209877
+2025-07-05 23:37:47,215 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/16/
+2025-07-05 23:37:47,237 | INFO | crawler.sources.baradwajrangan_links | Page 16 attempt 1 length=210408
+2025-07-05 23:37:47,259 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/17/
+2025-07-05 23:37:47,281 | INFO | crawler.sources.baradwajrangan_links | Page 17 attempt 1 length=210700
+2025-07-05 23:37:47,304 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/18/
+2025-07-05 23:37:47,324 | INFO | crawler.sources.baradwajrangan_links | Page 18 attempt 1 length=209572
+2025-07-05 23:37:47,347 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/19/
+2025-07-05 23:37:47,372 | INFO | crawler.sources.baradwajrangan_links | Page 19 attempt 1 length=210901
+2025-07-05 23:37:47,394 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/20/
+2025-07-05 23:37:47,414 | INFO | crawler.sources.baradwajrangan_links | Page 20 attempt 1 length=208971
+2025-07-05 23:37:47,438 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/21/
+2025-07-05 23:37:47,465 | INFO | crawler.sources.baradwajrangan_links | Page 21 attempt 1 length=210480
+2025-07-05 23:37:47,487 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/22/
+2025-07-05 23:37:47,513 | INFO | crawler.sources.baradwajrangan_links | Page 22 attempt 1 length=209685
+2025-07-05 23:37:47,537 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/23/
+2025-07-05 23:37:47,559 | INFO | crawler.sources.baradwajrangan_links | Page 23 attempt 1 length=208151
+2025-07-05 23:37:47,579 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/24/
+2025-07-05 23:37:47,597 | INFO | crawler.sources.baradwajrangan_links | Page 24 attempt 1 length=209874
+2025-07-05 23:37:47,619 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/25/
+2025-07-05 23:37:47,641 | INFO | crawler.sources.baradwajrangan_links | Page 25 attempt 1 length=208811
+2025-07-05 23:37:47,665 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/26/
+2025-07-05 23:37:47,686 | INFO | crawler.sources.baradwajrangan_links | Page 26 attempt 1 length=210063
+2025-07-05 23:37:47,708 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/27/
+2025-07-05 23:37:47,731 | INFO | crawler.sources.baradwajrangan_links | Page 27 attempt 1 length=207594
+2025-07-05 23:37:47,755 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/28/
+2025-07-05 23:37:47,776 | INFO | crawler.sources.baradwajrangan_links | Page 28 attempt 1 length=210554
+2025-07-05 23:37:47,798 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/29/
+2025-07-05 23:37:47,828 | INFO | crawler.sources.baradwajrangan_links | Page 29 attempt 1 length=210600
+2025-07-05 23:37:47,853 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/30/
+2025-07-05 23:37:47,879 | INFO | crawler.sources.baradwajrangan_links | Page 30 attempt 1 length=212254
+2025-07-05 23:37:47,901 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/31/
+2025-07-05 23:37:47,925 | INFO | crawler.sources.baradwajrangan_links | Page 31 attempt 1 length=212040
+2025-07-05 23:37:47,947 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/32/
+2025-07-05 23:37:47,964 | INFO | crawler.sources.baradwajrangan_links | Page 32 attempt 1 length=209316
+2025-07-05 23:37:47,988 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/33/
+2025-07-05 23:37:48,006 | INFO | crawler.sources.baradwajrangan_links | Page 33 attempt 1 length=210492
+2025-07-05 23:37:48,027 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/34/
+2025-07-05 23:37:48,053 | INFO | crawler.sources.baradwajrangan_links | Page 34 attempt 1 length=210013
+2025-07-05 23:37:48,077 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/35/
+2025-07-05 23:37:48,096 | INFO | crawler.sources.baradwajrangan_links | Page 35 attempt 1 length=210513
+2025-07-05 23:37:48,118 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/36/
+2025-07-05 23:37:48,153 | INFO | crawler.sources.baradwajrangan_links | Page 36 attempt 1 length=209777
+2025-07-05 23:37:48,177 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/37/
+2025-07-05 23:37:48,196 | INFO | crawler.sources.baradwajrangan_links | Page 37 attempt 1 length=208770
+2025-07-05 23:37:48,248 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/38/
+2025-07-05 23:37:48,278 | INFO | crawler.sources.baradwajrangan_links | Page 38 attempt 1 length=214946
+2025-07-05 23:37:48,300 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/39/
+2025-07-05 23:37:48,323 | INFO | crawler.sources.baradwajrangan_links | Page 39 attempt 1 length=210974
+2025-07-05 23:37:48,346 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/40/
+2025-07-05 23:37:48,366 | INFO | crawler.sources.baradwajrangan_links | Page 40 attempt 1 length=211282
+2025-07-05 23:37:48,388 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/41/
+2025-07-05 23:37:48,410 | INFO | crawler.sources.baradwajrangan_links | Page 41 attempt 1 length=210771
+2025-07-05 23:37:48,433 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/42/
+2025-07-05 23:37:48,451 | INFO | crawler.sources.baradwajrangan_links | Page 42 attempt 1 length=211437
+2025-07-05 23:37:48,473 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/43/
+2025-07-05 23:37:48,496 | INFO | crawler.sources.baradwajrangan_links | Page 43 attempt 1 length=211493
+2025-07-05 23:37:48,519 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/44/
+2025-07-05 23:37:48,538 | INFO | crawler.sources.baradwajrangan_links | Page 44 attempt 1 length=209137
+2025-07-05 23:37:48,559 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/45/
+2025-07-05 23:37:48,713 | INFO | crawler.sources.baradwajrangan_links | Page 45 attempt 1 length=213633
+2025-07-05 23:37:48,739 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/46/
+2025-07-05 23:37:48,766 | INFO | crawler.sources.baradwajrangan_links | Page 46 attempt 1 length=213039
+2025-07-05 23:37:48,793 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/47/
+2025-07-05 23:37:48,813 | INFO | crawler.sources.baradwajrangan_links | Page 47 attempt 1 length=210428
+2025-07-05 23:37:48,836 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/48/
+2025-07-05 23:37:48,856 | INFO | crawler.sources.baradwajrangan_links | Page 48 attempt 1 length=211946
+2025-07-05 23:37:48,879 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/49/
+2025-07-05 23:37:48,903 | INFO | crawler.sources.baradwajrangan_links | Page 49 attempt 1 length=214855
+2025-07-05 23:37:48,924 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/50/
+2025-07-05 23:37:48,949 | INFO | crawler.sources.baradwajrangan_links | Page 50 attempt 1 length=210345
+2025-07-05 23:37:48,971 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/51/
+2025-07-05 23:37:49,003 | INFO | crawler.sources.baradwajrangan_links | Page 51 attempt 1 length=212007
+2025-07-05 23:37:49,027 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/52/
+2025-07-05 23:37:49,046 | INFO | crawler.sources.baradwajrangan_links | Page 52 attempt 1 length=212513
+2025-07-05 23:37:49,068 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/53/
+2025-07-05 23:37:49,091 | INFO | crawler.sources.baradwajrangan_links | Page 53 attempt 1 length=213920
+2025-07-05 23:37:49,115 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/54/
+2025-07-05 23:37:49,131 | INFO | crawler.sources.baradwajrangan_links | Page 54 attempt 1 length=214048
+2025-07-05 23:37:49,152 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/55/
+2025-07-05 23:37:49,176 | INFO | crawler.sources.baradwajrangan_links | Page 55 attempt 1 length=209890
+2025-07-05 23:37:49,199 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/56/
+2025-07-05 23:37:49,218 | INFO | crawler.sources.baradwajrangan_links | Page 56 attempt 1 length=212844
+2025-07-05 23:37:49,238 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/57/
+2025-07-05 23:37:49,258 | INFO | crawler.sources.baradwajrangan_links | Page 57 attempt 1 length=210284
+2025-07-05 23:37:49,280 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/58/
+2025-07-05 23:37:49,300 | INFO | crawler.sources.baradwajrangan_links | Page 58 attempt 1 length=213529
+2025-07-05 23:37:49,323 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/59/
+2025-07-05 23:37:49,347 | INFO | crawler.sources.baradwajrangan_links | Page 59 attempt 1 length=210148
+2025-07-05 23:37:49,368 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/60/
+2025-07-05 23:37:49,391 | INFO | crawler.sources.baradwajrangan_links | Page 60 attempt 1 length=208717
+2025-07-05 23:37:49,414 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/61/
+2025-07-05 23:37:49,436 | INFO | crawler.sources.baradwajrangan_links | Page 61 attempt 1 length=211867
+2025-07-05 23:37:49,458 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/62/
+2025-07-05 23:37:49,485 | INFO | crawler.sources.baradwajrangan_links | Page 62 attempt 1 length=214892
+2025-07-05 23:37:49,539 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/63/
+2025-07-05 23:37:49,561 | INFO | crawler.sources.baradwajrangan_links | Page 63 attempt 1 length=212965
+2025-07-05 23:37:49,583 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/64/
+2025-07-05 23:37:49,601 | INFO | crawler.sources.baradwajrangan_links | Page 64 attempt 1 length=212152
+2025-07-05 23:37:49,622 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/65/
+2025-07-05 23:37:49,642 | INFO | crawler.sources.baradwajrangan_links | Page 65 attempt 1 length=213504
+2025-07-05 23:37:49,665 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/66/
+2025-07-05 23:37:49,696 | INFO | crawler.sources.baradwajrangan_links | Page 66 attempt 1 length=213615
+2025-07-05 23:37:49,717 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/67/
+2025-07-05 23:37:49,758 | INFO | crawler.sources.baradwajrangan_links | Page 67 attempt 1 length=214421
+2025-07-05 23:37:49,783 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/68/
+2025-07-05 23:37:49,807 | INFO | crawler.sources.baradwajrangan_links | Page 68 attempt 1 length=216221
+2025-07-05 23:37:49,830 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/69/
+2025-07-05 23:37:49,848 | INFO | crawler.sources.baradwajrangan_links | Page 69 attempt 1 length=214700
+2025-07-05 23:37:49,871 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/70/
+2025-07-05 23:37:49,905 | INFO | crawler.sources.baradwajrangan_links | Page 70 attempt 1 length=212256
+2025-07-05 23:37:49,929 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/71/
+2025-07-05 23:37:50,039 | INFO | crawler.sources.baradwajrangan_links | Page 71 attempt 1 length=210808
+2025-07-05 23:37:50,062 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/72/
+2025-07-05 23:37:50,083 | INFO | crawler.sources.baradwajrangan_links | Page 72 attempt 1 length=211004
+2025-07-05 23:37:50,109 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/73/
+2025-07-05 23:37:50,134 | INFO | crawler.sources.baradwajrangan_links | Page 73 attempt 1 length=211628
+2025-07-05 23:37:50,159 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/74/
+2025-07-05 23:37:50,176 | INFO | crawler.sources.baradwajrangan_links | Page 74 attempt 1 length=209724
+2025-07-05 23:37:50,200 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/75/
+2025-07-05 23:37:50,223 | INFO | crawler.sources.baradwajrangan_links | Page 75 attempt 1 length=209953
+2025-07-05 23:37:50,243 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/76/
+2025-07-05 23:37:50,267 | INFO | crawler.sources.baradwajrangan_links | Page 76 attempt 1 length=207337
+2025-07-05 23:37:50,288 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/77/
+2025-07-05 23:37:50,311 | INFO | crawler.sources.baradwajrangan_links | Page 77 attempt 1 length=210119
+2025-07-05 23:37:50,335 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/78/
+2025-07-05 23:37:50,356 | INFO | crawler.sources.baradwajrangan_links | Page 78 attempt 1 length=208854
+2025-07-05 23:37:50,376 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/79/
+2025-07-05 23:37:50,417 | INFO | crawler.sources.baradwajrangan_links | Page 79 attempt 1 length=209069
+2025-07-05 23:37:50,442 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/80/
+2025-07-05 23:37:50,463 | INFO | crawler.sources.baradwajrangan_links | Page 80 attempt 1 length=210432
+2025-07-05 23:37:50,483 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/81/
+2025-07-05 23:37:50,511 | INFO | crawler.sources.baradwajrangan_links | Page 81 attempt 1 length=211847
+2025-07-05 23:37:50,534 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/82/
+2025-07-05 23:37:50,561 | INFO | crawler.sources.baradwajrangan_links | Page 82 attempt 1 length=213265
+2025-07-05 23:37:50,583 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/83/
+2025-07-05 23:37:50,610 | INFO | crawler.sources.baradwajrangan_links | Page 83 attempt 1 length=209874
+2025-07-05 23:37:50,633 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/84/
+2025-07-05 23:37:50,656 | INFO | crawler.sources.baradwajrangan_links | Page 84 attempt 1 length=212254
+2025-07-05 23:37:50,682 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/85/
+2025-07-05 23:37:50,720 | INFO | crawler.sources.baradwajrangan_links | Page 85 attempt 1 length=212395
+2025-07-05 23:37:50,741 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/86/
+2025-07-05 23:37:50,776 | INFO | crawler.sources.baradwajrangan_links | Page 86 attempt 1 length=213516
+2025-07-05 23:37:50,801 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/87/
+2025-07-05 23:37:50,826 | INFO | crawler.sources.baradwajrangan_links | Page 87 attempt 1 length=213455
+2025-07-05 23:37:50,848 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/88/
+2025-07-05 23:37:50,870 | INFO | crawler.sources.baradwajrangan_links | Page 88 attempt 1 length=211910
+2025-07-05 23:37:50,924 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/89/
+2025-07-05 23:37:50,953 | INFO | crawler.sources.baradwajrangan_links | Page 89 attempt 1 length=212386
+2025-07-05 23:37:50,974 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/90/
+2025-07-05 23:37:50,996 | INFO | crawler.sources.baradwajrangan_links | Page 90 attempt 1 length=214516
+2025-07-05 23:37:51,017 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/91/
+2025-07-05 23:37:51,038 | INFO | crawler.sources.baradwajrangan_links | Page 91 attempt 1 length=212809
+2025-07-05 23:37:51,062 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/92/
+2025-07-05 23:37:51,078 | INFO | crawler.sources.baradwajrangan_links | Page 92 attempt 1 length=209115
+2025-07-05 23:37:51,099 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/93/
+2025-07-05 23:37:51,122 | INFO | crawler.sources.baradwajrangan_links | Page 93 attempt 1 length=207541
+2025-07-05 23:37:51,145 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/94/
+2025-07-05 23:37:51,163 | INFO | crawler.sources.baradwajrangan_links | Page 94 attempt 1 length=208211
+2025-07-05 23:37:51,184 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/95/
+2025-07-05 23:37:51,206 | INFO | crawler.sources.baradwajrangan_links | Page 95 attempt 1 length=215464
+2025-07-05 23:37:51,227 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/96/
+2025-07-05 23:37:51,259 | INFO | crawler.sources.baradwajrangan_links | Page 96 attempt 1 length=214901
+2025-07-05 23:37:51,284 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/97/
+2025-07-05 23:37:51,306 | INFO | crawler.sources.baradwajrangan_links | Page 97 attempt 1 length=216980
+2025-07-05 23:37:51,329 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/98/
+2025-07-05 23:37:51,350 | INFO | crawler.sources.baradwajrangan_links | Page 98 attempt 1 length=214262
+2025-07-05 23:37:51,373 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/99/
+2025-07-05 23:37:51,404 | INFO | crawler.sources.baradwajrangan_links | Page 99 attempt 1 length=213090
+2025-07-05 23:37:51,425 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/100/
+2025-07-05 23:37:51,446 | INFO | crawler.sources.baradwajrangan_links | Page 100 attempt 1 length=212937
+2025-07-05 23:37:51,470 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/101/
+2025-07-05 23:37:51,489 | INFO | crawler.sources.baradwajrangan_links | Page 101 attempt 1 length=212763
+2025-07-05 23:37:51,510 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/102/
+2025-07-05 23:37:51,537 | INFO | crawler.sources.baradwajrangan_links | Page 102 attempt 1 length=215892
+2025-07-05 23:37:51,559 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/103/
+2025-07-05 23:37:51,586 | INFO | crawler.sources.baradwajrangan_links | Page 103 attempt 1 length=213902
+2025-07-05 23:37:51,612 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/104/
+2025-07-05 23:37:51,635 | INFO | crawler.sources.baradwajrangan_links | Page 104 attempt 1 length=215164
+2025-07-05 23:37:51,656 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/105/
+2025-07-05 23:37:51,673 | INFO | crawler.sources.baradwajrangan_links | Page 105 attempt 1 length=214091
+2025-07-05 23:37:51,696 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/106/
+2025-07-05 23:37:51,715 | INFO | crawler.sources.baradwajrangan_links | Page 106 attempt 1 length=214525
+2025-07-05 23:37:51,737 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/107/
+2025-07-05 23:37:51,758 | INFO | crawler.sources.baradwajrangan_links | Page 107 attempt 1 length=213366
+2025-07-05 23:37:51,781 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/108/
+2025-07-05 23:37:51,799 | INFO | crawler.sources.baradwajrangan_links | Page 108 attempt 1 length=212382
+2025-07-05 23:37:51,820 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/109/
+2025-07-05 23:37:51,839 | INFO | crawler.sources.baradwajrangan_links | Page 109 attempt 1 length=213558
+2025-07-05 23:37:51,861 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/110/
+2025-07-05 23:37:51,883 | INFO | crawler.sources.baradwajrangan_links | Page 110 attempt 1 length=214584
+2025-07-05 23:37:51,906 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/111/
+2025-07-05 23:37:51,923 | INFO | crawler.sources.baradwajrangan_links | Page 111 attempt 1 length=214948
+2025-07-05 23:37:51,944 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/112/
+2025-07-05 23:37:51,963 | INFO | crawler.sources.baradwajrangan_links | Page 112 attempt 1 length=214538
+2025-07-05 23:37:51,986 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/113/
+2025-07-05 23:37:52,004 | INFO | crawler.sources.baradwajrangan_links | Page 113 attempt 1 length=215071
+2025-07-05 23:37:52,025 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/114/
+2025-07-05 23:37:52,046 | INFO | crawler.sources.baradwajrangan_links | Page 114 attempt 1 length=215683
+2025-07-05 23:37:52,101 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/115/
+2025-07-05 23:37:52,123 | INFO | crawler.sources.baradwajrangan_links | Page 115 attempt 1 length=214542
+2025-07-05 23:37:52,145 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/116/
+2025-07-05 23:37:52,168 | INFO | crawler.sources.baradwajrangan_links | Page 116 attempt 1 length=215853
+2025-07-05 23:37:52,190 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/117/
+2025-07-05 23:37:52,212 | INFO | crawler.sources.baradwajrangan_links | Page 117 attempt 1 length=213473
+2025-07-05 23:37:52,236 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/118/
+2025-07-05 23:37:52,260 | INFO | crawler.sources.baradwajrangan_links | Page 118 attempt 1 length=216799
+2025-07-05 23:37:52,282 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/119/
+2025-07-05 23:37:52,300 | INFO | crawler.sources.baradwajrangan_links | Page 119 attempt 1 length=215527
+2025-07-05 23:37:52,323 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/120/
+2025-07-05 23:37:52,351 | INFO | crawler.sources.baradwajrangan_links | Page 120 attempt 1 length=214327
+2025-07-05 23:37:52,373 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/121/
+2025-07-05 23:37:52,400 | INFO | crawler.sources.baradwajrangan_links | Page 121 attempt 1 length=215044
+2025-07-05 23:37:52,423 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/122/
+2025-07-05 23:37:52,445 | INFO | crawler.sources.baradwajrangan_links | Page 122 attempt 1 length=214780
+2025-07-05 23:37:52,466 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/123/
+2025-07-05 23:37:52,485 | INFO | crawler.sources.baradwajrangan_links | Page 123 attempt 1 length=222948
+2025-07-05 23:37:52,506 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/124/
+2025-07-05 23:37:52,529 | INFO | crawler.sources.baradwajrangan_links | Page 124 attempt 1 length=216025
+2025-07-05 23:37:52,553 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/125/
+2025-07-05 23:37:52,575 | INFO | crawler.sources.baradwajrangan_links | Page 125 attempt 1 length=217542
+2025-07-05 23:37:52,596 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/126/
+2025-07-05 23:37:52,613 | INFO | crawler.sources.baradwajrangan_links | Page 126 attempt 1 length=213300
+2025-07-05 23:37:52,635 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/127/
+2025-07-05 23:37:52,659 | INFO | crawler.sources.baradwajrangan_links | Page 127 attempt 1 length=210691
+2025-07-05 23:37:52,680 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/128/
+2025-07-05 23:37:52,699 | INFO | crawler.sources.baradwajrangan_links | Page 128 attempt 1 length=214103
+2025-07-05 23:37:52,722 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/129/
+2025-07-05 23:37:52,742 | INFO | crawler.sources.baradwajrangan_links | Page 129 attempt 1 length=214239
+2025-07-05 23:37:52,763 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/130/
+2025-07-05 23:37:52,792 | INFO | crawler.sources.baradwajrangan_links | Page 130 attempt 1 length=213117
+2025-07-05 23:37:52,814 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/131/
+2025-07-05 23:37:52,845 | INFO | crawler.sources.baradwajrangan_links | Page 131 attempt 1 length=213455
+2025-07-05 23:37:52,868 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/132/
+2025-07-05 23:37:52,893 | INFO | crawler.sources.baradwajrangan_links | Page 132 attempt 1 length=213872
+2025-07-05 23:37:52,914 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/133/
+2025-07-05 23:37:52,934 | INFO | crawler.sources.baradwajrangan_links | Page 133 attempt 1 length=216821
+2025-07-05 23:37:52,957 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/134/
+2025-07-05 23:37:52,982 | INFO | crawler.sources.baradwajrangan_links | Page 134 attempt 1 length=216411
+2025-07-05 23:37:53,003 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/135/
+2025-07-05 23:37:53,030 | INFO | crawler.sources.baradwajrangan_links | Page 135 attempt 1 length=218031
+2025-07-05 23:37:53,052 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/136/
+2025-07-05 23:37:53,075 | INFO | crawler.sources.baradwajrangan_links | Page 136 attempt 1 length=214515
+2025-07-05 23:37:53,098 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/137/
+2025-07-05 23:37:53,117 | INFO | crawler.sources.baradwajrangan_links | Page 137 attempt 1 length=215690
+2025-07-05 23:37:53,139 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/138/
+2025-07-05 23:37:53,167 | INFO | crawler.sources.baradwajrangan_links | Page 138 attempt 1 length=211396
+2025-07-05 23:37:53,192 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/139/
+2025-07-05 23:37:53,212 | INFO | crawler.sources.baradwajrangan_links | Page 139 attempt 1 length=213874
+2025-07-05 23:37:53,235 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/140/
+2025-07-05 23:37:53,253 | INFO | crawler.sources.baradwajrangan_links | Page 140 attempt 1 length=212494
+2025-07-05 23:37:53,308 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/141/
+2025-07-05 23:37:53,325 | INFO | crawler.sources.baradwajrangan_links | Page 141 attempt 1 length=212698
+2025-07-05 23:37:53,346 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/142/
+2025-07-05 23:37:53,366 | INFO | crawler.sources.baradwajrangan_links | Page 142 attempt 1 length=211991
+2025-07-05 23:37:53,386 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/143/
+2025-07-05 23:37:53,411 | INFO | crawler.sources.baradwajrangan_links | Page 143 attempt 1 length=208802
+2025-07-05 23:37:53,435 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/144/
+2025-07-05 23:37:53,458 | INFO | crawler.sources.baradwajrangan_links | Page 144 attempt 1 length=209872
+2025-07-05 23:37:53,480 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/145/
+2025-07-05 23:37:53,498 | INFO | crawler.sources.baradwajrangan_links | Page 145 attempt 1 length=214081
+2025-07-05 23:37:53,521 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/146/
+2025-07-05 23:37:53,545 | INFO | crawler.sources.baradwajrangan_links | Page 146 attempt 1 length=215879
+2025-07-05 23:37:53,566 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/147/
+2025-07-05 23:37:53,587 | INFO | crawler.sources.baradwajrangan_links | Page 147 attempt 1 length=212230
+2025-07-05 23:37:53,611 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/148/
+2025-07-05 23:37:53,635 | INFO | crawler.sources.baradwajrangan_links | Page 148 attempt 1 length=212563
+2025-07-05 23:37:53,656 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/149/
+2025-07-05 23:37:53,685 | INFO | crawler.sources.baradwajrangan_links | Page 149 attempt 1 length=217363
+2025-07-05 23:37:53,707 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/150/
+2025-07-05 23:37:53,726 | INFO | crawler.sources.baradwajrangan_links | Page 150 attempt 1 length=214332
+2025-07-05 23:37:53,750 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/151/
+2025-07-05 23:37:53,774 | INFO | crawler.sources.baradwajrangan_links | Page 151 attempt 1 length=214502
+2025-07-05 23:37:53,796 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/152/
+2025-07-05 23:37:53,818 | INFO | crawler.sources.baradwajrangan_links | Page 152 attempt 1 length=211988
+2025-07-05 23:37:53,841 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/153/
+2025-07-05 23:37:53,864 | INFO | crawler.sources.baradwajrangan_links | Page 153 attempt 1 length=217183
+2025-07-05 23:37:53,886 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/154/
+2025-07-05 23:37:53,943 | INFO | crawler.sources.baradwajrangan_links | Page 154 attempt 1 length=216523
+2025-07-05 23:37:53,967 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/155/
+2025-07-05 23:37:54,000 | INFO | crawler.sources.baradwajrangan_links | Page 155 attempt 1 length=216118
+2025-07-05 23:37:54,028 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/156/
+2025-07-05 23:37:54,045 | INFO | crawler.sources.baradwajrangan_links | Page 156 attempt 1 length=211532
+2025-07-05 23:37:54,067 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/157/
+2025-07-05 23:37:54,092 | INFO | crawler.sources.baradwajrangan_links | Page 157 attempt 1 length=214493
+2025-07-05 23:37:54,116 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/158/
+2025-07-05 23:37:54,135 | INFO | crawler.sources.baradwajrangan_links | Page 158 attempt 1 length=217702
+2025-07-05 23:37:54,156 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/159/
+2025-07-05 23:37:54,174 | INFO | crawler.sources.baradwajrangan_links | Page 159 attempt 1 length=213814
+2025-07-05 23:37:54,197 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/160/
+2025-07-05 23:37:54,215 | INFO | crawler.sources.baradwajrangan_links | Page 160 attempt 1 length=217761
+2025-07-05 23:37:54,236 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/161/
+2025-07-05 23:37:54,278 | INFO | crawler.sources.baradwajrangan_links | Page 161 attempt 1 length=213059
+2025-07-05 23:37:54,301 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/162/
+2025-07-05 23:37:54,317 | INFO | crawler.sources.baradwajrangan_links | Page 162 attempt 1 length=214709
+2025-07-05 23:37:54,342 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/163/
+2025-07-05 23:37:54,361 | INFO | crawler.sources.baradwajrangan_links | Page 163 attempt 1 length=211929
+2025-07-05 23:37:54,383 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/164/
+2025-07-05 23:37:54,433 | INFO | crawler.sources.baradwajrangan_links | Page 164 attempt 1 length=215935
+2025-07-05 23:37:54,459 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/165/
+2025-07-05 23:37:54,479 | INFO | crawler.sources.baradwajrangan_links | Page 165 attempt 1 length=215075
+2025-07-05 23:37:54,502 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/166/
+2025-07-05 23:37:54,521 | INFO | crawler.sources.baradwajrangan_links | Page 166 attempt 1 length=212146
+2025-07-05 23:37:54,581 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/167/
+2025-07-05 23:37:54,603 | INFO | crawler.sources.baradwajrangan_links | Page 167 attempt 1 length=210479
+2025-07-05 23:37:54,625 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/168/
+2025-07-05 23:37:54,648 | INFO | crawler.sources.baradwajrangan_links | Page 168 attempt 1 length=215379
+2025-07-05 23:37:54,669 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/169/
+2025-07-05 23:37:54,688 | INFO | crawler.sources.baradwajrangan_links | Page 169 attempt 1 length=211830
+2025-07-05 23:37:54,711 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/170/
+2025-07-05 23:37:54,728 | INFO | crawler.sources.baradwajrangan_links | Page 170 attempt 1 length=211777
+2025-07-05 23:37:54,749 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/171/
+2025-07-05 23:37:54,770 | INFO | crawler.sources.baradwajrangan_links | Page 171 attempt 1 length=213843
+2025-07-05 23:37:54,793 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/172/
+2025-07-05 23:37:54,810 | INFO | crawler.sources.baradwajrangan_links | Page 172 attempt 1 length=213181
+2025-07-05 23:37:54,831 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/173/
+2025-07-05 23:37:54,847 | INFO | crawler.sources.baradwajrangan_links | Page 173 attempt 1 length=211077
+2025-07-05 23:37:54,868 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/174/
+2025-07-05 23:37:54,891 | INFO | crawler.sources.baradwajrangan_links | Page 174 attempt 1 length=213447
+2025-07-05 23:37:54,915 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/175/
+2025-07-05 23:37:55,008 | INFO | crawler.sources.baradwajrangan_links | Page 175 attempt 1 length=208900
+2025-07-05 23:37:55,037 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/176/
+2025-07-05 23:37:55,176 | INFO | crawler.sources.baradwajrangan_links | Page 176 attempt 1 length=209698
+2025-07-05 23:37:55,213 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/177/
+2025-07-05 23:37:55,299 | INFO | crawler.sources.baradwajrangan_links | Page 177 attempt 1 length=211826
+2025-07-05 23:37:55,324 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/178/
+2025-07-05 23:37:55,512 | INFO | crawler.sources.baradwajrangan_links | Page 178 attempt 1 length=211376
+2025-07-05 23:37:55,546 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/179/
+2025-07-05 23:37:55,757 | INFO | crawler.sources.baradwajrangan_links | Page 179 attempt 1 length=209606
+2025-07-05 23:37:55,786 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/180/
+2025-07-05 23:37:55,809 | INFO | crawler.sources.baradwajrangan_links | Page 180 attempt 1 length=208162
+2025-07-05 23:37:55,833 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/181/
+2025-07-05 23:37:55,854 | INFO | crawler.sources.baradwajrangan_links | Page 181 attempt 1 length=212173
+2025-07-05 23:37:55,880 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/182/
+2025-07-05 23:37:55,939 | INFO | crawler.sources.baradwajrangan_links | Page 182 attempt 1 length=208361
+2025-07-05 23:37:55,965 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/183/
+2025-07-05 23:37:55,987 | INFO | crawler.sources.baradwajrangan_links | Page 183 attempt 1 length=209724
+2025-07-05 23:37:56,011 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/184/
+2025-07-05 23:37:56,041 | INFO | crawler.sources.baradwajrangan_links | Page 184 attempt 1 length=209649
+2025-07-05 23:37:56,064 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/185/
+2025-07-05 23:37:56,091 | INFO | crawler.sources.baradwajrangan_links | Page 185 attempt 1 length=211035
+2025-07-05 23:37:56,116 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/186/
+2025-07-05 23:37:56,150 | INFO | crawler.sources.baradwajrangan_links | Page 186 attempt 1 length=208602
+2025-07-05 23:37:56,173 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/187/
+2025-07-05 23:37:56,193 | INFO | crawler.sources.baradwajrangan_links | Page 187 attempt 1 length=209662
+2025-07-05 23:37:56,216 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/188/
+2025-07-05 23:37:56,241 | INFO | crawler.sources.baradwajrangan_links | Page 188 attempt 1 length=211578
+2025-07-05 23:37:56,266 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/189/
+2025-07-05 23:37:56,291 | INFO | crawler.sources.baradwajrangan_links | Page 189 attempt 1 length=209952
+2025-07-05 23:37:56,314 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/190/
+2025-07-05 23:37:56,333 | INFO | crawler.sources.baradwajrangan_links | Page 190 attempt 1 length=210810
+2025-07-05 23:37:56,357 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/191/
+2025-07-05 23:37:56,387 | INFO | crawler.sources.baradwajrangan_links | Page 191 attempt 1 length=209586
+2025-07-05 23:37:56,408 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/192/
+2025-07-05 23:37:56,457 | INFO | crawler.sources.baradwajrangan_links | Page 192 attempt 1 length=210330
+2025-07-05 23:37:56,480 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/193/
+2025-07-05 23:37:56,511 | INFO | crawler.sources.baradwajrangan_links | Page 193 attempt 1 length=212432
+2025-07-05 23:37:56,568 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/194/
+2025-07-05 23:37:56,593 | INFO | crawler.sources.baradwajrangan_links | Page 194 attempt 1 length=209942
+2025-07-05 23:37:56,616 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/195/
+2025-07-05 23:37:56,634 | INFO | crawler.sources.baradwajrangan_links | Page 195 attempt 1 length=210209
+2025-07-05 23:37:56,657 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/196/
+2025-07-05 23:37:56,690 | INFO | crawler.sources.baradwajrangan_links | Page 196 attempt 1 length=210620
+2025-07-05 23:37:56,713 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/197/
+2025-07-05 23:37:56,738 | INFO | crawler.sources.baradwajrangan_links | Page 197 attempt 1 length=209098
+2025-07-05 23:37:56,761 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/198/
+2025-07-05 23:37:56,788 | INFO | crawler.sources.baradwajrangan_links | Page 198 attempt 1 length=209359
+2025-07-05 23:37:56,812 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/199/
+2025-07-05 23:37:56,855 | INFO | crawler.sources.baradwajrangan_links | Page 199 attempt 1 length=209311
+2025-07-05 23:37:56,879 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/200/
+2025-07-05 23:37:56,902 | INFO | crawler.sources.baradwajrangan_links | Page 200 attempt 1 length=207596
+2025-07-05 23:37:56,926 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/201/
+2025-07-05 23:37:56,950 | INFO | crawler.sources.baradwajrangan_links | Page 201 attempt 1 length=188503
+2025-07-05 23:37:56,972 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/202/
+2025-07-05 23:37:56,997 | INFO | crawler.sources.baradwajrangan_links | Page 202 attempt 1 length=170905
+2025-07-05 23:37:57,020 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/203/
+2025-07-05 23:37:57,036 | INFO | crawler.sources.baradwajrangan_links | Page 203 attempt 1 length=170958
+2025-07-05 23:37:57,055 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/204/
+2025-07-05 23:37:57,075 | INFO | crawler.sources.baradwajrangan_links | Page 204 attempt 1 length=170223
+2025-07-05 23:37:57,095 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/205/
+2025-07-05 23:37:57,112 | INFO | crawler.sources.baradwajrangan_links | Page 205 attempt 1 length=172086
+2025-07-05 23:37:57,134 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/206/
+2025-07-05 23:37:57,166 | INFO | crawler.sources.baradwajrangan_links | Page 206 attempt 1 length=171044
+2025-07-05 23:37:57,187 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/207/
+2025-07-05 23:37:57,211 | INFO | crawler.sources.baradwajrangan_links | Page 207 attempt 1 length=170964
+2025-07-05 23:37:57,234 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/208/
+2025-07-05 23:37:57,272 | INFO | crawler.sources.baradwajrangan_links | Page 208 attempt 1 length=170136
+2025-07-05 23:37:57,291 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/209/
+2025-07-05 23:37:57,315 | INFO | crawler.sources.baradwajrangan_links | Page 209 attempt 1 length=169465
+2025-07-05 23:37:57,336 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/210/
+2025-07-05 23:37:57,357 | INFO | crawler.sources.baradwajrangan_links | Page 210 attempt 1 length=169707
+2025-07-05 23:37:57,379 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/211/
+2025-07-05 23:37:57,404 | INFO | crawler.sources.baradwajrangan_links | Page 211 attempt 1 length=169797
+2025-07-05 23:37:57,424 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/212/
+2025-07-05 23:37:57,443 | INFO | crawler.sources.baradwajrangan_links | Page 212 attempt 1 length=169500
+2025-07-05 23:37:57,465 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/213/
+2025-07-05 23:37:57,490 | INFO | crawler.sources.baradwajrangan_links | Page 213 attempt 1 length=168833
+2025-07-05 23:37:57,511 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/214/
+2025-07-05 23:37:57,536 | INFO | crawler.sources.baradwajrangan_links | Page 214 attempt 1 length=170534
+2025-07-05 23:37:57,557 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/215/
+2025-07-05 23:37:57,575 | INFO | crawler.sources.baradwajrangan_links | Page 215 attempt 1 length=169543
+2025-07-05 23:37:57,596 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/216/
+2025-07-05 23:37:57,647 | INFO | crawler.sources.baradwajrangan_links | Page 216 attempt 1 length=169263
+2025-07-05 23:37:57,667 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/217/
+2025-07-05 23:37:57,689 | INFO | crawler.sources.baradwajrangan_links | Page 217 attempt 1 length=172269
+2025-07-05 23:37:57,713 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/218/
+2025-07-05 23:37:57,733 | INFO | crawler.sources.baradwajrangan_links | Page 218 attempt 1 length=170293
+2025-07-05 23:37:57,753 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/219/
+2025-07-05 23:37:57,777 | INFO | crawler.sources.baradwajrangan_links | Page 219 attempt 1 length=169868
+2025-07-05 23:37:57,798 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/220/
+2025-07-05 23:37:57,821 | INFO | crawler.sources.baradwajrangan_links | Page 220 attempt 1 length=170199
+2025-07-05 23:37:57,871 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/221/
+2025-07-05 23:37:57,896 | INFO | crawler.sources.baradwajrangan_links | Page 221 attempt 1 length=169903
+2025-07-05 23:37:57,916 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/222/
+2025-07-05 23:37:57,931 | INFO | crawler.sources.baradwajrangan_links | Page 222 attempt 1 length=169049
+2025-07-05 23:37:57,952 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/223/
+2025-07-05 23:37:57,971 | INFO | crawler.sources.baradwajrangan_links | Page 223 attempt 1 length=171329
+2025-07-05 23:37:57,991 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/224/
+2025-07-05 23:37:58,035 | INFO | crawler.sources.baradwajrangan_links | Page 224 attempt 1 length=171106
+2025-07-05 23:37:58,057 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/225/
+2025-07-05 23:37:58,078 | INFO | crawler.sources.baradwajrangan_links | Page 225 attempt 1 length=170087
+2025-07-05 23:37:58,098 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/226/
+2025-07-05 23:37:58,119 | INFO | crawler.sources.baradwajrangan_links | Page 226 attempt 1 length=170666
+2025-07-05 23:37:58,139 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/227/
+2025-07-05 23:37:58,169 | INFO | crawler.sources.baradwajrangan_links | Page 227 attempt 1 length=170195
+2025-07-05 23:37:58,193 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/228/
+2025-07-05 23:37:58,209 | INFO | crawler.sources.baradwajrangan_links | Page 228 attempt 1 length=170197
+2025-07-05 23:37:58,229 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/229/
+2025-07-05 23:37:58,247 | INFO | crawler.sources.baradwajrangan_links | Page 229 attempt 1 length=169749
+2025-07-05 23:37:58,270 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/230/
+2025-07-05 23:37:58,293 | INFO | crawler.sources.baradwajrangan_links | Page 230 attempt 1 length=169273
+2025-07-05 23:37:58,312 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/231/
+2025-07-05 23:37:58,331 | INFO | crawler.sources.baradwajrangan_links | Page 231 attempt 1 length=170064
+2025-07-05 23:37:58,351 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/232/
+2025-07-05 23:37:58,369 | INFO | crawler.sources.baradwajrangan_links | Page 232 attempt 1 length=170549
+2025-07-05 23:37:58,391 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/233/
+2025-07-05 23:37:58,417 | INFO | crawler.sources.baradwajrangan_links | Page 233 attempt 1 length=170616
+2025-07-05 23:37:58,436 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/234/
+2025-07-05 23:37:58,472 | INFO | crawler.sources.baradwajrangan_links | Page 234 attempt 1 length=170475
+2025-07-05 23:37:58,495 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/235/
+2025-07-05 23:37:58,519 | INFO | crawler.sources.baradwajrangan_links | Page 235 attempt 1 length=171627
+2025-07-05 23:37:58,538 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/236/
+2025-07-05 23:37:58,567 | INFO | crawler.sources.baradwajrangan_links | Page 236 attempt 1 length=168249
+2025-07-05 23:37:58,587 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/237/
+2025-07-05 23:37:58,619 | INFO | crawler.sources.baradwajrangan_links | Page 237 attempt 1 length=167068
+2025-07-05 23:37:58,642 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/238/
+2025-07-05 23:37:58,661 | INFO | crawler.sources.baradwajrangan_links | Page 238 attempt 1 length=167361
+2025-07-05 23:37:58,681 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/239/
+2025-07-05 23:37:58,717 | INFO | crawler.sources.baradwajrangan_links | Page 239 attempt 1 length=167481
+2025-07-05 23:37:58,739 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/240/
+2025-07-05 23:37:58,757 | INFO | crawler.sources.baradwajrangan_links | Page 240 attempt 1 length=167080
+2025-07-05 23:37:58,775 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/241/
+2025-07-05 23:37:58,795 | INFO | crawler.sources.baradwajrangan_links | Page 241 attempt 1 length=166266
+2025-07-05 23:37:58,816 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/242/
+2025-07-05 23:37:58,841 | INFO | crawler.sources.baradwajrangan_links | Page 242 attempt 1 length=164362
+2025-07-05 23:37:58,860 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/243/
+2025-07-05 23:37:58,878 | INFO | crawler.sources.baradwajrangan_links | Page 243 attempt 1 length=164223
+2025-07-05 23:37:58,898 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/244/
+2025-07-05 23:37:58,918 | INFO | crawler.sources.baradwajrangan_links | Page 244 attempt 1 length=165103
+2025-07-05 23:37:58,939 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/245/
+2025-07-05 23:37:58,957 | INFO | crawler.sources.baradwajrangan_links | Page 245 attempt 1 length=164659
+2025-07-05 23:37:58,976 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/246/
+2025-07-05 23:37:59,000 | INFO | crawler.sources.baradwajrangan_links | Page 246 attempt 1 length=164569
+2025-07-05 23:37:59,020 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/247/
+2025-07-05 23:37:59,043 | INFO | crawler.sources.baradwajrangan_links | Page 247 attempt 1 length=164347
+2025-07-05 23:37:59,093 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/248/
+2025-07-05 23:37:59,114 | INFO | crawler.sources.baradwajrangan_links | Page 248 attempt 1 length=168681
+2025-07-05 23:37:59,134 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/249/
+2025-07-05 23:37:59,160 | INFO | crawler.sources.baradwajrangan_links | Page 249 attempt 1 length=168754
+2025-07-05 23:37:59,182 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/250/
+2025-07-05 23:37:59,203 | INFO | crawler.sources.baradwajrangan_links | Page 250 attempt 1 length=168764
+2025-07-05 23:37:59,222 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/251/
+2025-07-05 23:37:59,244 | INFO | crawler.sources.baradwajrangan_links | Page 251 attempt 1 length=170786
+2025-07-05 23:37:59,265 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/252/
+2025-07-05 23:37:59,284 | INFO | crawler.sources.baradwajrangan_links | Page 252 attempt 1 length=169828
+2025-07-05 23:37:59,304 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/253/
+2025-07-05 23:37:59,337 | INFO | crawler.sources.baradwajrangan_links | Page 253 attempt 1 length=171936
+2025-07-05 23:37:59,358 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/254/
+2025-07-05 23:37:59,382 | INFO | crawler.sources.baradwajrangan_links | Page 254 attempt 1 length=169287
+2025-07-05 23:37:59,403 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/255/
+2025-07-05 23:37:59,426 | INFO | crawler.sources.baradwajrangan_links | Page 255 attempt 1 length=169267
+2025-07-05 23:37:59,445 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/256/
+2025-07-05 23:37:59,471 | INFO | crawler.sources.baradwajrangan_links | Page 256 attempt 1 length=170678
+2025-07-05 23:37:59,493 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/257/
+2025-07-05 23:37:59,510 | INFO | crawler.sources.baradwajrangan_links | Page 257 attempt 1 length=169536
+2025-07-05 23:37:59,530 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/258/
+2025-07-05 23:37:59,557 | INFO | crawler.sources.baradwajrangan_links | Page 258 attempt 1 length=171003
+2025-07-05 23:37:59,578 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/259/
+2025-07-05 23:37:59,596 | INFO | crawler.sources.baradwajrangan_links | Page 259 attempt 1 length=169507
+2025-07-05 23:37:59,620 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/260/
+2025-07-05 23:37:59,639 | INFO | crawler.sources.baradwajrangan_links | Page 260 attempt 1 length=170336
+2025-07-05 23:37:59,660 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/261/
+2025-07-05 23:37:59,675 | INFO | crawler.sources.baradwajrangan_links | Page 261 attempt 1 length=169322
+2025-07-05 23:37:59,698 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/262/
+2025-07-05 23:37:59,713 | INFO | crawler.sources.baradwajrangan_links | Page 262 attempt 1 length=169706
+2025-07-05 23:37:59,733 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/263/
+2025-07-05 23:37:59,754 | INFO | crawler.sources.baradwajrangan_links | Page 263 attempt 1 length=170480
+2025-07-05 23:37:59,773 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/264/
+2025-07-05 23:37:59,795 | INFO | crawler.sources.baradwajrangan_links | Page 264 attempt 1 length=168891
+2025-07-05 23:37:59,817 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/265/
+2025-07-05 23:37:59,856 | INFO | crawler.sources.baradwajrangan_links | Page 265 attempt 1 length=169085
+2025-07-05 23:37:59,876 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/266/
+2025-07-05 23:37:59,899 | INFO | crawler.sources.baradwajrangan_links | Page 266 attempt 1 length=169018
+2025-07-05 23:37:59,921 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/267/
+2025-07-05 23:38:00,039 | INFO | crawler.sources.baradwajrangan_links | Page 267 attempt 1 length=169102
+2025-07-05 23:38:00,071 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/268/
+2025-07-05 23:38:00,094 | INFO | crawler.sources.baradwajrangan_links | Page 268 attempt 1 length=168039
+2025-07-05 23:38:00,119 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/269/
+2025-07-05 23:38:00,139 | INFO | crawler.sources.baradwajrangan_links | Page 269 attempt 1 length=169371
+2025-07-05 23:38:00,163 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/270/
+2025-07-05 23:38:00,186 | INFO | crawler.sources.baradwajrangan_links | Page 270 attempt 1 length=167434
+2025-07-05 23:38:00,207 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/271/
+2025-07-05 23:38:00,227 | INFO | crawler.sources.baradwajrangan_links | Page 271 attempt 1 length=168106
+2025-07-05 23:38:00,250 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/272/
+2025-07-05 23:38:00,269 | INFO | crawler.sources.baradwajrangan_links | Page 272 attempt 1 length=167856
+2025-07-05 23:38:00,290 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/273/
+2025-07-05 23:38:00,311 | INFO | crawler.sources.baradwajrangan_links | Page 273 attempt 1 length=169195
+2025-07-05 23:38:00,332 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/274/
+2025-07-05 23:38:00,350 | INFO | crawler.sources.baradwajrangan_links | Page 274 attempt 1 length=168348
+2025-07-05 23:38:00,406 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/275/
+2025-07-05 23:38:00,428 | INFO | crawler.sources.baradwajrangan_links | Page 275 attempt 1 length=167707
+2025-07-05 23:38:00,448 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/276/
+2025-07-05 23:38:00,473 | INFO | crawler.sources.baradwajrangan_links | Page 276 attempt 1 length=169702
+2025-07-05 23:38:00,495 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/277/
+2025-07-05 23:38:00,516 | INFO | crawler.sources.baradwajrangan_links | Page 277 attempt 1 length=151852
+2025-07-05 23:38:00,533 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/278/
+2025-07-05 23:38:00,766 | INFO | crawler.sources.baradwajrangan_links | Page 278 attempt 1 length=123128
+2025-07-05 23:38:00,787 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/279/
+2025-07-05 23:38:00,987 | INFO | crawler.sources.baradwajrangan_links | Page 279 attempt 1 length=123128
+2025-07-05 23:38:01,010 | INFO | crawler.sources.baradwajrangan_links | Fetched total of 5529 links before early stop or completion
+2025-07-05 23:38:01,011 | INFO | step_1_fetch_links | Attempted to fetch and store links.
+2025-07-05 23:38:01,149 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:01,183 | INFO | step_2_parse_posts | No new posts to parse
+2025-07-05 23:38:01,301 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:01,301 | INFO | __main__ | Crawl stage complete
+2025-07-05 23:38:01,301 | INFO | __main__ | Starting validation stage
+2025-07-05 23:38:01,301 | INFO | step_3_classify_reviews | Classifying 4 reviews
+2025-07-05 23:38:01,893 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:02,165 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.test-id-1 "HTTP/2 400 Bad Request"
+2025-07-05 23:38:02,167 | ERROR | db.review_queries | Failed to update is_film_review for test-id-1: {'message': 'invalid input syntax for type uuid: "test-id-1"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:02,167 | INFO | step_3_classify_reviews | Updated review test-id-1 -> True
+2025-07-05 23:38:02,408 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 400 Bad Request"
+2025-07-05 23:38:02,408 | ERROR | db.pipeline_logger | Failed to insert pipeline log: {'message': 'invalid input syntax for type uuid: "test-id-1"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:02,726 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:02,846 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.test-id-2 "HTTP/2 400 Bad Request"
+2025-07-05 23:38:02,846 | ERROR | db.review_queries | Failed to update is_film_review for test-id-2: {'message': 'invalid input syntax for type uuid: "test-id-2"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:02,846 | INFO | step_3_classify_reviews | Updated review test-id-2 -> False
+2025-07-05 23:38:03,135 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 400 Bad Request"
+2025-07-05 23:38:03,135 | ERROR | db.pipeline_logger | Failed to insert pipeline log: {'message': 'invalid input syntax for type uuid: "test-id-2"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:03,430 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:03,545 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.test-id-3 "HTTP/2 400 Bad Request"
+2025-07-05 23:38:03,546 | ERROR | db.review_queries | Failed to update is_film_review for test-id-3: {'message': 'invalid input syntax for type uuid: "test-id-3"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:03,546 | INFO | step_3_classify_reviews | Updated review test-id-3 -> False
+2025-07-05 23:38:03,653 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 400 Bad Request"
+2025-07-05 23:38:03,653 | ERROR | db.pipeline_logger | Failed to insert pipeline log: {'message': 'invalid input syntax for type uuid: "test-id-3"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:04,045 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:04,305 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.test-id-4 "HTTP/2 400 Bad Request"
+2025-07-05 23:38:04,306 | ERROR | db.review_queries | Failed to update is_film_review for test-id-4: {'message': 'invalid input syntax for type uuid: "test-id-4"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:04,306 | INFO | step_3_classify_reviews | Updated review test-id-4 -> True
+2025-07-05 23:38:04,414 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 400 Bad Request"
+2025-07-05 23:38:04,414 | ERROR | db.pipeline_logger | Failed to insert pipeline log: {'message': 'invalid input syntax for type uuid: "test-id-4"', 'code': '22P02', 'hint': None, 'details': None}
+2025-07-05 23:38:04,525 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:04,557 | INFO | step_3b_llm_validation | LLM validation not yet implemented
+2025-07-05 23:38:04,678 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:04,779 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Clink%2Cblog_title%2Cmovie_id&movie_id=is.null&is_film_review=eq.True "HTTP/2 200 OK"
+2025-07-05 23:38:04,781 | INFO | step_4_link_movies | Linking movies for 0 reviews
+2025-07-05 23:38:04,887 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:04,887 | INFO | __main__ | Validation stage complete
+2025-07-05 23:38:04,888 | INFO | __main__ | Starting enrichment stage
+2025-07-05 23:38:05,197 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Cblog_title%2Cshort_review%2Csentiment&sentiment=is.null&is_film_review=eq.True "HTTP/2 200 OK"
+2025-07-05 23:38:05,200 | INFO | step_5_generate_sentiment | Generating sentiment for 151 reviews
+2025-07-05 23:38:05,558 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:05,559 | INFO | step_5_generate_sentiment | Skipping sentiment for c4d1a212-321d-403d-9800-1cd226c0c0ea -> No – not a review
+2025-07-05 23:38:05,854 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:05,856 | INFO | step_5_generate_sentiment | Skipping sentiment for 15e9bc20-8c1e-47b2-95ce-1285fa95e4a4 -> No – not a review
+2025-07-05 23:38:06,245 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:06,251 | INFO | step_5_generate_sentiment | Skipping sentiment for a550d3a7-0ae2-483b-8e64-4f5d678a07e8 -> No – not a review
+2025-07-05 23:38:06,871 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:06,874 | INFO | step_5_generate_sentiment | Skipping sentiment for a0e64dd0-155d-465d-8b34-4aa92c2a88f3 -> No – not a review
+2025-07-05 23:38:07,213 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:07,216 | INFO | step_5_generate_sentiment | Skipping sentiment for 40882766-02c9-47ce-bd4c-9a07967cc1cc -> No – not a review
+2025-07-05 23:38:07,646 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:07,649 | INFO | step_5_generate_sentiment | Skipping sentiment for 264d97f0-e92f-4ab1-b4fc-0446bd49a365 -> No – not a review.
+2025-07-05 23:38:07,954 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:07,956 | INFO | step_5_generate_sentiment | Skipping sentiment for 628d9aab-44f0-4c79-9bcb-f86587bf057d -> No - not a review
+2025-07-05 23:38:08,512 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:08,515 | INFO | step_5_generate_sentiment | Skipping sentiment for a45e8b77-77e7-41e8-b1e1-acf0fd512dc0 -> No – not a review
+2025-07-05 23:38:08,812 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:08,816 | INFO | step_5_generate_sentiment | Skipping sentiment for c002bb90-4238-47b3-90b3-dbb3a11f1095 -> No – not a review
+2025-07-05 23:38:09,047 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:09,051 | INFO | step_5_generate_sentiment | Skipping sentiment for 23c9da27-8e4a-4fe3-b505-c56893dfc242 -> No - not a review
+2025-07-05 23:38:09,608 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:09,613 | INFO | step_5_generate_sentiment | Skipping sentiment for 0a63e81d-eeed-4229-a005-19616f2338a5 -> No – not a review
+2025-07-05 23:38:10,139 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:10,141 | INFO | step_5_generate_sentiment | Skipping sentiment for 9f9bbb90-251b-4e76-bc90-396b3ccc688f -> No - not a review
+2025-07-05 23:38:10,577 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:10,578 | INFO | step_5_generate_sentiment | Skipping sentiment for d6e80c6c-a44b-423f-b98f-36a6baaf87be -> No – not a review.
+2025-07-05 23:38:11,112 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:11,113 | INFO | step_5_generate_sentiment | Skipping sentiment for 147ec0da-8e71-4ab9-9574-50a6a50e854d -> No – not a review
+2025-07-05 23:38:11,413 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:11,415 | INFO | step_5_generate_sentiment | Skipping sentiment for 733f7724-973c-461a-8490-19e62263ac31 -> No – not a review
+2025-07-05 23:38:11,761 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:11,765 | INFO | step_5_generate_sentiment | Skipping sentiment for 4e00925d-b237-4d73-84d5-784105115c79 -> No – not a review
+2025-07-05 23:38:12,150 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:12,154 | INFO | step_5_generate_sentiment | Skipping sentiment for a66afad8-cdaf-4c36-b475-1bc801f2ea05 -> No – not a review
+2025-07-05 23:38:12,492 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:12,499 | INFO | step_5_generate_sentiment | Skipping sentiment for 872761d7-d005-4807-9cd8-6b21b291b004 -> No – not a review
+2025-07-05 23:38:12,831 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:12,835 | INFO | step_5_generate_sentiment | Skipping sentiment for 8d20e957-b077-4a34-87a4-5a7461ede3ea -> No – not a review.
+2025-07-05 23:38:13,125 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:13,126 | INFO | step_5_generate_sentiment | Skipping sentiment for 879620f6-e2ab-4329-828d-3652df86f2e4 -> No – not a review
+2025-07-05 23:38:13,487 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:13,491 | INFO | step_5_generate_sentiment | Skipping sentiment for 3120f158-6c67-43d9-b39a-6857bf98fade -> No – not a review.
+2025-07-05 23:38:13,855 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:13,860 | INFO | step_5_generate_sentiment | Skipping sentiment for 9f57f95c-d85a-4ba6-9e38-65921538677f -> No – not a review.
+2025-07-05 23:38:14,112 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:14,113 | INFO | step_5_generate_sentiment | Skipping sentiment for 44c3e7ed-313a-43be-a615-55811a7ae62e -> No – not a review
+2025-07-05 23:38:14,414 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:14,422 | INFO | step_5_generate_sentiment | Skipping sentiment for 448cabc8-6947-4c7a-bbc7-70a22fa32500 -> No – not a review
+2025-07-05 23:38:14,695 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:14,696 | INFO | step_5_generate_sentiment | Skipping sentiment for 01f6ff1f-4b38-4ba3-ae7f-9eef3cb2bfbf -> No – not a review
+2025-07-05 23:38:15,020 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:15,021 | INFO | step_5_generate_sentiment | Skipping sentiment for b83a7c95-74d4-49e9-9f9c-cf004e15b4db -> No – not a review
+2025-07-05 23:38:15,314 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:15,320 | INFO | step_5_generate_sentiment | Skipping sentiment for d07f6e52-cadd-49db-85d1-d6a4de52ed15 -> No – not a review
+2025-07-05 23:38:15,594 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:15,597 | INFO | step_5_generate_sentiment | Skipping sentiment for b9657c97-5045-4f9c-85de-74971790d1ba -> No – not a review
+2025-07-05 23:38:15,901 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:15,903 | INFO | step_5_generate_sentiment | Skipping sentiment for 8ca180c5-2a3f-499b-98ca-de0403eba453 -> No – not a review
+2025-07-05 23:38:16,333 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:16,340 | INFO | step_5_generate_sentiment | Skipping sentiment for 90c72836-abb7-409c-bff2-22218383b17a -> No – not a review
+2025-07-05 23:38:16,779 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:16,783 | INFO | step_5_generate_sentiment | Skipping sentiment for 0ea0fcca-b406-4225-9499-69aa214a44ba -> No – not a review
+2025-07-05 23:38:17,335 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:17,336 | INFO | step_5_generate_sentiment | Skipping sentiment for 63479175-be68-4c31-842d-233e3dd03342 -> No – not a review
+2025-07-05 23:38:17,642 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:17,642 | INFO | step_5_generate_sentiment | Skipping sentiment for 6a7adb88-c480-4539-8861-7db9ddd673cd -> No – not a review
+2025-07-05 23:38:18,219 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:18,224 | INFO | step_5_generate_sentiment | Skipping sentiment for 13bc0b37-f1ab-43fd-ad93-b358a0806b12 -> No – not a review
+2025-07-05 23:38:18,523 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:18,529 | INFO | step_5_generate_sentiment | Skipping sentiment for 7e761c48-c85e-4764-95f7-8dd89f8e5f87 -> No – not a review
+2025-07-05 23:38:18,879 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:18,888 | INFO | step_5_generate_sentiment | Skipping sentiment for 8c4e2312-19d4-4c25-97bb-11a006d67e9b -> No – not a review
+2025-07-05 23:38:19,156 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:19,156 | INFO | step_5_generate_sentiment | Skipping sentiment for 48e57ff4-607a-4e40-80a5-1d08c268b8f7 -> No – not a review.
+2025-07-05 23:38:19,575 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:19,581 | INFO | step_5_generate_sentiment | Skipping sentiment for 45462f02-332a-41a5-b662-a7481cb417db -> No – not a review
+2025-07-05 23:38:20,043 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:20,044 | INFO | step_5_generate_sentiment | Skipping sentiment for acfaaf5f-fa11-4d6f-93fc-db6296293672 -> No – not a review
+2025-07-05 23:38:20,425 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:20,434 | INFO | step_5_generate_sentiment | Skipping sentiment for a260ccb8-a331-4444-acb0-c18a60ebd277 -> No – not a review
+2025-07-05 23:38:20,682 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:20,683 | INFO | step_5_generate_sentiment | Skipping sentiment for 19515d8f-cb7f-4644-a760-28640a8e2b40 -> No – not a review
+2025-07-05 23:38:21,044 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:21,048 | INFO | step_5_generate_sentiment | Skipping sentiment for 6034257e-352e-4957-84a8-dc00fd689f5d -> No – not a review
+2025-07-05 23:38:21,579 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:21,579 | INFO | step_5_generate_sentiment | Skipping sentiment for 07e87bcb-60a6-413d-b354-4347c0bc79e0 -> No – not a review
+2025-07-05 23:38:21,943 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:21,946 | INFO | step_5_generate_sentiment | Skipping sentiment for f9630fb9-c400-4e56-a883-0774ae980170 -> No – not a review
+2025-07-05 23:38:22,273 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:22,275 | INFO | step_5_generate_sentiment | Skipping sentiment for 3a6a5935-2bc1-435c-9c94-31b2caa87d23 -> No – not a review.
+2025-07-05 23:38:22,542 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:22,543 | INFO | step_5_generate_sentiment | Skipping sentiment for 35a7c540-7049-4073-bafb-760019b96850 -> No – not a review
+2025-07-05 23:38:22,895 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:22,895 | INFO | step_5_generate_sentiment | Skipping sentiment for 2eb6b973-efeb-4875-b52f-79737357e4ad -> No – not a review
+2025-07-05 23:38:23,169 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:23,172 | INFO | step_5_generate_sentiment | Skipping sentiment for 968ee74d-e774-4353-8f17-6a3c9b775ad1 -> No – not a review.
+2025-07-05 23:38:23,548 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:23,557 | INFO | step_5_generate_sentiment | Skipping sentiment for 452a344b-22dc-4a61-930b-f429a16d2682 -> No – not a review
+2025-07-05 23:38:24,623 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:24,628 | INFO | step_5_generate_sentiment | Skipping sentiment for 1e13b472-a0c4-4cfc-a523-068f93057eb6 -> No - not a review
+2025-07-05 23:38:24,969 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:24,969 | INFO | step_5_generate_sentiment | Skipping sentiment for 5d071e5b-e3b8-42b4-a317-e35200509da6 -> No – not a review
+2025-07-05 23:38:25,562 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:25,566 | INFO | step_5_generate_sentiment | Skipping sentiment for 52b37047-e513-4fca-b8b3-750f29bf9cb3 -> No – not a review
+2025-07-05 23:38:25,889 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:25,892 | INFO | step_5_generate_sentiment | Skipping sentiment for ca74223e-eac9-47c8-8b5b-26aa62ec576a -> No – not a review
+2025-07-05 23:38:26,194 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:26,195 | INFO | step_5_generate_sentiment | Skipping sentiment for e41d0fb1-e577-447e-9712-d6e9e64fdce3 -> No – not a review.
+2025-07-05 23:38:26,504 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:26,508 | INFO | step_5_generate_sentiment | Skipping sentiment for 91058188-389b-43f9-8ea2-af575e332425 -> No – not a review.
+2025-07-05 23:38:26,766 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:26,767 | INFO | step_5_generate_sentiment | Skipping sentiment for 4dcfbf32-64e0-4a27-b00c-97b0074ef720 -> No – not a review.
+2025-07-05 23:38:27,132 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:27,135 | INFO | step_5_generate_sentiment | Skipping sentiment for 6d530847-8e2e-4e81-ab1b-d892828c806a -> No – not a review
+2025-07-05 23:38:27,478 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:27,479 | INFO | step_5_generate_sentiment | Skipping sentiment for 994f9b5d-badd-40ea-a388-53cf48593fd1 -> No – not a review
+2025-07-05 23:38:28,329 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:28,331 | INFO | step_5_generate_sentiment | Skipping sentiment for 04389db8-4c9a-4343-9c8a-95b23822fc2e -> No – not a review
+2025-07-05 23:38:28,740 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:28,748 | INFO | step_5_generate_sentiment | Skipping sentiment for f774af65-ab5f-476a-be0e-a1cb4364a24d -> No – not a review.
+2025-07-05 23:38:29,096 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:29,102 | INFO | step_5_generate_sentiment | Skipping sentiment for d7344d2f-534f-4aa7-b7da-052dc6bfc338 -> No - not a review
+2025-07-05 23:38:29,387 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:29,390 | INFO | step_5_generate_sentiment | Skipping sentiment for c0b1caf3-b2ee-4ebd-abb8-eda12e4d9855 -> No – not a review
+2025-07-05 23:38:29,910 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:29,914 | INFO | step_5_generate_sentiment | Skipping sentiment for c264052d-76b4-428e-92d2-6a094f7413ff -> No – not a review
+2025-07-05 23:38:30,278 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:30,282 | INFO | step_5_generate_sentiment | Skipping sentiment for 9877df60-8eb2-411e-9211-afaaea8fddd1 -> No – not a review
+2025-07-05 23:38:30,552 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:30,553 | INFO | step_5_generate_sentiment | Skipping sentiment for 280ac360-62ba-4811-a283-29f05071e15a -> No – not a review
+2025-07-05 23:38:30,891 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:30,893 | INFO | step_5_generate_sentiment | Skipping sentiment for 961d2ee3-effe-48c6-90b9-3c66304486a9 -> No – not a review
+2025-07-05 23:38:31,216 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:31,221 | INFO | step_5_generate_sentiment | Skipping sentiment for 05c6574d-ea0a-4c36-906b-30a05471371b -> No – not a review.
+2025-07-05 23:38:31,508 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:31,513 | INFO | step_5_generate_sentiment | Skipping sentiment for 296133f2-a677-43ba-8b32-d7108d719480 -> No – not a review
+2025-07-05 23:38:31,838 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:31,840 | INFO | step_5_generate_sentiment | Skipping sentiment for 4f85835a-34da-4d69-b549-d1b838fb5ff5 -> No – not a review
+2025-07-05 23:38:32,240 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:32,243 | INFO | step_5_generate_sentiment | Skipping sentiment for ba28a160-03b2-4b25-9a78-a014dd2a4631 -> No – not a review
+2025-07-05 23:38:32,514 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:32,517 | INFO | step_5_generate_sentiment | Skipping sentiment for c06106b6-9cde-466b-b7b8-4bb3c35c2dc2 -> No – not a review
+2025-07-05 23:38:32,799 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:32,799 | INFO | step_5_generate_sentiment | Skipping sentiment for 5a827dc9-62f3-4e6a-bbb2-106100a80b50 -> No – not a review
+2025-07-05 23:38:33,097 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:33,098 | INFO | step_5_generate_sentiment | Skipping sentiment for f74e1124-cfd6-44db-9170-93adbead1ba4 -> No – not a review
+2025-07-05 23:38:33,447 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:33,448 | INFO | step_5_generate_sentiment | Skipping sentiment for a76c2025-ad31-47c0-a054-c379779c1913 -> No - not a review
+2025-07-05 23:38:34,003 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:34,006 | INFO | step_5_generate_sentiment | Skipping sentiment for 09d8bc8b-860a-4b1e-b39d-2571b464486b -> No – not a review
+2025-07-05 23:38:34,291 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:34,295 | INFO | step_5_generate_sentiment | Skipping sentiment for 186a41c5-a312-4923-864b-52d442711d0d -> No – not a review
+2025-07-05 23:38:34,632 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:34,640 | INFO | step_5_generate_sentiment | Skipping sentiment for 8c312a4b-9a03-42a3-83cd-269ad6149621 -> No – not a review
+2025-07-05 23:38:34,965 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:35,244 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?id=eq.a02625fc-07f8-4fe8-b67e-490e7404515d "HTTP/2 200 OK"
+2025-07-05 23:38:35,247 | INFO | step_5_generate_sentiment | Updated sentiment for a02625fc-07f8-4fe8-b67e-490e7404515d -> Maybe
+2025-07-05 23:38:35,470 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:38:35,870 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:35,871 | INFO | step_5_generate_sentiment | Skipping sentiment for 6a52fd2e-b7fb-4f77-b74a-056d8cae4e91 -> No – not a review
+2025-07-05 23:38:36,212 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:36,213 | INFO | step_5_generate_sentiment | Skipping sentiment for cfc4dcdb-2fcc-46eb-af32-7ad8d2224a0e -> No – not a review.
+2025-07-05 23:38:36,467 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:36,468 | INFO | step_5_generate_sentiment | Skipping sentiment for 589a25ca-226e-42c2-93ea-63aa087b320d -> No – not a review
+2025-07-05 23:38:36,826 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:36,830 | INFO | step_5_generate_sentiment | Skipping sentiment for 3d38f951-7f5e-4368-8a36-f0ee530045a8 -> No – not a review.
+2025-07-05 23:38:37,102 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:37,104 | INFO | step_5_generate_sentiment | Skipping sentiment for fcdfbe79-87a3-4a9f-9161-755c5efb33e9 -> No - not a review
+2025-07-05 23:38:37,410 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:37,410 | INFO | step_5_generate_sentiment | Skipping sentiment for 8f760faf-b499-44c3-a154-7228f73f13f2 -> No – not a review
+2025-07-05 23:38:37,749 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:37,755 | INFO | step_5_generate_sentiment | Skipping sentiment for 294949b3-2fe5-4714-aaa2-d8c65ac9d6bb -> No – not a review
+2025-07-05 23:38:38,110 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:38,111 | INFO | step_5_generate_sentiment | Skipping sentiment for 4195a14b-7937-4495-9cd6-9e9ddd593eaf -> No – not a review
+2025-07-05 23:38:38,404 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:38,405 | INFO | step_5_generate_sentiment | Skipping sentiment for 205b080e-c2cb-4a47-8efb-1508777c85ac -> No – not a review
+2025-07-05 23:38:38,674 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:38,677 | INFO | step_5_generate_sentiment | Skipping sentiment for d27acf06-4792-4087-bb05-27ee12aa369c -> No – not a review
+2025-07-05 23:38:39,040 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:39,044 | INFO | step_5_generate_sentiment | Skipping sentiment for 3b813af3-c326-4133-82e3-fdb4d9399c1b -> No – not a review
+2025-07-05 23:38:39,864 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:39,869 | INFO | step_5_generate_sentiment | Skipping sentiment for ce5f9580-3a1c-4c49-9be8-474861d5ecdb -> No – not a review
+2025-07-05 23:38:40,428 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:40,430 | INFO | step_5_generate_sentiment | Skipping sentiment for 68405618-61f6-4287-a79d-7515806a63f1 -> No – not a review
+2025-07-05 23:38:40,706 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:40,707 | INFO | step_5_generate_sentiment | Skipping sentiment for 4218dbe5-a7a6-49f9-a90d-a4ad6324bb4c -> No – not a review.
+2025-07-05 23:38:41,043 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:41,044 | INFO | step_5_generate_sentiment | Skipping sentiment for e43d1e32-f8ef-499b-90a5-e89559873aa5 -> No – not a review
+2025-07-05 23:38:41,377 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:41,384 | INFO | step_5_generate_sentiment | Skipping sentiment for a827e0d1-3481-4bf0-ab88-ab0ee9cd7e47 -> No – not a review
+2025-07-05 23:38:41,706 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:41,711 | INFO | step_5_generate_sentiment | Skipping sentiment for 0d90e9ab-e8c0-4617-acdb-a39238b07397 -> No – not a review.
+2025-07-05 23:38:42,003 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:42,015 | INFO | step_5_generate_sentiment | Skipping sentiment for fb5bf528-af13-44f0-a2a2-41ffc3cae436 -> No – not a review
+2025-07-05 23:38:42,391 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:42,416 | INFO | step_5_generate_sentiment | Skipping sentiment for 20e400b4-2c2a-4cd2-8ee9-561b1111cb7e -> No – not a review.
+2025-07-05 23:38:42,672 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:42,675 | INFO | step_5_generate_sentiment | Skipping sentiment for 40bf033e-5161-4d37-a8ab-2eea4cc17106 -> No – not a review
+2025-07-05 23:38:43,048 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:43,052 | INFO | step_5_generate_sentiment | Skipping sentiment for e6b917fe-777f-427c-b29b-515b9cd3790d -> No – not a review
+2025-07-05 23:38:43,379 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:43,385 | INFO | step_5_generate_sentiment | Skipping sentiment for c90170b1-6576-462c-aaaa-db8f6a0b4f66 -> No – not a review
+2025-07-05 23:38:43,686 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:43,686 | INFO | step_5_generate_sentiment | Skipping sentiment for 123e6976-3392-4e52-a5f2-db6d95b6b555 -> No – not a review
+2025-07-05 23:38:43,906 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:43,907 | INFO | step_5_generate_sentiment | Skipping sentiment for d3eb0e1c-f36f-4f2b-8cb0-9cd1449225d5 -> No – not a review
+2025-07-05 23:38:44,235 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:44,242 | INFO | step_5_generate_sentiment | Skipping sentiment for 51fd1414-38c5-4e3c-bd0e-fc4f7cc928c6 -> No – not a review
+2025-07-05 23:38:44,525 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:44,526 | INFO | step_5_generate_sentiment | Skipping sentiment for 4c7b7f38-dae0-4b9e-8b62-b6d7620744ba -> No – not a review
+2025-07-05 23:38:44,792 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:44,796 | INFO | step_5_generate_sentiment | Skipping sentiment for 9a04bc00-63d9-4dbe-8d97-e91543141105 -> No - not a review
+2025-07-05 23:38:45,252 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:45,256 | INFO | step_5_generate_sentiment | Skipping sentiment for f7c01c63-b3e5-4098-adc4-0649c7c59c22 -> No – not a review.
+2025-07-05 23:38:45,684 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:45,690 | INFO | step_5_generate_sentiment | Skipping sentiment for 07772cc9-a750-4222-a848-d4a33e22b47e -> No – not a review
+2025-07-05 23:38:45,929 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:45,934 | INFO | step_5_generate_sentiment | Skipping sentiment for 9f6b9786-1177-4432-b0d1-88b2e428954c -> No – not a review
+2025-07-05 23:38:46,246 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:46,246 | INFO | step_5_generate_sentiment | Skipping sentiment for 74a15a87-4c1d-455b-adcb-93ee93d24f81 -> No – not a review
+2025-07-05 23:38:46,674 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:46,702 | INFO | step_5_generate_sentiment | Skipping sentiment for 4db73392-2f33-45ac-9d8c-a79bd02c95aa -> No – not a review
+2025-07-05 23:38:48,151 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:48,161 | INFO | step_5_generate_sentiment | Skipping sentiment for 1e0622fc-b9aa-42bd-8536-303acde94162 -> No – not a review.
+2025-07-05 23:38:48,479 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:48,482 | INFO | step_5_generate_sentiment | Skipping sentiment for ecad68e3-540b-4dd1-a114-78aab1cc9db1 -> No – not a review
+2025-07-05 23:38:48,818 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:48,821 | INFO | step_5_generate_sentiment | Skipping sentiment for e4346633-d83b-4857-9f68-dce804d583c4 -> No – not a review
+2025-07-05 23:38:49,666 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:49,671 | INFO | step_5_generate_sentiment | Skipping sentiment for ac290dd8-3015-490e-9cf7-f970e3ed163f -> No – not a review
+2025-07-05 23:38:50,044 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:50,045 | INFO | step_5_generate_sentiment | Skipping sentiment for 0d9150f2-0341-4d35-9af7-af3d280ca593 -> No - not a review
+2025-07-05 23:38:51,245 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:51,246 | INFO | step_5_generate_sentiment | Skipping sentiment for 033ba9bf-a31c-47d1-99bc-6c3dd2274e77 -> No – not a review
+2025-07-05 23:38:51,563 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:51,564 | INFO | step_5_generate_sentiment | Skipping sentiment for a65e88aa-1de1-472b-9bfa-04a31efab0ff -> No – not a review
+2025-07-05 23:38:51,909 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:51,913 | INFO | step_5_generate_sentiment | Skipping sentiment for c55a0033-30b3-4a70-bdf4-aa349793e1db -> No – not a review.
+2025-07-05 23:38:52,313 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:52,317 | INFO | step_5_generate_sentiment | Skipping sentiment for ee53f772-e6e5-4a81-be62-4e684e9d2d47 -> No – not a review
+2025-07-05 23:38:52,642 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:52,644 | INFO | step_5_generate_sentiment | Skipping sentiment for 64c6c34a-e6d4-43c2-94bf-d3adc2a4ac6c -> No – not a review
+2025-07-05 23:38:52,971 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:52,972 | INFO | step_5_generate_sentiment | Skipping sentiment for 2430c847-5ab8-48ed-b654-9cfefed00f70 -> No – not a review
+2025-07-05 23:38:53,826 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:53,826 | INFO | step_5_generate_sentiment | Skipping sentiment for c1695862-bc32-4f93-b66a-cead42fe9ea7 -> No – not a review
+2025-07-05 23:38:54,238 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:54,244 | INFO | step_5_generate_sentiment | Skipping sentiment for 9598ad91-eac1-4232-8623-77b4b631afdc -> No – not a review
+2025-07-05 23:38:54,704 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:54,713 | INFO | step_5_generate_sentiment | Skipping sentiment for a6302620-0c54-4aba-a382-0d10fd81c3dc -> No – not a review
+2025-07-05 23:38:55,027 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:55,031 | INFO | step_5_generate_sentiment | Skipping sentiment for f2f86d1c-651f-4865-96c0-7fcfb2ccb435 -> No – not a review
+2025-07-05 23:38:55,340 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:55,345 | INFO | step_5_generate_sentiment | Skipping sentiment for cf6cf567-c41b-434a-b012-3251c5a4aa33 -> No – not a review
+2025-07-05 23:38:55,735 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:55,736 | INFO | step_5_generate_sentiment | Skipping sentiment for 2dfbafe8-e81d-4d68-878e-29eb5ad6ddb8 -> No – not a review
+2025-07-05 23:38:56,578 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:56,579 | INFO | step_5_generate_sentiment | Skipping sentiment for 7f5da603-d248-4212-940d-ecd8f43d016d -> No – not a review.
+2025-07-05 23:38:56,845 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:56,846 | INFO | step_5_generate_sentiment | Skipping sentiment for 9d69d7ef-5df8-4349-8544-96727921f921 -> No – not a review
+2025-07-05 23:38:57,432 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:57,436 | INFO | step_5_generate_sentiment | Skipping sentiment for 1f2e8a57-1168-47c1-989a-e69c8882408b -> No – not a review
+2025-07-05 23:38:57,878 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:57,886 | INFO | step_5_generate_sentiment | Skipping sentiment for 3f93a432-de79-4792-9312-bb15962a6b86 -> No – not a review
+2025-07-05 23:38:58,259 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:58,260 | INFO | step_5_generate_sentiment | Skipping sentiment for 8d8a508f-211f-404b-a17e-9f161fddd05c -> No – not a review
+2025-07-05 23:38:58,635 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:58,636 | INFO | step_5_generate_sentiment | Skipping sentiment for 0dc775a3-3d5f-4b4a-bffa-b0996ef6b7d2 -> No – not a review
+2025-07-05 23:38:58,967 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:58,970 | INFO | step_5_generate_sentiment | Skipping sentiment for b7c76a23-ab71-4768-b9b9-5d1847c0323f -> No – not a review.
+2025-07-05 23:38:59,303 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:38:59,307 | INFO | step_5_generate_sentiment | Skipping sentiment for a7aeeb56-8e9b-4911-9ce5-fad26a91a8ea -> No – not a review
+2025-07-05 23:39:00,238 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:00,247 | INFO | step_5_generate_sentiment | Skipping sentiment for 235eee2e-8d52-4a10-8015-293eb9ae93cb -> No – not a review
+2025-07-05 23:39:00,645 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:00,652 | INFO | step_5_generate_sentiment | Skipping sentiment for 863e3024-9885-4673-ac76-922cda6d4f26 -> No – not a review
+2025-07-05 23:39:00,948 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:00,949 | INFO | step_5_generate_sentiment | Skipping sentiment for 0b44a38e-677d-4edd-9af9-03e33877cf2c -> No – not a review
+2025-07-05 23:39:01,340 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:01,345 | INFO | step_5_generate_sentiment | Skipping sentiment for 7e8bf107-ec28-443a-99d7-433085aa08c6 -> No – not a review
+2025-07-05 23:39:01,626 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:01,628 | INFO | step_5_generate_sentiment | Skipping sentiment for 2631130e-a55c-4e8f-8bb6-e91ffcfea6dc -> No – not a review
+2025-07-05 23:39:01,898 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:01,899 | INFO | step_5_generate_sentiment | Skipping sentiment for 938af70c-32b1-4866-b0fa-0bf375c4e4dd -> No – not a review
+2025-07-05 23:39:02,294 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:02,295 | INFO | step_5_generate_sentiment | Skipping sentiment for 344f014c-838b-4bed-9ffc-527665a1907e -> No – not a review
+2025-07-05 23:39:02,788 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:02,793 | INFO | step_5_generate_sentiment | Skipping sentiment for d7b66396-1dbb-470d-a17a-e76a7fd7f37b -> No - not a review
+2025-07-05 23:39:03,169 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:03,170 | INFO | step_5_generate_sentiment | Skipping sentiment for 7e712278-8753-4e39-8649-b632bd1ac279 -> No – not a review
+2025-07-05 23:39:03,500 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:03,501 | INFO | step_5_generate_sentiment | Skipping sentiment for 46985b97-b074-422b-a767-b3cff86e4dc7 -> No – not a review
+2025-07-05 23:39:03,810 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:03,814 | INFO | step_5_generate_sentiment | Skipping sentiment for 0f1d9ca5-e769-4e9a-9870-54144135f871 -> No – not a review.
+2025-07-05 23:39:05,450 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:05,465 | INFO | step_5_generate_sentiment | Skipping sentiment for f724cfbc-7d92-4c7b-9535-8095a12540a2 -> No – not a review
+2025-07-05 23:39:05,756 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:05,773 | INFO | step_5_generate_sentiment | Skipping sentiment for 6d521bcc-5bc3-4113-80e8-433733a4ef03 -> No – not a review.
+2025-07-05 23:39:06,143 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:06,149 | INFO | step_5_generate_sentiment | Skipping sentiment for 5ad6cf37-5b72-4d3b-8c67-86178c86077d -> No – not a review
+2025-07-05 23:39:06,476 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:06,481 | INFO | step_5_generate_sentiment | Skipping sentiment for e52d9eea-ec25-4654-8f1c-9aab70030d34 -> No – not a review
+2025-07-05 23:39:06,849 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:39:06,850 | INFO | step_5_generate_sentiment | Skipping sentiment for 767b8a7b-5fa6-478f-9abb-982cc835b2ac -> No – not a review.
+2025-07-05 23:39:07,034 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:07,199 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies_with_review_year?select=id%2Ctitle%2Crelease_year%2Clanguage%2Cgenre%2Creview_year&release_year=is.null "HTTP/2 200 OK"
+2025-07-05 23:39:07,207 | INFO | db.movie_queries | Returned 123 movies without metadata
+2025-07-05 23:39:07,208 | INFO | step_6_enrich_metadata | Enriching metadata for 123 movies
+2025-07-05 23:39:07,332 | INFO | tmdb.tmdb_api | No TMDb results for title: Deconstructing Woody
+2025-07-05 23:39:07,333 | WARNING | step_6_enrich_metadata | No metadata found for Deconstructing Woody
+2025-07-05 23:39:07,440 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:07,443 | INFO | tmdb.tmdb_api | No TMDb results for title: Kalki, Thanneer Mathan Dinangal
+2025-07-05 23:39:07,443 | INFO | tmdb.tmdb_api | No TMDb results for title: Pyaar Impossible / Dulha Mil Gaya
+2025-07-05 23:39:07,443 | INFO | tmdb.tmdb_api | No TMDb results for title: Veeram / Jilla
+2025-07-05 23:39:07,444 | WARNING | step_6_enrich_metadata | No metadata found for Kalki, Thanneer Mathan Dinangal
+2025-07-05 23:39:07,549 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:07,655 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies?id=eq.4e3c6a26-8b6f-4670-87cc-94787f85acd3 "HTTP/2 200 OK"
+2025-07-05 23:39:07,655 | INFO | step_6_enrich_metadata | Updated metadata for Namadhu
+2025-07-05 23:39:07,762 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:07,762 | WARNING | step_6_enrich_metadata | No metadata found for Pyaar Impossible / Dulha Mil Gaya
+2025-07-05 23:39:07,870 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:07,871 | WARNING | step_6_enrich_metadata | No metadata found for Veeram / Jilla
+2025-07-05 23:39:07,965 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,028 | INFO | tmdb.tmdb_api | No TMDb results for title: Kettiyolaanu Ente Malakha
+2025-07-05 23:39:08,028 | WARNING | step_6_enrich_metadata | No metadata found for Kettiyolaanu Ente Malakha
+2025-07-05 23:39:08,139 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,141 | INFO | tmdb.tmdb_api | No TMDb results for title: Om Shanti Om
+Saawariya
+2025-07-05 23:39:08,141 | INFO | tmdb.tmdb_api | No TMDb results for title: The Woman Who Ran, Suk Suk, The Roads Not Taken
+2025-07-05 23:39:08,141 | INFO | tmdb.tmdb_api | No TMDb results for title: 10 Enradhukulla
+2025-07-05 23:39:08,141 | INFO | tmdb.tmdb_api | No TMDb results for title: Kannil Mazhai
+2025-07-05 23:39:08,142 | WARNING | step_6_enrich_metadata | No metadata found for Om Shanti Om
+Saawariya
+2025-07-05 23:39:08,247 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,247 | WARNING | step_6_enrich_metadata | No metadata found for The Woman Who Ran, Suk Suk, The Roads Not Taken
+2025-07-05 23:39:08,371 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,385 | WARNING | step_6_enrich_metadata | No metadata found for 10 Enradhukulla
+2025-07-05 23:39:08,525 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,526 | WARNING | step_6_enrich_metadata | No metadata found for Kannil Mazhai
+2025-07-05 23:39:08,661 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,718 | INFO | tmdb.tmdb_api | No TMDb results for title: Moondru Per Moondru Kadal
+2025-07-05 23:39:08,719 | WARNING | step_6_enrich_metadata | No metadata found for Moondru Per Moondru Kadal
+2025-07-05 23:39:08,838 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,842 | INFO | tmdb.tmdb_api | No TMDb results for title: Kalakalappu @ Masala Café
+2025-07-05 23:39:08,842 | INFO | tmdb.tmdb_api | No TMDb results for title: Neethane En Ponvasantham
+2025-07-05 23:39:08,842 | INFO | tmdb.tmdb_api | No TMDb results for title: U Me Aur Hum, Krazzy 4
+2025-07-05 23:39:08,842 | INFO | tmdb.tmdb_api | No TMDb results for title: One Hundred Years of Solitude
+2025-07-05 23:39:08,843 | WARNING | step_6_enrich_metadata | No metadata found for Kalakalappu @ Masala Café
+2025-07-05 23:39:08,948 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:08,949 | WARNING | step_6_enrich_metadata | No metadata found for Neethane En Ponvasantham
+2025-07-05 23:39:09,056 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,057 | WARNING | step_6_enrich_metadata | No metadata found for U Me Aur Hum, Krazzy 4
+2025-07-05 23:39:09,161 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,163 | WARNING | step_6_enrich_metadata | No metadata found for One Hundred Years of Solitude
+2025-07-05 23:39:09,269 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,323 | INFO | tmdb.tmdb_api | No TMDb results for title: Kallachirippu
+2025-07-05 23:39:09,323 | WARNING | step_6_enrich_metadata | No metadata found for Kallachirippu
+2025-07-05 23:39:09,426 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,426 | INFO | tmdb.tmdb_api | No TMDb results for title: As I’m Suffering from Mixed Feelings
+2025-07-05 23:39:09,426 | INFO | tmdb.tmdb_api | No TMDb results for title: Kyaa Kool Hain Hum 3 / Mastizaade
+2025-07-05 23:39:09,427 | INFO | tmdb.tmdb_api | No TMDb results for title: Ameerin Aadhi Baghavan
+2025-07-05 23:39:09,427 | INFO | tmdb.tmdb_api | No TMDb results for title: Thelivuppathaiyin Neesa Thooram (TNT)
+2025-07-05 23:39:09,427 | WARNING | step_6_enrich_metadata | No metadata found for As I’m Suffering from Mixed Feelings
+2025-07-05 23:39:09,541 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,541 | WARNING | step_6_enrich_metadata | No metadata found for Kyaa Kool Hain Hum 3 / Mastizaade
+2025-07-05 23:39:09,757 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,778 | WARNING | step_6_enrich_metadata | No metadata found for Ameerin Aadhi Baghavan
+2025-07-05 23:39:09,875 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:09,875 | WARNING | step_6_enrich_metadata | No metadata found for Thelivuppathaiyin Neesa Thooram (TNT)
+2025-07-05 23:39:10,049 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,128 | INFO | tmdb.tmdb_api | No TMDb results for title: Thugs of Hindostan, 2.0
+2025-07-05 23:39:10,128 | WARNING | step_6_enrich_metadata | No metadata found for Thugs of Hindostan, 2.0
+2025-07-05 23:39:10,237 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,238 | INFO | tmdb.tmdb_api | No TMDb results for title: Into the Mouth of Madness
+2025-07-05 23:39:10,238 | INFO | tmdb.tmdb_api | No TMDb results for title: "What a Crock of Sith!"
+2025-07-05 23:39:10,238 | INFO | tmdb.tmdb_api | No TMDb results for title: Contract / Kismat Konnection
+2025-07-05 23:39:10,238 | INFO | tmdb.tmdb_api | No TMDb results for title: Kadhal Parisu
+2025-07-05 23:39:10,238 | WARNING | step_6_enrich_metadata | No metadata found for Into the Mouth of Madness
+2025-07-05 23:39:10,353 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,354 | WARNING | step_6_enrich_metadata | No metadata found for "What a Crock of Sith!"
+2025-07-05 23:39:10,458 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,459 | WARNING | step_6_enrich_metadata | No metadata found for Contract / Kismat Konnection
+2025-07-05 23:39:10,558 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,558 | WARNING | step_6_enrich_metadata | No metadata found for Kadhal Parisu
+2025-07-05 23:39:10,654 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,734 | INFO | tmdb.tmdb_api | No TMDb results for title: Cruel Tale of Bushido
+2025-07-05 23:39:10,734 | INFO | tmdb.tmdb_api | No TMDb results for title: Dada, OK Kanmani, VTK, Sarpatta Parambara, Anbe Sivam
+2025-07-05 23:39:10,734 | INFO | tmdb.tmdb_api | No TMDb results for title: Sufiyum Sujathayum
+2025-07-05 23:39:10,734 | WARNING | step_6_enrich_metadata | No metadata found for Cruel Tale of Bushido
+2025-07-05 23:39:10,847 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:10,847 | WARNING | step_6_enrich_metadata | No metadata found for Dada, OK Kanmani, VTK, Sarpatta Parambara, Anbe Sivam
+2025-07-05 23:39:11,087 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,088 | WARNING | step_6_enrich_metadata | No metadata found for Sufiyum Sujathayum
+2025-07-05 23:39:11,198 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,199 | INFO | tmdb.tmdb_api | No TMDb results for title: Aaha Kaadhal
+2025-07-05 23:39:11,199 | INFO | tmdb.tmdb_api | No TMDb results for title: Arre O Sambar
+2025-07-05 23:39:11,201 | WARNING | step_6_enrich_metadata | No metadata found for Aaha Kaadhal
+2025-07-05 23:39:11,308 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,308 | WARNING | step_6_enrich_metadata | No metadata found for Arre O Sambar
+2025-07-05 23:39:11,429 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,485 | INFO | tmdb.tmdb_api | No TMDb results for title: Every Shankar film
+2025-07-05 23:39:11,485 | INFO | tmdb.tmdb_api | No TMDb results for title: Rann / Ishqiya
+2025-07-05 23:39:11,486 | WARNING | step_6_enrich_metadata | No metadata found for Every Shankar film
+2025-07-05 23:39:11,590 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,591 | WARNING | step_6_enrich_metadata | No metadata found for Rann / Ishqiya
+2025-07-05 23:39:11,706 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,713 | INFO | tmdb.tmdb_api | No TMDb results for title: Sadiyaan / Tum Milo Toh Sahi
+2025-07-05 23:39:11,713 | INFO | tmdb.tmdb_api | No TMDb results for title: Dial M for Master
+2025-07-05 23:39:11,713 | INFO | tmdb.tmdb_api | No TMDb results for title: A view to a reevaluation
+2025-07-05 23:39:11,713 | WARNING | step_6_enrich_metadata | No metadata found for Sadiyaan / Tum Milo Toh Sahi
+2025-07-05 23:39:11,832 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,834 | WARNING | step_6_enrich_metadata | No metadata found for Dial M for Master
+2025-07-05 23:39:11,948 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:11,948 | WARNING | step_6_enrich_metadata | No metadata found for A view to a reevaluation
+2025-07-05 23:39:12,052 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,121 | INFO | tmdb.tmdb_api | No TMDb results for title: Indiana Shining
+2025-07-05 23:39:12,121 | WARNING | step_6_enrich_metadata | No metadata found for Indiana Shining
+2025-07-05 23:39:12,243 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,245 | INFO | tmdb.tmdb_api | No TMDb results for title: O Kaadhal Kanmani
+2025-07-05 23:39:12,245 | INFO | tmdb.tmdb_api | No TMDb results for title: The Heartbreak Kid / Enchanted / December Boys
+2025-07-05 23:39:12,246 | INFO | tmdb.tmdb_api | No TMDb results for title: The movie being reviewed is "The Godfather".
+2025-07-05 23:39:12,246 | WARNING | step_6_enrich_metadata | No metadata found for O Kaadhal Kanmani
+2025-07-05 23:39:12,358 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,358 | WARNING | step_6_enrich_metadata | No metadata found for The Heartbreak Kid / Enchanted / December Boys
+2025-07-05 23:39:12,463 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,464 | WARNING | step_6_enrich_metadata | No metadata found for The movie being reviewed is "The Godfather".
+2025-07-05 23:39:12,697 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,802 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies?id=eq.1872e539-57c9-4116-9cd2-c3de5108d7c5 "HTTP/2 200 OK"
+2025-07-05 23:39:12,802 | INFO | step_6_enrich_metadata | Updated metadata for Mrs. America
+2025-07-05 23:39:12,916 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:12,993 | INFO | tmdb.tmdb_api | No TMDb results for title: "A super superhero movie"
+2025-07-05 23:39:12,994 | WARNING | step_6_enrich_metadata | No metadata found for "A super superhero movie"
+2025-07-05 23:39:13,096 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,097 | INFO | tmdb.tmdb_api | No TMDb results for title: Karthik Dial Seydha Yenn
+2025-07-05 23:39:13,097 | INFO | tmdb.tmdb_api | No TMDb results for title: Mafia Mahabharata
+2025-07-05 23:39:13,097 | INFO | tmdb.tmdb_api | No TMDb results for title: The reinvention of a K-k-k-khan
+2025-07-05 23:39:13,097 | INFO | tmdb.tmdb_api | No TMDb results for title: The curious case of Kurosawa vs. Leone
+2025-07-05 23:39:13,097 | WARNING | step_6_enrich_metadata | No metadata found for Karthik Dial Seydha Yenn
+2025-07-05 23:39:13,220 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,221 | WARNING | step_6_enrich_metadata | No metadata found for Mafia Mahabharata
+2025-07-05 23:39:13,323 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,324 | WARNING | step_6_enrich_metadata | No metadata found for The reinvention of a K-k-k-khan
+2025-07-05 23:39:13,440 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,441 | WARNING | step_6_enrich_metadata | No metadata found for The curious case of Kurosawa vs. Leone
+2025-07-05 23:39:13,542 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,629 | INFO | tmdb.tmdb_api | No TMDb results for title: Poar Kaithigal
+2025-07-05 23:39:13,629 | INFO | tmdb.tmdb_api | No TMDb results for title: Tees Maar Khan / Toonpur Ka Superrhero
+2025-07-05 23:39:13,629 | INFO | tmdb.tmdb_api | No TMDb results for title: Every Mani Ratnam film
+2025-07-05 23:39:13,630 | WARNING | step_6_enrich_metadata | No metadata found for Poar Kaithigal
+2025-07-05 23:39:13,743 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,744 | WARNING | step_6_enrich_metadata | No metadata found for Tees Maar Khan / Toonpur Ka Superrhero
+2025-07-05 23:39:13,860 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,860 | WARNING | step_6_enrich_metadata | No metadata found for Every Mani Ratnam film
+2025-07-05 23:39:13,965 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:13,966 | INFO | tmdb.tmdb_api | No TMDb results for title: Laaga Chunari Mein Daag / Bhool Bhulaiyaa
+2025-07-05 23:39:13,966 | INFO | tmdb.tmdb_api | No TMDb results for title: Masakali 2.0
+2025-07-05 23:39:13,967 | WARNING | step_6_enrich_metadata | No metadata found for Laaga Chunari Mein Daag / Bhool Bhulaiyaa
+2025-07-05 23:39:14,084 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,085 | WARNING | step_6_enrich_metadata | No metadata found for Masakali 2.0
+2025-07-05 23:39:14,181 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,222 | INFO | tmdb.tmdb_api | No TMDb results for title: The Dinner from Hell
+2025-07-05 23:39:14,222 | WARNING | step_6_enrich_metadata | No metadata found for The Dinner from Hell
+2025-07-05 23:39:14,334 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,358 | INFO | tmdb.tmdb_api | No TMDb results for title: Thuppakki, Iruvar, Dil Se, Roja
+2025-07-05 23:39:14,359 | INFO | tmdb.tmdb_api | No TMDb results for title: Velainnu Vanthutta Vellakaran
+2025-07-05 23:39:14,359 | INFO | tmdb.tmdb_api | No TMDb results for title: Chase / Housefull
+2025-07-05 23:39:14,359 | INFO | tmdb.tmdb_api | No TMDb results for title: A Dinosaur Roams Again
+2025-07-05 23:39:14,359 | WARNING | step_6_enrich_metadata | No metadata found for Thuppakki, Iruvar, Dil Se, Roja
+2025-07-05 23:39:14,470 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,470 | WARNING | step_6_enrich_metadata | No metadata found for Velainnu Vanthutta Vellakaran
+2025-07-05 23:39:14,584 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,585 | WARNING | step_6_enrich_metadata | No metadata found for Chase / Housefull
+2025-07-05 23:39:14,697 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,697 | WARNING | step_6_enrich_metadata | No metadata found for A Dinosaur Roams Again
+2025-07-05 23:39:14,813 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,841 | INFO | tmdb.tmdb_api | No TMDb results for title: De Taali / Haal-e-Dil
+2025-07-05 23:39:14,841 | WARNING | step_6_enrich_metadata | No metadata found for De Taali / Haal-e-Dil
+2025-07-05 23:39:14,956 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:14,979 | INFO | tmdb.tmdb_api | No TMDb results for title: Uri – The Surgical Strike, Kumbalangi Nights
+2025-07-05 23:39:14,979 | WARNING | step_6_enrich_metadata | No metadata found for Uri – The Surgical Strike, Kumbalangi Nights
+2025-07-05 23:39:15,094 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,095 | INFO | tmdb.tmdb_api | No TMDb results for title: Dilemma: Some Adults Story
+2025-07-05 23:39:15,096 | INFO | tmdb.tmdb_api | No TMDb results for title: Once Upon Ay Time In Mumbai Dobaara
+2025-07-05 23:39:15,096 | WARNING | step_6_enrich_metadata | No metadata found for Dilemma: Some Adults Story
+2025-07-05 23:39:15,217 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,218 | WARNING | step_6_enrich_metadata | No metadata found for Once Upon Ay Time In Mumbai Dobaara
+2025-07-05 23:39:15,327 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,328 | INFO | tmdb.tmdb_api | No TMDb results for title: "A road movie about roots"
+2025-07-05 23:39:15,329 | INFO | tmdb.tmdb_api | No TMDb results for title: Little Fires Everywhere
+2025-07-05 23:39:15,329 | WARNING | step_6_enrich_metadata | No metadata found for "A road movie about roots"
+2025-07-05 23:39:15,450 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,450 | WARNING | step_6_enrich_metadata | No metadata found for Little Fires Everywhere
+2025-07-05 23:39:15,558 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,606 | INFO | tmdb.tmdb_api | No TMDb results for title: Ithu Kathirvelan Kadhal
+2025-07-05 23:39:15,606 | WARNING | step_6_enrich_metadata | No metadata found for Ithu Kathirvelan Kadhal
+2025-07-05 23:39:15,715 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,716 | INFO | tmdb.tmdb_api | No TMDb results for title: Five iconic movies of ‘Victory’ Venkatesh
+2025-07-05 23:39:15,716 | INFO | tmdb.tmdb_api | No TMDb results for title: Paava Kadhaigal
+2025-07-05 23:39:15,716 | INFO | tmdb.tmdb_api | No TMDb results for title: The curious case of a buttoned-down
+2025-07-05 23:39:15,716 | INFO | tmdb.tmdb_api | No TMDb results for title: Stupor Men
+2025-07-05 23:39:15,717 | WARNING | step_6_enrich_metadata | No metadata found for Five iconic movies of ‘Victory’ Venkatesh
+2025-07-05 23:39:15,819 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,820 | WARNING | step_6_enrich_metadata | No metadata found for Paava Kadhaigal
+2025-07-05 23:39:15,929 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:15,929 | WARNING | step_6_enrich_metadata | No metadata found for The curious case of a buttoned-down
+2025-07-05 23:39:16,031 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,031 | WARNING | step_6_enrich_metadata | No metadata found for Stupor Men
+2025-07-05 23:39:16,137 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,218 | INFO | tmdb.tmdb_api | No TMDb results for title: Siberia, Welcome to Chechnya, My Little Sister
+2025-07-05 23:39:16,218 | INFO | tmdb.tmdb_api | No TMDb results for title: Uthiri Pookkal
+2025-07-05 23:39:16,218 | WARNING | step_6_enrich_metadata | No metadata found for Siberia, Welcome to Chechnya, My Little Sister
+2025-07-05 23:39:16,320 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,321 | WARNING | step_6_enrich_metadata | No metadata found for Uthiri Pookkal
+2025-07-05 23:39:16,422 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,423 | INFO | tmdb.tmdb_api | No TMDb results for title: Muthina Kathirikka
+2025-07-05 23:39:16,423 | INFO | tmdb.tmdb_api | No TMDb results for title: Sapta Saagaradaache Ello - Side B
+2025-07-05 23:39:16,531 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies?id=eq.6b64285e-db1a-469a-9088-e5a83d8d0204 "HTTP/2 200 OK"
+2025-07-05 23:39:16,531 | INFO | step_6_enrich_metadata | Updated metadata for Teddy Bear
+2025-07-05 23:39:16,640 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,644 | WARNING | step_6_enrich_metadata | No metadata found for Muthina Kathirikka
+2025-07-05 23:39:16,750 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,751 | WARNING | step_6_enrich_metadata | No metadata found for Sapta Saagaradaache Ello - Side B
+2025-07-05 23:39:16,856 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:16,907 | INFO | tmdb.tmdb_api | No TMDb results for title: Kolamaavu Kokila
+2025-07-05 23:39:16,908 | WARNING | step_6_enrich_metadata | No metadata found for Kolamaavu Kokila
+2025-07-05 23:39:17,012 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,013 | INFO | tmdb.tmdb_api | No TMDb results for title: Heeramandi
+2025-07-05 23:39:17,013 | INFO | tmdb.tmdb_api | No TMDb results for title: Pitta Kathalu
+2025-07-05 23:39:17,013 | INFO | tmdb.tmdb_api | No TMDb results for title: Pichaikaaran
+2025-07-05 23:39:17,013 | INFO | tmdb.tmdb_api | No TMDb results for title: Kayamai Kadakka
+2025-07-05 23:39:17,014 | WARNING | step_6_enrich_metadata | No metadata found for Heeramandi
+2025-07-05 23:39:17,137 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,138 | WARNING | step_6_enrich_metadata | No metadata found for Pitta Kathalu
+2025-07-05 23:39:17,251 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,251 | WARNING | step_6_enrich_metadata | No metadata found for Pichaikaaran
+2025-07-05 23:39:17,357 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,357 | WARNING | step_6_enrich_metadata | No metadata found for Kayamai Kadakka
+2025-07-05 23:39:17,454 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,524 | INFO | tmdb.tmdb_api | No TMDb results for title: Man Madan Ambu
+2025-07-05 23:39:17,524 | WARNING | step_6_enrich_metadata | No metadata found for Man Madan Ambu
+2025-07-05 23:39:17,633 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,634 | INFO | tmdb.tmdb_api | No TMDb results for title: Kadhalil Sodhappuvadhu Eppidi
+2025-07-05 23:39:17,634 | INFO | tmdb.tmdb_api | No TMDb results for title: Ajith’s film
+2025-07-05 23:39:17,635 | INFO | tmdb.tmdb_api | No TMDb results for title: Tharamani
+2025-07-05 23:39:17,635 | INFO | tmdb.tmdb_api | No TMDb results for title: Modern Love Chennai
+2025-07-05 23:39:17,635 | WARNING | step_6_enrich_metadata | No metadata found for Kadhalil Sodhappuvadhu Eppidi
+2025-07-05 23:39:17,856 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,856 | WARNING | step_6_enrich_metadata | No metadata found for Ajith’s film
+2025-07-05 23:39:17,958 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:17,958 | WARNING | step_6_enrich_metadata | No metadata found for Tharamani
+2025-07-05 23:39:18,066 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,066 | WARNING | step_6_enrich_metadata | No metadata found for Modern Love Chennai
+2025-07-05 23:39:18,173 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,247 | INFO | tmdb.tmdb_api | No TMDb results for title: Putham Pudhu Kaalai Vidiyaadha
+2025-07-05 23:39:18,248 | WARNING | step_6_enrich_metadata | No metadata found for Putham Pudhu Kaalai Vidiyaadha
+2025-07-05 23:39:18,355 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,356 | INFO | tmdb.tmdb_api | No TMDb results for title: Summer 2007 / Mere Baap Pehle Aap
+2025-07-05 23:39:18,356 | INFO | tmdb.tmdb_api | No TMDb results for title: The French Disconnection
+2025-07-05 23:39:18,356 | INFO | tmdb.tmdb_api | No TMDb results for title: Once Upon a Time in the Fest
+2025-07-05 23:39:18,356 | INFO | tmdb.tmdb_api | No TMDb results for title: Gangs of Wasseypur II
+2025-07-05 23:39:18,356 | WARNING | step_6_enrich_metadata | No metadata found for Summer 2007 / Mere Baap Pehle Aap
+2025-07-05 23:39:18,471 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,472 | WARNING | step_6_enrich_metadata | No metadata found for The French Disconnection
+2025-07-05 23:39:18,572 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,572 | WARNING | step_6_enrich_metadata | No metadata found for Once Upon a Time in the Fest
+2025-07-05 23:39:18,680 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,681 | WARNING | step_6_enrich_metadata | No metadata found for Gangs of Wasseypur II
+2025-07-05 23:39:18,781 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,868 | INFO | tmdb.tmdb_api | No TMDb results for title: Madras Male
+2025-07-05 23:39:18,868 | INFO | tmdb.tmdb_api | No TMDb results for title: Goodnight Giggles
+2025-07-05 23:39:18,868 | INFO | tmdb.tmdb_api | No TMDb results for title: Well Done Abba / Hum Tum Aur Ghost
+2025-07-05 23:39:18,868 | WARNING | step_6_enrich_metadata | No metadata found for Madras Male
+2025-07-05 23:39:18,974 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:18,976 | WARNING | step_6_enrich_metadata | No metadata found for Goodnight Giggles
+2025-07-05 23:39:19,092 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,093 | WARNING | step_6_enrich_metadata | No metadata found for Well Done Abba / Hum Tum Aur Ghost
+2025-07-05 23:39:19,207 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,209 | INFO | tmdb.tmdb_api | No TMDb results for title: Sapta Saagaradaache Ello - Side A
+2025-07-05 23:39:19,210 | INFO | tmdb.tmdb_api | No TMDb results for title: Kudi Yedamaithe
+2025-07-05 23:39:19,211 | WARNING | step_6_enrich_metadata | No metadata found for Sapta Saagaradaache Ello - Side A
+2025-07-05 23:39:19,321 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,321 | WARNING | step_6_enrich_metadata | No metadata found for Kudi Yedamaithe
+2025-07-05 23:39:19,427 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,475 | INFO | tmdb.tmdb_api | No TMDb results for title: Engitta Modhathey
+2025-07-05 23:39:19,476 | WARNING | step_6_enrich_metadata | No metadata found for Engitta Modhathey
+2025-07-05 23:39:19,585 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,586 | INFO | tmdb.tmdb_api | No TMDb results for title: Prophet of Mood
+2025-07-05 23:39:19,586 | INFO | tmdb.tmdb_api | No TMDb results for title: That Four Letter Word
+2025-07-05 23:39:19,587 | INFO | tmdb.tmdb_api | No TMDb results for title: Kaun Kitne Paani Mein
+2025-07-05 23:39:19,587 | INFO | tmdb.tmdb_api | No TMDb results for title: PotC-On Stranger Tides
+2025-07-05 23:39:19,587 | WARNING | step_6_enrich_metadata | No metadata found for Prophet of Mood
+2025-07-05 23:39:19,697 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,697 | WARNING | step_6_enrich_metadata | No metadata found for That Four Letter Word
+2025-07-05 23:39:19,805 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:19,806 | WARNING | step_6_enrich_metadata | No metadata found for Kaun Kitne Paani Mein
+2025-07-05 23:39:20,252 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,253 | WARNING | step_6_enrich_metadata | No metadata found for PotC-On Stranger Tides
+2025-07-05 23:39:20,375 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,432 | INFO | tmdb.tmdb_api | No TMDb results for title: Kaaviyathalaivan
+2025-07-05 23:39:20,432 | WARNING | step_6_enrich_metadata | No metadata found for Kaaviyathalaivan
+2025-07-05 23:39:20,539 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,540 | INFO | tmdb.tmdb_api | No TMDb results for title: No Country for Young Women
+2025-07-05 23:39:20,540 | INFO | tmdb.tmdb_api | No TMDb results for title: KGF: Chapter Two
+2025-07-05 23:39:20,540 | INFO | tmdb.tmdb_api | No TMDb results for title: Ullangai Nellikkani
+2025-07-05 23:39:20,540 | INFO | tmdb.tmdb_api | No TMDb results for title: Chennai Ungalai Anbudan Varaverkirathu
+2025-07-05 23:39:20,540 | WARNING | step_6_enrich_metadata | No metadata found for No Country for Young Women
+2025-07-05 23:39:20,645 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,645 | WARNING | step_6_enrich_metadata | No metadata found for KGF: Chapter Two
+2025-07-05 23:39:20,758 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,760 | WARNING | step_6_enrich_metadata | No metadata found for Ullangai Nellikkani
+2025-07-05 23:39:20,886 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:20,887 | WARNING | step_6_enrich_metadata | No metadata found for Chennai Ungalai Anbudan Varaverkirathu
+2025-07-05 23:39:20,990 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,055 | INFO | tmdb.tmdb_api | No TMDb results for title: Balle Vellaiya Thevaa
+2025-07-05 23:39:21,056 | WARNING | step_6_enrich_metadata | No metadata found for Balle Vellaiya Thevaa
+2025-07-05 23:39:21,171 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,172 | INFO | tmdb.tmdb_api | No TMDb results for title: Moebius
+Pietà
+2025-07-05 23:39:21,173 | INFO | tmdb.tmdb_api | No TMDb results for title: Payanam / Nadunisi Naaigal
+2025-07-05 23:39:21,173 | INFO | tmdb.tmdb_api | No TMDb results for title: Khoya Khoya Chand / Dus Kahaniyaan
+2025-07-05 23:39:21,173 | WARNING | step_6_enrich_metadata | No metadata found for Moebius
+Pietà
+2025-07-05 23:39:21,278 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,278 | WARNING | step_6_enrich_metadata | No metadata found for Payanam / Nadunisi Naaigal
+2025-07-05 23:39:21,379 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,379 | WARNING | step_6_enrich_metadata | No metadata found for Khoya Khoya Chand / Dus Kahaniyaan
+2025-07-05 23:39:21,489 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,490 | INFO | tmdb.tmdb_api | No TMDb results for title: "A Serious Superman" -> Superman
+2025-07-05 23:39:21,490 | WARNING | step_6_enrich_metadata | No metadata found for "A Serious Superman" -> Superman
+2025-07-05 23:39:21,613 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,675 | INFO | tmdb.tmdb_api | No TMDb results for title: Right Yaaa Wrong / Na Ghar Ke Na Ghaat Ke
+2025-07-05 23:39:21,675 | WARNING | step_6_enrich_metadata | No metadata found for Right Yaaa Wrong / Na Ghar Ke Na Ghaat Ke
+2025-07-05 23:39:21,780 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,782 | INFO | tmdb.tmdb_api | No TMDb results for title: The Rahman Effect
+2025-07-05 23:39:21,782 | INFO | tmdb.tmdb_api | No TMDb results for title: The Cage at the Top
+2025-07-05 23:39:21,782 | INFO | tmdb.tmdb_api | No TMDb results for title: Vinnai Thaandi Varuvaaya
+2025-07-05 23:39:21,782 | WARNING | step_6_enrich_metadata | No metadata found for The Rahman Effect
+2025-07-05 23:39:21,894 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:21,895 | WARNING | step_6_enrich_metadata | No metadata found for The Cage at the Top
+2025-07-05 23:39:22,112 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,218 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies?id=eq.6c426bac-9693-4b14-959c-3f6c67d693c2 "HTTP/2 200 OK"
+2025-07-05 23:39:22,219 | INFO | step_6_enrich_metadata | Updated metadata for Guruvayoor Ambalanadayil
+2025-07-05 23:39:22,322 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,323 | WARNING | step_6_enrich_metadata | No metadata found for Vinnai Thaandi Varuvaaya
+2025-07-05 23:39:22,435 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,506 | INFO | tmdb.tmdb_api | No TMDb results for title: Neruppuda
+2025-07-05 23:39:22,507 | WARNING | step_6_enrich_metadata | No metadata found for Neruppuda
+2025-07-05 23:39:22,614 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,615 | INFO | tmdb.tmdb_api | No TMDb results for title: The other Miss Koovagam
+2025-07-05 23:39:22,615 | INFO | tmdb.tmdb_api | No TMDb results for title: Godhi Banna Sadharna Mykattu
+2025-07-05 23:39:22,615 | INFO | tmdb.tmdb_api | No TMDb results for title: The Intolerable Likeness of Being
+2025-07-05 23:39:22,615 | INFO | tmdb.tmdb_api | No TMDb results for title: Sthanarthi Sreekkuttan
+2025-07-05 23:39:22,615 | WARNING | step_6_enrich_metadata | No metadata found for The other Miss Koovagam
+2025-07-05 23:39:22,732 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,732 | WARNING | step_6_enrich_metadata | No metadata found for Godhi Banna Sadharna Mykattu
+2025-07-05 23:39:22,835 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,835 | WARNING | step_6_enrich_metadata | No metadata found for The Intolerable Likeness of Being
+2025-07-05 23:39:22,935 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:22,936 | WARNING | step_6_enrich_metadata | No metadata found for Sthanarthi Sreekkuttan
+2025-07-05 23:39:23,034 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,095 | INFO | tmdb.tmdb_api | No TMDb results for title: The abyss of passion
+2025-07-05 23:39:23,096 | WARNING | step_6_enrich_metadata | No metadata found for The abyss of passion
+2025-07-05 23:39:23,202 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,203 | INFO | tmdb.tmdb_api | No TMDb results for title: The Sisters Brothers, Charlie Says, La Quietud
+2025-07-05 23:39:23,203 | INFO | tmdb.tmdb_api | No TMDb results for title: The old man and the hill
+2025-07-05 23:39:23,203 | INFO | tmdb.tmdb_api | No TMDb results for title: Addham
+2025-07-05 23:39:23,203 | INFO | tmdb.tmdb_api | No TMDb results for title: The Invasion / Vacancy
+2025-07-05 23:39:23,204 | WARNING | step_6_enrich_metadata | No metadata found for The Sisters Brothers, Charlie Says, La Quietud
+2025-07-05 23:39:23,315 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,315 | WARNING | step_6_enrich_metadata | No metadata found for The old man and the hill
+2025-07-05 23:39:23,423 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,424 | WARNING | step_6_enrich_metadata | No metadata found for Addham
+2025-07-05 23:39:23,542 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,542 | WARNING | step_6_enrich_metadata | No metadata found for The Invasion / Vacancy
+2025-07-05 23:39:23,642 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,696 | INFO | tmdb.tmdb_api | No TMDb results for title: Kankaanikkum Maranam
+2025-07-05 23:39:23,696 | WARNING | step_6_enrich_metadata | No metadata found for Kankaanikkum Maranam
+2025-07-05 23:39:23,793 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:23,900 | INFO | httpx | HTTP Request: PATCH https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/movies?id=eq.8ca198ad-7cee-437c-87b4-817ad0f9bfb6 "HTTP/2 200 OK"
+2025-07-05 23:39:23,900 | INFO | step_6_enrich_metadata | Updated metadata for Drishyam
+2025-07-05 23:39:24,007 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:24,008 | INFO | step_6_enrich_metadata | Metadata enrichment complete
+2025-07-05 23:39:24,119 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:39:24,120 | INFO | __main__ | Enrichment stage complete
+2025-07-05 23:39:24,120 | INFO | __main__ | Pipeline run complete

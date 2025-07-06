@@ -1,0 +1,712 @@
+2025-07-05 23:51:21,266 | INFO | __main__ | Starting crawl stage
+2025-07-05 23:51:21,555 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/recent_review_links?select=link%2Cpost_date "HTTP/2 200 OK"
+2025-07-05 23:51:21,561 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com
+2025-07-05 23:51:21,680 | INFO | crawler.sources.baradwajrangan_links | Page 1 attempt 1 length=197714
+2025-07-05 23:51:21,719 | INFO | crawler.sources.baradwajrangan_links | Skipping known link: https://baradwajrangan.wordpress.com/2025/07/05/readers-write-in-824-love-actually/
+2025-07-05 23:51:21,720 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/2/
+2025-07-05 23:51:21,748 | INFO | crawler.sources.baradwajrangan_links | Page 2 attempt 1 length=211061
+2025-07-05 23:51:21,777 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/3/
+2025-07-05 23:51:21,807 | INFO | crawler.sources.baradwajrangan_links | Page 3 attempt 1 length=215868
+2025-07-05 23:51:21,837 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/4/
+2025-07-05 23:51:21,862 | INFO | crawler.sources.baradwajrangan_links | Page 4 attempt 1 length=211955
+2025-07-05 23:51:21,887 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/5/
+2025-07-05 23:51:21,909 | INFO | crawler.sources.baradwajrangan_links | Page 5 attempt 1 length=212321
+2025-07-05 23:51:21,932 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/6/
+2025-07-05 23:51:21,954 | INFO | crawler.sources.baradwajrangan_links | Page 6 attempt 1 length=211431
+2025-07-05 23:51:21,979 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/7/
+2025-07-05 23:51:21,999 | INFO | crawler.sources.baradwajrangan_links | Page 7 attempt 1 length=212227
+2025-07-05 23:51:22,022 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/8/
+2025-07-05 23:51:22,041 | INFO | crawler.sources.baradwajrangan_links | Page 8 attempt 1 length=210530
+2025-07-05 23:51:22,065 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/9/
+2025-07-05 23:51:22,087 | INFO | crawler.sources.baradwajrangan_links | Page 9 attempt 1 length=209957
+2025-07-05 23:51:22,109 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/10/
+2025-07-05 23:51:22,131 | INFO | crawler.sources.baradwajrangan_links | Page 10 attempt 1 length=209193
+2025-07-05 23:51:22,155 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/11/
+2025-07-05 23:51:22,182 | INFO | crawler.sources.baradwajrangan_links | Page 11 attempt 1 length=211339
+2025-07-05 23:51:22,223 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/12/
+2025-07-05 23:51:22,244 | INFO | crawler.sources.baradwajrangan_links | Page 12 attempt 1 length=211706
+2025-07-05 23:51:22,267 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/13/
+2025-07-05 23:51:22,291 | INFO | crawler.sources.baradwajrangan_links | Page 13 attempt 1 length=212157
+2025-07-05 23:51:22,316 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/14/
+2025-07-05 23:51:22,335 | INFO | crawler.sources.baradwajrangan_links | Page 14 attempt 1 length=212489
+2025-07-05 23:51:22,357 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/15/
+2025-07-05 23:51:22,376 | INFO | crawler.sources.baradwajrangan_links | Page 15 attempt 1 length=209955
+2025-07-05 23:51:22,399 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/16/
+2025-07-05 23:51:22,432 | INFO | crawler.sources.baradwajrangan_links | Page 16 attempt 1 length=210486
+2025-07-05 23:51:22,456 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/17/
+2025-07-05 23:51:22,472 | INFO | crawler.sources.baradwajrangan_links | Page 17 attempt 1 length=210778
+2025-07-05 23:51:22,495 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/18/
+2025-07-05 23:51:22,515 | INFO | crawler.sources.baradwajrangan_links | Page 18 attempt 1 length=209650
+2025-07-05 23:51:22,540 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/19/
+2025-07-05 23:51:22,563 | INFO | crawler.sources.baradwajrangan_links | Page 19 attempt 1 length=210979
+2025-07-05 23:51:22,586 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/20/
+2025-07-05 23:51:22,614 | INFO | crawler.sources.baradwajrangan_links | Page 20 attempt 1 length=209049
+2025-07-05 23:51:22,638 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/21/
+2025-07-05 23:51:22,663 | INFO | crawler.sources.baradwajrangan_links | Page 21 attempt 1 length=210558
+2025-07-05 23:51:22,685 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/22/
+2025-07-05 23:51:22,716 | INFO | crawler.sources.baradwajrangan_links | Page 22 attempt 1 length=209763
+2025-07-05 23:51:22,739 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/23/
+2025-07-05 23:51:22,757 | INFO | crawler.sources.baradwajrangan_links | Page 23 attempt 1 length=208229
+2025-07-05 23:51:22,778 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/24/
+2025-07-05 23:51:22,798 | INFO | crawler.sources.baradwajrangan_links | Page 24 attempt 1 length=209952
+2025-07-05 23:51:22,820 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/25/
+2025-07-05 23:51:22,840 | INFO | crawler.sources.baradwajrangan_links | Page 25 attempt 1 length=208889
+2025-07-05 23:51:22,863 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/26/
+2025-07-05 23:51:22,886 | INFO | crawler.sources.baradwajrangan_links | Page 26 attempt 1 length=210141
+2025-07-05 23:51:22,908 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/27/
+2025-07-05 23:51:22,930 | INFO | crawler.sources.baradwajrangan_links | Page 27 attempt 1 length=207672
+2025-07-05 23:51:22,954 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/28/
+2025-07-05 23:51:22,976 | INFO | crawler.sources.baradwajrangan_links | Page 28 attempt 1 length=210632
+2025-07-05 23:51:22,998 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/29/
+2025-07-05 23:51:23,023 | INFO | crawler.sources.baradwajrangan_links | Page 29 attempt 1 length=210678
+2025-07-05 23:51:23,047 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/30/
+2025-07-05 23:51:23,069 | INFO | crawler.sources.baradwajrangan_links | Page 30 attempt 1 length=212332
+2025-07-05 23:51:23,092 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/31/
+2025-07-05 23:51:23,110 | INFO | crawler.sources.baradwajrangan_links | Page 31 attempt 1 length=212118
+2025-07-05 23:51:23,131 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/32/
+2025-07-05 23:51:23,149 | INFO | crawler.sources.baradwajrangan_links | Page 32 attempt 1 length=209394
+2025-07-05 23:51:23,173 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/33/
+2025-07-05 23:51:23,192 | INFO | crawler.sources.baradwajrangan_links | Page 33 attempt 1 length=210570
+2025-07-05 23:51:23,213 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/34/
+2025-07-05 23:51:23,239 | INFO | crawler.sources.baradwajrangan_links | Page 34 attempt 1 length=210091
+2025-07-05 23:51:23,262 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/35/
+2025-07-05 23:51:23,282 | INFO | crawler.sources.baradwajrangan_links | Page 35 attempt 1 length=210591
+2025-07-05 23:51:23,304 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/36/
+2025-07-05 23:51:23,324 | INFO | crawler.sources.baradwajrangan_links | Page 36 attempt 1 length=209855
+2025-07-05 23:51:23,347 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/37/
+2025-07-05 23:51:23,367 | INFO | crawler.sources.baradwajrangan_links | Page 37 attempt 1 length=208848
+2025-07-05 23:51:23,417 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/38/
+2025-07-05 23:51:23,437 | INFO | crawler.sources.baradwajrangan_links | Page 38 attempt 1 length=215024
+2025-07-05 23:51:23,459 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/39/
+2025-07-05 23:51:23,477 | INFO | crawler.sources.baradwajrangan_links | Page 39 attempt 1 length=211052
+2025-07-05 23:51:23,500 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/40/
+2025-07-05 23:51:23,520 | INFO | crawler.sources.baradwajrangan_links | Page 40 attempt 1 length=211360
+2025-07-05 23:51:23,541 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/41/
+2025-07-05 23:51:23,559 | INFO | crawler.sources.baradwajrangan_links | Page 41 attempt 1 length=210849
+2025-07-05 23:51:23,582 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/42/
+2025-07-05 23:51:23,606 | INFO | crawler.sources.baradwajrangan_links | Page 42 attempt 1 length=211515
+2025-07-05 23:51:23,629 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/43/
+2025-07-05 23:51:23,657 | INFO | crawler.sources.baradwajrangan_links | Page 43 attempt 1 length=211571
+2025-07-05 23:51:23,681 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/44/
+2025-07-05 23:51:23,701 | INFO | crawler.sources.baradwajrangan_links | Page 44 attempt 1 length=209215
+2025-07-05 23:51:23,723 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/45/
+2025-07-05 23:51:23,742 | INFO | crawler.sources.baradwajrangan_links | Page 45 attempt 1 length=213711
+2025-07-05 23:51:23,765 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/46/
+2025-07-05 23:51:23,790 | INFO | crawler.sources.baradwajrangan_links | Page 46 attempt 1 length=213117
+2025-07-05 23:51:23,815 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/47/
+2025-07-05 23:51:23,834 | INFO | crawler.sources.baradwajrangan_links | Page 47 attempt 1 length=210506
+2025-07-05 23:51:23,856 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/48/
+2025-07-05 23:51:23,880 | INFO | crawler.sources.baradwajrangan_links | Page 48 attempt 1 length=212024
+2025-07-05 23:51:23,903 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/49/
+2025-07-05 23:51:23,922 | INFO | crawler.sources.baradwajrangan_links | Page 49 attempt 1 length=214933
+2025-07-05 23:51:23,943 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/50/
+2025-07-05 23:51:23,966 | INFO | crawler.sources.baradwajrangan_links | Page 50 attempt 1 length=210423
+2025-07-05 23:51:23,987 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/51/
+2025-07-05 23:51:24,010 | INFO | crawler.sources.baradwajrangan_links | Page 51 attempt 1 length=212085
+2025-07-05 23:51:24,034 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/52/
+2025-07-05 23:51:24,054 | INFO | crawler.sources.baradwajrangan_links | Page 52 attempt 1 length=212591
+2025-07-05 23:51:24,075 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/53/
+2025-07-05 23:51:24,097 | INFO | crawler.sources.baradwajrangan_links | Page 53 attempt 1 length=213998
+2025-07-05 23:51:24,121 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/54/
+2025-07-05 23:51:24,140 | INFO | crawler.sources.baradwajrangan_links | Page 54 attempt 1 length=214126
+2025-07-05 23:51:24,162 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/55/
+2025-07-05 23:51:24,183 | INFO | crawler.sources.baradwajrangan_links | Page 55 attempt 1 length=209968
+2025-07-05 23:51:24,206 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/56/
+2025-07-05 23:51:24,228 | INFO | crawler.sources.baradwajrangan_links | Page 56 attempt 1 length=212922
+2025-07-05 23:51:24,250 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/57/
+2025-07-05 23:51:24,280 | INFO | crawler.sources.baradwajrangan_links | Page 57 attempt 1 length=210362
+2025-07-05 23:51:24,303 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/58/
+2025-07-05 23:51:24,324 | INFO | crawler.sources.baradwajrangan_links | Page 58 attempt 1 length=213607
+2025-07-05 23:51:24,346 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/59/
+2025-07-05 23:51:24,374 | INFO | crawler.sources.baradwajrangan_links | Page 59 attempt 1 length=210226
+2025-07-05 23:51:24,396 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/60/
+2025-07-05 23:51:24,429 | INFO | crawler.sources.baradwajrangan_links | Page 60 attempt 1 length=208795
+2025-07-05 23:51:24,454 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/61/
+2025-07-05 23:51:24,475 | INFO | crawler.sources.baradwajrangan_links | Page 61 attempt 1 length=211945
+2025-07-05 23:51:24,498 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/62/
+2025-07-05 23:51:24,519 | INFO | crawler.sources.baradwajrangan_links | Page 62 attempt 1 length=214970
+2025-07-05 23:51:24,571 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/63/
+2025-07-05 23:51:24,590 | INFO | crawler.sources.baradwajrangan_links | Page 63 attempt 1 length=213043
+2025-07-05 23:51:24,611 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/64/
+2025-07-05 23:51:24,631 | INFO | crawler.sources.baradwajrangan_links | Page 64 attempt 1 length=212230
+2025-07-05 23:51:24,652 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/65/
+2025-07-05 23:51:24,685 | INFO | crawler.sources.baradwajrangan_links | Page 65 attempt 1 length=213582
+2025-07-05 23:51:24,709 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/66/
+2025-07-05 23:51:24,726 | INFO | crawler.sources.baradwajrangan_links | Page 66 attempt 1 length=213693
+2025-07-05 23:51:24,747 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/67/
+2025-07-05 23:51:24,765 | INFO | crawler.sources.baradwajrangan_links | Page 67 attempt 1 length=214499
+2025-07-05 23:51:24,788 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/68/
+2025-07-05 23:51:24,805 | INFO | crawler.sources.baradwajrangan_links | Page 68 attempt 1 length=216299
+2025-07-05 23:51:24,828 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/69/
+2025-07-05 23:51:24,846 | INFO | crawler.sources.baradwajrangan_links | Page 69 attempt 1 length=214778
+2025-07-05 23:51:24,869 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/70/
+2025-07-05 23:51:24,889 | INFO | crawler.sources.baradwajrangan_links | Page 70 attempt 1 length=212334
+2025-07-05 23:51:24,910 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/71/
+2025-07-05 23:51:24,930 | INFO | crawler.sources.baradwajrangan_links | Page 71 attempt 1 length=210886
+2025-07-05 23:51:24,952 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/72/
+2025-07-05 23:51:24,970 | INFO | crawler.sources.baradwajrangan_links | Page 72 attempt 1 length=211082
+2025-07-05 23:51:24,993 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/73/
+2025-07-05 23:51:25,011 | INFO | crawler.sources.baradwajrangan_links | Page 73 attempt 1 length=211706
+2025-07-05 23:51:25,031 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/74/
+2025-07-05 23:51:25,051 | INFO | crawler.sources.baradwajrangan_links | Page 74 attempt 1 length=209802
+2025-07-05 23:51:25,074 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/75/
+2025-07-05 23:51:25,094 | INFO | crawler.sources.baradwajrangan_links | Page 75 attempt 1 length=210031
+2025-07-05 23:51:25,114 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/76/
+2025-07-05 23:51:25,137 | INFO | crawler.sources.baradwajrangan_links | Page 76 attempt 1 length=207415
+2025-07-05 23:51:25,160 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/77/
+2025-07-05 23:51:25,183 | INFO | crawler.sources.baradwajrangan_links | Page 77 attempt 1 length=210197
+2025-07-05 23:51:25,204 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/78/
+2025-07-05 23:51:25,230 | INFO | crawler.sources.baradwajrangan_links | Page 78 attempt 1 length=208932
+2025-07-05 23:51:25,252 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/79/
+2025-07-05 23:51:25,270 | INFO | crawler.sources.baradwajrangan_links | Page 79 attempt 1 length=209147
+2025-07-05 23:51:25,294 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/80/
+2025-07-05 23:51:25,316 | INFO | crawler.sources.baradwajrangan_links | Page 80 attempt 1 length=210510
+2025-07-05 23:51:25,337 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/81/
+2025-07-05 23:51:25,358 | INFO | crawler.sources.baradwajrangan_links | Page 81 attempt 1 length=211925
+2025-07-05 23:51:25,382 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/82/
+2025-07-05 23:51:25,403 | INFO | crawler.sources.baradwajrangan_links | Page 82 attempt 1 length=213343
+2025-07-05 23:51:25,425 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/83/
+2025-07-05 23:51:25,445 | INFO | crawler.sources.baradwajrangan_links | Page 83 attempt 1 length=209952
+2025-07-05 23:51:25,467 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/84/
+2025-07-05 23:51:25,486 | INFO | crawler.sources.baradwajrangan_links | Page 84 attempt 1 length=212332
+2025-07-05 23:51:25,510 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/85/
+2025-07-05 23:51:25,531 | INFO | crawler.sources.baradwajrangan_links | Page 85 attempt 1 length=212473
+2025-07-05 23:51:25,553 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/86/
+2025-07-05 23:51:25,574 | INFO | crawler.sources.baradwajrangan_links | Page 86 attempt 1 length=213594
+2025-07-05 23:51:25,598 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/87/
+2025-07-05 23:51:25,622 | INFO | crawler.sources.baradwajrangan_links | Page 87 attempt 1 length=213533
+2025-07-05 23:51:25,643 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/88/
+2025-07-05 23:51:25,662 | INFO | crawler.sources.baradwajrangan_links | Page 88 attempt 1 length=211988
+2025-07-05 23:51:25,715 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/89/
+2025-07-05 23:51:25,739 | INFO | crawler.sources.baradwajrangan_links | Page 89 attempt 1 length=212464
+2025-07-05 23:51:25,760 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/90/
+2025-07-05 23:51:25,778 | INFO | crawler.sources.baradwajrangan_links | Page 90 attempt 1 length=214594
+2025-07-05 23:51:25,799 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/91/
+2025-07-05 23:51:25,827 | INFO | crawler.sources.baradwajrangan_links | Page 91 attempt 1 length=212887
+2025-07-05 23:51:25,852 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/92/
+2025-07-05 23:51:25,870 | INFO | crawler.sources.baradwajrangan_links | Page 92 attempt 1 length=209193
+2025-07-05 23:51:25,892 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/93/
+2025-07-05 23:51:25,911 | INFO | crawler.sources.baradwajrangan_links | Page 93 attempt 1 length=207619
+2025-07-05 23:51:25,935 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/94/
+2025-07-05 23:51:25,959 | INFO | crawler.sources.baradwajrangan_links | Page 94 attempt 1 length=208289
+2025-07-05 23:51:25,980 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/95/
+2025-07-05 23:51:25,998 | INFO | crawler.sources.baradwajrangan_links | Page 95 attempt 1 length=215542
+2025-07-05 23:51:26,021 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/96/
+2025-07-05 23:51:26,045 | INFO | crawler.sources.baradwajrangan_links | Page 96 attempt 1 length=214979
+2025-07-05 23:51:26,067 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/97/
+2025-07-05 23:51:26,098 | INFO | crawler.sources.baradwajrangan_links | Page 97 attempt 1 length=217058
+2025-07-05 23:51:26,120 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/98/
+2025-07-05 23:51:26,137 | INFO | crawler.sources.baradwajrangan_links | Page 98 attempt 1 length=214340
+2025-07-05 23:51:26,161 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/99/
+2025-07-05 23:51:26,180 | INFO | crawler.sources.baradwajrangan_links | Page 99 attempt 1 length=213168
+2025-07-05 23:51:26,202 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/100/
+2025-07-05 23:51:26,221 | INFO | crawler.sources.baradwajrangan_links | Page 100 attempt 1 length=213015
+2025-07-05 23:51:26,245 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/101/
+2025-07-05 23:51:26,281 | INFO | crawler.sources.baradwajrangan_links | Page 101 attempt 1 length=212841
+2025-07-05 23:51:26,304 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/102/
+2025-07-05 23:51:26,323 | INFO | crawler.sources.baradwajrangan_links | Page 102 attempt 1 length=215970
+2025-07-05 23:51:26,347 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/103/
+2025-07-05 23:51:26,366 | INFO | crawler.sources.baradwajrangan_links | Page 103 attempt 1 length=213980
+2025-07-05 23:51:26,388 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/104/
+2025-07-05 23:51:26,454 | INFO | crawler.sources.baradwajrangan_links | Page 104 attempt 1 length=215242
+2025-07-05 23:51:26,479 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/105/
+2025-07-05 23:51:26,502 | INFO | crawler.sources.baradwajrangan_links | Page 105 attempt 1 length=214169
+2025-07-05 23:51:26,529 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/106/
+2025-07-05 23:51:26,550 | INFO | crawler.sources.baradwajrangan_links | Page 106 attempt 1 length=214603
+2025-07-05 23:51:26,574 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/107/
+2025-07-05 23:51:26,594 | INFO | crawler.sources.baradwajrangan_links | Page 107 attempt 1 length=213444
+2025-07-05 23:51:26,619 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/108/
+2025-07-05 23:51:26,637 | INFO | crawler.sources.baradwajrangan_links | Page 108 attempt 1 length=212460
+2025-07-05 23:51:26,657 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/109/
+2025-07-05 23:51:26,680 | INFO | crawler.sources.baradwajrangan_links | Page 109 attempt 1 length=213636
+2025-07-05 23:51:26,703 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/110/
+2025-07-05 23:51:26,727 | INFO | crawler.sources.baradwajrangan_links | Page 110 attempt 1 length=214662
+2025-07-05 23:51:26,750 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/111/
+2025-07-05 23:51:26,768 | INFO | crawler.sources.baradwajrangan_links | Page 111 attempt 1 length=215026
+2025-07-05 23:51:26,789 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/112/
+2025-07-05 23:51:26,810 | INFO | crawler.sources.baradwajrangan_links | Page 112 attempt 1 length=214616
+2025-07-05 23:51:26,834 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/113/
+2025-07-05 23:51:26,852 | INFO | crawler.sources.baradwajrangan_links | Page 113 attempt 1 length=215149
+2025-07-05 23:51:26,874 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/114/
+2025-07-05 23:51:26,893 | INFO | crawler.sources.baradwajrangan_links | Page 114 attempt 1 length=215761
+2025-07-05 23:51:26,948 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/115/
+2025-07-05 23:51:26,968 | INFO | crawler.sources.baradwajrangan_links | Page 115 attempt 1 length=214620
+2025-07-05 23:51:26,989 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/116/
+2025-07-05 23:51:27,013 | INFO | crawler.sources.baradwajrangan_links | Page 116 attempt 1 length=215931
+2025-07-05 23:51:27,036 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/117/
+2025-07-05 23:51:27,060 | INFO | crawler.sources.baradwajrangan_links | Page 117 attempt 1 length=213551
+2025-07-05 23:51:27,084 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/118/
+2025-07-05 23:51:27,102 | INFO | crawler.sources.baradwajrangan_links | Page 118 attempt 1 length=216877
+2025-07-05 23:51:27,123 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/119/
+2025-07-05 23:51:27,142 | INFO | crawler.sources.baradwajrangan_links | Page 119 attempt 1 length=215605
+2025-07-05 23:51:27,165 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/120/
+2025-07-05 23:51:27,184 | INFO | crawler.sources.baradwajrangan_links | Page 120 attempt 1 length=214405
+2025-07-05 23:51:27,205 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/121/
+2025-07-05 23:51:27,225 | INFO | crawler.sources.baradwajrangan_links | Page 121 attempt 1 length=215122
+2025-07-05 23:51:27,249 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/122/
+2025-07-05 23:51:27,273 | INFO | crawler.sources.baradwajrangan_links | Page 122 attempt 1 length=214858
+2025-07-05 23:51:27,296 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/123/
+2025-07-05 23:51:27,312 | INFO | crawler.sources.baradwajrangan_links | Page 123 attempt 1 length=223026
+2025-07-05 23:51:27,335 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/124/
+2025-07-05 23:51:27,363 | INFO | crawler.sources.baradwajrangan_links | Page 124 attempt 1 length=216103
+2025-07-05 23:51:27,389 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/125/
+2025-07-05 23:51:27,407 | INFO | crawler.sources.baradwajrangan_links | Page 125 attempt 1 length=217620
+2025-07-05 23:51:27,429 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/126/
+2025-07-05 23:51:27,452 | INFO | crawler.sources.baradwajrangan_links | Page 126 attempt 1 length=213378
+2025-07-05 23:51:27,476 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/127/
+2025-07-05 23:51:27,492 | INFO | crawler.sources.baradwajrangan_links | Page 127 attempt 1 length=210769
+2025-07-05 23:51:27,513 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/128/
+2025-07-05 23:51:27,532 | INFO | crawler.sources.baradwajrangan_links | Page 128 attempt 1 length=214181
+2025-07-05 23:51:27,555 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/129/
+2025-07-05 23:51:27,580 | INFO | crawler.sources.baradwajrangan_links | Page 129 attempt 1 length=214317
+2025-07-05 23:51:27,602 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/130/
+2025-07-05 23:51:27,621 | INFO | crawler.sources.baradwajrangan_links | Page 130 attempt 1 length=213195
+2025-07-05 23:51:27,643 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/131/
+2025-07-05 23:51:27,661 | INFO | crawler.sources.baradwajrangan_links | Page 131 attempt 1 length=213533
+2025-07-05 23:51:27,684 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/132/
+2025-07-05 23:51:27,706 | INFO | crawler.sources.baradwajrangan_links | Page 132 attempt 1 length=213950
+2025-07-05 23:51:27,728 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/133/
+2025-07-05 23:51:27,750 | INFO | crawler.sources.baradwajrangan_links | Page 133 attempt 1 length=216899
+2025-07-05 23:51:27,774 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/134/
+2025-07-05 23:51:27,802 | INFO | crawler.sources.baradwajrangan_links | Page 134 attempt 1 length=216489
+2025-07-05 23:51:27,824 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/135/
+2025-07-05 23:51:27,842 | INFO | crawler.sources.baradwajrangan_links | Page 135 attempt 1 length=218109
+2025-07-05 23:51:27,865 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/136/
+2025-07-05 23:51:27,886 | INFO | crawler.sources.baradwajrangan_links | Page 136 attempt 1 length=214593
+2025-07-05 23:51:27,908 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/137/
+2025-07-05 23:51:27,927 | INFO | crawler.sources.baradwajrangan_links | Page 137 attempt 1 length=215768
+2025-07-05 23:51:27,948 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/138/
+2025-07-05 23:51:27,978 | INFO | crawler.sources.baradwajrangan_links | Page 138 attempt 1 length=211474
+2025-07-05 23:51:28,002 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/139/
+2025-07-05 23:51:28,023 | INFO | crawler.sources.baradwajrangan_links | Page 139 attempt 1 length=213952
+2025-07-05 23:51:28,045 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/140/
+2025-07-05 23:51:28,065 | INFO | crawler.sources.baradwajrangan_links | Page 140 attempt 1 length=212572
+2025-07-05 23:51:28,121 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/141/
+2025-07-05 23:51:28,146 | INFO | crawler.sources.baradwajrangan_links | Page 141 attempt 1 length=212776
+2025-07-05 23:51:28,168 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/142/
+2025-07-05 23:51:28,186 | INFO | crawler.sources.baradwajrangan_links | Page 142 attempt 1 length=212069
+2025-07-05 23:51:28,207 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/143/
+2025-07-05 23:51:28,224 | INFO | crawler.sources.baradwajrangan_links | Page 143 attempt 1 length=208880
+2025-07-05 23:51:28,247 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/144/
+2025-07-05 23:51:28,277 | INFO | crawler.sources.baradwajrangan_links | Page 144 attempt 1 length=209950
+2025-07-05 23:51:28,298 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/145/
+2025-07-05 23:51:28,317 | INFO | crawler.sources.baradwajrangan_links | Page 145 attempt 1 length=214159
+2025-07-05 23:51:28,340 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/146/
+2025-07-05 23:51:28,369 | INFO | crawler.sources.baradwajrangan_links | Page 146 attempt 1 length=215957
+2025-07-05 23:51:28,392 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/147/
+2025-07-05 23:51:28,430 | INFO | crawler.sources.baradwajrangan_links | Page 147 attempt 1 length=212308
+2025-07-05 23:51:28,455 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/148/
+2025-07-05 23:51:28,478 | INFO | crawler.sources.baradwajrangan_links | Page 148 attempt 1 length=212641
+2025-07-05 23:51:28,500 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/149/
+2025-07-05 23:51:28,518 | INFO | crawler.sources.baradwajrangan_links | Page 149 attempt 1 length=217441
+2025-07-05 23:51:28,541 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/150/
+2025-07-05 23:51:28,563 | INFO | crawler.sources.baradwajrangan_links | Page 150 attempt 1 length=214410
+2025-07-05 23:51:28,588 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/151/
+2025-07-05 23:51:28,608 | INFO | crawler.sources.baradwajrangan_links | Page 151 attempt 1 length=214580
+2025-07-05 23:51:28,630 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/152/
+2025-07-05 23:51:28,648 | INFO | crawler.sources.baradwajrangan_links | Page 152 attempt 1 length=212066
+2025-07-05 23:51:28,671 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/153/
+2025-07-05 23:51:28,696 | INFO | crawler.sources.baradwajrangan_links | Page 153 attempt 1 length=217261
+2025-07-05 23:51:28,718 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/154/
+2025-07-05 23:51:28,738 | INFO | crawler.sources.baradwajrangan_links | Page 154 attempt 1 length=216601
+2025-07-05 23:51:28,762 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/155/
+2025-07-05 23:51:28,786 | INFO | crawler.sources.baradwajrangan_links | Page 155 attempt 1 length=216196
+2025-07-05 23:51:28,809 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/156/
+2025-07-05 23:51:28,828 | INFO | crawler.sources.baradwajrangan_links | Page 156 attempt 1 length=211610
+2025-07-05 23:51:28,849 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/157/
+2025-07-05 23:51:28,870 | INFO | crawler.sources.baradwajrangan_links | Page 157 attempt 1 length=214571
+2025-07-05 23:51:28,893 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/158/
+2025-07-05 23:51:28,913 | INFO | crawler.sources.baradwajrangan_links | Page 158 attempt 1 length=217780
+2025-07-05 23:51:28,936 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/159/
+2025-07-05 23:51:28,963 | INFO | crawler.sources.baradwajrangan_links | Page 159 attempt 1 length=213892
+2025-07-05 23:51:28,987 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/160/
+2025-07-05 23:51:29,007 | INFO | crawler.sources.baradwajrangan_links | Page 160 attempt 1 length=217839
+2025-07-05 23:51:29,030 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/161/
+2025-07-05 23:51:29,058 | INFO | crawler.sources.baradwajrangan_links | Page 161 attempt 1 length=213137
+2025-07-05 23:51:29,081 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/162/
+2025-07-05 23:51:29,104 | INFO | crawler.sources.baradwajrangan_links | Page 162 attempt 1 length=214787
+2025-07-05 23:51:29,126 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/163/
+2025-07-05 23:51:29,146 | INFO | crawler.sources.baradwajrangan_links | Page 163 attempt 1 length=212007
+2025-07-05 23:51:29,168 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/164/
+2025-07-05 23:51:29,191 | INFO | crawler.sources.baradwajrangan_links | Page 164 attempt 1 length=216013
+2025-07-05 23:51:29,217 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/165/
+2025-07-05 23:51:29,233 | INFO | crawler.sources.baradwajrangan_links | Page 165 attempt 1 length=215153
+2025-07-05 23:51:29,256 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/166/
+2025-07-05 23:51:29,273 | INFO | crawler.sources.baradwajrangan_links | Page 166 attempt 1 length=212224
+2025-07-05 23:51:29,329 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/167/
+2025-07-05 23:51:29,350 | INFO | crawler.sources.baradwajrangan_links | Page 167 attempt 1 length=210557
+2025-07-05 23:51:29,371 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/168/
+2025-07-05 23:51:29,396 | INFO | crawler.sources.baradwajrangan_links | Page 168 attempt 1 length=215457
+2025-07-05 23:51:29,418 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/169/
+2025-07-05 23:51:29,439 | INFO | crawler.sources.baradwajrangan_links | Page 169 attempt 1 length=211908
+2025-07-05 23:51:29,464 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/170/
+2025-07-05 23:51:29,484 | INFO | crawler.sources.baradwajrangan_links | Page 170 attempt 1 length=211855
+2025-07-05 23:51:29,506 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/171/
+2025-07-05 23:51:29,526 | INFO | crawler.sources.baradwajrangan_links | Page 171 attempt 1 length=213921
+2025-07-05 23:51:29,550 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/172/
+2025-07-05 23:51:29,570 | INFO | crawler.sources.baradwajrangan_links | Page 172 attempt 1 length=213259
+2025-07-05 23:51:29,591 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/173/
+2025-07-05 23:51:29,615 | INFO | crawler.sources.baradwajrangan_links | Page 173 attempt 1 length=211155
+2025-07-05 23:51:29,640 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/174/
+2025-07-05 23:51:29,656 | INFO | crawler.sources.baradwajrangan_links | Page 174 attempt 1 length=213525
+2025-07-05 23:51:29,676 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/175/
+2025-07-05 23:51:29,702 | INFO | crawler.sources.baradwajrangan_links | Page 175 attempt 1 length=208978
+2025-07-05 23:51:29,722 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/176/
+2025-07-05 23:51:29,749 | INFO | crawler.sources.baradwajrangan_links | Page 176 attempt 1 length=209776
+2025-07-05 23:51:29,774 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/177/
+2025-07-05 23:51:29,802 | INFO | crawler.sources.baradwajrangan_links | Page 177 attempt 1 length=211904
+2025-07-05 23:51:29,823 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/178/
+2025-07-05 23:51:29,846 | INFO | crawler.sources.baradwajrangan_links | Page 178 attempt 1 length=211454
+2025-07-05 23:51:29,869 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/179/
+2025-07-05 23:51:29,888 | INFO | crawler.sources.baradwajrangan_links | Page 179 attempt 1 length=209684
+2025-07-05 23:51:29,911 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/180/
+2025-07-05 23:51:29,935 | INFO | crawler.sources.baradwajrangan_links | Page 180 attempt 1 length=208240
+2025-07-05 23:51:29,956 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/181/
+2025-07-05 23:51:30,048 | INFO | crawler.sources.baradwajrangan_links | Page 181 attempt 1 length=212251
+2025-07-05 23:51:30,082 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/182/
+2025-07-05 23:51:30,112 | INFO | crawler.sources.baradwajrangan_links | Page 182 attempt 1 length=208439
+2025-07-05 23:51:30,139 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/183/
+2025-07-05 23:51:30,158 | INFO | crawler.sources.baradwajrangan_links | Page 183 attempt 1 length=209802
+2025-07-05 23:51:30,184 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/184/
+2025-07-05 23:51:30,212 | INFO | crawler.sources.baradwajrangan_links | Page 184 attempt 1 length=209727
+2025-07-05 23:51:30,236 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/185/
+2025-07-05 23:51:30,267 | INFO | crawler.sources.baradwajrangan_links | Page 185 attempt 1 length=211113
+2025-07-05 23:51:30,293 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/186/
+2025-07-05 23:51:30,318 | INFO | crawler.sources.baradwajrangan_links | Page 186 attempt 1 length=208680
+2025-07-05 23:51:30,341 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/187/
+2025-07-05 23:51:30,360 | INFO | crawler.sources.baradwajrangan_links | Page 187 attempt 1 length=209740
+2025-07-05 23:51:30,383 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/188/
+2025-07-05 23:51:30,407 | INFO | crawler.sources.baradwajrangan_links | Page 188 attempt 1 length=211656
+2025-07-05 23:51:30,431 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/189/
+2025-07-05 23:51:30,450 | INFO | crawler.sources.baradwajrangan_links | Page 189 attempt 1 length=210030
+2025-07-05 23:51:30,472 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/190/
+2025-07-05 23:51:30,490 | INFO | crawler.sources.baradwajrangan_links | Page 190 attempt 1 length=210888
+2025-07-05 23:51:30,513 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/191/
+2025-07-05 23:51:30,535 | INFO | crawler.sources.baradwajrangan_links | Page 191 attempt 1 length=209664
+2025-07-05 23:51:30,557 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/192/
+2025-07-05 23:51:30,577 | INFO | crawler.sources.baradwajrangan_links | Page 192 attempt 1 length=210408
+2025-07-05 23:51:30,601 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/193/
+2025-07-05 23:51:30,624 | INFO | crawler.sources.baradwajrangan_links | Page 193 attempt 1 length=212510
+2025-07-05 23:51:30,687 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/194/
+2025-07-05 23:51:30,706 | INFO | crawler.sources.baradwajrangan_links | Page 194 attempt 1 length=210020
+2025-07-05 23:51:30,727 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/195/
+2025-07-05 23:51:30,743 | INFO | crawler.sources.baradwajrangan_links | Page 195 attempt 1 length=210287
+2025-07-05 23:51:30,767 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/196/
+2025-07-05 23:51:30,786 | INFO | crawler.sources.baradwajrangan_links | Page 196 attempt 1 length=210698
+2025-07-05 23:51:30,808 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/197/
+2025-07-05 23:51:30,832 | INFO | crawler.sources.baradwajrangan_links | Page 197 attempt 1 length=209176
+2025-07-05 23:51:30,854 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/198/
+2025-07-05 23:51:30,881 | INFO | crawler.sources.baradwajrangan_links | Page 198 attempt 1 length=209437
+2025-07-05 23:51:30,903 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/199/
+2025-07-05 23:51:30,931 | INFO | crawler.sources.baradwajrangan_links | Page 199 attempt 1 length=209389
+2025-07-05 23:51:30,954 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/200/
+2025-07-05 23:51:30,980 | INFO | crawler.sources.baradwajrangan_links | Page 200 attempt 1 length=207674
+2025-07-05 23:51:31,005 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/201/
+2025-07-05 23:51:31,027 | INFO | crawler.sources.baradwajrangan_links | Page 201 attempt 1 length=188581
+2025-07-05 23:51:31,048 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/202/
+2025-07-05 23:51:31,077 | INFO | crawler.sources.baradwajrangan_links | Page 202 attempt 1 length=170983
+2025-07-05 23:51:31,100 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/203/
+2025-07-05 23:51:31,125 | INFO | crawler.sources.baradwajrangan_links | Page 203 attempt 1 length=171036
+2025-07-05 23:51:31,146 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/204/
+2025-07-05 23:51:31,166 | INFO | crawler.sources.baradwajrangan_links | Page 204 attempt 1 length=170301
+2025-07-05 23:51:31,187 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/205/
+2025-07-05 23:51:31,206 | INFO | crawler.sources.baradwajrangan_links | Page 205 attempt 1 length=172164
+2025-07-05 23:51:31,229 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/206/
+2025-07-05 23:51:31,251 | INFO | crawler.sources.baradwajrangan_links | Page 206 attempt 1 length=171122
+2025-07-05 23:51:31,271 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/207/
+2025-07-05 23:51:31,292 | INFO | crawler.sources.baradwajrangan_links | Page 207 attempt 1 length=171042
+2025-07-05 23:51:31,314 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/208/
+2025-07-05 23:51:31,338 | INFO | crawler.sources.baradwajrangan_links | Page 208 attempt 1 length=170214
+2025-07-05 23:51:31,359 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/209/
+2025-07-05 23:51:31,377 | INFO | crawler.sources.baradwajrangan_links | Page 209 attempt 1 length=169543
+2025-07-05 23:51:31,399 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/210/
+2025-07-05 23:51:31,421 | INFO | crawler.sources.baradwajrangan_links | Page 210 attempt 1 length=169785
+2025-07-05 23:51:31,441 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/211/
+2025-07-05 23:51:31,461 | INFO | crawler.sources.baradwajrangan_links | Page 211 attempt 1 length=169875
+2025-07-05 23:51:31,483 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/212/
+2025-07-05 23:51:31,502 | INFO | crawler.sources.baradwajrangan_links | Page 212 attempt 1 length=169578
+2025-07-05 23:51:31,533 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/213/
+2025-07-05 23:51:31,555 | INFO | crawler.sources.baradwajrangan_links | Page 213 attempt 1 length=168911
+2025-07-05 23:51:31,581 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/214/
+2025-07-05 23:51:31,612 | INFO | crawler.sources.baradwajrangan_links | Page 214 attempt 1 length=170612
+2025-07-05 23:51:31,639 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/215/
+2025-07-05 23:51:31,675 | INFO | crawler.sources.baradwajrangan_links | Page 215 attempt 1 length=169621
+2025-07-05 23:51:31,696 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/216/
+2025-07-05 23:51:31,722 | INFO | crawler.sources.baradwajrangan_links | Page 216 attempt 1 length=169341
+2025-07-05 23:51:31,744 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/217/
+2025-07-05 23:51:31,770 | INFO | crawler.sources.baradwajrangan_links | Page 217 attempt 1 length=172347
+2025-07-05 23:51:31,807 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/218/
+2025-07-05 23:51:31,830 | INFO | crawler.sources.baradwajrangan_links | Page 218 attempt 1 length=170371
+2025-07-05 23:51:31,855 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/219/
+2025-07-05 23:51:31,881 | INFO | crawler.sources.baradwajrangan_links | Page 219 attempt 1 length=169946
+2025-07-05 23:51:31,941 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/220/
+2025-07-05 23:51:31,959 | INFO | crawler.sources.baradwajrangan_links | Page 220 attempt 1 length=170277
+2025-07-05 23:51:31,982 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/221/
+2025-07-05 23:51:32,006 | INFO | crawler.sources.baradwajrangan_links | Page 221 attempt 1 length=169981
+2025-07-05 23:51:32,027 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/222/
+2025-07-05 23:51:32,065 | INFO | crawler.sources.baradwajrangan_links | Page 222 attempt 1 length=169127
+2025-07-05 23:51:32,089 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/223/
+2025-07-05 23:51:32,113 | INFO | crawler.sources.baradwajrangan_links | Page 223 attempt 1 length=171407
+2025-07-05 23:51:32,134 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/224/
+2025-07-05 23:51:32,160 | INFO | crawler.sources.baradwajrangan_links | Page 224 attempt 1 length=171184
+2025-07-05 23:51:32,183 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/225/
+2025-07-05 23:51:32,206 | INFO | crawler.sources.baradwajrangan_links | Page 225 attempt 1 length=170165
+2025-07-05 23:51:32,227 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/226/
+2025-07-05 23:51:32,246 | INFO | crawler.sources.baradwajrangan_links | Page 226 attempt 1 length=170744
+2025-07-05 23:51:32,266 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/227/
+2025-07-05 23:51:32,290 | INFO | crawler.sources.baradwajrangan_links | Page 227 attempt 1 length=170273
+2025-07-05 23:51:32,314 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/228/
+2025-07-05 23:51:32,339 | INFO | crawler.sources.baradwajrangan_links | Page 228 attempt 1 length=170275
+2025-07-05 23:51:32,361 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/229/
+2025-07-05 23:51:32,397 | INFO | crawler.sources.baradwajrangan_links | Page 229 attempt 1 length=169827
+2025-07-05 23:51:32,422 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/230/
+2025-07-05 23:51:32,444 | INFO | crawler.sources.baradwajrangan_links | Page 230 attempt 1 length=169351
+2025-07-05 23:51:32,467 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/231/
+2025-07-05 23:51:32,498 | INFO | crawler.sources.baradwajrangan_links | Page 231 attempt 1 length=170142
+2025-07-05 23:51:32,520 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/232/
+2025-07-05 23:51:32,544 | INFO | crawler.sources.baradwajrangan_links | Page 232 attempt 1 length=170627
+2025-07-05 23:51:32,568 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/233/
+2025-07-05 23:51:32,586 | INFO | crawler.sources.baradwajrangan_links | Page 233 attempt 1 length=170694
+2025-07-05 23:51:32,607 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/234/
+2025-07-05 23:51:32,631 | INFO | crawler.sources.baradwajrangan_links | Page 234 attempt 1 length=170553
+2025-07-05 23:51:32,654 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/235/
+2025-07-05 23:51:32,678 | INFO | crawler.sources.baradwajrangan_links | Page 235 attempt 1 length=171705
+2025-07-05 23:51:32,698 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/236/
+2025-07-05 23:51:32,720 | INFO | crawler.sources.baradwajrangan_links | Page 236 attempt 1 length=168327
+2025-07-05 23:51:32,741 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/237/
+2025-07-05 23:51:32,764 | INFO | crawler.sources.baradwajrangan_links | Page 237 attempt 1 length=167146
+2025-07-05 23:51:32,785 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/238/
+2025-07-05 23:51:32,807 | INFO | crawler.sources.baradwajrangan_links | Page 238 attempt 1 length=167439
+2025-07-05 23:51:32,827 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/239/
+2025-07-05 23:51:32,857 | INFO | crawler.sources.baradwajrangan_links | Page 239 attempt 1 length=167559
+2025-07-05 23:51:32,881 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/240/
+2025-07-05 23:51:32,905 | INFO | crawler.sources.baradwajrangan_links | Page 240 attempt 1 length=167158
+2025-07-05 23:51:32,924 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/241/
+2025-07-05 23:51:32,946 | INFO | crawler.sources.baradwajrangan_links | Page 241 attempt 1 length=166344
+2025-07-05 23:51:32,968 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/242/
+2025-07-05 23:51:32,992 | INFO | crawler.sources.baradwajrangan_links | Page 242 attempt 1 length=164440
+2025-07-05 23:51:33,012 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/243/
+2025-07-05 23:51:33,040 | INFO | crawler.sources.baradwajrangan_links | Page 243 attempt 1 length=164301
+2025-07-05 23:51:33,061 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/244/
+2025-07-05 23:51:33,084 | INFO | crawler.sources.baradwajrangan_links | Page 244 attempt 1 length=165181
+2025-07-05 23:51:33,106 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/245/
+2025-07-05 23:51:33,126 | INFO | crawler.sources.baradwajrangan_links | Page 245 attempt 1 length=164737
+2025-07-05 23:51:33,147 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/246/
+2025-07-05 23:51:33,166 | INFO | crawler.sources.baradwajrangan_links | Page 246 attempt 1 length=164647
+2025-07-05 23:51:33,221 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/247/
+2025-07-05 23:51:33,245 | INFO | crawler.sources.baradwajrangan_links | Page 247 attempt 1 length=164425
+2025-07-05 23:51:33,265 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/248/
+2025-07-05 23:51:33,285 | INFO | crawler.sources.baradwajrangan_links | Page 248 attempt 1 length=168759
+2025-07-05 23:51:33,305 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/249/
+2025-07-05 23:51:33,332 | INFO | crawler.sources.baradwajrangan_links | Page 249 attempt 1 length=168832
+2025-07-05 23:51:33,355 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/250/
+2025-07-05 23:51:33,378 | INFO | crawler.sources.baradwajrangan_links | Page 250 attempt 1 length=168842
+2025-07-05 23:51:33,398 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/251/
+2025-07-05 23:51:33,426 | INFO | crawler.sources.baradwajrangan_links | Page 251 attempt 1 length=170864
+2025-07-05 23:51:33,449 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/252/
+2025-07-05 23:51:33,471 | INFO | crawler.sources.baradwajrangan_links | Page 252 attempt 1 length=169906
+2025-07-05 23:51:33,491 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/253/
+2025-07-05 23:51:33,511 | INFO | crawler.sources.baradwajrangan_links | Page 253 attempt 1 length=172014
+2025-07-05 23:51:33,531 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/254/
+2025-07-05 23:51:33,550 | INFO | crawler.sources.baradwajrangan_links | Page 254 attempt 1 length=169365
+2025-07-05 23:51:33,572 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/255/
+2025-07-05 23:51:33,596 | INFO | crawler.sources.baradwajrangan_links | Page 255 attempt 1 length=169345
+2025-07-05 23:51:33,617 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/256/
+2025-07-05 23:51:33,634 | INFO | crawler.sources.baradwajrangan_links | Page 256 attempt 1 length=170756
+2025-07-05 23:51:33,657 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/257/
+2025-07-05 23:51:33,678 | INFO | crawler.sources.baradwajrangan_links | Page 257 attempt 1 length=169614
+2025-07-05 23:51:33,697 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/258/
+2025-07-05 23:51:33,723 | INFO | crawler.sources.baradwajrangan_links | Page 258 attempt 1 length=171081
+2025-07-05 23:51:33,743 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/259/
+2025-07-05 23:51:33,763 | INFO | crawler.sources.baradwajrangan_links | Page 259 attempt 1 length=169585
+2025-07-05 23:51:33,786 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/260/
+2025-07-05 23:51:33,826 | INFO | crawler.sources.baradwajrangan_links | Page 260 attempt 1 length=170414
+2025-07-05 23:51:33,848 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/261/
+2025-07-05 23:51:33,868 | INFO | crawler.sources.baradwajrangan_links | Page 261 attempt 1 length=169400
+2025-07-05 23:51:33,890 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/262/
+2025-07-05 23:51:33,913 | INFO | crawler.sources.baradwajrangan_links | Page 262 attempt 1 length=169784
+2025-07-05 23:51:33,932 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/263/
+2025-07-05 23:51:33,956 | INFO | crawler.sources.baradwajrangan_links | Page 263 attempt 1 length=170558
+2025-07-05 23:51:33,977 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/264/
+2025-07-05 23:51:34,004 | INFO | crawler.sources.baradwajrangan_links | Page 264 attempt 1 length=168969
+2025-07-05 23:51:34,026 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/265/
+2025-07-05 23:51:34,054 | INFO | crawler.sources.baradwajrangan_links | Page 265 attempt 1 length=169163
+2025-07-05 23:51:34,073 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/266/
+2025-07-05 23:51:34,104 | INFO | crawler.sources.baradwajrangan_links | Page 266 attempt 1 length=169096
+2025-07-05 23:51:34,127 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/267/
+2025-07-05 23:51:34,153 | INFO | crawler.sources.baradwajrangan_links | Page 267 attempt 1 length=169180
+2025-07-05 23:51:34,175 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/268/
+2025-07-05 23:51:34,206 | INFO | crawler.sources.baradwajrangan_links | Page 268 attempt 1 length=168117
+2025-07-05 23:51:34,229 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/269/
+2025-07-05 23:51:34,251 | INFO | crawler.sources.baradwajrangan_links | Page 269 attempt 1 length=169449
+2025-07-05 23:51:34,272 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/270/
+2025-07-05 23:51:34,294 | INFO | crawler.sources.baradwajrangan_links | Page 270 attempt 1 length=167512
+2025-07-05 23:51:34,314 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/271/
+2025-07-05 23:51:34,343 | INFO | crawler.sources.baradwajrangan_links | Page 271 attempt 1 length=168184
+2025-07-05 23:51:34,366 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/272/
+2025-07-05 23:51:34,385 | INFO | crawler.sources.baradwajrangan_links | Page 272 attempt 1 length=167934
+2025-07-05 23:51:34,406 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/273/
+2025-07-05 23:51:34,457 | INFO | crawler.sources.baradwajrangan_links | Page 273 attempt 1 length=169273
+2025-07-05 23:51:34,514 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/274/
+2025-07-05 23:51:34,535 | INFO | crawler.sources.baradwajrangan_links | Page 274 attempt 1 length=168426
+2025-07-05 23:51:34,554 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/275/
+2025-07-05 23:51:34,573 | INFO | crawler.sources.baradwajrangan_links | Page 275 attempt 1 length=167785
+2025-07-05 23:51:34,592 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/276/
+2025-07-05 23:51:34,617 | INFO | crawler.sources.baradwajrangan_links | Page 276 attempt 1 length=169780
+2025-07-05 23:51:34,640 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/277/
+2025-07-05 23:51:34,660 | INFO | crawler.sources.baradwajrangan_links | Page 277 attempt 1 length=151930
+2025-07-05 23:51:34,676 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/278/
+2025-07-05 23:51:34,869 | INFO | crawler.sources.baradwajrangan_links | Page 278 attempt 1 length=123051
+2025-07-05 23:51:34,888 | INFO | crawler.sources.baradwajrangan_links | Fetching https://baradwajrangan.wordpress.com/page/279/
+2025-07-05 23:51:35,108 | INFO | crawler.sources.baradwajrangan_links | Page 279 attempt 1 length=123051
+2025-07-05 23:51:35,135 | INFO | crawler.sources.baradwajrangan_links | Fetched total of 5529 links before early stop or completion
+2025-07-05 23:51:35,135 | INFO | step_1_fetch_links | Attempted to fetch and store links.
+2025-07-05 23:51:35,312 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:51:35,353 | INFO | step_2_parse_posts | No new posts to parse
+2025-07-05 23:51:35,453 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:51:35,455 | INFO | __main__ | Crawl stage complete
+2025-07-05 23:51:35,455 | INFO | __main__ | Starting validation stage
+2025-07-05 23:51:35,558 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Cblog_title%2Cshort_review&is_film_review=is.null "HTTP/2 200 OK"
+2025-07-05 23:51:35,559 | INFO | step_3_classify_reviews | Classifying 0 reviews
+2025-07-05 23:51:35,678 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:51:35,679 | INFO | step_3b_llm_validation | LLM validation not yet implemented
+2025-07-05 23:51:35,777 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:51:35,924 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Clink%2Cblog_title%2Cmovie_id&movie_id=is.null&is_film_review=eq.True "HTTP/2 200 OK"
+2025-07-05 23:51:35,924 | INFO | step_4_link_movies | Linking movies for 0 reviews
+2025-07-05 23:51:36,020 | INFO | httpx | HTTP Request: POST https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/pipeline_logs "HTTP/2 201 Created"
+2025-07-05 23:51:36,021 | INFO | __main__ | Validation stage complete
+2025-07-05 23:51:36,021 | INFO | __main__ | Starting enrichment stage
+2025-07-05 23:51:36,207 | INFO | httpx | HTTP Request: GET https://whtyqwdpqppsnmfjnxfl.supabase.co/rest/v1/reviews?select=id%2Cblog_title%2Cshort_review%2Csentiment&sentiment=is.null&is_film_review=eq.True "HTTP/2 200 OK"
+2025-07-05 23:51:36,210 | INFO | step_5_generate_sentiment | Generating sentiment for 149 reviews
+2025-07-05 23:51:36,898 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:36,902 | INFO | step_5_generate_sentiment | Skipping sentiment for c4d1a212-321d-403d-9800-1cd226c0c0ea -> No – not a review
+2025-07-05 23:51:37,308 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:37,310 | INFO | step_5_generate_sentiment | Skipping sentiment for 15e9bc20-8c1e-47b2-95ce-1285fa95e4a4 -> No – not a review
+2025-07-05 23:51:37,715 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:37,715 | INFO | step_5_generate_sentiment | Skipping sentiment for a0e64dd0-155d-465d-8b34-4aa92c2a88f3 -> No – not a review
+2025-07-05 23:51:38,126 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:38,127 | INFO | step_5_generate_sentiment | Skipping sentiment for 40882766-02c9-47ce-bd4c-9a07967cc1cc -> No – not a review
+2025-07-05 23:51:38,739 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:38,739 | INFO | step_5_generate_sentiment | Skipping sentiment for 264d97f0-e92f-4ab1-b4fc-0446bd49a365 -> No – not a review.
+2025-07-05 23:51:39,150 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:39,152 | INFO | step_5_generate_sentiment | Skipping sentiment for 628d9aab-44f0-4c79-9bcb-f86587bf057d -> No - not a review
+2025-07-05 23:51:39,496 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:39,498 | INFO | step_5_generate_sentiment | Skipping sentiment for a45e8b77-77e7-41e8-b1e1-acf0fd512dc0 -> No - not a review
+2025-07-05 23:51:39,814 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:39,815 | INFO | step_5_generate_sentiment | Skipping sentiment for c002bb90-4238-47b3-90b3-dbb3a11f1095 -> No – not a review
+2025-07-05 23:51:40,313 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:40,321 | INFO | step_5_generate_sentiment | Skipping sentiment for 23c9da27-8e4a-4fe3-b505-c56893dfc242 -> No – not a review.
+2025-07-05 23:51:40,788 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:40,789 | INFO | step_5_generate_sentiment | Skipping sentiment for 0a63e81d-eeed-4229-a005-19616f2338a5 -> No – not a review
+2025-07-05 23:51:41,209 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:41,211 | INFO | step_5_generate_sentiment | Skipping sentiment for 9f9bbb90-251b-4e76-bc90-396b3ccc688f -> No - not a review
+2025-07-05 23:51:41,797 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:41,800 | INFO | step_5_generate_sentiment | Skipping sentiment for d6e80c6c-a44b-423f-b98f-36a6baaf87be -> No – not a review
+2025-07-05 23:51:42,120 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:42,122 | INFO | step_5_generate_sentiment | Skipping sentiment for 147ec0da-8e71-4ab9-9574-50a6a50e854d -> No – not a review
+2025-07-05 23:51:42,463 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:42,465 | INFO | step_5_generate_sentiment | Skipping sentiment for 733f7724-973c-461a-8490-19e62263ac31 -> No – not a review
+2025-07-05 23:51:42,785 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:42,785 | INFO | step_5_generate_sentiment | Skipping sentiment for 4e00925d-b237-4d73-84d5-784105115c79 -> No – not a review
+2025-07-05 23:51:43,223 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:43,235 | INFO | step_5_generate_sentiment | Skipping sentiment for a66afad8-cdaf-4c36-b475-1bc801f2ea05 -> No – not a review
+2025-07-05 23:51:43,758 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:43,758 | INFO | step_5_generate_sentiment | Skipping sentiment for 872761d7-d005-4807-9cd8-6b21b291b004 -> No – not a review.
+2025-07-05 23:51:44,053 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:44,054 | INFO | step_5_generate_sentiment | Skipping sentiment for 8d20e957-b077-4a34-87a4-5a7461ede3ea -> No – not a review.
+2025-07-05 23:51:44,474 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:44,475 | INFO | step_5_generate_sentiment | Skipping sentiment for 879620f6-e2ab-4329-828d-3652df86f2e4 -> No – not a review
+2025-07-05 23:51:44,827 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:44,831 | INFO | step_5_generate_sentiment | Skipping sentiment for 3120f158-6c67-43d9-b39a-6857bf98fade -> No – not a review.
+2025-07-05 23:51:45,295 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:45,298 | INFO | step_5_generate_sentiment | Skipping sentiment for 9f57f95c-d85a-4ba6-9e38-65921538677f -> No - not a review
+2025-07-05 23:51:45,659 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:45,661 | INFO | step_5_generate_sentiment | Skipping sentiment for 44c3e7ed-313a-43be-a615-55811a7ae62e -> No – not a review
+2025-07-05 23:51:46,187 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:46,190 | INFO | step_5_generate_sentiment | Skipping sentiment for 448cabc8-6947-4c7a-bbc7-70a22fa32500 -> No – not a review
+2025-07-05 23:51:46,497 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:46,499 | INFO | step_5_generate_sentiment | Skipping sentiment for 01f6ff1f-4b38-4ba3-ae7f-9eef3cb2bfbf -> No – not a review
+2025-07-05 23:51:46,818 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:46,822 | INFO | step_5_generate_sentiment | Skipping sentiment for b83a7c95-74d4-49e9-9f9c-cf004e15b4db -> No – not a review
+2025-07-05 23:51:47,176 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:47,179 | INFO | step_5_generate_sentiment | Skipping sentiment for d07f6e52-cadd-49db-85d1-d6a4de52ed15 -> No – not a review
+2025-07-05 23:51:47,533 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:47,535 | INFO | step_5_generate_sentiment | Skipping sentiment for b9657c97-5045-4f9c-85de-74971790d1ba -> No – not a review
+2025-07-05 23:51:47,873 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:47,885 | INFO | step_5_generate_sentiment | Skipping sentiment for 8ca180c5-2a3f-499b-98ca-de0403eba453 -> No – not a review
+2025-07-05 23:51:48,370 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:48,371 | INFO | step_5_generate_sentiment | Skipping sentiment for 90c72836-abb7-409c-bff2-22218383b17a -> No – not a review
+2025-07-05 23:51:48,674 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:48,675 | INFO | step_5_generate_sentiment | Skipping sentiment for 0ea0fcca-b406-4225-9499-69aa214a44ba -> No – not a review
+2025-07-05 23:51:49,044 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:49,101 | INFO | step_5_generate_sentiment | Skipping sentiment for 63479175-be68-4c31-842d-233e3dd03342 -> No – not a review
+2025-07-05 23:51:49,491 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:49,493 | INFO | step_5_generate_sentiment | Skipping sentiment for 6a7adb88-c480-4539-8861-7db9ddd673cd -> No – not a review
+2025-07-05 23:51:49,745 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:49,753 | INFO | step_5_generate_sentiment | Skipping sentiment for 13bc0b37-f1ab-43fd-ad93-b358a0806b12 -> No – not a review
+2025-07-05 23:51:50,026 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:50,027 | INFO | step_5_generate_sentiment | Skipping sentiment for 7e761c48-c85e-4764-95f7-8dd89f8e5f87 -> No – not a review.
+2025-07-05 23:51:50,292 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:50,294 | INFO | step_5_generate_sentiment | Skipping sentiment for 8c4e2312-19d4-4c25-97bb-11a006d67e9b -> No – not a review
+2025-07-05 23:51:50,657 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:50,659 | INFO | step_5_generate_sentiment | Skipping sentiment for 48e57ff4-607a-4e40-80a5-1d08c268b8f7 -> No – not a review.
+2025-07-05 23:51:51,302 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:51,305 | INFO | step_5_generate_sentiment | Skipping sentiment for 45462f02-332a-41a5-b662-a7481cb417db -> No – not a review.
+2025-07-05 23:51:51,799 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:51,803 | INFO | step_5_generate_sentiment | Skipping sentiment for acfaaf5f-fa11-4d6f-93fc-db6296293672 -> No – not a review
+2025-07-05 23:51:52,096 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:52,098 | INFO | step_5_generate_sentiment | Skipping sentiment for a260ccb8-a331-4444-acb0-c18a60ebd277 -> No – not a review
+2025-07-05 23:51:52,436 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:52,439 | INFO | step_5_generate_sentiment | Skipping sentiment for 19515d8f-cb7f-4644-a760-28640a8e2b40 -> No - not a review
+2025-07-05 23:51:52,810 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:52,813 | INFO | step_5_generate_sentiment | Skipping sentiment for 6034257e-352e-4957-84a8-dc00fd689f5d -> No – not a review
+2025-07-05 23:51:53,428 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:53,430 | INFO | step_5_generate_sentiment | Skipping sentiment for 07e87bcb-60a6-413d-b354-4347c0bc79e0 -> No – not a review
+2025-07-05 23:51:53,986 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:53,987 | INFO | step_5_generate_sentiment | Skipping sentiment for f9630fb9-c400-4e56-a883-0774ae980170 -> No – not a review
+2025-07-05 23:51:54,414 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:54,419 | INFO | step_5_generate_sentiment | Skipping sentiment for 3a6a5935-2bc1-435c-9c94-31b2caa87d23 -> No – not a review.
+2025-07-05 23:51:54,921 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:54,921 | INFO | step_5_generate_sentiment | Skipping sentiment for 35a7c540-7049-4073-bafb-760019b96850 -> No – not a review
+2025-07-05 23:51:55,816 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:55,819 | INFO | step_5_generate_sentiment | Skipping sentiment for 2eb6b973-efeb-4875-b52f-79737357e4ad -> No – not a review
+2025-07-05 23:51:56,150 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:56,152 | INFO | step_5_generate_sentiment | Skipping sentiment for 968ee74d-e774-4353-8f17-6a3c9b775ad1 -> No - not a review
+2025-07-05 23:51:56,498 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:56,500 | INFO | step_5_generate_sentiment | Skipping sentiment for 452a344b-22dc-4a61-930b-f429a16d2682 -> No – not a review
+2025-07-05 23:51:56,876 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:56,879 | INFO | step_5_generate_sentiment | Skipping sentiment for 1e13b472-a0c4-4cfc-a523-068f93057eb6 -> No – not a review.
+2025-07-05 23:51:57,560 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:57,564 | INFO | step_5_generate_sentiment | Skipping sentiment for 5d071e5b-e3b8-42b4-a317-e35200509da6 -> No – not a review
+2025-07-05 23:51:57,926 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:57,928 | INFO | step_5_generate_sentiment | Skipping sentiment for 52b37047-e513-4fca-b8b3-750f29bf9cb3 -> No – not a review
+2025-07-05 23:51:58,195 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:58,196 | INFO | step_5_generate_sentiment | Skipping sentiment for ca74223e-eac9-47c8-8b5b-26aa62ec576a -> No – not a review
+2025-07-05 23:51:58,468 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:58,470 | INFO | step_5_generate_sentiment | Skipping sentiment for e41d0fb1-e577-447e-9712-d6e9e64fdce3 -> No – not a review.
+2025-07-05 23:51:58,810 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:58,811 | INFO | step_5_generate_sentiment | Skipping sentiment for 91058188-389b-43f9-8ea2-af575e332425 -> No – not a review.
+2025-07-05 23:51:59,219 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:59,221 | INFO | step_5_generate_sentiment | Skipping sentiment for 4dcfbf32-64e0-4a27-b00c-97b0074ef720 -> No – not a review.
+2025-07-05 23:51:59,602 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:51:59,618 | INFO | step_5_generate_sentiment | Skipping sentiment for 6d530847-8e2e-4e81-ab1b-d892828c806a -> No – not a review
+2025-07-05 23:52:00,542 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:00,544 | INFO | step_5_generate_sentiment | Skipping sentiment for 994f9b5d-badd-40ea-a388-53cf48593fd1 -> No – not a review
+2025-07-05 23:52:00,870 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:00,871 | INFO | step_5_generate_sentiment | Skipping sentiment for 04389db8-4c9a-4343-9c8a-95b23822fc2e -> No - not a review
+2025-07-05 23:52:01,251 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:01,252 | INFO | step_5_generate_sentiment | Skipping sentiment for f774af65-ab5f-476a-be0e-a1cb4364a24d -> No – not a review.
+2025-07-05 23:52:01,590 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:01,592 | INFO | step_5_generate_sentiment | Skipping sentiment for d7344d2f-534f-4aa7-b7da-052dc6bfc338 -> No - not a review
+2025-07-05 23:52:01,963 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:01,966 | INFO | step_5_generate_sentiment | Skipping sentiment for c0b1caf3-b2ee-4ebd-abb8-eda12e4d9855 -> No – not a review.
+2025-07-05 23:52:02,349 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:02,351 | INFO | step_5_generate_sentiment | Skipping sentiment for c264052d-76b4-428e-92d2-6a094f7413ff -> No – not a review
+2025-07-05 23:52:03,213 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:03,215 | INFO | step_5_generate_sentiment | Skipping sentiment for 9877df60-8eb2-411e-9211-afaaea8fddd1 -> No - not a review
+2025-07-05 23:52:03,537 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:03,542 | INFO | step_5_generate_sentiment | Skipping sentiment for 280ac360-62ba-4811-a283-29f05071e15a -> No – not a review
+2025-07-05 23:52:03,861 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:03,863 | INFO | step_5_generate_sentiment | Skipping sentiment for 961d2ee3-effe-48c6-90b9-3c66304486a9 -> No – not a review
+2025-07-05 23:52:04,208 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-05 23:52:04,213 | INFO | step_5_generate_sentiment | Skipping sentiment for 05c6574d-ea0a-4c36-906b-30a05471371b -> No – not a review.
