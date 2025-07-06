@@ -22,13 +22,14 @@ async def _parse_and_store(
     session: aiohttp.ClientSession,
     url: dict,
     step_logger: StepLogger,
+    reviewer: str,
     attempt: int = 1,
 ) -> None:
     """Parse a blog post URL and persist the result."""
     try:
         async with semaphore:
             async with async_timeout.timeout(10):
-                data = await parse_post_async(session, url["link"])
+                data = await parse_post_async(session, url["link"], reviewer)
 
         for key in ["url", "title", "summary", "full_review", "date"]:
             if key not in data:
@@ -65,7 +66,7 @@ async def _parse_and_store(
         )
         raise
 
-async def parse_posts(urls: list[str]) -> None:
+async def parse_posts(urls: list[str], reviewer: str = "baradwajrangan") -> None:
     """Parse and store a list of blog post URLs."""
     step_logger = StepLogger("step_2_parse_posts")
     if not urls:
@@ -79,7 +80,7 @@ async def parse_posts(urls: list[str]) -> None:
         tasks = [
             run_with_retries(
                 _parse_and_store,
-                args=[session, url, step_logger],
+                args=[session, url, step_logger, reviewer],
                 max_retries=MAX_RETRIES,
             )
             for url in unique
