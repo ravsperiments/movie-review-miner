@@ -1,4 +1,4 @@
-"""Utility functions to persist crawler progress between runs."""
+"""Utility functions to persist scraper progress between runs."""
 
 import json
 from typing import Dict

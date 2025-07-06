@@ -24,11 +24,11 @@
 
 #### Week 5: Async Batch Orchestration
 - [x] Remove Redis/RQ based task queue (discard `run_worker.py`, `enqueue_tasks.py`, `master_orchestrator.py`)
-- [x] Implement asynchronous pagination crawler (`get_post_links_async` in `crawler/sources`)
+- [x] Implement asynchronous pagination scraper (`get_post_links_async` in `scraper/sources`)
 - [x] Create pipeline step1 (`pipeline/step_1_fetch_links.py`) to fetch & store blog post URLs in Supabase
-- [x] Implement async `parse_post_async` in `crawler/parse_post.py` to extract structured data from posts
+- [x] Implement async `parse_post_async` in `scraper/parse_post.py` to extract structured data from posts
 - [x] Create pipeline step2 (`pipeline/step_2_parse_posts.py`) to parse posts concurrently and upsert reviews
-- [x] Add structured logging (`utils/logger`) and failure tracking (`failed_post_links.txt`) in crawler & pipeline
+- [x] Add structured logging (`utils/logger`) and failure tracking (`failed_post_links.txt`) in scraper & pipeline
 - [x] Use asyncio.gather and semaphores to control concurrency
 
 #### Week 6: Refactor Pipeline & Modularize Blog Post Specific Crawling Logic
@@ -39,7 +39,7 @@
 - [x] Enrich reviews with sentiment labels (`pipeline/step_5_generate_sentiment.py`)
 - [x] Fetch and update TMDb metadata (`pipeline/step_6_enrich_metadata.py`)
 - [x] Add weekly orchestrator script (`run_pipeline.py`) with CLI options (`--limit`, `--dry-run`, `--reviewer`)
-- [x] Modularize blog-specific scraping in `crawler/sources` and parsing in `crawler/parse_post.py`
+- [x] Modularize blog-specific scraping in `scraper/sources` and parsing in `scraper/parse_post.py`
 - [x] Log pipeline metrics and results via `utils.StepLogger` and `db.pipeline_logger`
 
 #### Week 7: Refactor Pipeline & Modularize Blog Post Specific Crawling Logic (Contined..)
