@@ -73,7 +73,7 @@ def get_pending_pages_to_parse() -> List[Dict[str, Any]]:
     """
     try:
         # Query the 'raw_scraped_pages' table for records where 'status' is 'pending'.
-        response = supabase.table("raw_scraped_pages").select("*").eq("status", "pending").limit(1000).execute()
+        response = supabase.table("raw_scraped_pages").select("*").eq("status", "pending").execute()
         
         # Return the data if available, otherwise an empty list.
         return response.data if response.data else []

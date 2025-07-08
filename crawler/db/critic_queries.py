@@ -10,7 +10,7 @@ def get_critics() -> List[Dict[str, Any]]:
     Fetches all critic data from the 'critics' table.
     """
     try:
-        response = supabase.table("critics").select("id, name, base_url, bio, created_at, updated_at").execute()
+        response = supabase.table("ref_critics").select("id, name, base_url, bio, created_at, updated_at").execute()
         if response.data:
             return response.data
         return []
