@@ -42,8 +42,6 @@
 - [x] Modularize blog-specific scraping in `scraper/sources` and parsing in `scraper/parse_post.py`
 - [x] Log pipeline metrics and results via `utils.StepLogger` and `db.pipeline_logger`
 
-#### Week 7: Refactor Pipeline & Modularize Blog Post Specific Crawling Logic (Contined..)
-
 ##### 2025-07-07
 - [x] Implement `raw_scraped_pages` staging table
 - [x] Update `fetch_links` to insert into `raw_scraped_pages` with critic ID and status
@@ -58,8 +56,6 @@
 - [x] Move `crawler/reviewers.py` to `crawler/db/reviewers.py`
 - [x] Add comprehensive in-code comments to all modules involved in the `fetch_links` pipeline step
 - [x] Update `README.md` with project overview, crawler design, folder structure, pipeline explanation, and Step 1 details
-
-#### Week 8: Parsing Orchestrator & Refinements
 
 ##### 2025-07-08
 - [x] Move `baradwaj_rangan_parse.py` to `crawler/scraper/critics/baradwaj_rangan_parser.py`

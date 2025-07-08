@@ -1,7 +1,7 @@
 """Pipeline step modules for the weekly enrichment process."""
 
 #from . import step1_fetch_links
-from . import crawl_step2_parse_posts
+#from . import crawl_step2_parse_posts
 from . import val_step1_classify_reviews
 from . import val_step2_llm_validation
 from . import val_step3_link_movies
