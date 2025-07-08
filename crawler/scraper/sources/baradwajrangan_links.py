@@ -77,11 +77,17 @@ async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list
         for page in range(start_page, end_page + 1):
             page_links = await fetch_listing_page(session, page)
 
+            found_new_link_on_page = False
             for triple in page_links:
                 if triple[2] not in recent_links:
                     all_links.append(triple)
+                    found_new_link_on_page = True
                 else:
                     logger.info("Skipping known link: %s", triple[2])
+            
+            if not found_new_link_on_page:
+                logger.info("No new links found on page %s. Stopping early.", page)
+                break
 
     logger.info("Fetched total of %s links before early stop or completion", len(all_links))
     return all_links

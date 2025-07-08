@@ -23,7 +23,7 @@ def get_all_urls() -> List[str]:
 def bulk_insert_raw_urls(pages_data: List[Dict[str, Any]]) -> None:
     """Inserts a list of new URLs into the raw_scraped_pages table."""
     try:
-        response = supabase.table("raw_scraped_pages").insert(pages_data).execute()
+        response = supabase.table("raw_scraped_pages").upsert(pages_data, on_conflict="page_url").execute()
         logger.info(f"Successfully inserted {len(response.data)} new URLs.")
     except Exception as e:
         logger.error(f"Error bulk inserting new URLs: {e}")
