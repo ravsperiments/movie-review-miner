@@ -43,3 +43,18 @@
 - [x] Log pipeline metrics and results via `utils.StepLogger` and `db.pipeline_logger`
 
 #### Week 7: Refactor Pipeline & Modularize Blog Post Specific Crawling Logic (Contined..)
+
+##### 2025-07-07
+- [x] Implement `raw_scraped_pages` staging table
+- [x] Update `fetch_links` to insert into `raw_scraped_pages` with critic ID and status
+- [x] Update `parse_posts` to read from and update `raw_scraped_pages`
+- [x] Implement early stopping in `baradwajrangan_links.py`
+- [x] Implement upsert for duplicate prevention in `store_scraped_pages.py`
+- [x] Refactor `fetch_links` to support multiple reviewers with dedicated scripts
+- [x] Create `crawler/db/reviewers.py` for reviewer data management
+- [x] Create `crawler/scraper/critics/baradwajrangan_fetcher.py` for critic-specific fetching logic
+- [x] Create `crawler/pipeline/fetch_links_orchestrator.py` to orchestrate reviewer-specific fetchers
+- [x] Update `crawler/run_pipeline.py` to use the new orchestrator
+- [x] Move `crawler/reviewers.py` to `crawler/db/reviewers.py`
+- [x] Add comprehensive in-code comments to all modules involved in the `fetch_links` pipeline step
+- [x] Update `README.md` with project overview, crawler design, folder structure, pipeline explanation, and Step 1 details
