@@ -1,8 +1,7 @@
 """Orchestrate the weekly enrichment pipeline."""
 import argparse
 import asyncio
-from pipeline import (
-    crawl_step1_fetch_links,
+from crawler.pipeline import (
     crawl_step2_parse_posts,
     val_step1_classify_reviews,
     val_step2_llm_validation,
@@ -10,14 +9,18 @@ from pipeline import (
     enrich_step1_generate_sentiment,
     enrich_step2_add_metadata,
 )
+from crawler.pipeline.fetch_links_orchestrator import orchestrate_fetch_links
 from crawler.utils.logger import get_logger
 from crawler.llm import set_llm_model
 
 logger = get_logger(__name__)
 
-async def crawl(limit: int | None = None, dry_run: bool = False, reviewer: str = "baradwajrangan") -> list[str]:
+async def crawl(limit: int | None = None, dry_run: bool = False) -> list[str]:
     logger.info("Starting crawl stage")
-    links = await crawl_step1_fetch_links.fetch_links(reviewer=reviewer)
+    await orchestrate_fetch_links()
+    # The orchestrator handles storing links, so we don't need to return them here for now.
+    # If subsequent steps need the links, they should query the database.
+    links = [] # Placeholder for now, as links are stored directly by orchestrator
     if limit:
         links = links[:limit]
         logger.debug("Limiting to %s links", limit)
@@ -26,7 +29,7 @@ async def crawl(limit: int | None = None, dry_run: bool = False, reviewer: str =
         logger.info("Dry run enabled - exiting early")
         return []
 
-    await crawl_step2_parse_posts.parse_posts(links, reviewer=reviewer)
+    await crawl_step2_parse_posts.parse_posts(links)
     logger.info("Crawl stage complete")
     return links
 
@@ -46,8 +49,8 @@ async def enrich() -> None:
     logger.info("Enrichment stage complete")
 
 
-async def main(limit: int | None = None, dry_run: bool = False, reviewer: str = "baradwajrangan") -> None:
-    await crawl(limit=limit, dry_run=dry_run, reviewer=reviewer)
+async def main(limit: int | None = None, dry_run: bool = False) -> None:
+    await crawl(limit=limit, dry_run=dry_run)
     if dry_run:
         return
     validate()
@@ -58,7 +61,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run enrichment pipeline")
     parser.add_argument("--limit", type=int, help="Limit number of links to process")
     parser.add_argument("--dry-run", action="store_true", help="Run fetch step only")
-    parser.add_argument("--reviewer", default="baradwajrangan", help="Reviewer id to crawl")
+    
     parser.add_argument(
         "--llm-model",
         default=None,
@@ -70,4 +73,4 @@ if __name__ == "__main__":
     if args.llm_model:
         set_llm_model(args.llm_model)
 
-    asyncio.run(main(limit=args.limit, dry_run=args.dry_run, reviewer=args.reviewer))
+    asyncio.run(main(limit=args.limit, dry_run=args.dry_run))
