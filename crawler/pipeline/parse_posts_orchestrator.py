@@ -25,6 +25,20 @@ from crawler.utils.retries import run_with_retries
 from crawler.db.pipeline_logger import log_step_result
 import json
 
+from crawler.db.critic_queries import get_critics
+from crawler.scraper.critics import baradwajrangan_parser
+
+# Map critic IDs to their respective parsers
+CRITIC_PARSERS = {}
+
+# Dynamically build CRITIC_PARSERS based on fetched critic data
+critics_data = get_critics()
+for critic in critics_data:
+    # Assuming a naming convention like 'baradwajrangan_parser'
+    # You might need a more robust way to map critic ID to parser module
+    if critic["name"] == "Baradwaj Rangan": # This is a temporary hardcode, will be replaced by a more robust mapping
+        CRITIC_PARSERS[critic["id"]] = baradwajrangan_parser
+
 
 # --- Configuration Constants ---
 # Maximum number of concurrent HTTP requests to prevent overwhelming the source servers.
