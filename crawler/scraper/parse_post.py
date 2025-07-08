@@ -1,9 +1,9 @@
 """Dispatcher for parsing blog posts from different reviewers."""
 import aiohttp
-from .sources import baradwajrangan_parse
+from .critics import baradwajrangan_parser as baradwajrangan_parse
 
 SOURCES = {
-    "baradwajrangan": baradwajrangan_parse,
+    "79031f4e-3785-425d-a17d-4796cdf0a87e": baradwajrangan_parse, # Baradwaj Rangan
 }
 
 async def parse_post_async(session: aiohttp.ClientSession, url: str, reviewer: str = "baradwajrangan") -> dict:

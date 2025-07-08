@@ -2,13 +2,13 @@
 
 #### Week 1: Basic Crawler
 - [x] Set up project structure and virtual environment
-- [x] Create \`get_post_links()\` in \`fetch_links.py\`
+- [x] Create `get_post_links()` in `fetch_links.py`
 - [x] Debug selector to correctly fetch blog post links
-- [x] Create \`parse_post()\` in \`parse_post.py\` to extract title and intro
+- [x] Create `parse_post()` in `parse_post.py` to extract title and intro
 
 #### Week 2: Sentiment Analysis
 - [x] Choose LLM source (OpenAI or local LLaMA)
-- [x] Implement \`analyze_sentiment()\` in \`llm/openai_wrapper.py\` or \`llm/llama_wrapper.py\`
+- [x] Implement `analyze_sentiment()` in `llm/openai_wrapper.py` or `llm/llama_wrapper.py`
 - [x] Design and test prompt: “Does the author recommend this movie?”
 - [x] Tag each post as positive or not
 - [x] Provide async script to enrich sentiment for reviews missing data
@@ -19,7 +19,7 @@
 
 #### Week 4: CLI & Extensibility
 - [x] Add CLI arguments: number of posts, export format, LLM model
-- [x] Add progress bar with \`tqdm\`
+- [x] Add progress bar with `tqdm`
 - [x] Add logging to file
 
 #### Week 5: Async Batch Orchestration
@@ -58,3 +58,23 @@
 - [x] Move `crawler/reviewers.py` to `crawler/db/reviewers.py`
 - [x] Add comprehensive in-code comments to all modules involved in the `fetch_links` pipeline step
 - [x] Update `README.md` with project overview, crawler design, folder structure, pipeline explanation, and Step 1 details
+
+#### Week 8: Parsing Orchestrator & Refinements
+
+##### 2025-07-08
+- [x] Move `baradwaj_rangan_parse.py` to `crawler/scraper/critics/baradwaj_rangan_parser.py`
+- [x] Update `crawler/scraper/parse_post.py` to reflect new parser location and use critic UUIDs
+- [x] Rename `crawler/db/store_scraped_pages.py` to `crawler/db/scraper_queries.py`
+- [x] Add new functions to `scraper_queries.py` for `new_scraped_links` table (get, update parsed, update error)
+- [x] Create `crawler/pipeline/parse_posts_orchestrator.py` for testing with `new_scraped_links`
+- [x] Fix `parse_posts_orchestrator.py` to use `page_url` instead of `post_url`
+- [x] Fix `parse_posts_orchestrator.py` to map `critic_id` correctly
+- [x] Fix `scraper_queries.py` to map parsed data keys (`parsed_title`, etc.) to correct database column names (`title`, etc.) for `raw_scraped_pages`
+- [x] Fix `scraper_queries.py` to use correct table name `new_scraped_links` (removed typo `new_scrapped_links`)
+- [x] Refactor `crawler/db/supabase_client.py` to use standard logging to resolve circular dependency
+- [x] Upgrade `parse_posts_orchestrator.py` (formerly `crawl_step2_parse_posts.py`) to dynamically select parsers based on `critic_id`
+- [x] Rename `crawl_step2_parse_posts.py` to `parse_posts_orchestrator.py`
+- [x] Revert `parse_posts_orchestrator.py` to use `new_scraped_links` table for testing
+- [x] Update `crawler/scraper/parse_post.py` to use critic UUIDs in `SOURCES` dictionary
+- [x] Switch `parse_posts_orchestrator.py` back to `raw_scraped_pages` table
+- [x] Add robust comments to `parse_posts_orchestrator.py`
