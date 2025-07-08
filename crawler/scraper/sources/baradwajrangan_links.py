@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 from crawler.utils.logger import get_logger
 from crawler.utils.io_helpers import write_failure
-from crawler.db.review_queries import get_latest_post_date, get_recent_links
+from crawler.db.store_scraped_pages import get_all_urls
 
 BASE_URL = "https://baradwajrangan.wordpress.com"
 CONCURRENT_FETCHES = 10
@@ -68,7 +68,7 @@ async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list
     Fetch blog post links between start_page and end_page.
     Stops early if a recent link (already stored) is encountered.
     """
-    recent_links = get_recent_links()
+    recent_links = get_all_urls()
 
     connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
     all_links: list[tuple[int, int, str]] = []

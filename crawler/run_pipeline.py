@@ -11,6 +11,7 @@ from pipeline import (
     enrich_step2_add_metadata,
 )
 from crawler.utils.logger import get_logger
+from crawler.llm import set_llm_model
 
 logger = get_logger(__name__)
 
@@ -58,6 +59,15 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, help="Limit number of links to process")
     parser.add_argument("--dry-run", action="store_true", help="Run fetch step only")
     parser.add_argument("--reviewer", default="baradwajrangan", help="Reviewer id to crawl")
+    parser.add_argument(
+        "--llm-model",
+        default=None,
+        choices=["openai", "llama"],
+        help="LLM model to use (overrides LLM_MODEL env)",
+    )
     args = parser.parse_args()
+
+    if args.llm_model:
+        set_llm_model(args.llm_model)
 
     asyncio.run(main(limit=args.limit, dry_run=args.dry_run, reviewer=args.reviewer))
