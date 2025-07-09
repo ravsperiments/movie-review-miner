@@ -1,0 +1,20 @@
+requests
+beautifulsoup4
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+supabase
+httpx
+async-timeout>=4.0
+aiohttp
+python-dotenv
+
+#genai
+google-generativeai
+anthropic
+openai
+prometheus_client
+
+#movie databases
+tqdm

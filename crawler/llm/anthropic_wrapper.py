@@ -5,6 +5,12 @@ from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
+from ..utils.metrics import (
+    LLM_REQUEST_COUNT,
+    LLM_REQUESTS_IN_FLIGHT,
+    LLM_PROMPT_LENGTH,
+)
+
 class AnthropicWrapper:
     """
     A wrapper for the Anthropic API (Claude models).
@@ -30,16 +36,19 @@ class AnthropicWrapper:
         """
         if not self.client:
             raise RuntimeError("Anthropic client not initialized. ANTHROPIC_API_KEY is missing.")
-
+        provider = 'anthropic'
+        LLM_REQUEST_COUNT.labels(provider=provider).inc()
+        LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
         try:
             message = await self.client.messages.create(
                 model=model,
                 max_tokens=1024,
-                messages=[
-                    {"role": "user", "content": prompt}
-                ]
+                messages=[{"role": "user", "content": prompt}],
             )
             return message.content[0].text
         except Exception as e:
             logger.error(f"Error generating text with Anthropic model {model}: {e}")
             raise
+        finally:
+            LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).dec()

@@ -41,6 +41,7 @@
 - [x] Add weekly orchestrator script (`run_pipeline.py`) with CLI options (`--limit`, `--dry-run`, `--reviewer`)
 - [x] Modularize blog-specific scraping in `scraper/sources` and parsing in `scraper/parse_post.py`
 - [x] Log pipeline metrics and results via `utils.StepLogger` and `db.pipeline_logger`
+- [x] Instrument remote LLM throughput & token usage metrics (requests, concurrency, prompt/completion tokens) via Prometheus_client
 
 ##### 2025-07-07
 - [x] Implement `raw_scraped_pages` staging table
@@ -74,12 +75,11 @@
 - [x] Update `crawler/scraper/parse_post.py` to use critic UUIDs in `SOURCES` dictionary
 - [x] Switch `parse_posts_orchestrator.py` back to `raw_scraped_pages` table
 - [x] Add robust comments to `parse_posts_orchestrator.py`
-
-##### 2025-07-09
 - [x] Refactor `pipeline/parse_posts_orchestrator.py` to iterate per critic+base_url (DB-driven critic lookup) with improved concurrency and retry logic
 - [x] Refactor `pipeline/review_validation_orchestrator.py` to use an LLMController for explicit model selection or parallel multi-model runs, and batch-store results in `stg_llm_logs`
 
-- [ ] TODO: implement LLaMA wrapper via Ollama CLI for local LLaMA2 inference
-- [ ] TODO: build a comparison script to evaluate multiple model outputs and apply a voting system for final decision
+#### 2025-07-09
+- [x] TODO: implement LLaMA wrapper via Ollama CLI for local LLaMA2 inference
+- [x] TODO: build a comparison script to evaluate multiple model outputs and apply a voting system for final decision
 - [ ] TODO: execute the classification orchestrator for all parsed posts in staging
 - [ ] TODO: update `stg_cleaned_reviews` with final voted results
