@@ -154,7 +154,7 @@ def get_parsed_pages() -> List[Dict[str, Any]]:
                               Returns an empty list if no parsed pages are found or an error occurs.
     """
     try:
-        response = supabase.table("raw_scraped_pages").select("*").eq("status", "parsed").limit(5).execute()
+        response = supabase.table("raw_scraped_pages").select("*").eq("status", "parsed").limit(500).execute()
         print(response.data)
         return response.data if response.data else []
     except Exception as e:

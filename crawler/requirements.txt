@@ -14,6 +14,9 @@ python-dotenv
 google-generativeai
 anthropic
 openai
+xai_sdk
+
+# monitoring
 prometheus_client
 
 #movie databases

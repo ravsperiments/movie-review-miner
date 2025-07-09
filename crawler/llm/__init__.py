@@ -1,5 +1,5 @@
 import os
-from . import openai_wrapper, llama_wrapper
+from . import ollama_wrapper, openai_wrapper, xai_wrapper
 
 # Determine selected LLM model from environment or set via CLI
 _SELECTED_MODEL = os.getenv("LLM_MODEL", "openai").lower()
@@ -12,8 +12,10 @@ def set_llm_model(model: str) -> None:
 def _get_module():
     if _SELECTED_MODEL == "openai":
         return openai_wrapper
-    if _SELECTED_MODEL == "llama":
-        return llama_wrapper
+    if _SELECTED_MODEL == "ollama":
+        return ollama_wrapper
+    if _SELECTED_MODEL == "xai":
+        return xai_wrapper
     raise ValueError(f"Unknown LLM model: {_SELECTED_MODEL}")
 
 def is_film_review(title: str, short_review: str) -> bool:

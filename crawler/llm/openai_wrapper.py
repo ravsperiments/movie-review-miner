@@ -31,14 +31,6 @@ class OpenAIWrapper:
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.2,
             )
-            usage = getattr(response.usage, None)
-            if usage is not None:
-                prompt_toks = getattr(usage, 'prompt_tokens', 0)
-                comp_toks = getattr(usage, 'completion_tokens', 0)
-                total_toks = prompt_toks + comp_toks
-                LLM_PROMPT_TOKENS.labels(provider=provider).observe(prompt_toks)
-                LLM_COMPLETION_TOKENS.labels(provider=provider).observe(comp_toks)
-                LLM_TOTAL_TOKENS.labels(provider=provider).observe(total_toks)
             return response.choices[0].message.content.strip()
         except OpenAIError as e:
             self.logger.error("OpenAI generate_text failed: %s", e)

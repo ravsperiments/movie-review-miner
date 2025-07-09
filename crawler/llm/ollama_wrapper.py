@@ -7,21 +7,21 @@ from dotenv import load_dotenv
 from ..utils.logger import get_logger
 
 
-class LlamaWrapper:
-    """Wrapper for LLaMA models via Ollama CLI."""
+class OLlamaWrapper:
+    """Wrapper for OLLaMA models via Ollama CLI."""
 
     def __init__(self):
         load_dotenv()
-        self.default_model = os.getenv("LLAMA_MODEL_NAME", "llama2")
+        self.default_model = os.getenv("OLLAMA_MODEL_NAME", "gemma2:2b-instruct-q4_K_M")
         self.logger = get_logger(__name__)
 
     async def prompt_llm(self, prompt: str, model: str = None) -> str:
         """
-        Generates text using the specified LLaMA model via the Ollama CLI.
+        Generates text using the specified OLLaMA model via the Ollama CLI.
 
         Args:
             prompt: The prompt to send to the model.
-            model: Optional model name override; if omitted, uses LLAMA_MODEL_NAME.
+            model: Optional model name override; if omitted, uses OLLAMA_MODEL_NAME.
 
         Returns:
             The text response from the model.
@@ -32,7 +32,6 @@ class LlamaWrapper:
                 "ollama",
                 "run",
                 model_name,
-                "--prompt",
                 prompt,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,

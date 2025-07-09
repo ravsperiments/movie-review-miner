@@ -2,10 +2,11 @@
 import os
 import json
 from typing import Any, Dict, List
-from crawler.llm.llama_wrapper import LlamaWrapper
+from crawler.llm.ollama_wrapper import OLlamaWrapper
 from crawler.llm.openai_wrapper import OpenAIWrapper
 from crawler.llm.gemini_wrapper import GeminiWrapper
 from crawler.llm.anthropic_wrapper import AnthropicWrapper
+from crawler.llm.xai_wrapper import XaiWrapper
 from crawler.utils.singleton import Singleton
 from crawler.llm.prompts.cleaning_prompt import CLEANING_PROMPT_TEMPLATE
 from crawler.llm.prompts.judging_prompt import JUDGING_PROMPT_TEMPLATE
@@ -52,10 +53,17 @@ class LLMController(metaclass=Singleton):
 
         # Initialize LLaMA wrapper (Ollama CLI)
         try:
-            self.wrappers["llama"] = LlamaWrapper()
-            self.wrappers["llama2"] = self.wrappers["llama"]
+            self.wrappers["ollama"] = OLlamaWrapper()
+            self.wrappers["gemma2:2b-instruct-q4_K_M"] = self.wrappers["ollama"]
         except Exception as e:
-            print(f"Could not initialize LlamaWrapper: {e}")
+            print(f"Could not initialize OLlamaWrapper: {e}")
+
+        # Initialize XAI wrapper
+        try:
+            self.wrappers["xai"] = XaiWrapper()
+            self.wrappers["xai-default"] = self.wrappers["xai"]
+        except Exception as e:
+            print(f"Could not initialize XaiWrapper: {e}")
 
         if not self.wrappers:
             raise RuntimeError("No LLM wrappers could be initialized. Check API keys and environment variables.")
@@ -78,9 +86,10 @@ class LLMController(metaclass=Singleton):
             wrapper = self.wrappers.get("gemini")
         elif model_name.startswith("claude"):
             wrapper = self.wrappers.get("anthropic")
-        elif model_name.startswith("llama"):
-            wrapper = self.wrappers.get("llama")
-        
+        elif model_name.startswith("gemma2"):
+            wrapper = self.wrappers.get("ollama")
+        elif model_name.startswith("grok"):
+            wrapper = self.wrappers.get("xai")
         if not wrapper:
             raise ValueError(f"No wrapper found for model: {model_name}")
 
