@@ -2,20 +2,20 @@
 
 import os
 from dotenv import load_dotenv
-from openai import OpenAI, OpenAIError
+from openai import OpenAI, AsyncOpenAI, OpenAIError
 
 from ..utils.logger import get_logger
 
 class OpenAIWrapper:
     def __init__(self):
         load_dotenv()
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.logger = get_logger(__name__)
 
-    def generate_text(self, prompt: str) -> str:
+    async def prompt_llm(self, prompt: str, model: str = "gpt-3.5-turbo") -> str:
         try:
-            response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+            response = await self.client.chat.completions.create(
+                model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.2,
             )

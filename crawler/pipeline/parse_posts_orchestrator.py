@@ -1,16 +1,14 @@
 """
-Orchestrates the parsing of raw blog post content and stores the extracted data in Supabase.
+Orchestrator for Step 2: parse raw blog posts in the staging table and store structured content.
 
-This script is responsible for:
-1.  Fetching raw blog post entries that are marked as 'pending' or 'posted' from the database.
-2.  Dynamically selecting the appropriate parsing logic based on the critic associated with each post.
-3.  Executing the parsing process to extract structured data such as title, short description,
-    full review content, and publication date.
-4.  Updating the database with the parsed information, marking the post as 'parsed' upon success.
-5.  Logging any errors encountered during the parsing process, updating the post's status to 'failed'
-    and storing error details for debugging.
-6.  Managing concurrency and retries for robust processing of multiple posts.
+This script:
+  1. Retrieves pending pages to parse (with URL, critic ID) from the DB.
+  2. Builds a dynamic critic-to-parser mapping via a DB-driven critic lookup.
+  3. Applies concurrency and retry logic for robust HTTP parsing of each URL.
+  4. Validates, transforms, and upserts parsed fields into the raw_scraped_pages table.
+  5. Logs successes and failures using StepLogger and pipeline_logger.
 """
+import logging
 import asyncio
 import aiohttp
 import async_timeout
@@ -27,6 +25,9 @@ import json
 
 from crawler.db.critic_queries import get_critics
 from crawler.scraper.critics import baradwajrangan_parser
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Map critic IDs to their respective parsers
 CRITIC_PARSERS = {}
@@ -89,22 +90,18 @@ async def _parse_and_store(
         return
 
     try:
-        # Acquire a semaphore to limit concurrent requests.
+        # Ensure we don’t overwhelm the target site or hang indefinitely
         async with semaphore:
-            # Set a timeout for the parsing operation to prevent indefinite hangs.
             async with async_timeout.timeout(10):
-                # Call the dynamic parser dispatcher to get structured data from the page.
-                # The parse_post_async function internally selects the correct critic parser.
+                # Dispatch to the appropriate critic parser
                 data = await parse_post_async(session, page_url, critic_id)
 
-        # Validate that all expected keys are present in the parsed data.
-        # This ensures the parser returned a complete set of information.
+        # Verify all required fields were parsed
         for key in ["url", "title", "summary", "full_review", "date"]:
             if key not in data:
-                raise ValueError(f"Missing {key} in parsed data")
+                raise ValueError(f"Missing {key} in parsed data for {page_url}")
 
-        # Map the parsed data keys to the database column names.
-        # This ensures consistency with the Supabase schema.
+        # Normalize parsed output to our DB schema
         parsed_data = {
             "parsed_title": data["title"],
             "parsed_short_review": data["summary"],
@@ -112,12 +109,12 @@ async def _parse_and_store(
             "parsed_review_date": data["date"],
         }
 
-        # Update the database record for the raw page with the extracted content and 'parsed' status.
+        # Persist parsed content and mark as parsed
         update_page_as_parsed(page_id, parsed_data)
         step_logger.metrics["saved_count"] += 1
-        step_logger.logger.info("Stored review from %s", page_url)
-        
-        # Log the successful parsing of this specific link in the pipeline logs.
+        logger.info("Parsed and stored review %s", page_url)
+
+        # Record pipeline success metrics
         log_step_result(
             "parse_post",
             link_id=page_id,
@@ -159,11 +156,13 @@ async def parse_posts(pages: list[dict]) -> None:
         pages (list[dict]): A list of dictionaries, each representing a raw page entry to be parsed.
     """
     # Initialize a StepLogger for the entire parsing step (Step 2).
+    # Initialize a StepLogger for the entire parsing step (Step 2)
+    logger.info("Starting parse_posts for %d pages", len(pages))
     step_logger = StepLogger("step_2_parse_posts")
     
     # If no pages are provided, log and finalize immediately.
     if not pages:
-        step_logger.logger.info("No new posts to parse")
+        logger.info("No pending pages to parse. Exiting parse_posts_orchestrator.")
         step_logger.finalize()
         return
     
@@ -172,6 +171,7 @@ async def parse_posts(pages: list[dict]) -> None:
     step_logger.logger.info("Parsing %s posts", step_logger.metrics["input_count"])
 
     # Use an aiohttp ClientSession for efficient and persistent HTTP connections.
+    # Use a shared HTTP session for efficiency across multiple page fetches
     async with aiohttp.ClientSession() as session:
         # Create a list of asynchronous tasks, each wrapped with retry logic.
         # Each task will call _parse_and_store for a single page.

@@ -141,3 +141,22 @@ def update_page_with_error(page_id: str, error_type: str, error_message: str) ->
     except Exception as e:
         # Log any errors that occur while trying to log the original error.
         logger.error(f"Error logging error for page {page_id}: {e}")
+
+def get_parsed_pages() -> List[Dict[str, Any]]:
+    """
+    Fetches all entries from the `raw_scraped_pages` table that have a status of 'parsed'.
+
+    These are typically pages whose content has been successfully parsed and are ready
+    for further processing, such as LLM classification.
+
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries, each representing a parsed page.
+                              Returns an empty list if no parsed pages are found or an error occurs.
+    """
+    try:
+        response = supabase.table("raw_scraped_pages").select("*").eq("status", "parsed").limit(5).execute()
+        print(response.data)
+        return response.data if response.data else []
+    except Exception as e:
+        logger.error(f"Error fetching parsed raw scraped pages: {e}")
+        return []
