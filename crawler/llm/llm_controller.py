@@ -53,7 +53,8 @@ class LLMController(metaclass=Singleton):
         # Initialize LLaMA wrapper (Ollama CLI)
         try:
             self.wrappers["llama"] = LlamaWrapper()
-            self.wrappers["llama2"] = self.wrappers["llama"]
+            self.wrappers["phi3:mini"] = self.wrappers["llama"]
+            self.wrappers["gemma3n:e2b"] = self.wrappers["llama"]
         except Exception as e:
             print(f"Could not initialize LlamaWrapper: {e}")
 
@@ -71,17 +72,18 @@ class LLMController(metaclass=Singleton):
         Returns:
             The response from the LLM.
         """
-        wrapper = None
-        if model_name.startswith("gpt"):
-            wrapper = self.wrappers.get("openai")
-        elif model_name.startswith("gemini"):
-            wrapper = self.wrappers.get("gemini")
-        elif model_name.startswith("claude"):
-            wrapper = self.wrappers.get("anthropic")
-        elif model_name.startswith("llama"):
-            wrapper = self.wrappers.get("llama")
-        
-        if not wrapper:
+        wrapper = self.wrappers.get(model_name)
+        if wrapper is None:
+            if model_name.startswith("gpt"):
+                wrapper = self.wrappers.get("openai")
+            elif model_name.startswith("gemini"):
+                wrapper = self.wrappers.get("gemini")
+            elif model_name.startswith("claude"):
+                wrapper = self.wrappers.get("anthropic")
+            elif model_name.startswith("llama"):
+                wrapper = self.wrappers.get("llama")
+
+        if wrapper is None:
             raise ValueError(f"No wrapper found for model: {model_name}")
 
         return await wrapper.prompt_llm(prompt, model=model_name)

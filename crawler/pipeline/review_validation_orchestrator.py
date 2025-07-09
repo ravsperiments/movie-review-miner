@@ -20,6 +20,11 @@ from crawler.llm.prompts.is_film_review_prompt import IS_FILM_REVIEW_PROMPT_TEMP
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Map each classification task type to the JSON field to extract and normalize
+EXTRACT_FIELD_FOR_TASK: Dict[str, str] = {
+    "is_film_review": "is_film_review",
+}
+
 async def classify_review_with_llm(llm_controller: LLMController, model_name: str, review_data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Performs LLM classification for a single review using a specified model.
@@ -56,13 +61,29 @@ async def classify_review_with_llm(llm_controller: LLMController, model_name: st
         logger.error("Classification failed (model %s, source_id %s): %s", model_name, review_data['id'], e)
         output_parsed = {"error": str(e), "raw_output": output_raw}
 
+    # Normalize parsed output to the single flag for this task (yes/no/maybe)
+    if isinstance(output_parsed, dict):
+        field = EXTRACT_FIELD_FOR_TASK.get(task_type)
+        if field and field in output_parsed:
+            raw_val = output_parsed[field]
+            if isinstance(raw_val, bool):
+                normalized = "yes" if raw_val else "no"
+            elif isinstance(raw_val, str):
+                normalized = raw_val.strip().lower()
+                if normalized not in ("yes", "no", "maybe"):
+                    normalized = "maybe"
+            else:
+                normalized = "maybe"
+            output_parsed = normalized
+
     task_fingerprint = generate_task_fingerprint(task_type, review_data["id"])
 
-    # Prepare log row for this model
+    # Prepare log row for this model (sanitize model_name: remove special chars except hyphens/underscores)
+    db_model_name = re.sub(r"[^A-Za-z0-9_-]", "", model_name)
     return {
         "source_table": "raw_scraped_pages",
         "source_id": review_data["id"],
-        "model_name": model_name,
+        "model_name": db_model_name,
         "task_type": task_type,
         "input_data": input_data,
         "task_fingerprint": task_fingerprint,
@@ -72,9 +93,7 @@ async def classify_review_with_llm(llm_controller: LLMController, model_name: st
     }
 
 CLASSIFICATION_MODELS = [
-    "gpt-4",
-    "gemini-2.5-flash",
-    "claude-sonnet-4-0",
+    "claude-sonnet-4-0"
 ]
 
 async def classify_reviews():

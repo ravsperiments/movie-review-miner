@@ -12,7 +12,7 @@ class LlamaWrapper:
 
     def __init__(self):
         load_dotenv()
-        self.default_model = os.getenv("LLAMA_MODEL_NAME", "llama2")
+        self.default_model = os.getenv("LLAMA_MODEL_NAME", "phi3:mini")
         self.logger = get_logger(__name__)
 
     async def prompt_llm(self, prompt: str, model: str = None) -> str:
@@ -32,7 +32,6 @@ class LlamaWrapper:
                 "ollama",
                 "run",
                 model_name,
-                "--prompt",
                 prompt,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
