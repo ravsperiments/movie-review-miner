@@ -78,8 +78,14 @@
 - [x] Refactor `pipeline/parse_posts_orchestrator.py` to iterate per critic+base_url (DB-driven critic lookup) with improved concurrency and retry logic
 - [x] Refactor `pipeline/review_validation_orchestrator.py` to use an LLMController for explicit model selection or parallel multi-model runs, and batch-store results in `stg_llm_logs`
 
-#### 2025-07-09
+##### 2025-07-09
+- [x] Fixed "Broken pipe" error in `review_validation_orchestrator.py` by removing redundant batch insert.
+- [x] Implemented rate limiting in `review_validation_orchestrator.py` to avoid overwhelming APIs.
+- [x] Refactored `review_validation_orchestrator.py` to stream LLM logs to the database.
+- [x] Refactored `review_validation_orchestrator.py` to simplify the `classify_review_with_llm` function and remove unnecessary `asyncio.gather`.
 - [x] TODO: implement LLaMA wrapper via Ollama CLI for local LLaMA2 inference
 - [x] TODO: build a comparison script to evaluate multiple model outputs and apply a voting system for final decision
+
+#### 2025-07-10
 - [ ] TODO: execute the classification orchestrator for all parsed posts in staging
 - [ ] TODO: update `stg_cleaned_reviews` with final voted results
