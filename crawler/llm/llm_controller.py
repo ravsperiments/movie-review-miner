@@ -86,7 +86,7 @@ class LLMController(metaclass=Singleton):
             wrapper = self.wrappers.get("gemini")
         elif model_name.startswith("claude"):
             wrapper = self.wrappers.get("anthropic")
-        elif model_name.startswith("gemma2"):
+        elif model_name.startswith("gemma"):
             wrapper = self.wrappers.get("ollama")
         elif model_name.startswith("grok"):
             wrapper = self.wrappers.get("xai")

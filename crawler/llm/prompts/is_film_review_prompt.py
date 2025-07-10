@@ -5,6 +5,12 @@ IS_FILM_REVIEW_PROMPT_TEMPLATE = """You are an expert critic assistant. Given th
 3. What are the **names of the films**, if mentioned?
 4. Justify your answer briefly based on clues in the content.
 
+Examples of phrases in the content that is not a film review:
+-Interview
+-Readers Write In 
+-#QnA
+-Lights, Camera, Analysis: Pa Ranjith (Natchathiram Nagargiradhu)
+
 Output your answer in the following JSON format:
 
 {{
@@ -19,7 +25,7 @@ Here is the input:
 ---
 Title: {blog_title}
 
-Short Review: {short_review}
+Summary: {short_review}
 
-Full Review: {full_review}
+Full Text: {full_review}
 ---"""

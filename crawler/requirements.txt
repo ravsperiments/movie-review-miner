@@ -21,3 +21,4 @@ prometheus_client
 
 #movie databases
 tqdm
+aiolimiter

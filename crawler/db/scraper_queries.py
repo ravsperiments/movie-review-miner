@@ -154,9 +154,34 @@ def get_parsed_pages() -> List[Dict[str, Any]]:
                               Returns an empty list if no parsed pages are found or an error occurs.
     """
     try:
-        response = supabase.table("raw_scraped_pages").select("*").eq("status", "parsed").limit(500).execute()
+        response = supabase.table("raw_scraped_pages").select("*").eq("status", "parsed").limit(5).execute()
         print(response.data)
         return response.data if response.data else []
     except Exception as e:
         logger.error(f"Error fetching parsed raw scraped pages: {e}")
         return []
+    
+
+def get_unpromoted_pages() -> List[Dict[str, Any]]:
+    """
+    Fetches all entries from the `raw_scraped_pages` table that have a status of 'parsed'.
+
+    These are typically pages whose content has been successfully parsed and are ready
+    for further processing, such as LLM classification.
+
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries, each representing a parsed page.
+                              Returns an empty list if no parsed pages are found or an error occurs.
+    """
+    try:
+        # Step 1: Get IDs already processed by gpt-35-turbo
+        response = supabase.table("vw_unpromoted_parsed_pages") \
+            .select("*") \
+            .execute()
+
+        return response.data if response.data else []
+
+    except Exception as e:
+        logger.error(f"Error fetching parsed raw scraped pages: {e}")
+        return []
+
