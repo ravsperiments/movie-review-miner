@@ -26,9 +26,9 @@ EXTRACT_FIELD_FOR_TASK: Dict[str, str] = {
     "is_film_review": "is_film_review",
 }
 
-async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any]) -> Dict[str, Any]:
+async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any]) -> None:
     """
-    Performs LLM classification for a single review using a specified model.
+    Performs LLM classification for a single review and inserts the result if valid.
     """
     async with limiter:
         # Define the classification task and assemble the input fields
@@ -95,7 +95,12 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
         "output_parsed": output_parsed,
         "accepted": not (isinstance(output_parsed, dict) and "error" in output_parsed),
     }
-    return log_row
+    if log_row["accepted"]:
+        try:
+            batch_insert_llm_logs([log_row])
+            logger.info("Inserted LLM log for source_id %s, model %s", review_data['id'], model_name)
+        except Exception as e:
+            logger.error("Failed to insert LLM log for source_id %s, model %s: %s", review_data['id'], model_name, e)
 
 CLASSIFICATION_MODELS = [
     "grok-3-mini-fast",
@@ -118,22 +123,17 @@ async def classify_reviews():
     logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
 
     # Rate limiter: 5 requests per second
-    limiter = AsyncLimiter(5, 1)
+    limiter = AsyncLimiter(2, 1)
 
-    tasks: List[Dict[str, Any]] = []
+    tasks: List[asyncio.Task] = []
     for page in parsed_pages:
         # Run classification with each configured model in parallel
         for model_name in CLASSIFICATION_MODELS:
-            tasks.append(classify_review_with_llm(limiter, llm_controller, model_name, page))
+            task = asyncio.create_task(classify_review_with_llm(limiter, llm_controller, model_name, page))
+            tasks.append(task)
 
-    results = await asyncio.gather(*tasks)
+    await asyncio.gather(*tasks)
     logger.info(f"All classification tasks finished")
-    # Batch-insert all model logs (one row per model) into Supabase
-    try:
-        batch_insert_llm_logs(results)
-        logger.info("Inserted %d LLM log rows.", len(results))
-    except Exception as e:
-        logger.error("Batch insert of LLM logs failed: %s", e)
     logger.info("Finished LLM classification of parsed reviews.")
 
 if __name__ == "__main__":
