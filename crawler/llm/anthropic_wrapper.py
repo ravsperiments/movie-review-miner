@@ -1,7 +1,11 @@
 import os
 import anthropic
 import logging
+import json
+import traceback
+import re
 from anthropic import AsyncAnthropic
+from anthropic import APIError, APIStatusError, APITimeoutError
 
 logger = logging.getLogger(__name__)
 
@@ -46,9 +50,19 @@ class AnthropicWrapper:
                 max_tokens=1024,
                 messages=[{"role": "user", "content": prompt}],
             )
-            return message.content[0].text
+            response_text = message.content[0].text
+
+            # Extract JSON part using regex
+            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+            if json_match:
+                json_string = json_match.group(0)
+                return json_string
+            else:
+                logger.error(f"No JSON object found in Anthropic response: {response_text}")
+                return response_text # Return original text if no JSON found, let downstream handle error
+
         except Exception as e:
-            logger.error(f"Error generating text with Anthropic model {model}: {e}")
+            logger.error(f"An error occurred in prompt_llm for model {model}: {type(e).__name__}: {e}. Traceback: {traceback.format_exc()}")
             raise
         finally:
             LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).dec()
