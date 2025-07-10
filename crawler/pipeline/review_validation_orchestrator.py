@@ -107,7 +107,7 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
         _log_llm_result(review_data, model_name, task_type, input_data, output_raw, output_parsed)
 
 CLASSIFICATION_MODELS = [
-    "claude-3-5-haiku-latest",
+    "gemma2-9b-it",
 ]
 
 async def classify_reviews():

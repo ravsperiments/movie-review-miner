@@ -7,6 +7,7 @@ from crawler.llm.openai_wrapper import OpenAIWrapper
 from crawler.llm.gemini_wrapper import GeminiWrapper
 from crawler.llm.anthropic_wrapper import AnthropicWrapper
 from crawler.llm.xai_wrapper import XaiWrapper
+from crawler.llm.groq_wrapper import GroqWrapper
 from crawler.utils.singleton import Singleton
 from crawler.llm.prompts.cleaning_prompt import CLEANING_PROMPT_TEMPLATE
 from crawler.llm.prompts.judging_prompt import JUDGING_PROMPT_TEMPLATE
@@ -38,7 +39,6 @@ class LLMController(metaclass=Singleton):
             self.wrappers["gemini"] = GeminiWrapper()
             self.wrappers["gemini-pro"] = self.wrappers["gemini"]
             self.wrappers["gemini-pro-vision"] = self.wrappers["gemini"]
-            print("GeminiWrapper initialized successfully.")
         except Exception as e:
             print(f"Could not initialize GeminiWrapper: {e}")
 
@@ -64,6 +64,13 @@ class LLMController(metaclass=Singleton):
             self.wrappers["xai-default"] = self.wrappers["xai"]
         except Exception as e:
             print(f"Could not initialize XaiWrapper: {e}")
+        
+        # Initialize Groq wrapper
+        try:
+            self.wrappers["groq"] = GroqWrapper()
+            self.wrappers["llama3-8b-8192"] = self.wrappers["groq"]
+        except Exception as e:
+            print(f"Could not initialize GroqWrapper: {e}")
 
         if not self.wrappers:
             raise RuntimeError("No LLM wrappers could be initialized. Check API keys and environment variables.")
@@ -86,10 +93,12 @@ class LLMController(metaclass=Singleton):
             wrapper = self.wrappers.get("gemini")
         elif model_name.startswith("claude"):
             wrapper = self.wrappers.get("anthropic")
-        elif model_name.startswith("gemma"):
+        elif model_name.startswith("phi"):
             wrapper = self.wrappers.get("ollama")
         elif model_name.startswith("grok"):
             wrapper = self.wrappers.get("xai")
+        elif model_name.startswith("gemma2-9b"):
+            wrapper = self.wrappers.get("groq")
         if not wrapper:
             raise ValueError(f"No wrapper found for model: {model_name}")
 

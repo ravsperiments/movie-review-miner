@@ -177,6 +177,7 @@ def get_unpromoted_pages() -> List[Dict[str, Any]]:
         # Step 1: Get IDs already processed by gpt-35-turbo
         response = supabase.table("vw_unpromoted_parsed_pages") \
             .select("*") \
+            .limit(10) \
             .execute()
 
         return response.data if response.data else []

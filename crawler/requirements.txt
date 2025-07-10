@@ -15,6 +15,7 @@ google-generativeai
 anthropic
 openai
 xai_sdk
+groq
 
 # monitoring
 prometheus_client
