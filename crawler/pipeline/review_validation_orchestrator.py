@@ -10,7 +10,7 @@ import json
 import re
 import logging
 from dotenv import load_dotenv
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Union
 from aiolimiter import AsyncLimiter
 
 from crawler.db.scraper_queries import get_unpromoted_pages
@@ -26,37 +26,16 @@ EXTRACT_FIELD_FOR_TASK: Dict[str, str] = {
     "is_film_review": "is_film_review",
 }
 
-async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any]) -> None:
+def _parse_llm_output(output_raw: str, task_type: str) -> Union[str, Dict[str, Any]]:
     """
-    Performs LLM classification for a single review and inserts the result if valid.
+    Parses and cleans the JSON output from the LLM.
     """
-    async with limiter:
-        # Define the classification task and assemble the input fields
-        task_type = "is_film_review"
-    input_data = {
-        "blog_title": review_data.get("parsed_title"),
-        "short_review": review_data.get("parsed_short_review"),
-        "full_review": review_data.get("parsed_full_review"),
-    }
-
-    prompt = IS_FILM_REVIEW_PROMPT_TEMPLATE.format(
-        blog_title=input_data['blog_title'],
-        short_review=input_data['short_review'],
-        full_review=input_data['full_review']
-    )
-
-    # Call the LLM and parse the JSON output (strip code fences if needed)
-    output_raw = ""
-    output_parsed = {}
     try:
-        response = await llm_controller.prompt_llm(model_name, prompt)
-        output_raw = response or ""
         # Remove markdown fences around JSON if present
         fenced = re.match(r"```(?:json)?\s*(.*)\s*```$", output_raw.strip(), flags=re.DOTALL)
         cleaned = fenced.group(1).strip() if fenced else output_raw.strip()
 
         # Fix unquoted values like: is_film_review: Maybe
-        # (avoid lookbehind; match the whole expression instead)
         cleaned = re.sub(r'"is_film_review":\s*(Yes|No|Maybe)', r'"is_film_review": "\1"', cleaned)
 
         output_parsed = json.loads(cleaned)
@@ -71,22 +50,24 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
                 elif isinstance(value, str) and task_type == "is_film_review":
                     val_lower = value.strip().lower()
                     value = val_lower if val_lower in ("yes", "no", "maybe") else "maybe"
-                output_parsed = value
-        logger.info("Model %s for source_id %s returned parsed JSON", model_name, review_data['id'])
+                return value
+        return output_parsed
     except json.JSONDecodeError as e:
-        logger.error("JSON decoding error (model %s, source_id %s): %s", model_name, review_data['id'], e)
-        output_parsed = {"error": "JSON_DECODE_ERROR", "raw_output": output_raw}
+        logger.error(f"JSON decoding error: {e}")
+        return {"error": "JSON_DECODE_ERROR", "raw_output": output_raw}
     except Exception as e:
-        logger.error("Classification failed (model %s, source_id %s): %s", model_name, review_data['id'], e)
-        output_parsed = {"error": str(e), "raw_output": output_raw}
+        logger.error(f"Failed to parse LLM output: {e}")
+        return {"error": str(e), "raw_output": output_raw}
 
+def _log_llm_result(review_data: Dict[str, Any], model_name: str, task_type: str, input_data: Dict[str, Any], output_raw: str, output_parsed: Union[str, Dict[str, Any]]) -> None:
+    """
+    Logs the LLM result to the database.
+    """
     task_fingerprint = generate_task_fingerprint(task_type, review_data["id"])
 
-    # Prepare log row for this model and insert it immediately to avoid data loss
     log_row = {
         "source_table": "raw_scraped_pages",
         "source_id": review_data["id"],
-        # Sanitize model_name for DB: keep only alphanumeric, underscore, and hyphen
         "model_name": re.sub(r"[^A-Za-z0-9_.-]", "", model_name),
         "task_type": task_type,
         "input_data": input_data,
@@ -95,15 +76,38 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
         "output_parsed": output_parsed,
         "accepted": not (isinstance(output_parsed, dict) and "error" in output_parsed),
     }
+
     if log_row["accepted"]:
         try:
             batch_insert_llm_logs([log_row])
-            logger.info("Inserted LLM log for source_id %s, model %s", review_data['id'], model_name)
+            logger.info(f"Inserted LLM log for source_id {review_data['id']}, model {model_name}")
         except Exception as e:
-            logger.error("Failed to insert LLM log for source_id %s, model %s: %s", review_data['id'], model_name, e)
+            logger.error(f"Failed to insert LLM log for source_id {review_data['id']}, model {model_name}: {e}")
+
+async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any]) -> None:
+    """
+    Performs LLM classification for a single review and inserts the result if valid.
+    """
+    async with limiter:
+        task_type = "is_film_review"
+        input_data = {
+            "blog_title": review_data.get("parsed_title"),
+            "short_review": review_data.get("parsed_short_review"),
+            "full_review": review_data.get("parsed_full_review"),
+        }
+
+        prompt = IS_FILM_REVIEW_PROMPT_TEMPLATE.format(
+            blog_title=input_data['blog_title'],
+            short_review=input_data['short_review'],
+            full_review=input_data['full_review']
+        )
+
+        output_raw = await llm_controller.prompt_llm(model_name, prompt) or ""
+        output_parsed = _parse_llm_output(output_raw, task_type)
+        _log_llm_result(review_data, model_name, task_type, input_data, output_raw, output_parsed)
 
 CLASSIFICATION_MODELS = [
-    "grok-3-mini-fast",
+    "claude-3-5-haiku-latest",
 ]
 
 async def classify_reviews():
@@ -122,18 +126,15 @@ async def classify_reviews():
 
     logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
 
-    # Rate limiter: 5 requests per second
-    limiter = AsyncLimiter(2, 1)
+    # Rate limiter: 40 requests per 60 seconds
+    limiter = AsyncLimiter(40, 60)
 
-    tasks: List[asyncio.Task] = []
+    tasks = []
     for page in parsed_pages:
-        # Run classification with each configured model in parallel
         for model_name in CLASSIFICATION_MODELS:
-            task = asyncio.create_task(classify_review_with_llm(limiter, llm_controller, model_name, page))
-            tasks.append(task)
+            tasks.append(classify_review_with_llm(limiter, llm_controller, model_name, page))
 
     await asyncio.gather(*tasks)
-    logger.info(f"All classification tasks finished")
     logger.info("Finished LLM classification of parsed reviews.")
 
 if __name__ == "__main__":
