@@ -4,6 +4,8 @@ import logging
 import json
 import traceback
 import re
+import asyncio
+import random
 from anthropic import AsyncAnthropic
 from anthropic import APIError, APIStatusError, APITimeoutError
 
@@ -27,6 +29,35 @@ class AnthropicWrapper:
         else:
             self.client = AsyncAnthropic(api_key=self.api_key)
 
+    async def _handle_rate_limit(self, api_call, *args, **kwargs):
+        retries = 0
+        max_retries = 5
+        backoff_time = 1
+        while retries < max_retries:
+            try:
+                return await api_call(*args, **kwargs)
+            except APIStatusError as e:
+                if e.status_code == 429:
+                    retries += 1
+                    if retries == max_retries:
+                        logger.error(f"Rate limit exceeded. Max retries reached. Giving up.")
+                        raise
+                    
+                    # Get retry-after header if available, otherwise use exponential backoff
+                    retry_after = e.response.headers.get("retry-after")
+                    if retry_after:
+                        wait_time = int(retry_after)
+                        logger.warning(f"Rate limit exceeded. Retrying in {wait_time} seconds.")
+                    else:
+                        wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
+                        logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
+                    
+                    await asyncio.sleep(wait_time)
+                else:
+                    raise
+            except Exception:
+                raise
+
     async def prompt_llm(self, prompt: str, model: str = "claude-sonnet-4-0") -> str:
         """
         Generates text using the Anthropic API.
@@ -40,16 +71,25 @@ class AnthropicWrapper:
         """
         if not self.client:
             raise RuntimeError("Anthropic client not initialized. ANTHROPIC_API_KEY is missing.")
+        
         provider = 'anthropic'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
         LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+
         try:
-            message = await self.client.messages.create(
+            api_call = self.client.messages.create
+            message = await self._handle_rate_limit(
+                api_call,
                 model=model,
                 max_tokens=1024,
                 messages=[{"role": "user", "content": prompt}],
             )
+            
+            if not message or not message.content:
+                logger.error("Invalid response from Anthropic API: message or content is missing.")
+                return "" # Return empty string if response is invalid
+
             response_text = message.content[0].text
 
             # Extract JSON part using regex

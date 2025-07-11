@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+import random
 
 from crawler.db.supabase_client import supabase
 
@@ -174,13 +175,15 @@ def get_unpromoted_pages() -> List[Dict[str, Any]]:
                               Returns an empty list if no parsed pages are found or an error occurs.
     """
     try:
-        # Step 1: Get IDs already processed by gpt-35-turbo
-        response = supabase.table("vw_unpromoted_parsed_pages") \
+        # query raw sccapped pages to get unpublished rows, which returns ~1000 rows
+        response = supabase.table("raw_scraped_pages") \
             .select("*") \
-            .limit(10) \
+            .gt("parsed_review_date", "2018-12-31") \
             .execute()
-
-        return response.data if response.data else []
+        # get 200 random sample from the reuturned records
+        sampled_rows = random.sample(response.data, 200)
+        
+        return sampled_rows if sampled_rows else []
 
     except Exception as e:
         logger.error(f"Error fetching parsed raw scraped pages: {e}")

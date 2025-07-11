@@ -1,4 +1,6 @@
 import os
+import asyncio
+import random
 from dotenv import load_dotenv
 import google.generativeai as genai
 
@@ -16,6 +18,23 @@ class GeminiWrapper:
         self.model = genai.GenerativeModel("gemini-2.5-flash")
         self.logger = get_logger(__name__)
 
+    async def _handle_errors(self, api_call, *args, **kwargs):
+        retries = 0
+        max_retries = 5
+        backoff_time = 1
+        while retries < max_retries:
+            try:
+                return api_call(*args, **kwargs)
+            except Exception as e:
+                retries += 1
+                if retries == max_retries:
+                    self.logger.error(f"API call failed after {max_retries} retries. Giving up.")
+                    raise
+                
+                wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
+                self.logger.warning(f"API call failed. Retrying in {wait_time:.2f} seconds.")
+                await asyncio.sleep(wait_time)
+
     async def prompt_llm(self, prompt: str, model: str = "gemini-1.0-pro") -> str:
         provider = 'gemini'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
@@ -23,8 +42,8 @@ class GeminiWrapper:
         LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
         try:
             model_instance = genai.GenerativeModel(model)
-            response = model_instance.generate_content(prompt)
-            if response.text:
+            response = await self._handle_errors(model_instance.generate_content, prompt)
+            if response and response.text:
                 return response.text
             self.logger.warning("Gemini generate_content did not return text. Response: %s", response)
             raise ValueError("Gemini generate_content did not return text.")

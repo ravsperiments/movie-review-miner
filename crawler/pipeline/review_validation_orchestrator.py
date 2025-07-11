@@ -108,7 +108,16 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
 
 CLASSIFICATION_MODELS = [
     "gemma2-9b-it",
+    "claude-3-5-haiku-latest",
+    "claude-3-5-sonnet-latest",
+    "grok-3-mini-fast",
+    "gpt-4.1-nano",
+    "gpt-4.1-mini",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash-lite-preview-06-17",
+    "phi3:mini"
 ]
+
 
 async def classify_reviews():
     """
@@ -127,7 +136,7 @@ async def classify_reviews():
     logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
 
     # Rate limiter: 40 requests per 60 seconds
-    limiter = AsyncLimiter(40, 60)
+    limiter = AsyncLimiter(1, 5)
 
     tasks = []
     for page in parsed_pages:

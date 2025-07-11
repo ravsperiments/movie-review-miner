@@ -2,6 +2,8 @@
 Wrapper for the XAI API (example generic provider).
 """
 import os
+import asyncio
+import random
 
 from dotenv import load_dotenv
 import httpx
@@ -35,6 +37,37 @@ class XaiWrapper:
             )
         self.logger = get_logger(__name__)
 
+    async def _handle_errors(self, api_call, *args, **kwargs):
+        retries = 0
+        max_retries = 5
+        backoff_time = 1
+        while retries < max_retries:
+            try:
+                resp = await api_call(*args, **kwargs)
+                resp.raise_for_status()
+                return resp
+            except httpx.HTTPStatusError as e:
+                if e.response.status_code == 429:
+                    retries += 1
+                    if retries == max_retries:
+                        self.logger.error(f"Rate limit exceeded. Max retries reached. Giving up.")
+                        raise
+
+                    retry_after = e.response.headers.get("retry-after")
+                    if retry_after:
+                        wait_time = int(retry_after)
+                        self.logger.warning(f"Rate limit exceeded. Retrying in {wait_time} seconds.")
+                    else:
+                        wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
+                        self.logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
+                    
+                    await asyncio.sleep(wait_time)
+                else:
+                    raise
+            except Exception as e:
+                self.logger.error("XAI API call failed: %s", e)
+                raise
+
     async def prompt_llm(self, prompt: str, model: str = "xai-default") -> str:
         """
         Generate a completion via the XAI API.
@@ -53,12 +86,12 @@ class XaiWrapper:
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
         LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
         try:
-            resp = await self.client.post(
+            resp = await self._handle_errors(
+                self.client.post,
                 "/chat/completions",
                 json={"model": model, "messages": [{"role": "user", "content": prompt}]},
                 timeout=60.0,
             )
-            resp.raise_for_status()
             data = resp.json()
             return data["choices"][0]["message"]["content"].strip()
         except Exception as e:
