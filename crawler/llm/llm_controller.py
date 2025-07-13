@@ -8,6 +8,7 @@ from crawler.llm.gemini_wrapper import GeminiWrapper
 from crawler.llm.anthropic_wrapper import AnthropicWrapper
 from crawler.llm.xai_wrapper import XaiWrapper
 from crawler.llm.groq_wrapper import GroqWrapper
+from crawler.llm.huggingface_wrapper import HuggingFaceWrapper
 from crawler.utils.singleton import Singleton
 from crawler.llm.prompts.cleaning_prompt import CLEANING_PROMPT_TEMPLATE
 from crawler.llm.prompts.judging_prompt import JUDGING_PROMPT_TEMPLATE
@@ -72,6 +73,13 @@ class LLMController(metaclass=Singleton):
         except Exception as e:
             print(f"Could not initialize GroqWrapper: {e}")
 
+        # Initialize Hugging Face wrapper
+        try:
+            self.wrappers["huggingface"] = HuggingFaceWrapper()
+            self.wrappers["mistralai/Mistral-7B-Instruct-v0.1"] = self.wrappers["huggingface"]
+        except Exception as e:
+            print(f"Could not initialize HuggingFaceWrapper: {e}")
+
         if not self.wrappers:
             raise RuntimeError("No LLM wrappers could be initialized. Check API keys and environment variables.")
 
@@ -99,6 +107,8 @@ class LLMController(metaclass=Singleton):
             wrapper = self.wrappers.get("xai")
         elif model_name.startswith("gemma2-9b"):
             wrapper = self.wrappers.get("groq")
+        elif "/" in model_name:
+            wrapper = self.wrappers.get("huggingface")
         if not wrapper:
             raise ValueError(f"No wrapper found for model: {model_name}")
 
