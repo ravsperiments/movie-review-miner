@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
-from typing import List, Dict, Any, Optional
-import random
+from typing import List, Dict, Any
+# import random
 
 from crawler.db.supabase_client import supabase
 
@@ -27,7 +27,7 @@ def get_all_urls() -> List[str]:
     try:
         # Query the 'raw_scraped_pages' table to select all 'page_url' columns.
         response = supabase.table("raw_scraped_pages").select("page_url").execute()
-        
+
         # If data is returned, extract the 'page_url' from each item.
         if response.data:
             return [item['page_url'] for item in response.data]
@@ -75,7 +75,7 @@ def get_pending_pages_to_parse() -> List[Dict[str, Any]]:
     try:
         # Query the 'raw_scraped_pages' table for records where 'status' is 'pending'.
         response = supabase.table("raw_scraped_pages").select("*").eq("status", "pending").execute()
-        
+
         # Return the data if available, otherwise an empty list.
         return response.data if response.data else []
     except Exception as e:
@@ -161,7 +161,7 @@ def get_parsed_pages() -> List[Dict[str, Any]]:
     except Exception as e:
         logger.error(f"Error fetching parsed raw scraped pages: {e}")
         return []
-    
+
 
 def get_unpromoted_pages() -> List[Dict[str, Any]]:
     """
@@ -176,16 +176,14 @@ def get_unpromoted_pages() -> List[Dict[str, Any]]:
     """
     try:
         # query raw sccapped pages to get unpublished rows, which returns ~1000 rows
-        response = supabase.table("raw_scraped_pages") \
+        response = supabase.table("vw_unpromoted_parsed_pages") \
             .select("*") \
-            .gt("parsed_review_date", "2018-12-31") \
             .execute()
         # get 200 random sample from the reuturned records
-        sampled_rows = random.sample(response.data, 200)
-        
+        sampled_rows = response.data
+
         return sampled_rows if sampled_rows else []
 
     except Exception as e:
         logger.error(f"Error fetching parsed raw scraped pages: {e}")
         return []
-
