@@ -16,6 +16,8 @@ anthropic
 openai
 xai_sdk
 groq
+huggingface_hub
+mistralai
 
 # monitoring
 prometheus_client

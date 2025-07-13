@@ -9,11 +9,8 @@ from crawler.llm.anthropic_wrapper import AnthropicWrapper
 from crawler.llm.xai_wrapper import XaiWrapper
 from crawler.llm.groq_wrapper import GroqWrapper
 from crawler.llm.huggingface_wrapper import HuggingFaceWrapper
-from crawler.llm.mistral_wrapper import MistralWrapper
+#from crawler.llm.mistral_wrapper import MistralWrapper
 from crawler.utils.singleton import Singleton
-from crawler.llm.prompts.cleaning_prompt import CLEANING_PROMPT_TEMPLATE
-from crawler.llm.prompts.judging_prompt import JUDGING_PROMPT_TEMPLATE
-from crawler.llm.prompts.is_film_review_prompt import IS_FILM_REVIEW_PROMPT_TEMPLATE
 
 class LLMController(metaclass=Singleton):
     """
@@ -66,7 +63,7 @@ class LLMController(metaclass=Singleton):
             self.wrappers["xai-default"] = self.wrappers["xai"]
         except Exception as e:
             print(f"Could not initialize XaiWrapper: {e}")
-        
+
         # Initialize Groq wrapper
         try:
             self.wrappers["groq"] = GroqWrapper()
@@ -123,52 +120,3 @@ class LLMController(metaclass=Singleton):
             raise ValueError(f"No wrapper found for model: {model_name}")
 
         return await wrapper.prompt_llm(prompt, model=model_name)
-
-    async def run_cleaning(self, text_fields: List[str]) -> Dict[str, Any]:
-        """
-        Runs a cleaning task on a list of text fields using the configured LLM.
-
-        Args:
-            text_fields: A list of strings to be cleaned.
-
-        Returns:
-            A dictionary containing the cleaned text fields.
-        """
-        prompt = CLEANING_PROMPT_TEMPLATE.format(text_fields=json.dumps(text_fields))
-        retries = 3
-        for i in range(retries):
-            try:
-                response = await self.prompt_llm(self.default_model, prompt)
-                cleaned_texts = json.loads(response)
-                return {"cleaned_texts": cleaned_texts}
-            except json.JSONDecodeError as e:
-                print(f"JSON decoding error: {e}. Retrying...")
-            except Exception as e:
-                print(f"Error during cleaning: {e}. Retrying...")
-        return {"error": "Failed to clean texts after multiple retries."}
-
-    async def run_judging(self, original: str, edited: str) -> Dict[str, Any]:
-        """
-        Runs a judging task to compare an original and edited text using the configured LLM.
-
-        Args:
-            original: The original text.
-            edited: The edited text.
-
-        Returns:
-            A dictionary containing the judgment result.
-        """
-        prompt = JUDGING_PROMPT_TEMPLATE.format(original_text=original, edited_text=edited)
-        retries = 3
-        for i in range(retries):
-            try:
-                response = await self.prompt_llm(self.default_model, prompt)
-                judgment = json.loads(response)
-                return {"judgment": judgment}
-            except json.JSONDecodeError as e:
-                print(f"JSON decoding error: {e}. Retrying...")
-            except Exception as e:
-                print(f"Error during judging: {e}. Retrying...")
-        return {"error": "Failed to judge texts after multiple retries."}
-
-

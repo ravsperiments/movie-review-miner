@@ -1,4 +1,4 @@
-IS_FILM_REVIEW_PROMPT_TEMPLATE = """Movie Review Miner
+PAGE_CLASSIFICATION_PROMPT_TEMPLATE = """Movie Review Miner
 
 ### ROLE
 You are an assistant to Baradwaj Rangan (BR), a noted film critic who primarily reviews Indian films, but occasionally covers Hollywood and world cinema. You are curating **his personal movie reviews** from his blog.
@@ -12,16 +12,20 @@ However, many posts on the blog are not reviews. So, your task is to determine w
 - Essays about actors, trends, or older films
 - Multi-film comparisons
 
+For posts that **are** film reviews, also analyze whether BR’s sentiment toward the film is **positive**, **negative**, or **mixed**, based on his tone and word choice. He rarely uses star ratings and often expresses nuanced opinions. Use your judgment to infer sentiment from how he describes the film.
+
+If the post is **not** a film review, output `"sentiment": "N/A"`.
+
 ### OUTPUT
-You must return a json object of exactly the following format with your analysis:
+Return a JSON object with exactly the following structure:
 ```json
 {{
   "is_film_review": true | false | "maybe",
   "num_films": integer,
   "film_names": [list of strings],
-  "justification": "short explanation of reasoning"
+  "sentiment": "positive" | "negative" | "mixed" | "N/A"
 }}
-```
+
 
 ### MUST-FOLLOW RULES (ranked by importance):
 1. If the post is written by **anyone other than Baradwaj Rangan**, mark it as `"is_film_review": false` — even if it's about a movie.
@@ -29,10 +33,13 @@ You must return a json object of exactly the following format with your analysis
 3. If the post covers **more than one film**, even in comparison, mark as `"is_film_review": false`.
 4. If the post discusses **a single film** with analysis of plot, themes, acting, direction, visuals, etc., and is authored by BR, mark as `"is_film_review": true`.
 5. If uncertain, but the structure feels like a review (setup → analysis → opinion), or it reads like a critique, mark as `"is_film_review": "maybe"`.
+6. If the post is not a film review, always return "sentiment": "N/A".
+7. If the post is a film review, infer sentiment as:
+    - "positive" — if BR praises the film overall
+    - "negative" — if he clearly dislikes it or finds it lacking
+    - "mixed" — if he balances praise and criticism without a clear lean
 
-### EXAMPLES
-
-#### VALID REVIEWS
+#### EXAMPLE OF A MOVIE REVIEW WITH POSITIVE SENTIMENT
 Title: Jigarthanda DoubleX Movie Review: A gonzo celebration of filmmaking and friendship
 Summary: A spiritual sequel that's wild, witty, and weird in the best ways.
 Full Text: Baradwaj Rangan reviews Jigarthanda DoubleX, dissecting its meta-narrative, Karthik Subbaraj's tonal shifts, and how it blends satire with sincerity.
@@ -43,14 +50,34 @@ Expected Output:
   "is_film_review": true,
   "num_films": 1,
   "film_names": ["Jigarthanda DoubleX"],
-  "justification": "Written by Baradwaj Rangan; analyzes themes, tone, and craft of a single film."
-}}
+  "sentiment": "positive"}}
 ```
+
+####EXAMPLE OF A MOVIE REVIEW WITH NEGATIVE SENTIMENT
+Title: Anurag Basu’s ‘Metro… In Dino’ is an interesting and ambitious experiment, but it stays at a distance and we end up feeling very little
+Summary: The film is about a number of characters in a number of relationship conflicts. Some are treated seriously, some are treated comically, and there’s definitely a vision – but there’s no emotional connection. The rest of this review may contain spoilers.
+
+Expected Output:
+```json
+{{
+  "is_film_review": true,
+  "num_films": 1,
+  "film_names": ["Metro.. In Dino"],
+  "sentiment": "negative"}}
+```
+####EXAMPLE OF A MOVIE REVIEW WITH MIXED SENTIMENT
+Title: RS Prasanna’s ‘Sitaare Zameen Par’ (Aamir Khan) is a very broad comedy-drama, and it kinda-sorta works
+Summary: Aamir Khan plays a basketball coach who is asked to train a team of special-needs people. Everything is very broad and generic, but the feel-good factor holds it all together.
+```json
+{{
+  "is_film_review": true,
+  "num_films": 1,
+  "film_names": ["Metro.. In Dino"],
+  "sentiment": "negative"}}
 
 #### REVIEWS BY GUEST AUTHORS
 Title: Readers Write In #211: 96, an underrated gem
 Summary: Reflections on how '96' spoke to me.
-Full Text: This post is by Sudarshan Garg. He describes why the film struck a chord and how its portrayal of longing felt deeply personal.
 
 Expected Output:
 ```json
@@ -58,13 +85,12 @@ Expected Output:
   "is_film_review": false,
   "num_films": 1,
   "film_names": ["96"],
-  "justification": "This is a reader submission by Sudarshan Garg, not Baradwaj Rangan."
+  "sentiment": "N/A"
 }}
 ```
 
-Title: The symbolism and sincerity in Maaveeran
+Title: Kairam Vaashi reflects on The symbolism and sincerity in Maaveeran
 Summary: Sivakarthikeyan plays a reluctant hero who becomes the voice of a people.
-Full Text: This post is authored by Kairam Vaashi and explores the social metaphors and visual boldness of Maaveeran.
 
 Expected Output:
 ```json
@@ -72,14 +98,13 @@ Expected Output:
   "is_film_review": false,
   "num_films": 1,
   "film_names": ["Maaveeran"],
-  "justification": "Although this is a review, it is authored by Kairam Vaashi and not Baradwaj Rangan."
+  "sentiment": "N/A"
 }}
 ```
 
 #### INTERVIEWS AND OTHER POSTS
 Title: Interview: Lokesh Kanagaraj on 'Vikram'
 Summary: The director talks about the making of 'Vikram'.
-Full Text: Baradwaj Rangan interviews Lokesh Kanagaraj about the story and style of 'Vikram'. The discussion touches on the Kamal Haasan universe and behind-the-scenes work.
 
 Expected Output:
 ```json
@@ -87,8 +112,11 @@ Expected Output:
   "is_film_review": false,
   "num_films": 1,
   "film_names": ["Vikram"],
-  "justification": "This is an interview, not a review or critique by Baradwaj Rangan."
+  "sentiment": "N/A"
 }}
+
+
+
 ```
 
 Here is the input:

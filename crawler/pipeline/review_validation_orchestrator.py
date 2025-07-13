@@ -16,14 +16,14 @@ from aiolimiter import AsyncLimiter
 from crawler.db.scraper_queries import get_unpromoted_pages
 from crawler.db.llm_log_queries import generate_task_fingerprint, batch_insert_llm_logs
 from crawler.llm.llm_controller import LLMController
-from crawler.llm.prompts.is_film_review_prompt import IS_FILM_REVIEW_PROMPT_TEMPLATE
+from crawler.llm.prompts.page_classification_prompt import PAGE_CLASSIFICATION_PROMPT_TEMPLATE
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Map each classification task type to the JSON field to extract
-EXTRACT_FIELD_FOR_TASK: Dict[str, str] = {
-    "is_film_review": "is_film_review",
+EXTRACT_FIELD_FOR_TASK: Dict[str, List[str]] = {
+    "classify_page": ["is_film_review", "film_names", "sentiment"],
 }
 
 CLASSIFICATION_MODELS = [
@@ -46,16 +46,15 @@ def _parse_llm_output(output_raw: str, task_type: str) -> Union[str, Dict[str, A
         output_parsed = json.loads(cleaned)
         # Extract only the single field we care about based on task_type
         if isinstance(output_parsed, dict):
-            field = EXTRACT_FIELD_FOR_TASK.get(task_type)
-            if field and field in output_parsed:
-                value = output_parsed[field]
-                # Normalize booleans/strings for film-review task
-                if isinstance(value, bool):
-                    value = "yes" if value else "no"
-                elif isinstance(value, str) and task_type == "is_film_review":
-                    val_lower = value.strip().lower()
-                    value = val_lower if val_lower in ("yes", "no", "maybe") else "maybe"
-                return value
+            fields = EXTRACT_FIELD_FOR_TASK.get(task_type)
+            extracted_values = {}
+            if fields:
+                for field in fields:
+                    if field in output_parsed:
+                        extracted_values[field] = output_parsed[field]
+                        # Normalize booleans/strings for film-review task
+                logger.info(f"extraced value: {extracted_values}")
+                return extracted_values
         return output_parsed
     except json.JSONDecodeError as e:
         logger.error(f"JSON decoding error: {e}")
@@ -94,14 +93,14 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
     Performs LLM classification for a single review and inserts the result if valid.
     """
     async with limiter:
-        task_type = "is_film_review"
+        task_type = "classify_page"
         input_data = {
             "blog_title": review_data.get("parsed_title"),
             "short_review": review_data.get("parsed_short_review"),
             "full_review": review_data.get("full_review_truncated"),
         }
 
-        prompt = IS_FILM_REVIEW_PROMPT_TEMPLATE.format(
+        prompt = PAGE_CLASSIFICATION_PROMPT_TEMPLATE.format(
             blog_title=input_data['blog_title'],
             short_review=input_data['short_review'],
             full_review=input_data['full_review']
@@ -116,7 +115,7 @@ async def classify_reviews():
     Main function to fetch parsed reviews, classify them using multiple LLMs in parallel,
     and log the results.
     """
-    logger.info("Starting LLM classification of parsed reviews...")
+    logger.info("Starting LLM classification of parsed pages...")
     load_dotenv() # Load environment variables
     llm_controller = LLMController()
 
