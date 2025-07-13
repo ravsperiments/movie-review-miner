@@ -31,6 +31,57 @@ CLASSIFICATION_MODELS = [
     "claude-3-5-haiku-latest"
 ]
 
+async def classify_reviews():
+    """
+    Main function to fetch parsed reviews, classify them using multiple LLMs in parallel,
+    and log the results.
+    """
+    logger.info("Starting LLM classification of parsed pages...")
+    load_dotenv() # Load environment variables
+    llm_controller = LLMController()
+
+    parsed_pages = get_unpromoted_pages()
+    if not parsed_pages:
+        logger.info("No parsed pages found to classify.")
+        return
+
+    logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
+
+    # Rate limiter: 40 requests per 60 seconds
+    limiter = AsyncLimiter(1, 5)
+
+    tasks = []
+    total_pages = len(parsed_pages)
+
+    for counter, page in enumerate(parsed_pages, start=1):
+        for model_name in CLASSIFICATION_MODELS:
+            tasks.append(classify_review_with_llm(limiter, llm_controller, model_name, page, counter, total_pages))
+
+    await asyncio.gather(*tasks)
+    logger.info("Finished LLM classification of parsed reviews.")
+
+async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any], page_num: int, total_pages: int) -> None:
+    """
+    Performs LLM classification for a single review and inserts the result if valid.
+    """
+    async with limiter:
+        task_type = "classify_page"
+        input_data = {
+            "blog_title": review_data.get("parsed_title"),
+            "short_review": review_data.get("parsed_short_review"),
+            "full_review": review_data.get("full_review_truncated"),
+        }
+
+        prompt = PAGE_CLASSIFICATION_PROMPT_TEMPLATE.format(
+            blog_title=input_data['blog_title'],
+            short_review=input_data['short_review'],
+            full_review=input_data['full_review']
+        )
+
+        output_raw = await llm_controller.prompt_llm(model_name, prompt) or ""
+        output_parsed = _parse_llm_output(output_raw, task_type)
+        _log_llm_result(review_data, model_name, task_type, input_data, output_raw, output_parsed, page_num, total_pages)
+
 def _parse_llm_output(output_raw: str, task_type: str) -> Union[str, Dict[str, Any]]:
     """
     Parses and cleans the JSON output from the LLM.
@@ -68,18 +119,25 @@ def _log_llm_result(review_data: Dict[str, Any], model_name: str, task_type: str
     Logs the LLM result to the database.
     """
     task_fingerprint = generate_task_fingerprint(task_type, review_data["id"])
-
+    model_clean = re.sub(r"[^A-Za-z0-9_.-]", "", model_name)
     log_row = {
-        "source_table": "raw_scraped_pages",
-        "source_id": review_data["id"],
-        "model_name": re.sub(r"[^A-Za-z0-9_.-]", "", model_name),
-        "task_type": task_type,
-        "input_data": input_data,
-        "task_fingerprint": task_fingerprint,
-        "output_raw": output_raw,
-        "output_parsed": output_parsed,
-        "accepted": not (isinstance(output_parsed, dict) and "error" in output_parsed),
-    }
+            "source_table": "raw_scraped_pages",
+            "source_id": review_data["id"],
+            "model_name": model_clean,
+            "task_type": task_type,
+            "input_data": input_data,
+            "task_fingerprint": task_fingerprint,
+            "output_raw": output_raw,
+            "is_movie_review": None,
+            "sentiment": None,
+            "movie_name": None,
+            "accepted": False,
+        }
+    if isinstance(output_parsed, dict) and "error" not in output_parsed:
+        log_row["accepted"] = True
+        log_row["is_movie_review"] = output_parsed.get("is_film_review")
+        log_row["sentiment"] = output_parsed.get("sentiment")
+        log_row["movie_name"] = output_parsed.get("film_names")
 
     if log_row["accepted"]:
         try:
@@ -87,57 +145,6 @@ def _log_llm_result(review_data: Dict[str, Any], model_name: str, task_type: str
             logger.info(f"Inserted LLM log for page num {page_num} of {total_pages} | source_id {review_data['id']}, model {model_name}")
         except Exception as e:
             logger.error(f"Failed to insert LLM log for source_id {review_data['id']} | model {model_name}: {e}")
-
-async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMController, model_name: str, review_data: Dict[str, Any], page_num: int, total_pages: int) -> None:
-    """
-    Performs LLM classification for a single review and inserts the result if valid.
-    """
-    async with limiter:
-        task_type = "classify_page"
-        input_data = {
-            "blog_title": review_data.get("parsed_title"),
-            "short_review": review_data.get("parsed_short_review"),
-            "full_review": review_data.get("full_review_truncated"),
-        }
-
-        prompt = PAGE_CLASSIFICATION_PROMPT_TEMPLATE.format(
-            blog_title=input_data['blog_title'],
-            short_review=input_data['short_review'],
-            full_review=input_data['full_review']
-        )
-
-        output_raw = await llm_controller.prompt_llm(model_name, prompt) or ""
-        output_parsed = _parse_llm_output(output_raw, task_type)
-        _log_llm_result(review_data, model_name, task_type, input_data, output_raw, output_parsed, page_num, total_pages)
-
-async def classify_reviews():
-    """
-    Main function to fetch parsed reviews, classify them using multiple LLMs in parallel,
-    and log the results.
-    """
-    logger.info("Starting LLM classification of parsed pages...")
-    load_dotenv() # Load environment variables
-    llm_controller = LLMController()
-
-    parsed_pages = get_unpromoted_pages()
-    if not parsed_pages:
-        logger.info("No parsed pages found to classify.")
-        return
-
-    logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
-
-    # Rate limiter: 40 requests per 60 seconds
-    limiter = AsyncLimiter(1, 5)
-
-    tasks = []
-    total_pages = len(parsed_pages)
-
-    for counter, page in enumerate(parsed_pages, start=1):
-        for model_name in CLASSIFICATION_MODELS:
-            tasks.append(classify_review_with_llm(limiter, llm_controller, model_name, page, counter, total_pages))
-
-    await asyncio.gather(*tasks)
-    logger.info("Finished LLM classification of parsed reviews.")
 
 if __name__ == "__main__":
     asyncio.run(classify_reviews())
