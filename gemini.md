@@ -1,32 +1,37 @@
 ## Workflow Guidelines for Making Code Changes
 
 ### Always Work in a New Branch
-Before making any code changes, create a new Git branch using a clear and descriptive naming convention.
+Before making any code changes, always create a new Git branch using a clear and descriptive naming convention.
 
 **Branch Naming Suggestions** (use a prefix based on the type of change):
 
-- `fix/short-description` – for bug fixes  
-- `feature/short-description` – for new features  
-- `refactor/short-description` – for code cleanups or structure changes  
+- `fix/short-description` – for bug fixes
+- `feature/short-description` – for new features
+- `refactor/short-description` – for code cleanups or structure changes
 - `chore/short-description` – for minor, non-functional updates
 
 **Examples**:
 
-- `fix/crawler-timeout-bug`  
-- `feature/add-tmdb-enrichment`  
+- `fix/crawler-timeout-bug`
+- `feature/add-tmdb-enrichment`
 - `refactor/clean-db-utils`
 
-Each branch should focus on only one logical change or set of related changes.  
+Each branch should focus on only one logical change or set of related changes.
 If you're making unrelated changes, create a separate branch for each.
 
+### Implementation
+- Always share an implementation plan before you start making Changes
+- Add compheresntive docuentation and comments inline in the code
 
 ### Committing and Merging
 
 After completing and testing your changes:
+- update tasks.md
+- provide a bullet point summary of changes done under the current date. If the current date section doesn;t exist create one.
+- follow the formatting elsewhere in the doc
 
-#### Commit
-Use a descriptive commit message in this format:  
-`<type>: <concise summary>`  
+- After updating tasks.md, use a descriptive commit message in this format:
+`<type>: <concise summary>`
 `<detailed description of the change>`
 
 **Example**:
@@ -38,22 +43,22 @@ Added a check to skip entries without 'sentiment' key, preventing classification
 
 **Commit types**:
 
-- `fix:` – bug fixes  
-- `feature:` – new features  
-- `refactor:` – refactoring without behavior change  
+- `fix:` – bug fixes
+- `feature:` – new features
+- `refactor:` – refactoring without behavior change
 - `chore:` – maintenance and non-functional changes
 
 #### Merge and Push
 
-- Merge the branch into `main`  
-- Delete the branch locally and remotely  
+- Merge the branch into `main`
+- Delete the branch locally and remotely
 - Push the updated `main` branch:
+
 ```
 git push origin main
-
+```
 
 ### Running Crawler Scripts
-
 For any crawler-related scripts, always run them from the project root (`movie-review-miner`) after activating the virtual environment:
 
 **Activate venv**:
@@ -101,4 +106,3 @@ requirements.txt           # List of Python dependencies
 reviewers.py               # Reviewer-related logic or processing
 run_pipeline.py            # Entry point to run the full data pipeline
 tasks.md                   # Task documentation or process instructions
-
