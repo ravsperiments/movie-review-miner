@@ -68,12 +68,13 @@ class XaiWrapper:
                 self.logger.error("XAI API call failed: %s", e)
                 raise
 
-    async def prompt_llm(self, prompt: str, model: str = "xai-default") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "xai-default") -> str:
         """
         Generate a completion via the XAI API.
 
         Args:
-            prompt: The prompt to send to the model.
+            system_prompt: The system prompt to guide the model.
+            user_prompt: The user's prompt for text generation.
             model: The XAI model name to use (defaults to 'xai-default').
 
         Returns:
@@ -84,12 +85,18 @@ class XaiWrapper:
         provider = "xai"
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
         try:
             resp = await self._handle_errors(
                 self.client.post,
                 "/chat/completions",
-                json={"model": model, "messages": [{"role": "user", "content": prompt}]},
+                json={
+                    "model": model,
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                },
                 timeout=60.0,
             )
             data = resp.json()

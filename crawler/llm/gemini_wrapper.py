@@ -35,14 +35,17 @@ class GeminiWrapper:
                 self.logger.warning(f"API call failed. Retrying in {wait_time:.2f} seconds.")
                 await asyncio.sleep(wait_time)
 
-    async def prompt_llm(self, prompt: str, model: str = "gemini-1.0-pro") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "gemini-1.5-flash-latest") -> str:
         provider = 'gemini'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
         try:
-            model_instance = genai.GenerativeModel(model)
-            response = await self._handle_errors(model_instance.generate_content, prompt)
+            model_instance = genai.GenerativeModel(
+                model_name=model,
+                system_instruction=system_prompt
+            )
+            response = await self._handle_errors(model_instance.generate_content, user_prompt)
             if response and response.text:
                 return response.text
             self.logger.warning("Gemini generate_content did not return text. Response: %s", response)

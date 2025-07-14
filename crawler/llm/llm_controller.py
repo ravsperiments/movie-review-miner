@@ -88,13 +88,14 @@ class LLMController(metaclass=Singleton):
         if not self.wrappers:
             raise RuntimeError("No LLM wrappers could be initialized. Check API keys and environment variables.")
 
-    async def prompt_llm(self, model_name: str, prompt: str) -> Any:
+    async def prompt_llm(self, model_name: str, system_prompt: str, user_prompt: str) -> Any:
         """
         Generates content using the specified LLM model.
 
         Args:
             model_name: The name of the LLM model to use (e.g., "gpt-4", "claude-3-opus-20240229").
-            prompt: The prompt for text generation.
+            system_prompt: The system prompt to guide the model.
+            user_prompt: The user's prompt for text generation.
 
         Returns:
             The response from the LLM.
@@ -120,4 +121,4 @@ class LLMController(metaclass=Singleton):
         if not wrapper:
             raise ValueError(f"No wrapper found for model: {model_name}")
 
-        return await wrapper.prompt_llm(prompt, model=model_name)
+        return await wrapper.prompt_llm(system_prompt, user_prompt, model=model_name)

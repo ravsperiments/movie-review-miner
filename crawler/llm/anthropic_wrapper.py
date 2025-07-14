@@ -58,24 +58,25 @@ class AnthropicWrapper:
             except Exception:
                 raise
 
-    async def prompt_llm(self, prompt: str, model: str = "claude-sonnet-4-0") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "claude-3-haiku-20240307") -> str:
         """
         Generates text using the Anthropic API.
 
         Args:
-            prompt: The prompt for text generation.
-            model: The specific Anthropic model to use (e.g., "claude-3-opus-20240229").
+            system_prompt: The system prompt to guide the model.
+            user_prompt: The user's prompt for text generation.
+            model: The specific Anthropic model to use.
 
         Returns:
             The generated text.
         """
         if not self.client:
             raise RuntimeError("Anthropic client not initialized. ANTHROPIC_API_KEY is missing.")
-        
+
         provider = 'anthropic'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
 
         try:
             api_call = self.client.messages.create
@@ -83,7 +84,8 @@ class AnthropicWrapper:
                 api_call,
                 model=model,
                 max_tokens=1024,
-                messages=[{"role": "user", "content": prompt}],
+                system=system_prompt,
+                messages=[{"role": "user", "content": user_prompt}],
             )
             
             if not message or not message.content:

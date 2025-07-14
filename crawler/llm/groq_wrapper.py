@@ -51,17 +51,20 @@ class GroqWrapper:
             except Exception:
                 raise
 
-    async def prompt_llm(self, prompt: str, model: str = "llama3-8b-8192") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "llama3-8b-8192") -> str:
         provider = 'groq'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
         try:
             api_call = self.client.chat.completions.create
             response = await self._handle_rate_limit(
                 api_call,
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
                 temperature=0.2,
             )
             

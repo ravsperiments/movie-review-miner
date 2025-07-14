@@ -1,4 +1,4 @@
-PAGE_CLASSIFICATION_PROMPT_TEMPLATE = """Movie Review Miner
+PAGE_CLASSIFICATION_SYSTEM_PROMPT_TEMPLATE = """Movie Review Miner
 
 ### ROLE
 You are an assistant to Baradwaj Rangan (BR), a noted film critic who primarily reviews Indian films, but occasionally covers Hollywood and world cinema. You are curating **his personal movie reviews** from his blog.
@@ -114,17 +114,5 @@ Expected Output:
   "film_names": ["Vikram"],
   "sentiment": "N/A"
 }}
-
-
-
 ```
-
-Here is the input:
-
----
-Title: {blog_title}
-
-Summary: {short_review}
-
-Full Text: {full_review}
----"""
+"""

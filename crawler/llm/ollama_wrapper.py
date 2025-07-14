@@ -33,12 +33,13 @@ class OLlamaWrapper:
                 self.logger.warning(f"API call failed. Retrying in {wait_time:.2f} seconds.")
                 await asyncio.sleep(wait_time)
 
-    async def prompt_llm(self, prompt: str, model: str = None) -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = None) -> str:
         """
         Generates text using the specified OLLaMA model via the Ollama CLI.
 
         Args:
-            prompt: The prompt to send to the model.
+            system_prompt: The system prompt to guide the model.
+            user_prompt: The user's prompt for text generation.
             model: Optional model name override; if omitted, uses OLLAMA_MODEL_NAME.
 
         Returns:
@@ -46,12 +47,15 @@ class OLlamaWrapper:
         """
         model_name = model or self.default_model
         
+        # Combine system and user prompts for Ollama
+        full_prompt = f"System: {system_prompt}\n\nUser: {user_prompt}"
+
         async def ollama_run():
             proc = await asyncio.create_subprocess_exec(
                 "ollama",
                 "run",
                 model_name,
-                prompt,
+                full_prompt,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )

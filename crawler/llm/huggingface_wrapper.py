@@ -69,12 +69,13 @@ class HuggingFaceWrapper:
             except Exception:
                 raise
 
-    async def prompt_llm(self, prompt: str, model: str = "mistralai/Mistral-7B-Instruct-v0.1") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "mistralai/Mistral-7B-Instruct-v0.1") -> str:
         """
         Prompts a Hugging Face language model and returns the response.
 
         Args:
-            prompt: The prompt to send to the model.
+            system_prompt: The system prompt to guide the model.
+            user_prompt: The user's prompt for text generation.
             model: The name of the model to use.
 
         Returns:
@@ -83,12 +84,14 @@ class HuggingFaceWrapper:
         provider = 'huggingface'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
         try:
+            # Hugging Face doesn't have a dedicated system prompt, so we combine them.
+            full_prompt = f"<s>[INST] {system_prompt} [/INST]</s>\n{user_prompt}"
             api_call = self.client.text_generation
             response = await self._handle_rate_limit(
                 api_call,
-                prompt=prompt,
+                prompt=full_prompt,
                 model=model,
                 max_new_tokens=1000,
             )

@@ -19,3 +19,6 @@ failures/
 
 # Exported output
 output/
+
+#env
+.venv/

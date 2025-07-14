@@ -43,16 +43,19 @@ class MistralWrapper:
                 else:
                     raise
 
-    async def prompt_llm(self, prompt: str, model: str = "mistral-small-latest") -> str:
+    async def prompt_llm(self, system_prompt: str, user_prompt: str, model: str = "mistral-small-latest") -> str:
         provider = 'mistral'
         LLM_REQUEST_COUNT.labels(provider=provider).inc()
         LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).inc()
-        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(prompt))
+        LLM_PROMPT_LENGTH.labels(provider=provider).observe(len(user_prompt))
         try:
             response = await self._handle_rate_limit(
                 self.client.chat.complete_async,
                 model=model,
-                messages=[UserMessage(role="user", content=prompt)],
+                messages=[
+                    UserMessage(role="system", content=system_prompt),
+                    UserMessage(role="user", content=user_prompt)
+                ],
                 temperature=0.2,
             )
 

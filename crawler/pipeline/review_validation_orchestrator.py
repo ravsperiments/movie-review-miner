@@ -16,7 +16,8 @@ from aiolimiter import AsyncLimiter
 from crawler.db.scraper_queries import get_unpromoted_pages
 from crawler.db.llm_log_queries import generate_task_fingerprint, batch_insert_llm_logs
 from crawler.llm.llm_controller import LLMController
-from crawler.llm.prompts.page_classification_prompt import PAGE_CLASSIFICATION_PROMPT_TEMPLATE
+from crawler.llm.prompts.page_classification_system_prompt import PAGE_CLASSIFICATION_SYSTEM_PROMPT_TEMPLATE
+from crawler.llm.prompts.page_classification_user_prompt import PAGE_CLASSIFICATION_USER_PROMPT_TEMPLATE
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -27,7 +28,8 @@ EXTRACT_FIELD_FOR_TASK: Dict[str, List[str]] = {
 }
 
 CLASSIFICATION_MODELS = [
-    "mistral-small-latest",
+    "gemma2-9b-it",
+    "claude-3-5-haiku-latest"
 ]
 
 async def classify_reviews():
