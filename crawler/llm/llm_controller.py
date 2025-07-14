@@ -9,7 +9,7 @@ from crawler.llm.anthropic_wrapper import AnthropicWrapper
 from crawler.llm.xai_wrapper import XaiWrapper
 from crawler.llm.groq_wrapper import GroqWrapper
 from crawler.llm.huggingface_wrapper import HuggingFaceWrapper
-#from crawler.llm.mistral_wrapper import MistralWrapper
+from crawler.llm.mistral_wrapper import MistralWrapper
 from crawler.utils.singleton import Singleton
 
 class LLMController(metaclass=Singleton):
@@ -74,7 +74,7 @@ class LLMController(metaclass=Singleton):
         # Initialize Hugging Face wrapper
         try:
             self.wrappers["huggingface"] = HuggingFaceWrapper()
-            self.wrappers["mistralai/Mistral-7B-Instruct-v0.1"] = self.wrappers["huggingface"]
+            #self.wrappers["mistralai/Mistral-7B-Instruct-v0.1"] = self.wrappers["huggingface"]
         except Exception as e:
             print(f"Could not initialize HuggingFaceWrapper: {e}")
 
@@ -99,6 +99,7 @@ class LLMController(metaclass=Singleton):
         Returns:
             The response from the LLM.
         """
+
         wrapper = None
         if model_name.startswith("gpt"):
             wrapper = self.wrappers.get("openai")
@@ -112,10 +113,10 @@ class LLMController(metaclass=Singleton):
             wrapper = self.wrappers.get("xai")
         elif model_name.startswith("gemma2-9b"):
             wrapper = self.wrappers.get("groq")
-        elif "/" in model_name:
-            wrapper = self.wrappers.get("huggingface")
         elif model_name.startswith("mistral"):
             wrapper = self.wrappers.get("mistral")
+        elif "/" in model_name:
+            wrapper = self.wrappers.get("huggingface")
         if not wrapper:
             raise ValueError(f"No wrapper found for model: {model_name}")
 
