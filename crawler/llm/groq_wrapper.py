@@ -35,7 +35,7 @@ class GroqWrapper:
                     if retries == max_retries:
                         self.logger.error(f"Rate limit exceeded. Max retries reached. Giving up.")
                         raise
-                    
+
                     # Get retry-after header if available, otherwise use exponential backoff
                     retry_after = e.response.headers.get("retry-after")
                     if retry_after:
@@ -44,7 +44,7 @@ class GroqWrapper:
                     else:
                         wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                         self.logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
-                    
+
                     await asyncio.sleep(wait_time)
                 else:
                     raise
@@ -67,7 +67,7 @@ class GroqWrapper:
                 ],
                 temperature=0.2,
             )
-            
+
             if not response or not response.choices:
                 self.logger.error("Invalid response from Groq API: choices are missing.")
                 return ""
