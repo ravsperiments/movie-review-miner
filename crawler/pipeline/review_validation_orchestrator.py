@@ -73,13 +73,14 @@ async def classify_review_with_llm(limiter: AsyncLimiter, llm_controller: LLMCon
             "full_review": review_data.get("full_review_truncated"),
         }
 
-        prompt = PAGE_CLASSIFICATION_PROMPT_TEMPLATE.format(
+        system_prompt = PAGE_CLASSIFICATION_SYSTEM_PROMPT_TEMPLATE
+        user_prompt = PAGE_CLASSIFICATION_USER_PROMPT_TEMPLATE.format(
             blog_title=input_data['blog_title'],
             short_review=input_data['short_review'],
             full_review=input_data['full_review']
         )
 
-        output_raw = await llm_controller.prompt_llm(model_name, prompt) or ""
+        output_raw = await llm_controller.prompt_llm(model_name, system_prompt, user_prompt) or ""
         output_parsed = _parse_llm_output(output_raw, task_type)
         _log_llm_result(review_data, model_name, task_type, input_data, output_raw, output_parsed, page_num, total_pages)
 
