@@ -2,6 +2,7 @@
 
 #### 2025-07-14
 - [x] Experimenting with system and user prompts
+- [x] Updated prompt to reduce claude haiku's verbosity which resulted in 2x output tokens
 - [ ] TODO: execute the classification orchestrator for all parsed posts in staging
 - [ ] TODO: update `stg_cleaned_reviews` with final voted results
 

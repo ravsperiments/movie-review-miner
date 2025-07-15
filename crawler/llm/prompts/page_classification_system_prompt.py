@@ -24,7 +24,7 @@ Only return a JSON object with exactly the following structure.
   "film_names": [list of strings],
   "sentiment": "positive" | "negative" | "mixed" | "N/A"
 }}
-
+You **must not** return any text in the response other than the Json. Including notes, justification, thoughts or information or text before or after the Json.
 
 ### MUST-FOLLOW RULES (ranked by importance):
 1. You **must not** return any text in the response other than the Json. Including justification, thoughts or information or text before or after the Json.
