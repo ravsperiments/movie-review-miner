@@ -55,6 +55,32 @@ The first step of the pipeline focuses on fetching blog post links from various 
     *   Responsible for bulk inserting newly fetched raw page URLs into the `raw_scraped_pages` table in the Supabase database.
     *   Utilizes an upsert mechanism to prevent duplicate entries and update existing ones.
 
+#### Step 2: Parse Post
+This step is responsible for taking the fetched links, parsing the content of the pages, and storing the parsed content.
+
+*   **Orchestration (`crawler/pipeline/parse_posts_orchestrator.py`):**
+    *   Fetches unprocessed links from the database.
+    *   For each link, it calls the appropriate parser based on the critic.
+    *   Stores the parsed content (e.g., review text, author) in the database.
+*   **Reviewer-Specific Parsers (`crawler/scraper/critics/*_parser.py`):**
+    *   Each critic has a dedicated parser that knows how to extract the relevant information from their specific website structure.
+*   **Generic Post Parsing (`crawler/scraper/parse_post.py`):**
+    *   A generic interface that calls the correct critic-specific parser.
+*   **Database Storage (`crawler/db/store_review.py`):**
+    *   Stores the extracted review content into the `reviews` table.
+
+#### Step 3: Classify Review
+This step uses an LLM to classify the parsed reviews.
+
+*   **Orchestration (`crawler/pipeline/classify_review_orchestrator.py`):**
+    *   Fetches unclassified reviews from the database.
+    *   Uses the `llm_controller` to classify the review as a "movie review" or "not a movie review".
+    *   Updates the review in the database with the classification.
+*   **LLM Controller (`crawler/llm/llm_controller.py`):**
+    *   Manages the interaction with the LLM, sending the review text and receiving the classification.
+*   **Prompts (`crawler/llm/prompts`):**
+    *   Contains the prompts used to guide the LLM in its classification task.
+
 ---
 
 ## Web

@@ -5,6 +5,7 @@ import asyncio
 import random
 from dotenv import load_dotenv
 from groq import Groq, AsyncGroq, GroqError
+import logging
 
 from ..utils.logger import get_logger
 from ..utils.metrics import (
@@ -15,6 +16,8 @@ from ..utils.metrics import (
     LLM_COMPLETION_TOKENS,
     LLM_TOTAL_TOKENS,
 )
+
+logger = logging.getLogger(__name__)
 
 class GroqWrapper:
     def __init__(self):
@@ -71,8 +74,8 @@ class GroqWrapper:
             if not response or not response.choices:
                 self.logger.error("Invalid response from Groq API: choices are missing.")
                 return ""
-
-            return response.choices[0].message.content.strip()
+            response_text = response.choices[0].message.content
+            return response_text.strip()
         except GroqError as e:
             self.logger.error("Groq generate_text failed: %s", e)
             raise

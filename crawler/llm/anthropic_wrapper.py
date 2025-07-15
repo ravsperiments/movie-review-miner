@@ -42,7 +42,7 @@ class AnthropicWrapper:
                     if retries == max_retries:
                         logger.error(f"Rate limit exceeded. Max retries reached. Giving up.")
                         raise
-                    
+
                     # Get retry-after header if available, otherwise use exponential backoff
                     retry_after = e.response.headers.get("retry-after")
                     if retry_after:
@@ -51,7 +51,7 @@ class AnthropicWrapper:
                     else:
                         wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                         logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
-                    
+
                     await asyncio.sleep(wait_time)
                 else:
                     raise
@@ -87,13 +87,13 @@ class AnthropicWrapper:
                 system=system_prompt,
                 messages=[{"role": "user", "content": user_prompt}],
             )
-            
+
             if not message or not message.content:
                 logger.error("Invalid response from Anthropic API: message or content is missing.")
                 return "" # Return empty string if response is invalid
 
-            response_text = message.content[0].text
 
+            response_text = message.content[0].text
             # Extract JSON part using regex
             json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
             if json_match:
