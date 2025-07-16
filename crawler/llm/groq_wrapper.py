@@ -6,6 +6,7 @@ import random
 from dotenv import load_dotenv
 from groq import Groq, AsyncGroq, GroqError
 import logging
+import re
 
 from ..utils.logger import get_logger
 from ..utils.metrics import (
@@ -74,8 +75,12 @@ class GroqWrapper:
             if not response or not response.choices:
                 self.logger.error("Invalid response from Groq API: choices are missing.")
                 return ""
-            response_text = response.choices[0].message.content
-            return response_text.strip()
+            response_text = response.choices[0].message.content.strip()
+            # Remove markdown code fences
+            response_text_cleaned = re.sub(r"```(?:json)?", "", response_text).strip()
+            # Replace double curly braces with single
+            response_text_cleaned = response_text_cleaned.replace("{{", "{").replace("}}", "}")
+            return response_text_cleaned
         except GroqError as e:
             self.logger.error("Groq generate_text failed: %s", e)
             raise

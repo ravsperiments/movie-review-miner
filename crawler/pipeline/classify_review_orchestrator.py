@@ -29,7 +29,6 @@ EXTRACT_FIELD_FOR_TASK: Dict[str, List[str]] = {
 
 CLASSIFICATION_MODELS = [
     "gemma2-9b-it",
-    "claude-3-5-haiku-latest"
 ]
 
 async def classify_reviews():
