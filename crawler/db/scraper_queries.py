@@ -187,3 +187,25 @@ def get_unpromoted_pages() -> List[Dict[str, Any]]:
     except Exception as e:
         logger.error(f"Error fetching parsed raw scraped pages: {e}")
         return []
+
+def batch_update_status(page_ids: List[str], status: str) -> None:
+    """
+    Updates the status for a batch of pages in the `raw_scraped_pages` table.
+    Can run within a transaction if a client is provided.
+
+    Args:
+        page_ids (List[str]): A list of unique identifiers (IDs) of the pages to update.
+        status (str): The new status to assign to the pages.
+        client: Optional Supabase client instance for transactional operations.
+    """
+    if not page_ids:
+        return
+
+    try:
+        # Perform the update operation, setting the new status for all matching IDs.
+        supabase.table("raw_scraped_pages").update({"status": status}).in_("id", page_ids).execute()
+        logger.info(f"Attempted to update {len(page_ids)} pages to status '{status}'.")
+    except Exception as e:
+        # Log any errors that occur during the batch status update.
+        logger.error(f"Error batch updating page statuses: {e}")
+        raise

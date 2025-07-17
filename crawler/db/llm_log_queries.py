@@ -71,3 +71,20 @@ def batch_insert_llm_logs(rows: list[dict]) -> None:
             "created_at": now,
         })
     supabase.table("stg_llm_logs").insert(batch).execute()
+
+def get_reconciliation_records(primary_model: str, judge_model: str) -> list:
+    """
+    Fetches records for reconciliation from the database.
+    """
+    try:
+        response = supabase.rpc(
+            'get_reconciliation_data',
+            {
+                'p_primary_model': primary_model,
+                'p_judge_model': judge_model
+            }
+        ).execute()
+        return response.data
+    except Exception as e:
+        print(f"Error fetching reconciliation records: {e}")
+        return []

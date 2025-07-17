@@ -9,6 +9,8 @@ httpx
 async-timeout>=4.0
 aiohttp
 python-dotenv
+pydantic
+instructor
 
 #genai
 google-generativeai
