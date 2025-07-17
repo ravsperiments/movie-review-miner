@@ -32,7 +32,7 @@ def insert_llm_log(
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     try:
-        response = supabase.table("stg_llm_logs").insert(data).execute()
+        supabase.table("stg_llm_logs").insert(data).execute()
         print(f"Successfully inserted LLM log for source_id: {source_id}, model: {model_name}")
     except Exception as e:
         print(f"Error inserting LLM log for source_id: {source_id}, model: {model_name}: {e}")

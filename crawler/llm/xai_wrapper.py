@@ -9,7 +9,10 @@ from dotenv import load_dotenv
 import httpx
 from xai_sdk import Client
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from ..utils.metrics import (
     LLM_REQUEST_COUNT,
     LLM_REQUESTS_IN_FLIGHT,
@@ -35,7 +38,7 @@ class XaiWrapper:
                 base_url=base_url,
                 headers={"Authorization": f"Bearer {self.api_key}"},
             )
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_errors(self, api_call, *args, **kwargs):
         retries = 0
@@ -60,7 +63,7 @@ class XaiWrapper:
                     else:
                         wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                         self.logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
-                    
+
                     await asyncio.sleep(wait_time)
                 else:
                     raise

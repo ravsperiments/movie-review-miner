@@ -6,7 +6,10 @@ import random
 from dotenv import load_dotenv
 from openai import OpenAI, AsyncOpenAI, OpenAIError
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from ..utils.metrics import (
     LLM_REQUEST_COUNT,
     LLM_REQUESTS_IN_FLIGHT,
@@ -20,7 +23,7 @@ class OpenAIWrapper:
     def __init__(self):
         load_dotenv()
         self.client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_rate_limit(self, api_call, *args, **kwargs):
         retries = 0
@@ -35,7 +38,7 @@ class OpenAIWrapper:
                     if retries == max_retries:
                         self.logger.error(f"Rate limit exceeded. Max retries reached. Giving up.")
                         raise
-                    
+
                     # Get retry-after header if available, otherwise use exponential backoff
                     retry_after = e.response.headers.get("retry-after")
                     if retry_after:
@@ -44,7 +47,7 @@ class OpenAIWrapper:
                     else:
                         wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                         self.logger.warning(f"Rate limit exceeded. Retrying in {wait_time:.2f} seconds.")
-                    
+
                     await asyncio.sleep(wait_time)
                 else:
                     raise
@@ -67,7 +70,7 @@ class OpenAIWrapper:
                 ],
                 temperature=0.2,
             )
-            
+
             if not response or not response.choices:
                 self.logger.error("Invalid response from OpenAI API: choices are missing.")
                 return ""
@@ -78,8 +81,3 @@ class OpenAIWrapper:
             raise
         finally:
             LLM_REQUESTS_IN_FLIGHT.labels(provider=provider).dec()
-
-
-    
-
-

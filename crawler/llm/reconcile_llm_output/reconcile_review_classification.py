@@ -1,22 +1,18 @@
 """
 This module handles the reconciliation of LLM outputs for review classification.
 """
-
 import logging
-from crawler.db.supabase_client import supabase
-from crawler.llm.reconcile_llm_output.utils import get_logger
 from crawler.db.llm_log_queries import get_reconciliation_records
 from crawler.db.scraper_queries import batch_update_status
 from crawler.db.stg_clean_review_queries import batch_insert_clean_reviews
 
 # Configure logger
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 def run_reconciliation_pipeline(primary_model: str, judge_model: str):
     """
     Orchestrates the entire reconciliation process.
     """
-    logger.info("Starting reconciliation pipeline...")
 
     # 1. Fetch records
     logger.info("Fetching parsed records for reconciliation...")
@@ -25,14 +21,11 @@ def run_reconciliation_pipeline(primary_model: str, judge_model: str):
         logger.info("No records to reconcile. Exiting reconciliation pipeline.")
         return
     logger.info(f"Successfully fetched {len(records)} records for reconciliation.")
-    logger.info(f"Fetched records: {records}")
 
     # 2. Reconcile records
     logger.info("Reconciling LLM outputs...")
     promoted, not_promoted = _reconcile_classify_review(records, primary_model, judge_model)
     logger.info(f"Reconciliation resulted in {len(promoted)} promoted and {len(not_promoted)} not_promoted records.")
-    logger.info(f"Promoted records: {promoted}")
-    logger.info(f"Not promoted records: {not_promoted}")
 
     # 3. Execute database updates
     try:
@@ -104,8 +97,6 @@ def _reconcile_classify_review(records: list, primary_model: str, judge_model: s
             promoted.append(record)
         else:
             not_promoted.append(record['source_id'])
-
-    logger.info(f"Reconciliation complete: Promoted({len(promoted)}), Not Promoted({len(not_promoted)}), Skipped({len(skipped)})")
     return promoted, not_promoted
 
 def _update_status(source_ids: list, status: str):
@@ -116,9 +107,7 @@ def _update_status(source_ids: list, status: str):
         logger.info(f"No source_ids provided for status update to '{status}'.")
         return
     try:
-        logger.info(f"Calling batch_update_status for {len(source_ids)} records to '{status}'.")
         batch_update_status(source_ids, status)
-        logger.info(f"Successfully updated status to '{status}' for {len(source_ids)} records.")
     except Exception as e:
         logger.error(f"Error updating status to '{status}': {e}")
         raise
@@ -140,9 +129,7 @@ def _insert_clean_reviews(records: list):
         return
 
     try:
-        logger.info(f"Calling batch_insert_clean_reviews for {len(valid_records)} records.")
         batch_insert_clean_reviews(valid_records)
-        logger.info(f"Successfully inserted {len(valid_records)} clean reviews.")
     except Exception as e:
         logger.error(f"Error inserting clean reviews: {e}")
         raise

@@ -5,7 +5,9 @@ import asyncio
 import random
 from dotenv import load_dotenv
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 class OLlamaWrapper:
@@ -14,7 +16,7 @@ class OLlamaWrapper:
     def __init__(self):
         load_dotenv()
         self.default_model = os.getenv("OLLAMA_MODEL_NAME", "gemma2:2b-instruct-q4_K_M")
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_errors(self, api_call, *args, **kwargs):
         retries = 0
@@ -28,7 +30,7 @@ class OLlamaWrapper:
                 if retries == max_retries:
                     self.logger.error(f"API call failed after {max_retries} retries. Giving up.")
                     raise
-                
+
                 wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                 self.logger.warning(f"API call failed. Retrying in {wait_time:.2f} seconds.")
                 await asyncio.sleep(wait_time)
@@ -46,7 +48,7 @@ class OLlamaWrapper:
             The text response from the model.
         """
         model_name = model or self.default_model
-        
+
         # Combine system and user prompts for Ollama
         full_prompt = f"System: {system_prompt}\n\nUser: {user_prompt}"
 

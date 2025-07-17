@@ -4,7 +4,10 @@ import random
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from ..utils.metrics import (
     LLM_REQUEST_COUNT,
     LLM_REQUESTS_IN_FLIGHT,
@@ -16,7 +19,7 @@ class GeminiWrapper:
         load_dotenv()
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = genai.GenerativeModel("gemini-2.5-flash")
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_errors(self, api_call, *args, **kwargs):
         retries = 0
@@ -30,7 +33,7 @@ class GeminiWrapper:
                 if retries == max_retries:
                     self.logger.error(f"API call failed after {max_retries} retries. Giving up.")
                     raise
-                
+
                 wait_time = backoff_time * (2 ** retries) + random.uniform(0, 1)
                 self.logger.warning(f"API call failed. Retrying in {wait_time:.2f} seconds.")
                 await asyncio.sleep(wait_time)

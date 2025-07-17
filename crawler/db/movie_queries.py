@@ -3,9 +3,10 @@
 
 from datetime import datetime
 from crawler.db.supabase_client import supabase
-from crawler.utils.logger import get_logger
+import logging
 
-logger = get_logger(__name__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def get_movie_by_title(title: str) -> dict | None:
     """Return a movie record by title if it exists."""

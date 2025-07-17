@@ -8,7 +8,10 @@ from groq import Groq, AsyncGroq, GroqError
 import logging
 import re
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from ..utils.metrics import (
     LLM_REQUEST_COUNT,
     LLM_REQUESTS_IN_FLIGHT,
@@ -24,7 +27,7 @@ class GroqWrapper:
     def __init__(self):
         load_dotenv()
         self.client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_rate_limit(self, api_call, *args, **kwargs):
         retries = 0

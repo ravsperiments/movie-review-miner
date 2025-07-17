@@ -2,9 +2,10 @@
 
 from datetime import datetime
 from .supabase_client import supabase
-from crawler.utils.logger import get_logger
+import logging
 
-logger = get_logger(__name__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def get_latest_post_date() -> datetime | None:
     """Fetch the most recent post_date stored in Supabase."""
@@ -14,7 +15,7 @@ def get_latest_post_date() -> datetime | None:
             .order("post_date", desc=True) \
             .limit(1) \
             .execute()
-        
+
         latest_post_date_str = result.data[0]["post_date"] if result.data else None
         if latest_post_date_str:
             return datetime.strptime(latest_post_date_str, "%Y-%m-%d")
@@ -43,7 +44,7 @@ def get_recent_links() -> set[str]:
     except Exception as e:
         logger.error("Failed to fetch recent links", e)
         return set()
-    
+
 def get_links_without_movieid() -> list[dict]:
     """
     Fetch all reviews from Supabase where movie_id is null.
@@ -145,4 +146,3 @@ def get_links_with_title_tbd() -> list[dict]:
         .execute()
     )
     return result.data if result.data else None
-

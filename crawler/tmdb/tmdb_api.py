@@ -1,12 +1,14 @@
 import os
 import aiohttp
-from crawler.utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 import json
 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 TMDB_BASE_URL = "https://api.themoviedb.org/3"
-
-logger = get_logger(__name__)
 
 async def search_tmdb(title: str, year: str | None = None) -> dict | None:
     """Search TMDb for movie metadata by title, preferring matches by release year."""

@@ -5,7 +5,10 @@ from dotenv import load_dotenv
 from mistralai import Mistral
 from mistralai.models import UserMessage
 
-from ..utils.logger import get_logger
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from ..utils.metrics import (
     LLM_REQUEST_COUNT,
     LLM_REQUESTS_IN_FLIGHT,
@@ -22,7 +25,7 @@ class MistralWrapper:
     def __init__(self):
         load_dotenv()
         self.client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
     async def _handle_rate_limit(self, api_call, *args, **kwargs):
         retries = 0

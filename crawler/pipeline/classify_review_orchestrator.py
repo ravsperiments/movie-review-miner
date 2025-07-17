@@ -9,7 +9,6 @@ import asyncio
 import json
 import re
 import logging
-import os
 from dotenv import load_dotenv
 from typing import Dict, Any, List, Union
 from aiolimiter import AsyncLimiter
