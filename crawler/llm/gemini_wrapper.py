@@ -3,6 +3,8 @@ import asyncio
 import random
 from dotenv import load_dotenv
 import google.generativeai as genai
+from typing import List, Dict, Any, Type
+from pydantic import BaseModel
 
 import logging
 
@@ -20,6 +22,8 @@ class GeminiWrapper:
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = genai.GenerativeModel("gemini-2.5-flash")
         self.logger = logging.getLogger(__name__)
+        # Create a client interface for instructor compatibility
+        self.client = self
 
     async def _handle_errors(self, api_call, *args, **kwargs):
         retries = 0

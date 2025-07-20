@@ -11,6 +11,7 @@ aiohttp
 python-dotenv
 pydantic
 instructor
+pydantic-ai
 
 #genai
 google-generativeai

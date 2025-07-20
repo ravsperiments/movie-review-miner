@@ -47,7 +47,7 @@ async def classify_reviews():
     parsed_pages = get_unpromoted_pages()
     if not parsed_pages:
         logger.info("No parsed pages found to classify.")
-        #return
+        return
 
     logger.info(f"Found {len(parsed_pages)} parsed pages to classify.")
 
