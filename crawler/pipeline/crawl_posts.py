@@ -5,7 +5,7 @@ This script:
   1. Retrieves pending pages to parse (with URL, critic ID) from the DB.
   2. Builds a dynamic critic-to-parser mapping via a DB-driven critic lookup.
   3. Applies concurrency and retry logic for robust HTTP parsing of each URL.
-  4. Validates, transforms, and upserts parsed fields into the raw_scraped_pages table.
+  4. Validates, transforms, and upserts parsed fields into the pages table.
   5. Logs successes and failures using StepLogger and pipeline_logger.
 """
 import logging

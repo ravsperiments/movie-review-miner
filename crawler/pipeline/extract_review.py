@@ -1,13 +1,13 @@
 """Unified review processing pipeline - EXTRACT stage."""
 import asyncio
 import importlib
+import json
 import logging
 from typing import Optional
 
 from crawler.llm.client import process_with_llm
 from crawler.llm.schemas import ProcessedReview
-from crawler.db.stg_clean_review_queries import get_staged_reviews, batch_insert_clean_reviews
-from crawler.db.scraper_queries import batch_update_status
+from crawler.db.scraper_queries import get_parsed_pages, batch_update_status, update_page_extract_results
 
 logger = logging.getLogger(__name__)
 
@@ -73,12 +73,12 @@ async def run_extract_pipeline(
     )
     logger.info(f"Using prompt {prompt_version}: {prompt_module.DESCRIPTION}")
 
-    # Fetch unprocessed pages from staging view
-    pages = get_staged_reviews(limit=limit)
+    # Fetch parsed pages ready for EXTRACT
+    pages = get_parsed_pages(limit=limit)
     logger.info(f"Fetched {len(pages)} pages to process")
 
     if not pages:
-        return {"processed": 0, "film_reviews": 0, "errors": 0}
+        return {"processed": 0, "film_reviews": 0, "non_reviews": 0, "errors": 0}
 
     # Process with controlled concurrency
     semaphore = asyncio.Semaphore(concurrency)
@@ -106,14 +106,11 @@ async def run_extract_pipeline(
 
         if result.is_film_review:
             film_reviews.append({
-                "raw_page_id": page_id,
+                "page_id": page_id,
                 "cleaned_title": result.cleaned_title,
                 "cleaned_short_review": result.cleaned_short_review,
                 "movie_names": result.movie_names,
                 "sentiment": result.sentiment,
-                "is_title_valid": True,
-                "is_short_review_valid": True,
-                "status": "approved",
             })
         else:
             non_reviews.append(page_id)
@@ -121,9 +118,18 @@ async def run_extract_pipeline(
     # Write to database
     if not dry_run:
         if film_reviews:
-            batch_insert_clean_reviews(film_reviews)
-            batch_update_status([r["raw_page_id"] for r in film_reviews], "extracted")
-            logger.info(f"Inserted {len(film_reviews)} clean reviews")
+            # Update pages table with extraction results
+            for review in film_reviews:
+                movie_names_json = json.dumps(review["movie_names"]) if isinstance(review["movie_names"], list) else review["movie_names"]
+                update_page_extract_results(
+                    page_id=review["page_id"],
+                    is_film_review=True,
+                    movie_names=movie_names_json,
+                    sentiment=review["sentiment"],
+                    cleaned_title=review["cleaned_title"],
+                    cleaned_short_review=review["cleaned_short_review"]
+                )
+            logger.info(f"Updated {len(film_reviews)} pages with extraction results")
 
         if non_reviews:
             batch_update_status(non_reviews, "not_film_review")

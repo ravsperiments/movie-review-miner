@@ -1,18 +1,14 @@
 """Pipeline step modules for the movie review miner.
 
 Pipeline Stages:
-    1. CRAWL   - fetch_links_orchestrator, parse_posts_orchestrator
-    2. EXTRACT - process_reviews (single LLM call)
-    3. ENRICH  - enrich_step2_add_metadata
+    1. CRAWL   - crawl_fetch_links, crawl_posts
+    2. EXTRACT - extract_review (single LLM call)
+    3. ENRICH  - enrich_movie_data
 """
 
-# Only import modules that are actively used
-# Old validation steps (val_step1, val_step2, val_step3) are deprecated
-# and replaced by process_reviews
-
 __all__ = [
-    "fetch_links_orchestrator",
-    "parse_posts_orchestrator",
-    "process_reviews",
-    "enrich_step2_add_metadata",
+    "crawl_fetch_links",
+    "crawl_posts",
+    "extract_review",
+    "enrich_movie_data",
 ]
