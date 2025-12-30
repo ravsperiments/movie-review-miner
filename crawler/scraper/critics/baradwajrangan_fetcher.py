@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Optional
 from urllib.parse import urlparse
 from crawler.scraper.fetch_links import get_post_links_async
-from crawler.db.store_scraped_pages import bulk_insert_raw_urls
+from crawler.db.scraper_queries import bulk_insert_raw_urls
 from crawler.utils import StepLogger
 
 async def fetch_links(critic_id: str, base_url: str, domain: str, start_page: int = 1, end_page: int = 279) -> list[str]:

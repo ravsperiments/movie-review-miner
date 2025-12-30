@@ -33,8 +33,9 @@ logger = get_logger(__name__)
 
 async def crawl(limit: int | None = None, dry_run: bool = False) -> list[str]:
     """Stage 1: CRAWL - Fetch links and parse pages."""
-    from crawler.pipeline.fetch_links_orchestrator import orchestrate_fetch_links
-    from crawler.pipeline.parse_posts_orchestrator import parse_posts
+    from crawler.pipeline.crawl_fetch_links import orchestrate_fetch_links
+    from crawler.pipeline.crawl_posts import parse_posts
+    from crawler.db.scraper_queries import get_pending_pages_to_parse
 
     logger.info("Starting CRAWL stage")
 
@@ -46,9 +47,15 @@ async def crawl(limit: int | None = None, dry_run: bool = False) -> list[str]:
         return []
 
     # Step 2: Parse posts
-    links = await parse_posts(limit=limit)
-    logger.info(f"CRAWL complete - processed {len(links) if links else 0} links")
-    return links or []
+    pages = get_pending_pages_to_parse()
+    if limit:
+        pages = pages[:limit]
+
+    if pages:
+        await parse_posts(pages)
+
+    logger.info(f"CRAWL complete - processed {len(pages) if pages else 0} links")
+    return [p['page_url'] for p in pages] if pages else []
 
 
 async def extract(
@@ -59,7 +66,7 @@ async def extract(
     concurrency: int = 5,
 ) -> dict:
     """Stage 2: EXTRACT - Process reviews with single LLM call."""
-    from crawler.pipeline.process_reviews import run_extract_pipeline
+    from crawler.pipeline.extract_review import run_extract_pipeline
 
     logger.info(f"Starting EXTRACT stage: model={model}, prompt={prompt_version}")
 
@@ -77,12 +84,12 @@ async def extract(
 
 async def enrich() -> None:
     """Stage 3: ENRICH - Add TMDB metadata."""
-    from crawler.pipeline import enrich_step2_add_metadata
+    from crawler.pipeline import enrich_movie_data
 
     logger.info("Starting ENRICH stage")
 
-    if hasattr(enrich_step2_add_metadata, 'enrich_metadata'):
-        await enrich_step2_add_metadata.enrich_metadata()
+    if hasattr(enrich_movie_data, 'enrich_metadata'):
+        await enrich_movie_data.enrich_metadata()
 
     logger.info("ENRICH complete")
 
