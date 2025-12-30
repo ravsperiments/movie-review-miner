@@ -10,16 +10,44 @@ from pathlib import Path
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Database path
-DB_PATH = "/Users/ravi/Documents/Projects/movie-review-miner/crawler/local.db"
+# Default database path
+DEFAULT_DB_PATH = Path(__file__).parent.parent / "local.db"
+
+# Module-level DB path (can be overridden before first use)
+_db_path: Path | None = None
+_db_instance: "SQLiteClient | None" = None
+
+
+def set_db_path(path: Path | str) -> None:
+    """Set the database path before first use.
+
+    Call this before any database operations to use a different database file.
+    """
+    global _db_path, _db_instance
+    _db_path = Path(path) if isinstance(path, str) else path
+    _db_instance = None  # Reset singleton so next get_db() creates new instance
+    logger.info(f"Database path set to: {_db_path}")
+
+
+def get_db_path() -> Path:
+    """Get the current database path."""
+    return _db_path if _db_path is not None else DEFAULT_DB_PATH
+
+
+def get_db() -> "SQLiteClient":
+    """Get the database client singleton."""
+    global _db_instance
+    if _db_instance is None:
+        _db_instance = SQLiteClient(str(get_db_path()))
+    return _db_instance
 
 
 class SQLiteClient:
     """SQLite database client for local development."""
 
-    def __init__(self, db_path: str = DB_PATH):
+    def __init__(self, db_path: str | None = None):
         """Initialize SQLite client and create tables if needed."""
-        self.db_path = db_path
+        self.db_path = db_path if db_path else str(get_db_path())
         self._init_db()
 
     def _get_connection(self) -> sqlite3.Connection:
@@ -294,5 +322,7 @@ class SQLiteClient:
         return self.execute_many(query, data)
 
 
-# Create a singleton instance
+# Backward-compatible singleton (uses default path)
+# For configurable path, call set_db_path() before any DB operations,
+# then use get_db() to access the client
 db = SQLiteClient()

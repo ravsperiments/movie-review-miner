@@ -1,7 +1,5 @@
 import asyncio
-import aiohttp
-import async_timeout
-from tqdm.asyncio import tqdm
+import httpx
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
@@ -67,7 +65,7 @@ def extract_links_from_html(html: str, page: int) -> list[tuple[int, int, str]]:
         if a.get("href")
     ]
 
-async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[tuple[int, int, str]]:
+async def fetch_listing_page(client: httpx.AsyncClient, page: int) -> list[tuple[int, int, str]]:
     """
     Asynchronously fetches a single blog listing page and extracts links.
 
@@ -90,23 +88,18 @@ async def fetch_listing_page(session: aiohttp.ClientSession, page: int) -> list[
     # Implement a retry mechanism for fetching the page.
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            # Acquire a semaphore to limit concurrent fetches.
-            async with semaphore:
-                # Set a timeout for the HTTP request to prevent indefinite hangs.
-                async with async_timeout.timeout(10):
-                    # Perform the GET request to the constructed URL.
-                    async with session.get(url, headers=HEADERS) as response:
-                        # Read the response body as text.
-                        html = await response.text()
+            # Perform the GET request using httpx
+            response = await client.get(url, headers=HEADERS, timeout=30.0)
+            html = response.text
 
-                        # For debugging purposes, save the HTML of the first page on the first attempt.
-                        if page == 1 and attempt == 1:
-                            with open("crawler/debug_page_1.html", "w") as f:
-                                f.write(html) # Corrected: use html variable instead of response.text
+            # For debugging purposes, save the HTML of the first page on the first attempt.
+            if page == 1 and attempt == 1:
+                with open("crawler/debug_page_1.html", "w") as f:
+                    f.write(html)
 
-                        logger.info("Page %s attempt %s length=%s", page, attempt, len(html))
-                        # Extract and return links from the fetched HTML.
-                        return extract_links_from_html(html, page)
+            logger.info("Page %s attempt %s length=%s", page, attempt, len(html))
+            # Extract and return links from the fetched HTML.
+            return extract_links_from_html(html, page)
 
         except Exception as e:
             # Log a warning if an attempt fails and wait before retrying.
@@ -140,18 +133,16 @@ async def get_post_links_async(start_page: int = 1, end_page: int = 279) -> list
     # This is used to identify and skip already processed links.
     recent_links = get_all_urls()
 
-    # Configure a TCP connector for the aiohttp session to manage connection limits.
-    connector = aiohttp.TCPConnector(limit=CONCURRENT_FETCHES)
-    
     # List to store all newly fetched links.
     all_links: list[tuple[int, int, str]] = []
 
-    # Create an aiohttp client session for making HTTP requests.
-    async with aiohttp.ClientSession(connector=connector) as session:
+    # Create an httpx async client for making HTTP requests.
+    # Using httpx instead of aiohttp due to Python 3.14 compatibility issues
+    async with httpx.AsyncClient() as client:
         # Iterate through the specified page range.
         for page in range(start_page, end_page + 1):
             # Fetch links from the current listing page.
-            page_links = await fetch_listing_page(session, page)
+            page_links = await fetch_listing_page(client, page)
 
             # Flag to track if any new links were found on the current page.
             found_new_link_on_page = False
@@ -193,10 +184,10 @@ def get_post_links(page: int) -> list[str]:
         list[str]: A list of URLs extracted from the specified page.
     """
     async def run():
-        # Create a new aiohttp session for this synchronous call.
-        async with aiohttp.ClientSession() as session:
+        # Create a new httpx client for this synchronous call.
+        async with httpx.AsyncClient() as client:
             # Fetch links asynchronously and extract only the URLs.
-            results = await fetch_listing_page(session, page)
+            results = await fetch_listing_page(client, page)
             return [url for (_, _, url) in results]
 
     # Run the asynchronous `run` function using asyncio.run().

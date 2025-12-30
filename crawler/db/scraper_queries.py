@@ -4,7 +4,7 @@ from typing import List, Dict, Any
 # import random
 
 try:
-    from crawler.db.sqlite_client import db
+    from crawler.db.sqlite_client import get_db
     USE_SQLITE = True
 except Exception:
     from crawler.db.supabase_client import supabase
@@ -31,7 +31,7 @@ def get_all_urls() -> List[str]:
     """
     try:
         if USE_SQLITE:
-            results = db.select("pages", "page_url")
+            results = get_db().select("pages", "page_url")
             return [item['page_url'] for item in results] if results else []
         else:
             # Query the 'pages' table to select all 'page_url' columns.
@@ -61,7 +61,7 @@ def bulk_insert_raw_urls(pages_data: List[Dict[str, Any]]) -> None:
     """
     try:
         if USE_SQLITE:
-            db.upsert("pages", pages_data, conflict_column="page_url")
+            get_db().upsert("pages", pages_data, conflict_column="page_url")
             logger.info(f"Successfully inserted {len(pages_data)} new URLs.")
         else:
             # Perform a bulk upsert operation. If a 'page_url' already exists,
@@ -86,7 +86,7 @@ def get_pending_pages_to_parse() -> List[Dict[str, Any]]:
     """
     try:
         if USE_SQLITE:
-            return db.select("pages", where="status = ?", params=("pending",))
+            return get_db().select("pages", where="status = ?", params=("pending",))
         else:
             # Query the 'pages' table for records where 'status' is 'pending'.
             response = supabase.table("pages").select("*").eq("status", "pending").execute()
@@ -123,7 +123,7 @@ def update_page_as_parsed(page_id: str, parsed_data: Dict[str, Any]) -> None:
     }
     try:
         if USE_SQLITE:
-            db.update("pages", update_payload, "id = ?", (page_id,))
+            get_db().update("pages", update_payload, "id = ?", (page_id,))
             logger.info(f"Successfully updated page {page_id} as parsed.")
         else:
             # Perform the update operation on the 'pages' table,
@@ -155,7 +155,7 @@ def update_page_with_error(page_id: str, error_type: str, error_message: str) ->
     }
     try:
         if USE_SQLITE:
-            db.update("pages", update_payload, "id = ?", (page_id,))
+            get_db().update("pages", update_payload, "id = ?", (page_id,))
             logger.info(f"Successfully logged error for page {page_id}.")
         else:
             # Perform the update operation, setting the status and error details.
@@ -180,7 +180,7 @@ def get_parsed_pages(limit: int = 10) -> List[Dict[str, Any]]:
     """
     try:
         if USE_SQLITE:
-            return db.select("pages", where="status = ?", params=("parsed",), limit=limit)
+            return get_db().select("pages", where="status = ?", params=("parsed",), limit=limit)
         else:
             response = (
                 supabase.table("pages")
@@ -209,7 +209,7 @@ def get_unpromoted_pages() -> List[Dict[str, Any]]:
     try:
         if USE_SQLITE:
             # For SQLite, just return parsed pages (no view available)
-            return db.select("pages", where="status = ?", params=("parsed",))
+            return get_db().select("pages", where="status = ?", params=("parsed",))
         else:
             # query pages to get unpublished rows, which returns ~1000 rows
             response = supabase.table("vw_unpromoted_parsed_pages") \
@@ -247,7 +247,7 @@ def batch_update_status(page_ids: List[str], status: str, batch_size: int = 100)
                 # Update using IN clause with parameter substitution
                 placeholders = ", ".join("?" * len(chunk))
                 query = f"UPDATE pages SET status = ?, updated_at = ? WHERE id IN ({placeholders})"
-                db.execute_query(
+                get_db().execute_query(
                     query,
                     (status, datetime.utcnow().isoformat()) + tuple(chunk)
                 )
@@ -296,7 +296,7 @@ def update_page_extract_results(
 
     try:
         if USE_SQLITE:
-            db.update("pages", update_payload, "id = ?", (page_id,))
+            get_db().update("pages", update_payload, "id = ?", (page_id,))
             logger.info(f"Successfully updated page {page_id} with extraction results.")
         else:
             supabase.table("pages").update(update_payload).eq("id", page_id).execute()

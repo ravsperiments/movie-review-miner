@@ -9,7 +9,7 @@ import logging
 from typing import List, Dict, Any
 
 try:
-    from crawler.db.sqlite_client import db
+    from crawler.db.sqlite_client import get_db
     USE_SQLITE = True
 except Exception:
     from crawler.db.supabase_client import supabase
@@ -41,7 +41,7 @@ def get_critics() -> List[Dict[str, Any]]:
     """
     try:
         if USE_SQLITE:
-            results = db.select("critics", "id, name, base_url, bio, created_at, updated_at")
+            results = get_db().select("critics", "id, name, base_url, bio, created_at, updated_at")
             return results if results else []
         else:
             response = supabase.table("critics").select("id, name, base_url, bio, created_at, updated_at").execute()

@@ -7,14 +7,23 @@ Pipeline Stages:
     2. EXTRACT - Single LLM call: classify + clean + sentiment
     3. ENRICH  - Add TMDB metadata
 
+Modes:
+    prod  - Uses local.db (default, production data)
+    test  - Uses test.db (isolated test database)
+    eval  - Runs golden set evaluation
+
 Usage:
-    # Run full pipeline
+    # Run full pipeline (prod mode)
     python run_pipeline.py --stage all
 
     # Run specific stages
     python run_pipeline.py --stage crawl
     python run_pipeline.py --stage extract --model anthropic/claude-3-5-sonnet-latest --prompt v1
     python run_pipeline.py --stage enrich
+
+    # Test mode (uses test.db)
+    python run_pipeline.py --mode test --stage crawl
+    python run_pipeline.py --mode test --stage extract
 
     # Run evaluation
     python run_pipeline.py --mode eval --model anthropic/claude-3-5-sonnet-latest --prompt v1
@@ -25,10 +34,31 @@ Usage:
 import argparse
 import asyncio
 import logging
+from pathlib import Path
 
 from crawler.utils.logger import get_logger, setup_pipeline_logging
 
 logger = get_logger(__name__)
+
+# Database paths for different modes
+CRAWLER_DIR = Path(__file__).parent
+DB_PATHS = {
+    "prod": CRAWLER_DIR / "local.db",
+    "test": CRAWLER_DIR / "test.db",
+}
+
+
+def setup_database(mode: str) -> None:
+    """Configure database path based on mode."""
+    if mode == "eval":
+        # Eval mode doesn't use the DB
+        return
+
+    from crawler.db.sqlite_client import set_db_path
+
+    db_path = DB_PATHS.get(mode, DB_PATHS["prod"])
+    set_db_path(db_path)
+    logger.info(f"Using database: {db_path}")
 
 
 async def crawl(limit: int | None = None, dry_run: bool = False) -> list[str]:
@@ -117,6 +147,9 @@ async def main(args) -> None:
     """Run the movie review mining pipeline."""
     setup_pipeline_logging()
 
+    # Configure database based on mode (must be done before any DB imports)
+    setup_database(args.mode)
+
     if args.mode == "eval":
         # Evaluation mode
         result = await run_eval(
@@ -194,9 +227,9 @@ Examples:
 
     parser.add_argument(
         "--mode",
-        choices=["pipeline", "eval"],
-        default="pipeline",
-        help="Run mode: 'pipeline' for production, 'eval' for experimentation"
+        choices=["prod", "test", "eval"],
+        default="prod",
+        help="Run mode: 'prod' uses local.db, 'test' uses test.db, 'eval' for golden set testing"
     )
     parser.add_argument(
         "--stage",
