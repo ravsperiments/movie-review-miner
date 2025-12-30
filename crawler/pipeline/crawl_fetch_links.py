@@ -1,5 +1,6 @@
 import asyncio
 import importlib
+from urllib.parse import urlparse
 from crawler.db.critic_queries import get_critics
 from crawler.utils import StepLogger
 

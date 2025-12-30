@@ -1,21 +1,14 @@
-"""Pipeline step modules for the weekly enrichment process."""
+"""Pipeline step modules for the movie review miner.
 
-#from . import step1_fetch_links
-#from . import crawl_step2_parse_posts
-#from . import val_step1_classify_reviews
-#from . import review_validation_orchestrator
-from . import val_step2_llm_validation
-from . import val_step3_link_movies
-from . import enrich_step1_generate_sentiment
-from . import enrich_step2_add_metadata
+Pipeline Stages:
+    1. CRAWL   - crawl_fetch_links, crawl_posts
+    2. EXTRACT - extract_review (single LLM call)
+    3. ENRICH  - enrich_movie_data
+"""
 
 __all__ = [
-    "crawl_step1_fetch_links",
-    "crawl_step2_parse_posts",
-    "val_step1_classify_reviews",
-    "review_validation_orchestrator",
-    "review_validation_orchestrator",
-    "val_step3_link_movies",
-    "enrich_step1_generate_sentiment",
-    "enrich_step2_add_metadata",
+    "crawl_fetch_links",
+    "crawl_posts",
+    "extract_review",
+    "enrich_movie_data",
 ]

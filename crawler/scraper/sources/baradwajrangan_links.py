@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 
 from crawler.utils.logger import get_logger
 from crawler.utils.io_helpers import write_failure
-from crawler.db.store_scraped_pages import get_all_urls
+from crawler.db.scraper_queries import get_all_urls
 
 # Base URL for the Baradwaj Rangan blog, used for constructing full URLs.
 BASE_URL = "https://baradwajrangan.wordpress.com"

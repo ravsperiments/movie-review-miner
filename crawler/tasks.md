@@ -1,5 +1,17 @@
 ### 📋 tasks.md — LLM Movie Review Miner
 
+#### 2025-07-19
+- [x] Implemented clean_review_orchestrator for review content cleaning using primary+judge LLM pattern
+- [x] Created modular prompt system with separate system/user prompts for cleaning and judging
+- [x] Added quality criteria framework: primary model (Claude Sonnet) cleans content, judge model (Claude Haiku) validates quality
+- [x] Integrated movie name context into cleaning prompts for better specificity
+- [x] Updated system prompts to avoid generic language ("this movie", "the film") and enforce professional film criticism standards
+- [x] Fixed data flow between primary and judge models with sequential execution pattern
+- [x] Achieved 100% judge approval rate with Sonnet primary model producing high-quality, professional content
+- [x] Updated task types from clean_review_fields/judge_clean_review to clean_review/judge_review
+- [ ] TODO: Fix reconciliation logic to properly approve records that pass both title and review validation
+- [ ] TODO: Resolve database enum error for "rejected" status in stg_clean_reviews table
+
 #### 2025-07-14
 - [x] Experimenting with system and user prompts
 - [x] Updated prompt to reduce claude haiku's verbosity which resulted in 2x output tokens

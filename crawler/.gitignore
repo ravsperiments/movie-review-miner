@@ -6,6 +6,8 @@ __pycache__/
 
 # Local database
 reviews.db
+local.db
+*.db
 
 # Logs
 logs/
@@ -24,3 +26,8 @@ output/
 .venv/
 
 .zed
+.DS_Store
+
+# Eval results
+eval/results/
+*_results.json
