@@ -4,6 +4,7 @@ import asyncio
 import argparse
 import importlib
 import json
+import logging
 import time
 from pathlib import Path
 
@@ -18,9 +19,37 @@ def load_config() -> dict:
     with open(config_path) as f:
         return yaml.safe_load(f)
 
+
+def setup_eval_logging() -> logging.Logger:
+    """Set up logging for eval: INFO to console, errors to file only."""
+    logger = logging.getLogger("review_aggregator.eval.model_runner")
+    logger.setLevel(logging.DEBUG)
+
+    # Clear existing handlers
+    logger.handlers.clear()
+    logger.propagate = False
+
+    # Console: INFO only (progress messages)
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    console.setFormatter(logging.Formatter("%(asctime)s | %(message)s", "%Y-%m-%d %H:%M:%S"))
+    logger.addHandler(console)
+
+    # File: DEBUG and above (includes errors)
+    log_dir = Path(__file__).parent.parent / "logs"
+    log_dir.mkdir(exist_ok=True)
+    file_handler = logging.FileHandler(log_dir / "model_runner.log")
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(message)s", "%Y-%m-%d %H:%M:%S"
+    ))
+    logger.addHandler(file_handler)
+
+    return logger
+
+
 from review_aggregator.llm.client import process_with_llm, parse_model_string
 from review_aggregator.llm.schemas import ProcessedReview
-from review_aggregator.utils.logger import get_logger
 from review_aggregator.eval.db import (
     get_latest_batch,
     get_batch,
@@ -28,7 +57,7 @@ from review_aggregator.eval.db import (
     save_llm_output,
 )
 
-logger = get_logger(__name__)
+logger = setup_eval_logging()
 
 # Cache for imported prompt modules
 _prompt_modules = {}
@@ -105,7 +134,7 @@ async def run_sample_with_model(sample: dict, model: str, prompt_module) -> dict
 
     except Exception as e:
         latency_ms = (time.time() - start_time) * 1000
-        logger.error(f"Error running sample {sample_id} on {model}: {e}")
+        logger.debug(f"Error running sample {sample_id} on {model}: {e}")
 
         return {
             "sample_id": sample_id,
@@ -196,7 +225,7 @@ async def run_eval(
     for result in results:
         if result["error"]:
             error_count += 1
-            logger.error(f"Sample {result['sample_id']} on {result['model']}: {result['error']}")
+            logger.debug(f"Sample {result['sample_id']} on {result['model']}: {result['error']}")
 
             save_llm_output(
                 sample_id=result["sample_id"],
