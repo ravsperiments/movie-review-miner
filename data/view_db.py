@@ -190,32 +190,37 @@ class DBViewHandler(BaseHTTPRequestHandler):
 
     <script>
         async function loadData() {
+            console.log('loadData called');
             try {
+                console.log('Fetching /api/data...');
                 const response = await fetch('/api/data');
+                console.log('Response status:', response.status);
                 const dbData = await response.json();
+                console.log('Data received:', dbData.tables ? dbData.tables.length + ' tables' : 'error');
                 renderTables(dbData);
             } catch (error) {
+                console.error('Error:', error);
                 document.getElementById('content').innerHTML = '<div class="empty">Error loading database: ' + error.message + '</div>';
             }
         }
 
         function downloadCSV(tableName, columns, rows) {
             // Build CSV content
-            let csv = columns.map(col => `"${col.name}"`).join(',') + '\n';
-            rows.forEach(row => {
-                csv += row.map(cell => {
-                    const val = String(cell || '');
+            var csv = columns.map(function(col) { return '"' + col.name + '"'; }).join(',') + '\\n';
+            rows.forEach(function(row) {
+                csv += row.map(function(cell) {
+                    var val = String(cell || '');
                     // Escape quotes and wrap in quotes
-                    return `"${val.replace(/"/g, '""')}"`;
-                }).join(',') + '\n';
+                    return '"' + val.split('"').join('""') + '"';
+                }).join(',') + '\\n';
             });
 
             // Create blob and download
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            var blob = new Blob([csv], { type: 'text/csv' });
+            var url = window.URL.createObjectURL(blob);
+            var link = document.createElement('a');
             link.href = url;
-            link.download = `${tableName}.csv`;
+            link.download = tableName + '.csv';
             document.body.appendChild(link);
             link.click();
             window.URL.revokeObjectURL(url);
@@ -223,42 +228,36 @@ class DBViewHandler(BaseHTTPRequestHandler):
         }
 
         function renderTables(dbData) {
-            const container = document.getElementById('content');
+            var container = document.getElementById('content');
             container.innerHTML = '<p style="color: #666; margin-bottom: 30px;">Database: ' + dbData.path + '</p>';
 
-            dbData.tables.forEach(table => {
-                const section = document.createElement('div');
+            dbData.tables.forEach(function(table) {
+                var section = document.createElement('div');
                 section.className = 'table-section';
 
                 // Header
-                const header = document.createElement('div');
+                var header = document.createElement('div');
                 header.className = 'table-header';
-                header.innerHTML = `
-                    <h2>📋 ${table.name}</h2>
-                    <div class="table-stats">${table.rowCount} rows</div>
-                `;
+                header.innerHTML = '<h2>' + table.name + '</h2><div class="table-stats">' + table.rowCount + ' rows</div>';
                 section.appendChild(header);
 
                 // Content
-                const content = document.createElement('div');
+                var content = document.createElement('div');
                 content.className = 'table-content';
 
                 // Schema
-                const schemaDiv = document.createElement('div');
+                var schemaDiv = document.createElement('div');
                 schemaDiv.className = 'schema';
                 schemaDiv.innerHTML = '<h3>Schema</h3>';
 
-                const columnsDiv = document.createElement('div');
+                var columnsDiv = document.createElement('div');
                 columnsDiv.className = 'columns';
 
-                table.columns.forEach(col => {
-                    const item = document.createElement('div');
+                table.columns.forEach(function(col) {
+                    var item = document.createElement('div');
                     item.className = 'column-item';
-                    item.innerHTML = `
-                        <div class="column-name">${col.name}</div>
-                        <div class="column-type">${col.type}</div>
-                        ${col.flags ? `<div class="column-flags">${col.flags}</div>` : ''}
-                    `;
+                    var flagsHtml = col.flags ? '<div class="column-flags">' + col.flags + '</div>' : '';
+                    item.innerHTML = '<div class="column-name">' + col.name + '</div><div class="column-type">' + col.type + '</div>' + flagsHtml;
                     columnsDiv.appendChild(item);
                 });
 
@@ -267,30 +266,30 @@ class DBViewHandler(BaseHTTPRequestHandler):
 
                 // Controls
                 if (table.rowCount > 0) {
-                    const controls = document.createElement('div');
+                    var controls = document.createElement('div');
                     controls.className = 'table-controls';
-                    const downloadBtn = document.createElement('button');
+                    var downloadBtn = document.createElement('button');
                     downloadBtn.className = 'btn-download';
-                    downloadBtn.textContent = '⬇️ Download as CSV';
-                    downloadBtn.onclick = () => downloadCSV(table.name, table.columns, table.rows);
+                    downloadBtn.textContent = 'Download as CSV';
+                    downloadBtn.onclick = function() { downloadCSV(table.name, table.columns, table.rows); };
                     controls.appendChild(downloadBtn);
-                    const rowInfo = document.createElement('span');
+                    var rowInfo = document.createElement('span');
                     rowInfo.className = 'row-count';
-                    rowInfo.textContent = `Showing ${table.rows.length} of ${table.rowCount} rows`;
+                    rowInfo.textContent = 'Showing ' + table.rows.length + ' of ' + table.rowCount + ' rows';
                     controls.appendChild(rowInfo);
                     content.appendChild(controls);
                 }
 
                 // Data
                 if (table.rowCount > 0) {
-                    const table_elem = document.createElement('table');
+                    var table_elem = document.createElement('table');
                     table_elem.className = 'data-table';
 
                     // Header
-                    const thead = document.createElement('thead');
-                    const headerRow = document.createElement('tr');
-                    table.columns.forEach(col => {
-                        const th = document.createElement('th');
+                    var thead = document.createElement('thead');
+                    var headerRow = document.createElement('tr');
+                    table.columns.forEach(function(col) {
+                        var th = document.createElement('th');
                         th.textContent = col.name;
                         headerRow.appendChild(th);
                     });
@@ -298,12 +297,12 @@ class DBViewHandler(BaseHTTPRequestHandler):
                     table_elem.appendChild(thead);
 
                     // Body
-                    const tbody = document.createElement('tbody');
+                    var tbody = document.createElement('tbody');
                     if (table.rows.length > 0) {
-                        table.rows.forEach(row => {
-                            const tr = document.createElement('tr');
-                            row.forEach(cell => {
-                                const td = document.createElement('td');
+                        table.rows.forEach(function(row) {
+                            var tr = document.createElement('tr');
+                            row.forEach(function(cell) {
+                                var td = document.createElement('td');
                                 td.textContent = String(cell || '');
                                 tr.appendChild(td);
                             });
@@ -313,9 +312,9 @@ class DBViewHandler(BaseHTTPRequestHandler):
                     table_elem.appendChild(tbody);
                     content.appendChild(table_elem);
                 } else {
-                    const empty = document.createElement('div');
+                    var empty = document.createElement('div');
                     empty.className = 'empty';
-                    empty.textContent = '📭 No rows in this table';
+                    empty.textContent = 'No rows in this table';
                     content.appendChild(empty);
                 }
 
@@ -325,7 +324,11 @@ class DBViewHandler(BaseHTTPRequestHandler):
         }
 
         // Load data when page loads
-        loadData();
+        console.log('Script loaded, calling loadData...');
+        window.onload = function() {
+            console.log('Window loaded');
+            loadData();
+        };
     </script>
 </body>
 </html>"""
