@@ -5,11 +5,18 @@ import argparse
 import importlib
 import json
 import time
-from datetime import datetime
 from pathlib import Path
 
+import yaml
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env")
+
+
+def load_config() -> dict:
+    """Load eval config from config.yaml."""
+    config_path = Path(__file__).parent / "config.yaml"
+    with open(config_path) as f:
+        return yaml.safe_load(f)
 
 from review_aggregator.llm.client import process_with_llm, parse_model_string
 from review_aggregator.llm.schemas import ProcessedReview
@@ -235,16 +242,27 @@ async def run_eval(
 
 def main():
     """CLI entry point."""
+    config = load_config()
+
     parser = argparse.ArgumentParser(description="Run model evaluation on sample batch")
-    parser.add_argument("--models", nargs="+", required=True,
-                       help="Models to evaluate (e.g., anthropic/claude-sonnet-4-20250514)")
+    parser.add_argument("--models", nargs="+",
+                       help="Models to evaluate (default: all from config.yaml)")
     parser.add_argument("--batch", type=str, default="latest", help="Batch ID or 'latest'")
     parser.add_argument("--limit", type=int, help="Max samples to process")
-    parser.add_argument("--concurrency", type=int, default=3, help="Max concurrent requests")
+    parser.add_argument("--concurrency", type=int,
+                       default=config.get("evaluation", {}).get("default_concurrency", 3),
+                       help="Max concurrent requests")
     args = parser.parse_args()
 
+    # Use models from config if not specified
+    models = args.models or config.get("models", [])
+    if not models:
+        raise ValueError("No models specified. Add to config.yaml or use --models")
+
+    print(f"Running eval with models: {models}")
+
     stats = asyncio.run(run_eval(
-        models=args.models,
+        models=models,
         batch_id=args.batch,
         limit=args.limit,
         concurrency=args.concurrency,

@@ -33,7 +33,7 @@ from .db import (
     get_batch_stats,
 )
 from .sampler import create_sample_batch_from_db
-from .runner import run_eval, get_critic_prompt
+from .model_runner import run_eval, get_critic_prompt
 from .judge import score_outputs
 
 __all__ = [
