@@ -2,6 +2,9 @@
 crawler/failures/
 crawler/logs/
 crawler/crawler/
+review_aggregator/failures/
+review_aggregator/logs/
+review_aggregator/eval/results/
 
 # Python
 __pycache__/
