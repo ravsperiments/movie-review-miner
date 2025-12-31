@@ -366,8 +366,8 @@ class DBViewHandler(BaseHTTPRequestHandler):
             cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
             row_count = cursor.fetchone()[0]
 
-            # Get all data (for CSV export and display)
-            cursor.execute(f"SELECT * FROM {table_name};")
+            # Get first 100 rows for display (large tables would be too much JSON)
+            cursor.execute(f"SELECT * FROM {table_name} LIMIT 100;")
             rows = cursor.fetchall()
 
             db_data["tables"].append({
@@ -440,9 +440,27 @@ if __name__ == "__main__":
         print(f"Database not found: {DB_PATH}")
         exit(1)
 
-    server = HTTPServer(("localhost", 8000), DBViewHandler)
-    print("📊 Database viewer running at http://localhost:8000")
+    # Find a free port
+    import socket
+    port = 8000
+    while port < 8010:
+        try:
+            server = HTTPServer(("localhost", port), DBViewHandler)
+            break
+        except OSError:
+            port += 1
+    else:
+        print("Could not find a free port")
+        exit(1)
+
+    url = f"http://localhost:{port}"
+    print(f"📊 Database viewer running at {url}")
     print("Press Ctrl+C to stop")
+
+    # Update browser opener with correct port
+    global open_browser
+    def open_browser():
+        webbrowser.open(url)
 
     # Open browser automatically
     timer = Timer(1.0, open_browser)
