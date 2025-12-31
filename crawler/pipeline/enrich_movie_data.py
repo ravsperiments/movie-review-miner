@@ -1,6 +1,6 @@
-"""Step 6: use TMDb to enrich movie metadata."""
+"""ENRICH stage: use TMDb to enrich movie metadata."""
 import asyncio
-from crawler.db.movie_queries import get_movies_missing_metadata, update_movie_metadata
+from crawler.db.movie_queries import get_movies_pending_enrichment, update_movie_metadata, update_movie_status
 from crawler.db.review_queries import get_post_date_for_movie
 from crawler.tmdb.tmdb_api import search_tmdb
 from crawler.utils.io_helpers import write_failure
@@ -14,9 +14,10 @@ semaphore = asyncio.Semaphore(CONCURRENT_REQUESTS)
 async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
     try:
         async with semaphore:
-            metadata = await search_tmdb(movie["title"], movie["review_year"])
+            metadata = await search_tmdb(movie["title"], movie.get("review_year"))
         if metadata:
-            update_movie_metadata(movie["id"], metadata)
+            update_movie_metadata(movie["id"], metadata, source="tmdb")
+            update_movie_status(movie["id"], "enriched")
             step_logger.metrics["saved_count"] += 1
             step_logger.logger.info("Updated metadata for %s", movie["title"])
             log_step_result(
@@ -26,6 +27,9 @@ async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
                 status="success",
             )
         else:
+            # No TMDB match found - mark as failed
+            update_movie_status(movie["id"], "enrichment_failed", "No TMDB match found")
+            step_logger.metrics["failed_count"] += 1
             step_logger.logger.warning("No metadata found for %s", movie["title"])
             log_step_result(
                 "enrich_metadata",
@@ -35,6 +39,7 @@ async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
                 error_message="No metadata",
             )
     except Exception as e:
+        update_movie_status(movie["id"], "enrichment_failed", str(e))
         step_logger.metrics["failed_count"] += 1
         step_logger.logger.error(
             "TMDb enrichment failed for %s: %s", movie.get("title"), e, exc_info=True
@@ -50,9 +55,9 @@ async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
 
 
 async def enrich_metadata() -> None:
-    """Fill in metadata for movies lacking it using TMDb."""
-    step_logger = StepLogger("step_6_enrich_metadata")
-    movies = get_movies_missing_metadata()
+    """Fill in metadata for movies with status='pending_enrichment' using TMDb."""
+    step_logger = StepLogger("enrich_metadata")
+    movies = get_movies_pending_enrichment()
     step_logger.metrics["input_count"] = len(movies)
     step_logger.logger.info("Enriching metadata for %s movies", len(movies))
 

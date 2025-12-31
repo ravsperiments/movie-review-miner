@@ -30,10 +30,10 @@ async def orchestrate_fetch_links():
         base_url = critic["base_url"]
         domain = urlparse(base_url).netloc
         
-        # Construct the module name for the reviewer-specific fetcher script.
-        # The naming convention is 'crawler.scraper.critics.<domain_prefix>_fetcher'.
-        # For example, 'baradwajrangan.wordpress.com' becomes 'baradwajrangan_fetcher'.
-        module_name = f"crawler.scraper.critics.{domain.split('.')[0]}_fetcher"
+        # Construct the module name for the reviewer-specific scraper.
+        # The naming convention is 'crawler.critics.<domain_prefix>'.
+        # For example, 'baradwajrangan.wordpress.com' becomes 'baradwajrangan'.
+        module_name = f"crawler.critics.{domain.split('.')[0]}"
 
         try:
             # Dynamically import the reviewer-specific fetcher module.

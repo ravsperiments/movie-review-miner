@@ -137,7 +137,7 @@ def update_page_as_parsed(page_id: str, parsed_data: Dict[str, Any]) -> None:
 
 def update_page_with_error(page_id: str, error_type: str, error_message: str) -> None:
     """
-    Logs a parsing failure for a specific page by updating its status to 'failed_parsing'.
+    Logs a parsing failure for a specific page by updating its status to 'parsing_failed'.
 
     This function is invoked when an error occurs during the parsing of a raw page.
     It records the type of error and a descriptive message for debugging and tracking.
@@ -149,7 +149,7 @@ def update_page_with_error(page_id: str, error_type: str, error_message: str) ->
     """
     # Prepare the payload for updating the page's status to indicate a parsing failure.
     update_payload = {
-        "status": "failed_parsing",
+        "status": "parsing_failed",
         "error_type": error_type,
         "error_message": error_message
     }
@@ -262,13 +262,40 @@ def batch_update_status(page_ids: List[str], status: str, batch_size: int = 100)
             raise
 
 
+def update_page_extraction_failed(page_id: str, error_message: str, model_name: str = None) -> None:
+    """
+    Marks a page as failed during LLM extraction.
+
+    Args:
+        page_id (str): The unique identifier of the page.
+        error_message (str): Description of the extraction error.
+        model_name (str): The LLM model that was used.
+    """
+    update_payload = {
+        "status": "extraction_failed",
+        "error_type": "extraction_error",
+        "error_message": error_message,
+        "extract_model_name": model_name,
+    }
+    try:
+        if USE_SQLITE:
+            get_db().update("pages", update_payload, "id = ?", (page_id,))
+            logger.info(f"Marked page {page_id} as extraction_failed.")
+        else:
+            supabase.table("pages").update(update_payload).eq("id", page_id).execute()
+            logger.info(f"Marked page {page_id} as extraction_failed.")
+    except Exception as e:
+        logger.error(f"Error marking page {page_id} as extraction_failed: {e}")
+
+
 def update_page_extract_results(
     page_id: str,
     is_film_review: bool,
     movie_names: str,
     sentiment: str,
     cleaned_title: str,
-    cleaned_short_review: str
+    cleaned_short_review: str,
+    model_name: str = None
 ) -> None:
     """
     Updates a page with LLM extraction results.
@@ -283,6 +310,7 @@ def update_page_extract_results(
         sentiment (str): Sentiment classification ('positive', 'negative', 'neutral').
         cleaned_title (str): Cleaned/standardized title text.
         cleaned_short_review (str): Cleaned/standardized short review text.
+        model_name (str): The LLM model used for extraction (e.g., "anthropic/claude-sonnet-4-20250514").
     """
     update_payload = {
         "is_film_review": is_film_review,
@@ -290,6 +318,7 @@ def update_page_extract_results(
         "sentiment": sentiment,
         "cleaned_title": cleaned_title,
         "cleaned_short_review": cleaned_short_review,
+        "extract_model_name": model_name,
         "status": "extracted",
         "extracted_at": datetime.utcnow().isoformat()
     }

@@ -7,7 +7,7 @@ from typing import Optional
 
 from crawler.llm.client import process_with_llm
 from crawler.llm.schemas import ProcessedReview
-from crawler.db.scraper_queries import get_parsed_pages, batch_update_status, update_page_extract_results
+from crawler.db.scraper_queries import get_parsed_pages, batch_update_status, update_page_extract_results, update_page_extraction_failed
 
 logger = logging.getLogger(__name__)
 
@@ -100,6 +100,9 @@ async def run_extract_pipeline(
     for page_id, result, error in results:
         if error:
             errors.append({"page_id": page_id, "error": error})
+            # Mark as extraction_failed in DB
+            if not dry_run:
+                update_page_extraction_failed(page_id, error, model_name=model)
             continue
 
         processed += 1
@@ -127,13 +130,14 @@ async def run_extract_pipeline(
                     movie_names=movie_names_json,
                     sentiment=review["sentiment"],
                     cleaned_title=review["cleaned_title"],
-                    cleaned_short_review=review["cleaned_short_review"]
+                    cleaned_short_review=review["cleaned_short_review"],
+                    model_name=model
                 )
             logger.info(f"Updated {len(film_reviews)} pages with extraction results")
 
         if non_reviews:
-            batch_update_status(non_reviews, "not_film_review")
-            logger.info(f"Marked {len(non_reviews)} as non-film reviews")
+            batch_update_status(non_reviews, "not_extracted")
+            logger.info(f"Marked {len(non_reviews)} as not_extracted")
 
     summary = {
         "processed": processed,

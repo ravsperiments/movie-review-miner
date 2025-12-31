@@ -1,0 +1,31 @@
+# Generated runtime files
+crawler/failures/
+crawler/logs/
+crawler/crawler/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+*.egg-info/
+
+# Databases
+*.db
+*.sqlite
+
+# IDE
+.idea/
+.vscode/
+.ropeproject/
+
+# OS
+.DS_Store
+
+# Debug files
+crawler/debug_*.html
+
+# Env
+.env
+.env.local

@@ -1,45 +1,26 @@
 """
-Orchestrator for Step 2: parse raw blog posts in the staging table and store structured content.
+Orchestrator for Step 2: parse raw blog posts and store structured content.
 
 This script:
-  1. Retrieves pending pages to parse (with URL, critic ID) from the DB.
-  2. Builds a dynamic critic-to-parser mapping via a DB-driven critic lookup.
-  3. Applies concurrency and retry logic for robust HTTP parsing of each URL.
-  4. Validates, transforms, and upserts parsed fields into the pages table.
-  5. Logs successes and failures using StepLogger and pipeline_logger.
+  1. Retrieves pending pages to parse from the DB.
+  2. Applies concurrency and retry logic for robust HTTP parsing of each URL.
+  3. Validates, transforms, and upserts parsed fields into the pages table.
+  4. Logs successes and failures using StepLogger and pipeline_logger.
 """
 import logging
 import asyncio
 import aiohttp
 import async_timeout
-from tqdm.asyncio import tqdm
-from typing import Dict, Any
 
-from crawler.scraper.parse_post import parse_post_async
+from crawler.critics.baradwajrangan import parse_post_async
 from crawler.db.scraper_queries import get_pending_pages_to_parse, update_page_as_parsed, update_page_with_error
 from crawler.utils.io_helpers import write_failure
 from crawler.utils import StepLogger
 from crawler.utils.retries import run_with_retries
 from crawler.db.pipeline_logger import log_step_result
-import json
-
-from crawler.db.critic_queries import get_critics
-from crawler.scraper.critics import baradwajrangan_parser
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Map critic IDs to their respective parsers
-CRITIC_PARSERS = {}
-
-# Dynamically build CRITIC_PARSERS based on fetched critic data
-critics_data = get_critics()
-for critic in critics_data:
-    # Assuming a naming convention like 'baradwajrangan_parser'
-    # You might need a more robust way to map critic ID to parser module
-    if critic["name"] == "Baradwaj Rangan": # This is a temporary hardcode, will be replaced by a more robust mapping
-        CRITIC_PARSERS[critic["id"]] = baradwajrangan_parser
-
 
 # --- Configuration Constants ---
 # Maximum number of concurrent HTTP requests to prevent overwhelming the source servers.
@@ -93,8 +74,8 @@ async def _parse_and_store(
         # Ensure we don’t overwhelm the target site or hang indefinitely
         async with semaphore:
             async with async_timeout.timeout(10):
-                # Dispatch to the appropriate critic parser
-                data = await parse_post_async(session, page_url, critic_id)
+                # Parse the blog post
+                data = await parse_post_async(session, page_url)
 
         # Verify all required fields were parsed
         for key in ["url", "title", "summary", "full_review", "date"]:

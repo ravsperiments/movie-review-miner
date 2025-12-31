@@ -85,6 +85,9 @@ class SQLiteClient:
                 popularity REAL,
                 poster_path TEXT,
                 tmdb_id TEXT,
+                source TEXT DEFAULT 'extracted',
+                status TEXT DEFAULT 'pending_enrichment',
+                error_message TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
@@ -93,6 +96,7 @@ class SQLiteClient:
             # Create indexes for movies
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_movies_title ON movies(title)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_movies_release_year ON movies(release_year)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_movies_status ON movies(status)")
 
             # pages table (merged raw_scraped_pages + stg_clean_reviews)
             cursor.execute("""
@@ -116,6 +120,7 @@ class SQLiteClient:
                 sentiment TEXT,
                 cleaned_title TEXT,
                 cleaned_short_review TEXT,
+                extract_model_name TEXT,
                 extracted_at TIMESTAMP,
 
                 movie_id TEXT,
