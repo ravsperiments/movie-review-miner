@@ -1,7 +1,7 @@
-import logging
 from datetime import datetime
 from typing import List, Dict, Any
-# import random
+
+from crawler.utils.logger import get_logger
 
 try:
     from crawler.db.sqlite_client import get_db
@@ -10,10 +10,7 @@ except Exception:
     from crawler.db.supabase_client import supabase
     USE_SQLITE = False
 
-# Configure logging for this module.
-# This ensures that messages from this file are properly captured in the overall logging system.
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def get_all_urls() -> List[str]:

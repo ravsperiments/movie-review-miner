@@ -1,7 +1,8 @@
 """Database helpers for managing movie records."""
 
 from datetime import datetime
-import logging
+
+from crawler.utils.logger import get_logger
 
 try:
     from crawler.db.sqlite_client import get_db
@@ -10,8 +11,7 @@ except Exception:
     from crawler.db.supabase_client import supabase
     USE_SQLITE = False
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def get_movie_by_title(title: str) -> dict | None:

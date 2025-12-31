@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from crawler.db.pipeline_logger import log_step_result
+
 from .logger import get_logger
 
 class StepLogger:
@@ -94,17 +94,14 @@ class StepLogger:
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
-        # Attempt to log the step's result to the database via pipeline_logger.
-        try:
-            log_step_result(
-                self.step_name,
-                attempt_number=1, # Assuming first attempt for now; can be extended.
-                status="success", # Assuming success; error handling would set this to "failed".
-                result_data=self.metrics, # Store all collected metrics.
-            )
-        except Exception as e:  # noqa: BLE001
-            # Log an error if logging to the database fails, but do not prevent finalization.
-            self.logger.error("Failed to log step summary to database: %s", e)
+        # Log final metrics summary
+        self.logger.info(
+            "Step complete: input=%d, processed=%d, saved=%d, failed=%d",
+            self.metrics["input_count"],
+            self.metrics["processed_count"],
+            self.metrics["saved_count"],
+            self.metrics["failed_count"],
+        )
 
         # Remove the file handler from the logger and close it to release the log file.
         self.logger.removeHandler(self._handler)

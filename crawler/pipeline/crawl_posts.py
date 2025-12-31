@@ -5,9 +5,8 @@ This script:
   1. Retrieves pending pages to parse from the DB.
   2. Applies concurrency and retry logic for robust HTTP parsing of each URL.
   3. Validates, transforms, and upserts parsed fields into the pages table.
-  4. Logs successes and failures using StepLogger and pipeline_logger.
+  4. Logs successes and failures using StepLogger.
 """
-import logging
 import asyncio
 import aiohttp
 import async_timeout
@@ -17,10 +16,9 @@ from crawler.db.scraper_queries import get_pending_pages_to_parse, update_page_a
 from crawler.utils.io_helpers import write_failure
 from crawler.utils import StepLogger
 from crawler.utils.retries import run_with_retries
-from crawler.db.pipeline_logger import log_step_result
+from crawler.utils.logger import get_logger
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # --- Configuration Constants ---
 # Maximum number of concurrent HTTP requests to prevent overwhelming the source servers.
@@ -59,15 +57,7 @@ async def _parse_and_store(
 
     # Basic validation to ensure essential data is present before proceeding.
     if not all([page_id, critic_id, page_url]):
-        step_logger.logger.error(f"Skipping post with missing data: {page}")
-        # Log this as a failure in the pipeline, as it's an unprocessable item.
-        log_step_result(
-            "parse_post",
-            link_id=page_id,
-            attempt_number=attempt,
-            status="failure",
-            error_message="Missing essential data (ID, critic_id, or URL)",
-        )
+        step_logger.logger.error("Skipping post with missing data: page_id=%s", page_id)
         return
 
     try:
@@ -95,14 +85,6 @@ async def _parse_and_store(
         step_logger.metrics["saved_count"] += 1
         logger.info("Parsed and stored review %s", page_url)
 
-        # Record pipeline success metrics
-        log_step_result(
-            "parse_post",
-            link_id=page_id,
-            attempt_number=attempt,
-            status="success",
-            result_data={"link": page_url},
-        )
     except Exception as e:
         # Log a warning for failed attempts, including the URL and error message.
         step_logger.logger.warning(
@@ -110,15 +92,6 @@ async def _parse_and_store(
         )
         # Update the database record to mark the page as failed and store the error details.
         update_page_with_error(page_id, type(e).__name__, str(e))
-        
-        # Log the parsing failure in the pipeline logs.
-        log_step_result(
-            "parse_post",
-            link_id=page_id,
-            attempt_number=attempt,
-            status="failure",
-            error_message=str(e),
-        )
         # Re-raise the exception to be caught by the retry mechanism (run_with_retries).
         raise
 
@@ -175,17 +148,9 @@ async def parse_posts(pages: list[dict]) -> None:
         if isinstance(result, Exception):
             step_logger.metrics["failed_count"] += 1
             # Log the failure with full traceback for detailed debugging.
-            step_logger.logger.error("Failed to parse %s", page["page_url"], exc_info=True)
+            step_logger.logger.error("Failed to parse %s: %s", page["page_url"], result)
             # Write the failed URL and error message to a dedicated failure file.
             write_failure("failed_post_links.txt", page["page_url"], str(result))
-            # Log the final failure in the pipeline logs after all retries.
-            log_step_result(
-                "parse_post",
-                link_id=page.get("id"),
-                attempt_number=MAX_RETRIES, # Log with the max retries attempted
-                status="failure",
-                error_message=str(result),
-            )
 
     # Calculate the total number of processed items.
     step_logger.metrics["processed_count"] = step_logger.metrics["saved_count"] + step_logger.metrics["failed_count"]

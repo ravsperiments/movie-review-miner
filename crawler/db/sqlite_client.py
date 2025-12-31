@@ -1,14 +1,13 @@
 """SQLite client for local database operations."""
 
 import sqlite3
-import logging
 import uuid
 from datetime import datetime
 from pathlib import Path
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+from crawler.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 # Default database path
 DEFAULT_DB_PATH = Path(__file__).parent.parent / "local.db"

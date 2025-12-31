@@ -34,8 +34,13 @@ Usage:
 import argparse
 import asyncio
 import logging
+import sys
 from pathlib import Path
 
+# Add project root to path for direct script execution
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from crawler.utils.log_id import generate_log_id, set_log_id
 from crawler.utils.logger import get_logger, setup_pipeline_logging
 
 logger = get_logger(__name__)
@@ -145,7 +150,23 @@ async def run_eval(
 
 async def main(args) -> None:
     """Run the movie review mining pipeline."""
+    # Generate and set log ID for this run
+    log_id = generate_log_id()
+    set_log_id(log_id)
+
     setup_pipeline_logging()
+
+    # Log pipeline params
+    logger.info(
+        "Pipeline started: mode=%s, stage=%s, model=%s, prompt=%s, limit=%s, concurrency=%s, dry_run=%s",
+        args.mode,
+        args.stage,
+        args.model,
+        args.prompt,
+        args.limit,
+        args.concurrency,
+        args.dry_run,
+    )
 
     # Configure database based on mode (must be done before any DB imports)
     setup_database(args.mode)

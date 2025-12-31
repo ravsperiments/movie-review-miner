@@ -1,9 +1,9 @@
 import os
 import aiohttp
-import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from crawler.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 import json
 

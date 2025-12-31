@@ -2,10 +2,10 @@
 
 from datetime import datetime
 from .supabase_client import supabase
-import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from crawler.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 def get_latest_post_date() -> datetime | None:
     """Fetch the most recent post_date stored in Supabase."""
