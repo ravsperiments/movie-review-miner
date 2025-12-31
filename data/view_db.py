@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Simple web server to view SQLite database as HTML."""
+"""Simple web server to view SQLite database as HTML with CSV export."""
 
 import sqlite3
 import json
+import io
 from pathlib import Path
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import webbrowser
@@ -20,6 +21,9 @@ class DBViewHandler(BaseHTTPRequestHandler):
             self.serve_html()
         elif self.path == "/api/data":
             self.serve_data()
+        elif self.path.startswith("/api/csv/"):
+            table_name = self.path[9:]  # Remove "/api/csv/"
+            self.serve_csv(table_name)
         else:
             self.send_error(404)
 
@@ -141,20 +145,34 @@ class DBViewHandler(BaseHTTPRequestHandler):
             padding: 10px 12px;
             border-bottom: 1px solid #eee;
             word-break: break-word;
-            max-width: 400px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            white-space: normal;
+            vertical-align: top;
         }
         .data-table tbody tr:hover {
             background: #f9f9f9;
         }
-        .data-table td:hover {
-            white-space: normal;
-            overflow: visible;
-            background: #fff;
-            z-index: 1;
-            position: relative;
+        .table-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .btn-download {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-download:hover {
+            background: #5568d3;
+        }
+        .row-count {
+            font-size: 13px;
+            color: #666;
         }
         .empty {
             color: #999;
@@ -179,6 +197,29 @@ class DBViewHandler(BaseHTTPRequestHandler):
             } catch (error) {
                 document.getElementById('content').innerHTML = '<div class="empty">Error loading database: ' + error.message + '</div>';
             }
+        }
+
+        function downloadCSV(tableName, columns, rows) {
+            // Build CSV content
+            let csv = columns.map(col => `"${col.name}"`).join(',') + '\n';
+            rows.forEach(row => {
+                csv += row.map(cell => {
+                    const val = String(cell || '');
+                    // Escape quotes and wrap in quotes
+                    return `"${val.replace(/"/g, '""')}"`;
+                }).join(',') + '\n';
+            });
+
+            // Create blob and download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${tableName}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(link);
         }
 
         function renderTables(dbData) {
@@ -224,6 +265,22 @@ class DBViewHandler(BaseHTTPRequestHandler):
                 schemaDiv.appendChild(columnsDiv);
                 content.appendChild(schemaDiv);
 
+                // Controls
+                if (table.rowCount > 0) {
+                    const controls = document.createElement('div');
+                    controls.className = 'table-controls';
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'btn-download';
+                    downloadBtn.textContent = '⬇️ Download as CSV';
+                    downloadBtn.onclick = () => downloadCSV(table.name, table.columns, table.rows);
+                    controls.appendChild(downloadBtn);
+                    const rowInfo = document.createElement('span');
+                    rowInfo.className = 'row-count';
+                    rowInfo.textContent = `Showing ${table.rows.length} of ${table.rowCount} rows`;
+                    controls.appendChild(rowInfo);
+                    content.appendChild(controls);
+                }
+
                 // Data
                 if (table.rowCount > 0) {
                     const table_elem = document.createElement('table');
@@ -247,21 +304,11 @@ class DBViewHandler(BaseHTTPRequestHandler):
                             const tr = document.createElement('tr');
                             row.forEach(cell => {
                                 const td = document.createElement('td');
-                                td.textContent = String(cell || '').substring(0, 100);
-                                td.title = String(cell || '');
+                                td.textContent = String(cell || '');
                                 tr.appendChild(td);
                             });
                             tbody.appendChild(tr);
                         });
-                    }
-                    if (table.rows.length < table.rowCount) {
-                        const tr = document.createElement('tr');
-                        const td = document.createElement('td');
-                        td.colSpan = table.columns.length;
-                        td.className = 'empty';
-                        td.textContent = '... and ' + (table.rowCount - table.rows.length) + ' more rows';
-                        tr.appendChild(td);
-                        tbody.appendChild(tr);
                     }
                     table_elem.appendChild(tbody);
                     content.appendChild(table_elem);
@@ -319,8 +366,8 @@ class DBViewHandler(BaseHTTPRequestHandler):
             cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
             row_count = cursor.fetchone()[0]
 
-            # Get sample data (first 10 rows)
-            cursor.execute(f"SELECT * FROM {table_name} LIMIT 10;")
+            # Get all data (for CSV export and display)
+            cursor.execute(f"SELECT * FROM {table_name};")
             rows = cursor.fetchall()
 
             db_data["tables"].append({
@@ -336,6 +383,47 @@ class DBViewHandler(BaseHTTPRequestHandler):
         self.send_header("Content-type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(db_data).encode())
+
+    def serve_csv(self, table_name):
+        """Serve table data as CSV file."""
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+
+            # Verify table exists
+            cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?;", (table_name,))
+            if not cursor.fetchone():
+                self.send_error(404)
+                conn.close()
+                return
+
+            # Get schema
+            cursor.execute(f"PRAGMA table_info({table_name});")
+            columns = [row[1] for row in cursor.fetchall()]
+
+            # Get all data
+            cursor.execute(f"SELECT * FROM {table_name};")
+            rows = cursor.fetchall()
+
+            conn.close()
+
+            # Build CSV
+            output = io.StringIO()
+            # Write header
+            output.write(','.join(f'"{col}"' for col in columns) + '\n')
+            # Write rows
+            for row in rows:
+                output.write(','.join(f'"{str(cell or "").replace('"', '""')}"' for cell in row) + '\n')
+
+            csv_data = output.getvalue().encode()
+
+            self.send_response(200)
+            self.send_header("Content-type", "text/csv")
+            self.send_header("Content-Disposition", f'attachment; filename="{table_name}.csv"')
+            self.end_headers()
+            self.wfile.write(csv_data)
+        except Exception as e:
+            self.send_error(500)
 
     def log_message(self, format, *args):
         """Suppress log messages."""
