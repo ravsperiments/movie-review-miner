@@ -34,7 +34,7 @@ async def _enrich_movie(movie: dict, step_logger: StepLogger) -> None:
 
 async def enrich_metadata() -> None:
     """Fill in metadata for movies with status='pending_enrichment' using TMDb."""
-    step_logger = StepLogger("enrich_metadata")
+    step_logger = StepLogger("enrich_movie_data")
     movies = get_movies_pending_enrichment()
     step_logger.metrics["input_count"] = len(movies)
     step_logger.logger.info("Enriching metadata for %s movies", len(movies))

@@ -16,7 +16,7 @@ async def orchestrate_fetch_links():
     """
     # Initialize a StepLogger for the orchestration process. This provides
     # consistent logging for the overall link fetching step.
-    step_logger = StepLogger("fetch_links_orchestrator")
+    step_logger = StepLogger("crawl_fetch_links")
     
     # Retrieve the list of reviewers from the designated source.
     # In the current implementation, this comes from a hardcoded list,

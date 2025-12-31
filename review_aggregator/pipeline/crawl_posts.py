@@ -112,7 +112,7 @@ async def parse_posts(pages: list[dict]) -> None:
     # Initialize a StepLogger for the entire parsing step (Step 2).
     # Initialize a StepLogger for the entire parsing step (Step 2)
     logger.info("Starting parse_posts for %d pages", len(pages))
-    step_logger = StepLogger("step_2_parse_posts")
+    step_logger = StepLogger("crawl_posts")
     
     # If no pages are provided, log and finalize immediately.
     if not pages:

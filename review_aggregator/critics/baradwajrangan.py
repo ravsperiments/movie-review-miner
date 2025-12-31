@@ -276,7 +276,7 @@ async def fetch_links(
     Returns:
         List of fetched page URLs.
     """
-    step_logger = StepLogger(f"step_1_fetch_links_{domain.replace('.', '_')}")
+    step_logger = StepLogger(f"crawl_fetch_links_{domain.replace('.', '_')}")
 
     fetched_links_tuples = await get_post_links_async(start_page, end_page)
 
