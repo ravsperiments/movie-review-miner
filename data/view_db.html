@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite Database Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #222;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .table-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .table-header h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .table-stats {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .table-content {
+            padding: 20px;
+        }
+        .schema {
+            margin-bottom: 20px;
+        }
+        .schema h3 {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .column-item {
+            background: #f9f9f9;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            border-left: 3px solid #667eea;
+        }
+        .column-name {
+            font-weight: 600;
+            color: #333;
+        }
+        .column-type {
+            color: #666;
+            font-size: 12px;
+        }
+        .column-flags {
+            color: #888;
+            font-size: 11px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        .data-table thead {
+            background: #f0f0f0;
+            border-bottom: 2px solid #ddd;
+        }
+        .data-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            word-break: break-word;
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .data-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+        .data-table td:hover {
+            white-space: normal;
+            overflow: visible;
+            background: #fff;
+            z-index: 1;
+        }
+        .empty {
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 SQLite Database Viewer</h1>
+        <p style="color: #666; margin-bottom: 30px;">Database: /Users/ravi/Documents/Projects/movie-review-miner/data/local.db</p>
+
+        <div class="table-section">
+            <div class="table-header">
+                <h2>📋 critics</h2>
+                <div class="table-stats">1 rows</div>
+            </div>
+            <div class="table-content">
+                <div class="schema">
+                    <h3>Schema</h3>
+                    <div class="columns">
+                        <div class="column-item">
+                            <div class="column-name">id</div>
+                            <div class="column-type">TEXT</div>
+                            <div class="column-flags">PK</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">name</div>
+                            <div class="column-type">TEXT</div>
+                            <div class="column-flags">NOT NULL</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">base_url</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">bio</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">created_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">updated_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>base_url</th>
+                            <th>bio</th>
+                            <th>created_at</th>
+                            <th>updated_at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title="Baradwaj Rangan">Baradwaj Rangan</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="Film critic and author">Film critic and author</td>
+                            <td title="2025-12-31 04:55:29">2025-12-31 04:55:29</td>
+                            <td title="2025-12-31 04:55:29">2025-12-31 04:55:29</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div class="table-header">
+                <h2>📋 movies</h2>
+                <div class="table-stats">0 rows</div>
+            </div>
+            <div class="table-content">
+                <div class="schema">
+                    <h3>Schema</h3>
+                    <div class="columns">
+                        <div class="column-item">
+                            <div class="column-name">id</div>
+                            <div class="column-type">TEXT</div>
+                            <div class="column-flags">PK</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">title</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">release_year</div>
+                            <div class="column-type">INTEGER</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">language</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">genre</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">popularity</div>
+                            <div class="column-type">REAL</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">poster_path</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">tmdb_id</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">source</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">status</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">error_message</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">created_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">updated_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="empty">📭 No rows in this table</div>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div class="table-header">
+                <h2>📋 pages</h2>
+                <div class="table-stats">5580 rows</div>
+            </div>
+            <div class="table-content">
+                <div class="schema">
+                    <h3>Schema</h3>
+                    <div class="columns">
+                        <div class="column-item">
+                            <div class="column-name">id</div>
+                            <div class="column-type">TEXT</div>
+                            <div class="column-flags">PK</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">page_url</div>
+                            <div class="column-type">TEXT</div>
+                            <div class="column-flags">NOT NULL</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">base_url</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">critic_id</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">page_content</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">fetched_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">parsed_title</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">parsed_short_review</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">parsed_full_review</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">parsed_review_date</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">parsed_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">is_film_review</div>
+                            <div class="column-type">BOOLEAN</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">movie_names</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">sentiment</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">cleaned_title</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">cleaned_short_review</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">extract_model_name</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">extracted_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">movie_id</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">enriched_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">status</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">error_type</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">error_message</div>
+                            <div class="column-type">TEXT</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">created_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                        <div class="column-item">
+                            <div class="column-name">updated_at</div>
+                            <div class="column-type">TIMESTAMP</div>
+                        </div>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>page_url</th>
+                            <th>base_url</th>
+                            <th>critic_id</th>
+                            <th>page_content</th>
+                            <th>fetched_at</th>
+                            <th>parsed_title</th>
+                            <th>parsed_short_review</th>
+                            <th>parsed_full_review</th>
+                            <th>parsed_review_date</th>
+                            <th>parsed_at</th>
+                            <th>is_film_review</th>
+                            <th>movie_names</th>
+                            <th>sentiment</th>
+                            <th>cleaned_title</th>
+                            <th>cleaned_short_review</th>
+                            <th>extract_model_name</th>
+                            <th>extracted_at</th>
+                            <th>movie_id</th>
+                            <th>enriched_at</th>
+                            <th>status</th>
+                            <th>error_type</th>
+                            <th>error_message</th>
+                            <th>created_at</th>
+                            <th>updated_at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td title="11b543b5-a7cd-4843-8f5f-376da5f215ba">11b543b5-a7cd-4843-8f5f-376da5f215ba</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/31/happy-2026-all/">https://baradwajrangan.wordpress.com/2025/12/31/happy-2026-all/</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294730">2025-12-31T04:56:23.294730</td>
+                            <td title="Happy 2026, all!">Happy 2026, all!</td>
+                            <td title="True that! 😀">True that! 😀</td>
+                            <td title="True that! 😀
+
+Any resolutions?">True that! 😀
+
+Any resolutions?</td>
+                            <td title="December 31, 2025">December 31, 2025</td>
+                            <td title="2025-12-31T04:56:23.810195">2025-12-31T04:56:23.810195</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301607">2025-12-31T04:56:23.301607</td>
+                            <td title="2025-12-31T04:56:23.810201">2025-12-31T04:56:23.810201</td>
+                        </tr>
+                        <tr>
+                            <td title="3ca35ccf-1737-425d-bee7-af5582407329">3ca35ccf-1737-425d-bee7-af5582407329</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/31/readers-write-in-917-what-i-attended-in-2025-concert">https://baradwajrangan.wordpress.com/2025/12/31/readers-write-in-917-what-i-attended-in-2025-concert</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294735">2025-12-31T04:56:23.294735</td>
+                            <td title="Readers Write In #917: What I attended in 2025: Concerts">Readers Write In #917: What I attended in 2025: Concerts</td>
+                            <td title="By Jayram Sataluri">By Jayram Sataluri</td>
+                            <td title="By Jayram Sataluri
+
+In the past, there have been RWIs on “What I read this year”, “Best Films of the">By Jayram Sataluri
+
+In the past, there have been RWIs on “What I read this year”, “Best Films of the</td>
+                            <td title="December 31, 2025">December 31, 2025</td>
+                            <td title="2025-12-31T04:56:23.739285">2025-12-31T04:56:23.739285</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301612">2025-12-31T04:56:23.301612</td>
+                            <td title="2025-12-31T04:56:23.739289">2025-12-31T04:56:23.739289</td>
+                        </tr>
+                        <tr>
+                            <td title="b32aaa86-342b-4cbd-9909-61e2f99a95b7">b32aaa86-342b-4cbd-9909-61e2f99a95b7</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/30/readers-write-in-916-new-tbr-format/">https://baradwajrangan.wordpress.com/2025/12/30/readers-write-in-916-new-tbr-format/</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294737">2025-12-31T04:56:23.294737</td>
+                            <td title="Readers Write In #916: New TBR Format">Readers Write In #916: New TBR Format</td>
+                            <td title="By Rahini David">By Rahini David</td>
+                            <td title="By Rahini David
+
+I have been working on my new TBR Notebook for the past one month. This means going">By Rahini David
+
+I have been working on my new TBR Notebook for the past one month. This means going</td>
+                            <td title="December 30, 2025">December 30, 2025</td>
+                            <td title="2025-12-31T04:56:23.529479">2025-12-31T04:56:23.529479</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301616">2025-12-31T04:56:23.301616</td>
+                            <td title="2025-12-31T04:56:23.529486">2025-12-31T04:56:23.529486</td>
+                        </tr>
+                        <tr>
+                            <td title="ee5458aa-dc33-46ec-a32c-dcd717e2d658">ee5458aa-dc33-46ec-a32c-dcd717e2d658</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-915-23rd-chennai-international-film">https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-915-23rd-chennai-international-film</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294739">2025-12-31T04:56:23.294739</td>
+                            <td title="Readers Write In #915: 23rd Chennai International Film Festival">Readers Write In #915: 23rd Chennai International Film Festival</td>
+                            <td title="By Bharath Vijayakumar">By Bharath Vijayakumar</td>
+                            <td title="By Bharath Vijayakumar
+
+The 23rd Chennai International Film Festival was recently held (11th Decembe">By Bharath Vijayakumar
+
+The 23rd Chennai International Film Festival was recently held (11th Decembe</td>
+                            <td title="December 28, 2025">December 28, 2025</td>
+                            <td title="2025-12-31T04:56:23.629738">2025-12-31T04:56:23.629738</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301619">2025-12-31T04:56:23.301619</td>
+                            <td title="2025-12-31T04:56:23.629741">2025-12-31T04:56:23.629741</td>
+                        </tr>
+                        <tr>
+                            <td title="602d63b4-d49d-48ec-aace-753b6abc24e9">602d63b4-d49d-48ec-aace-753b6abc24e9</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-914-in-a-lonely-place-an-engaging-t">https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-914-in-a-lonely-place-an-engaging-t</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294740">2025-12-31T04:56:23.294740</td>
+                            <td title="Readers Write In #914: In a Lonely Place: An Engaging Toxic Romance in the Guise of a Noir Thriller">Readers Write In #914: In a Lonely Place: An Engaging Toxic Romance in the Guise of a Noir Thriller</td>
+                            <td title="By Vijay Ramanathan">By Vijay Ramanathan</td>
+                            <td title="By Vijay Ramanathan
+
+Nicholas Ray’sIn a Lonely Place(1950) starts off as a murder mystery. A hatchec">By Vijay Ramanathan
+
+Nicholas Ray’sIn a Lonely Place(1950) starts off as a murder mystery. A hatchec</td>
+                            <td title="December 28, 2025">December 28, 2025</td>
+                            <td title="2025-12-31T04:56:23.594143">2025-12-31T04:56:23.594143</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301622">2025-12-31T04:56:23.301622</td>
+                            <td title="2025-12-31T04:56:23.594146">2025-12-31T04:56:23.594146</td>
+                        </tr>
+                        <tr>
+                            <td title="87a3842e-7d88-493e-8cd1-bafd34d3a18e">87a3842e-7d88-493e-8cd1-bafd34d3a18e</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-913-two-unrelated-stories/">https://baradwajrangan.wordpress.com/2025/12/28/readers-write-in-913-two-unrelated-stories/</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294742">2025-12-31T04:56:23.294742</td>
+                            <td title="Readers Write In #913: Two ‘unrelated’ stories">Readers Write In #913: Two ‘unrelated’ stories</td>
+                            <td title="By Jeeva P">By Jeeva P</td>
+                            <td title="By Jeeva P
+
+“Dad, how do you pronounce this word?” My 8-year old son was pointing his little fingers">By Jeeva P
+
+“Dad, how do you pronounce this word?” My 8-year old son was pointing his little fingers</td>
+                            <td title="December 28, 2025">December 28, 2025</td>
+                            <td title="2025-12-31T04:56:23.574695">2025-12-31T04:56:23.574695</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301625">2025-12-31T04:56:23.301625</td>
+                            <td title="2025-12-31T04:56:23.574700">2025-12-31T04:56:23.574700</td>
+                        </tr>
+                        <tr>
+                            <td title="cd3880e8-0d29-4ffa-bb03-466a9e955d86">cd3880e8-0d29-4ffa-bb03-466a9e955d86</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/27/my-top-10-films-of-2025/">https://baradwajrangan.wordpress.com/2025/12/27/my-top-10-films-of-2025/</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294743">2025-12-31T04:56:23.294743</td>
+                            <td title="My Top 10 Films of 2025">My Top 10 Films of 2025</td>
+                            <td title="Copyright ©2025 GALATTA.">Copyright ©2025 GALATTA.</td>
+                            <td title="Copyright ©2025 GALATTA.">Copyright ©2025 GALATTA.</td>
+                            <td title="December 27, 2025">December 27, 2025</td>
+                            <td title="2025-12-31T04:56:23.843928">2025-12-31T04:56:23.843928</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301628">2025-12-31T04:56:23.301628</td>
+                            <td title="2025-12-31T04:56:23.843931">2025-12-31T04:56:23.843931</td>
+                        </tr>
+                        <tr>
+                            <td title="c7794275-d624-4319-b97a-bbb5867464b4">c7794275-d624-4319-b97a-bbb5867464b4</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/26/nanda-kishores-vrusshabha-has-a-fine-idea-thats-lost">https://baradwajrangan.wordpress.com/2025/12/26/nanda-kishores-vrusshabha-has-a-fine-idea-thats-lost</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294744">2025-12-31T04:56:23.294744</td>
+                            <td title="Nanda Kishore’s ‘Vrusshabha’ has a fine idea that’s lost in the execution">Nanda Kishore’s ‘Vrusshabha’ has a fine idea that’s lost in the execution</td>
+                            <td title="Mohanlal plays two characters over two timelines. The plot is about a curse that persists through re">Mohanlal plays two characters over two timelines. The plot is about a curse that persists through re</td>
+                            <td title="Mohanlal plays two characters over two timelines. The plot is about a curse that persists through re">Mohanlal plays two characters over two timelines. The plot is about a curse that persists through re</td>
+                            <td title="December 26, 2025">December 26, 2025</td>
+                            <td title="2025-12-31T04:56:23.554673">2025-12-31T04:56:23.554673</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301630">2025-12-31T04:56:23.301630</td>
+                            <td title="2025-12-31T04:56:23.554680">2025-12-31T04:56:23.554680</td>
+                        </tr>
+                        <tr>
+                            <td title="e78d73c9-0044-4db8-bd80-d731c4e74229">e78d73c9-0044-4db8-bd80-d731c4e74229</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/26/the-galatta-plus-mega-actors-round-table-2025/">https://baradwajrangan.wordpress.com/2025/12/26/the-galatta-plus-mega-actors-round-table-2025/</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294745">2025-12-31T04:56:23.294745</td>
+                            <td title="The Galatta Plus Mega Actors Round Table 2025">The Galatta Plus Mega Actors Round Table 2025</td>
+                            <td title="Copyright ©2025 GALATTA.">Copyright ©2025 GALATTA.</td>
+                            <td title="Copyright ©2025 GALATTA.">Copyright ©2025 GALATTA.</td>
+                            <td title="December 26, 2025">December 26, 2025</td>
+                            <td title="2025-12-31T04:56:23.610099">2025-12-31T04:56:23.610099</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301633">2025-12-31T04:56:23.301633</td>
+                            <td title="2025-12-31T04:56:23.610101">2025-12-31T04:56:23.610101</td>
+                        </tr>
+                        <tr>
+                            <td title="b4697538-c8da-4f47-9a9b-1540b6641650">b4697538-c8da-4f47-9a9b-1540b6641650</td>
+                            <td title="https://baradwajrangan.wordpress.com/2025/12/25/kris-thirukumarans-retta-thala-is-a-crime-thriller-t">https://baradwajrangan.wordpress.com/2025/12/25/kris-thirukumarans-retta-thala-is-a-crime-thriller-t</td>
+                            <td title="https://baradwajrangan.wordpress.com">https://baradwajrangan.wordpress.com</td>
+                            <td title="baradwaj-rangan">baradwaj-rangan</td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.294746">2025-12-31T04:56:23.294746</td>
+                            <td title="Kris Thirukumaran’s ‘Retta Thala’ is a crime thriller that wants to be stylish and ends up being pre">Kris Thirukumaran’s ‘Retta Thala’ is a crime thriller that wants to be stylish and ends up being pre</td>
+                            <td title="This Arun Vijay starrer is a total misfire. Every frame is designed to a micro-degree, sure, but the">This Arun Vijay starrer is a total misfire. Every frame is designed to a micro-degree, sure, but the</td>
+                            <td title="This Arun Vijay starrer is a total misfire. Every frame is designed to a micro-degree, sure, but the">This Arun Vijay starrer is a total misfire. Every frame is designed to a micro-degree, sure, but the</td>
+                            <td title="December 25, 2025">December 25, 2025</td>
+                            <td title="2025-12-31T04:56:23.649200">2025-12-31T04:56:23.649200</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="parsed">parsed</td>
+                            <td title=""></td>
+                            <td title=""></td>
+                            <td title="2025-12-31T04:56:23.301635">2025-12-31T04:56:23.301635</td>
+                            <td title="2025-12-31T04:56:23.649202">2025-12-31T04:56:23.649202</td>
+                        </tr>
+                        <tr><td colspan="25" class="empty">... and 5570 more rows</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
