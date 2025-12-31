@@ -1,0 +1,29 @@
+# Evaluation system configuration
+
+models:
+  - anthropic/claude-sonnet-4-20250514
+  - openai/gpt-4o
+
+judges:
+  - name: claude
+    model: anthropic/claude-sonnet-4-20250514
+  - name: gpt4
+    model: openai/gpt-4o
+
+sampling:
+  default_size: 100
+  default_mode: per_critic
+  default_seed: 42
+
+evaluation:
+  default_concurrency: 3
+  default_limit: null
+
+scoring:
+  judge_concurrency: 2
+  field_weights:
+    is_film_review: 1.0
+    movie_names: 1.0
+    sentiment: 1.0
+    cleaned_title: 1.0
+    cleaned_short_review: 1.0

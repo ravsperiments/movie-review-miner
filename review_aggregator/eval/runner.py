@@ -1,242 +1,257 @@
-"""Evaluation framework - run model+prompt against golden set."""
+"""Model evaluation runner - run models on sample batches."""
+
 import asyncio
-import json
+import argparse
 import importlib
-import logging
+import json
+import time
 from datetime import datetime
 from pathlib import Path
-from difflib import SequenceMatcher
 
-from review_aggregator.llm.client import process_with_llm
+from dotenv import load_dotenv
+load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env")
+
+from review_aggregator.llm.client import process_with_llm, parse_model_string
 from review_aggregator.llm.schemas import ProcessedReview
+from review_aggregator.utils.logger import get_logger
+from review_aggregator.eval.db import (
+    get_latest_batch,
+    get_batch,
+    get_samples,
+    save_llm_output,
+)
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
-RESULTS_DIR = Path(__file__).parent / "results"
-
-
-def fuzzy_match(actual: str, expected: str, threshold: float = 0.8) -> tuple[bool, float]:
-    """Check if strings match above similarity threshold."""
-    if not actual or not expected:
-        return actual == expected, 1.0 if actual == expected else 0.0
-    similarity = SequenceMatcher(None, actual.lower(), expected.lower()).ratio()
-    return similarity >= threshold, round(similarity, 3)
-
-
-def compare_outputs(actual: ProcessedReview, expected: dict) -> dict:
-    """Compare actual LLM output against expected values."""
-    results = {}
-
-    # Exact match for boolean
-    results["is_film_review"] = {
-        "pass": actual.is_film_review == expected["is_film_review"],
-        "actual": actual.is_film_review,
-        "expected": expected["is_film_review"],
-    }
-
-    # Exact match for sentiment
-    results["sentiment"] = {
-        "pass": actual.sentiment == expected["sentiment"],
-        "actual": actual.sentiment,
-        "expected": expected["sentiment"],
-    }
-
-    # Set comparison for movie names (case-insensitive, order doesn't matter)
-    actual_movies = set(m.lower() for m in actual.movie_names)
-    expected_movies = set(m.lower() for m in expected.get("movie_names", []))
-    results["movie_names"] = {
-        "pass": actual_movies == expected_movies,
-        "actual": actual.movie_names,
-        "expected": expected.get("movie_names", []),
-    }
-
-    # Fuzzy match for text fields
-    title_pass, title_sim = fuzzy_match(
-        actual.cleaned_title,
-        expected["cleaned_title"],
-        threshold=0.85
-    )
-    results["cleaned_title"] = {
-        "pass": title_pass,
-        "similarity": title_sim,
-        "actual": actual.cleaned_title,
-        "expected": expected["cleaned_title"],
-    }
-
-    summary_pass, summary_sim = fuzzy_match(
-        actual.cleaned_short_review,
-        expected["cleaned_short_review"],
-        threshold=0.7  # More lenient for summaries
-    )
-    results["cleaned_short_review"] = {
-        "pass": summary_pass,
-        "similarity": summary_sim,
-        "actual": actual.cleaned_short_review,
-        "expected": expected["cleaned_short_review"],
-    }
-
-    # Overall pass requires all fields to pass
-    results["all_passed"] = all(
-        r["pass"] for r in results.values() if isinstance(r, dict) and "pass" in r
-    )
-
-    return results
+# Cache for imported prompt modules
+_prompt_modules = {}
 
 
-async def run_single_test(
-    test_case: dict,
-    model: str,
-    prompt_module,
-) -> dict:
-    """Run a single test case."""
-    test_id = test_case["id"]
-    input_data = test_case["input"]
-    expected = test_case["expected"]
+def get_critic_prompt(critic_id: str):
+    """
+    Auto-detect latest prompt version for a critic.
 
-    start_time = datetime.now()
+    Looks for pattern: review_aggregator/llm/prompts/{critic_id}_v{N}.py
+    Returns the module with the highest version number.
+    """
+    cache_key = f"prompt_{critic_id}"
+    if cache_key in _prompt_modules:
+        return _prompt_modules[cache_key]
+
+    # Normalize critic_id to valid Python module name (remove hyphens, lowercase)
+    module_critic_id = critic_id.replace("-", "").lower()
+
+    # Try to import the prompt module
+    # Assumes prompt naming: critic_id_v1, critic_id_v2, etc.
+    prompt_module = None
+    version = 1
+
+    while True:
+        try:
+            module_name = f"review_aggregator.llm.prompts.{module_critic_id}_v{version}"
+            mod = importlib.import_module(module_name)
+            prompt_module = mod
+            version += 1
+        except ImportError:
+            break
+
+    if not prompt_module:
+        raise ValueError(f"No prompt found for critic {critic_id} (tried {module_critic_id}_v*)")
+
+    _prompt_modules[cache_key] = prompt_module
+    logger.info(f"Loaded prompt for {critic_id} (v{version - 1})")
+    return prompt_module
+
+
+async def run_sample_with_model(sample: dict, model: str, prompt_module) -> dict:
+    """
+    Run a single sample through a model.
+
+    Returns dict with output or error.
+    """
+    sample_id = sample["id"]
+    start_time = time.time()
 
     try:
         user_prompt = prompt_module.USER_PROMPT_TEMPLATE.format(
-            title=input_data.get("title", ""),
-            summary=input_data.get("summary", ""),
-            full_review=input_data.get("full_review", ""),
+            title=sample.get("input_title", ""),
+            summary=sample.get("input_summary", ""),
+            full_review=sample.get("input_full_review", ""),
         )
 
-        actual = await process_with_llm(
+        output = await process_with_llm(
             model=model,
             system_prompt=prompt_module.SYSTEM_PROMPT,
             user_prompt=user_prompt,
             response_model=ProcessedReview,
         )
 
-        latency_ms = (datetime.now() - start_time).total_seconds() * 1000
-        comparison = compare_outputs(actual, expected)
+        latency_ms = (time.time() - start_time) * 1000
 
         return {
-            "test_id": test_id,
-            "passed": comparison["all_passed"],
-            "latency_ms": round(latency_ms, 2),
-            "actual": actual.model_dump(),
-            "expected": expected,
-            "field_results": comparison,
+            "sample_id": sample_id,
+            "model": model,
             "error": None,
+            "latency_ms": latency_ms,
+            "output": output,
         }
 
     except Exception as e:
-        logger.error(f"Test {test_id} failed with error: {e}")
+        latency_ms = (time.time() - start_time) * 1000
+        logger.error(f"Error running sample {sample_id} on {model}: {e}")
+
         return {
-            "test_id": test_id,
-            "passed": False,
-            "latency_ms": None,
-            "actual": None,
-            "expected": expected,
-            "field_results": None,
+            "sample_id": sample_id,
+            "model": model,
             "error": str(e),
+            "latency_ms": latency_ms,
+            "output": None,
         }
 
 
-async def run_evaluation(
-    model: str,
-    prompt_version: str,
-    golden_set_path: str = None,
+async def run_eval(
+    models: list[str],
+    batch_id: str = "latest",
+    limit: int = None,
     concurrency: int = 3,
 ) -> dict:
     """
-    Run model+prompt combination against golden set.
+    Run evaluation on a batch of samples.
 
     Args:
-        model: LLM to evaluate (e.g., "anthropic/claude-3-5-sonnet-latest")
-        prompt_version: Prompt version to test
-        golden_set_path: Path to golden set JSON
-        concurrency: Max concurrent test runs
+        models: List of model strings (e.g., ["anthropic/claude-sonnet-4-20250514"])
+        batch_id: Batch ID or 'latest'
+        limit: Max samples to process
+        concurrency: Max concurrent requests
 
     Returns:
-        Evaluation report dict
+        Statistics dict
     """
-    # Load golden set
-    if golden_set_path is None:
-        golden_set_path = Path(__file__).parent / "golden_set.json"
+    # Get batch
+    if batch_id == "latest":
+        batch = get_latest_batch()
+        if not batch:
+            raise ValueError("No batches found")
+        batch_id = batch["id"]
     else:
-        golden_set_path = Path(golden_set_path)
+        batch = get_batch(batch_id)
+        if not batch:
+            raise ValueError(f"Batch {batch_id} not found")
 
-    with open(golden_set_path) as f:
-        golden_data = json.load(f)
+    logger.info(f"Running eval on batch {batch_id}")
 
-    test_cases = golden_data.get("test_cases", golden_data)
-    if isinstance(test_cases, dict):
-        test_cases = [test_cases]
+    # Get samples
+    samples = get_samples(batch_id)
+    if limit:
+        samples = samples[:limit]
 
-    # Load prompt
-    prompt_module = importlib.import_module(
-        f"crawler.llm.prompts.process_review_{prompt_version}"
-    )
+    logger.info(f"Processing {len(samples)} samples on {len(models)} models")
 
-    logger.info(f"Running evaluation: model={model}, prompt={prompt_version}, tests={len(test_cases)}")
+    # Load prompts for each critic
+    critic_prompts = {}
+    for sample in samples:
+        critic = sample["critic_id"]
+        if critic not in critic_prompts:
+            try:
+                critic_prompts[critic] = get_critic_prompt(critic)
+            except Exception as e:
+                logger.error(f"Failed to load prompt for critic {critic}: {e}")
+                raise
 
-    # Run tests with concurrency control
+    # Run models with concurrency control
     semaphore = asyncio.Semaphore(concurrency)
 
-    async def run_with_semaphore(tc):
+    async def run_with_semaphore(sample, model):
         async with semaphore:
-            return await run_single_test(tc, model, prompt_module)
+            prompt = critic_prompts.get(sample["critic_id"])
+            if not prompt:
+                return {
+                    "sample_id": sample["id"],
+                    "model": model,
+                    "error": f"No prompt for critic {sample['critic_id']}",
+                    "latency_ms": 0,
+                    "output": None,
+                }
+            return await run_sample_with_model(sample, model, prompt)
 
-    results = await asyncio.gather(*[
-        run_with_semaphore(tc) for tc in test_cases
-    ])
+    # Collect all tasks
+    tasks = []
+    for sample in samples:
+        for model in models:
+            tasks.append(run_with_semaphore(sample, model))
 
-    # Calculate metrics
-    passed = sum(1 for r in results if r["passed"])
-    failed = len(results) - passed
+    results = await asyncio.gather(*tasks)
 
-    # Field-level accuracy
-    field_stats = {}
-    for field in ["is_film_review", "sentiment", "movie_names", "cleaned_title", "cleaned_short_review"]:
-        field_passes = sum(
-            1 for r in results
-            if r["field_results"] and r["field_results"].get(field, {}).get("pass", False)
-        )
-        field_stats[field] = round(field_passes / len(results), 3) if results else 0
+    # Save results to eval.db
+    success_count = 0
+    error_count = 0
 
-    # Build report
-    report = {
-        "meta": {
-            "model": model,
-            "prompt_version": prompt_version,
-            "prompt_description": prompt_module.DESCRIPTION,
-            "timestamp": datetime.now().isoformat(),
-            "golden_set_version": golden_data.get("version", "unknown"),
-            "total_cases": len(results),
-        },
-        "summary": {
-            "passed": passed,
-            "failed": failed,
-            "accuracy": round(passed / len(results), 3) if results else 0,
-            "field_accuracy": field_stats,
-        },
-        "failures": [
-            {
-                "test_id": r["test_id"],
-                "error": r["error"],
-                "field_results": {
-                    k: v for k, v in (r["field_results"] or {}).items()
-                    if isinstance(v, dict) and not v.get("pass", True)
-                } if r["field_results"] else None
-            }
-            for r in results if not r["passed"]
-        ],
-        "details": results,
+    for result in results:
+        if result["error"]:
+            error_count += 1
+            logger.error(f"Sample {result['sample_id']} on {result['model']}: {result['error']}")
+
+            save_llm_output(
+                sample_id=result["sample_id"],
+                model=result["model"],
+                prompt_version="unknown",
+                error=result["error"],
+                latency_ms=result["latency_ms"],
+            )
+        else:
+            success_count += 1
+            output = result["output"]
+
+            # Get prompt version from critic
+            sample = next(s for s in samples if s["id"] == result["sample_id"])
+            critic = sample["critic_id"]
+            prompt = critic_prompts[critic]
+            prompt_version = getattr(prompt, "VERSION", "unknown")
+
+            save_llm_output(
+                sample_id=result["sample_id"],
+                model=result["model"],
+                prompt_version=prompt_version,
+                output_is_film_review=output.is_film_review,
+                output_movie_names=json.dumps(output.movie_names),
+                output_sentiment=output.sentiment,
+                output_cleaned_title=output.cleaned_title,
+                output_cleaned_short_review=output.cleaned_short_review,
+                latency_ms=result["latency_ms"],
+            )
+
+    logger.info(f"Eval complete: {success_count} successes, {error_count} errors")
+
+    return {
+        "batch_id": batch_id,
+        "models": models,
+        "sample_count": len(samples),
+        "total_results": len(results),
+        "success_count": success_count,
+        "error_count": error_count,
+        "mean_latency_ms": sum(r["latency_ms"] for r in results) / len(results) if results else 0,
     }
 
-    # Save results
-    RESULTS_DIR.mkdir(exist_ok=True)
-    safe_model = model.replace("/", "_")
-    filename = f"eval_{safe_model}_{prompt_version}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    output_path = RESULTS_DIR / filename
 
-    with open(output_path, "w") as f:
-        json.dump(report, f, indent=2)
+def main():
+    """CLI entry point."""
+    parser = argparse.ArgumentParser(description="Run model evaluation on sample batch")
+    parser.add_argument("--models", nargs="+", required=True,
+                       help="Models to evaluate (e.g., anthropic/claude-sonnet-4-20250514)")
+    parser.add_argument("--batch", type=str, default="latest", help="Batch ID or 'latest'")
+    parser.add_argument("--limit", type=int, help="Max samples to process")
+    parser.add_argument("--concurrency", type=int, default=3, help="Max concurrent requests")
+    args = parser.parse_args()
 
-    logger.info(f"Evaluation complete: {passed}/{len(results)} passed ({report['summary']['accuracy']:.1%})")
-    logger.info(f"Results saved to: {output_path}")
+    stats = asyncio.run(run_eval(
+        models=args.models,
+        batch_id=args.batch,
+        limit=args.limit,
+        concurrency=args.concurrency,
+    ))
 
-    return report
+    print(json.dumps(stats, indent=2))
+
+
+if __name__ == "__main__":
+    main()

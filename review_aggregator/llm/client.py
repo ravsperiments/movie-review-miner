@@ -14,10 +14,35 @@ T = TypeVar("T", bound=BaseModel)
 
 # Client cache
 _clients: dict = {}
+# Gemini model cache (separate because it needs GenerativeModel instances)
+_gemini_models: dict = {}
 
 
-def get_client(provider: str):
-    """Get or create instructor-patched client for provider."""
+def get_client(provider: str, model_name: str = None):
+    """Get or create instructor-patched client for provider.
+
+    Args:
+        provider: The LLM provider (anthropic, openai, groq, ollama, google)
+        model_name: Required for google/gemini to create the right model instance
+    """
+    # For Gemini, we need a client per model
+    if provider == "google":
+        cache_key = f"google/{model_name}" if model_name else "google"
+        if cache_key in _clients:
+            return _clients[cache_key]
+
+        import google.generativeai as genai
+        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+        # Create GenerativeModel and wrap with instructor
+        gemini_model = genai.GenerativeModel(model_name=model_name or "gemini-1.5-pro")
+        _clients[cache_key] = instructor.from_gemini(
+            client=gemini_model,
+            mode=instructor.Mode.GEMINI_JSON,
+        )
+        return _clients[cache_key]
+
+    # Other providers use a single client
     if provider in _clients:
         return _clients[provider]
 
@@ -66,7 +91,7 @@ async def process_with_llm(
     Call any LLM with structured output.
 
     Args:
-        model: Provider/model string (e.g., "anthropic/claude-3-5-sonnet-latest")
+        model: Provider/model string (e.g., "anthropic/claude-sonnet-4-20250514")
         system_prompt: System instructions
         user_prompt: User message with data
         response_model: Pydantic model for structured output
@@ -76,7 +101,7 @@ async def process_with_llm(
         Parsed Pydantic model instance
     """
     provider, model_name = parse_model_string(model)
-    client = get_client(provider)
+    client = get_client(provider, model_name)
 
     logger.debug(f"Calling {provider}/{model_name}")
 
@@ -86,6 +111,14 @@ async def process_with_llm(
             max_tokens=1024,
             messages=[{"role": "user", "content": user_prompt}],
             system=system_prompt,
+            response_model=response_model,
+            max_retries=max_retries,
+        )
+    elif provider == "google":
+        # Gemini uses generate_content with combined prompt
+        combined_prompt = f"{system_prompt}\n\n{user_prompt}"
+        return client.messages.create(
+            messages=[{"role": "user", "content": combined_prompt}],
             response_model=response_model,
             max_retries=max_retries,
         )
