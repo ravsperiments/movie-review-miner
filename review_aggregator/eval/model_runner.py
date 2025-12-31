@@ -194,78 +194,75 @@ async def run_eval(
                 logger.error(f"Failed to load prompt for critic {critic}: {e}")
                 raise
 
-    # Run models with concurrency control
-    semaphore = asyncio.Semaphore(concurrency)
+    # Run models one at a time with progress
+    total_success = 0
+    total_errors = 0
 
-    async def run_with_semaphore(sample, model):
-        async with semaphore:
+    for model_idx, model in enumerate(models, 1):
+        logger.info(f"[{model_idx}/{len(models)}] Starting model: {model}")
+        model_success = 0
+        model_errors = 0
+
+        for sample_idx, sample in enumerate(samples, 1):
             prompt = critic_prompts.get(sample["critic_id"])
             if not prompt:
-                return {
-                    "sample_id": sample["id"],
-                    "model": model,
-                    "error": f"No prompt for critic {sample['critic_id']}",
-                    "latency_ms": 0,
-                    "output": None,
-                }
-            return await run_sample_with_model(sample, model, prompt)
+                logger.info(f"  [{sample_idx}/{len(samples)}] SKIP (no prompt)")
+                model_errors += 1
+                save_llm_output(
+                    sample_id=sample["id"],
+                    model=model,
+                    prompt_version="unknown",
+                    error=f"No prompt for critic {sample['critic_id']}",
+                    latency_ms=0,
+                )
+                continue
 
-    # Collect all tasks
-    tasks = []
-    for sample in samples:
-        for model in models:
-            tasks.append(run_with_semaphore(sample, model))
+            result = await run_sample_with_model(sample, model, prompt)
 
-    results = await asyncio.gather(*tasks)
+            if result["error"]:
+                model_errors += 1
+                logger.debug(f"  [{sample_idx}/{len(samples)}] ERROR: {result['error'][:50]}")
+                save_llm_output(
+                    sample_id=result["sample_id"],
+                    model=result["model"],
+                    prompt_version="unknown",
+                    error=result["error"],
+                    latency_ms=result["latency_ms"],
+                )
+            else:
+                model_success += 1
+                output = result["output"]
+                prompt_version = getattr(prompt, "VERSION", "unknown")
 
-    # Save results to eval.db
-    success_count = 0
-    error_count = 0
+                save_llm_output(
+                    sample_id=result["sample_id"],
+                    model=result["model"],
+                    prompt_version=prompt_version,
+                    output_is_film_review=output.is_film_review,
+                    output_movie_names=json.dumps(output.movie_names),
+                    output_sentiment=output.sentiment,
+                    output_cleaned_title=output.cleaned_title,
+                    output_cleaned_short_review=output.cleaned_short_review,
+                    latency_ms=result["latency_ms"],
+                )
 
-    for result in results:
-        if result["error"]:
-            error_count += 1
-            logger.debug(f"Sample {result['sample_id']} on {result['model']}: {result['error']}")
+            # Progress every 5 samples or at end
+            if sample_idx % 5 == 0 or sample_idx == len(samples):
+                logger.info(f"  [{sample_idx}/{len(samples)}] {model_success} ok, {model_errors} err")
 
-            save_llm_output(
-                sample_id=result["sample_id"],
-                model=result["model"],
-                prompt_version="unknown",
-                error=result["error"],
-                latency_ms=result["latency_ms"],
-            )
-        else:
-            success_count += 1
-            output = result["output"]
+        logger.info(f"[{model_idx}/{len(models)}] Done: {model} ({model_success}/{len(samples)} success)")
+        total_success += model_success
+        total_errors += model_errors
 
-            # Get prompt version from critic
-            sample = next(s for s in samples if s["id"] == result["sample_id"])
-            critic = sample["critic_id"]
-            prompt = critic_prompts[critic]
-            prompt_version = getattr(prompt, "VERSION", "unknown")
-
-            save_llm_output(
-                sample_id=result["sample_id"],
-                model=result["model"],
-                prompt_version=prompt_version,
-                output_is_film_review=output.is_film_review,
-                output_movie_names=json.dumps(output.movie_names),
-                output_sentiment=output.sentiment,
-                output_cleaned_title=output.cleaned_title,
-                output_cleaned_short_review=output.cleaned_short_review,
-                latency_ms=result["latency_ms"],
-            )
-
-    logger.info(f"Eval complete: {success_count} successes, {error_count} errors")
+    logger.info(f"Eval complete: {total_success} successes, {total_errors} errors")
 
     return {
         "batch_id": batch_id,
         "models": models,
         "sample_count": len(samples),
-        "total_results": len(results),
-        "success_count": success_count,
-        "error_count": error_count,
-        "mean_latency_ms": sum(r["latency_ms"] for r in results) / len(results) if results else 0,
+        "total_results": total_success + total_errors,
+        "success_count": total_success,
+        "error_count": total_errors,
     }
 
 
