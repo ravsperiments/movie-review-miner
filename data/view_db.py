@@ -337,52 +337,63 @@ class DBViewHandler(BaseHTTPRequestHandler):
 
     def serve_data(self):
         """Serve database data as JSON."""
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
+        try:
+            conn = sqlite3.connect(str(DB_PATH))
+            cursor = conn.cursor()
 
-        # Get all tables
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tables = [t[0] for t in cursor.fetchall()]
+            # Get all tables
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = [t[0] for t in cursor.fetchall()]
 
-        db_data = {"path": str(DB_PATH), "tables": []}
+            db_data = {"path": str(DB_PATH), "tables": []}
 
-        for table_name in tables:
-            # Get schema
-            cursor.execute(f"PRAGMA table_info({table_name});")
-            columns = []
-            for col_id, name, type_, notnull, dflt_value, pk in cursor.fetchall():
-                flags = []
-                if pk:
-                    flags.append("PK")
-                if notnull:
-                    flags.append("NOT NULL")
-                columns.append({
-                    "name": name,
-                    "type": type_,
-                    "flags": " ".join(flags)
+            for table_name in tables:
+                # Get schema
+                cursor.execute(f"PRAGMA table_info({table_name});")
+                columns = []
+                for col_id, name, type_, notnull, dflt_value, pk in cursor.fetchall():
+                    flags = []
+                    if pk:
+                        flags.append("PK")
+                    if notnull:
+                        flags.append("NOT NULL")
+                    columns.append({
+                        "name": name,
+                        "type": type_,
+                        "flags": " ".join(flags)
+                    })
+
+                # Get row count
+                cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
+                row_count = cursor.fetchone()[0]
+
+                # Get first 100 rows for display (large tables would be too much JSON)
+                cursor.execute(f"SELECT * FROM {table_name} LIMIT 100;")
+                rows = cursor.fetchall()
+
+                db_data["tables"].append({
+                    "name": table_name,
+                    "columns": columns,
+                    "rowCount": row_count,
+                    "rows": rows
                 })
 
-            # Get row count
-            cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
-            row_count = cursor.fetchone()[0]
+            conn.close()
 
-            # Get first 100 rows for display (large tables would be too much JSON)
-            cursor.execute(f"SELECT * FROM {table_name} LIMIT 100;")
-            rows = cursor.fetchall()
-
-            db_data["tables"].append({
-                "name": table_name,
-                "columns": columns,
-                "rowCount": row_count,
-                "rows": rows
-            })
-
-        conn.close()
-
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(db_data).encode())
+            response = json.dumps(db_data).encode()
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.send_header("Content-Length", str(len(response)))
+            self.end_headers()
+            self.wfile.write(response)
+        except Exception as e:
+            error_response = json.dumps({"error": str(e)}).encode()
+            self.send_response(500)
+            self.send_header("Content-type", "application/json")
+            self.send_header("Content-Length", str(len(error_response)))
+            self.end_headers()
+            self.wfile.write(error_response)
+            print(f"Error in serve_data: {e}")
 
     def serve_csv(self, table_name):
         """Serve table data as CSV file."""
@@ -426,8 +437,8 @@ class DBViewHandler(BaseHTTPRequestHandler):
             self.send_error(500)
 
     def log_message(self, format, *args):
-        """Suppress log messages."""
-        pass
+        """Log HTTP requests."""
+        print(f"  {args[0]} {args[1]} {args[2]}")
 
 
 def open_browser():
