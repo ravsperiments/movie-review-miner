@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Simple web server to view SQLite database as HTML with CSV export."""
+"""Simple web server to view SQLite databases with sidebar navigation."""
 
 import sqlite3
 import json
 import io
 from pathlib import Path
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import urlparse, parse_qs
 import webbrowser
 from threading import Timer
 
-DB_PATH = Path(__file__).parent / "local.db"
+DATA_DIR = Path(__file__).parent
 
 
 class DBViewHandler(BaseHTTPRequestHandler):
@@ -17,15 +18,143 @@ class DBViewHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Handle GET requests."""
-        if self.path == "/":
+        parsed = urlparse(self.path)
+        path = parsed.path
+        params = parse_qs(parsed.query)
+
+        if path == "/":
             self.serve_html()
-        elif self.path == "/api/data":
-            self.serve_data()
-        elif self.path.startswith("/api/csv/"):
-            table_name = self.path[9:]  # Remove "/api/csv/"
-            self.serve_csv(table_name)
+        elif path == "/api/databases":
+            self.serve_databases()
+        elif path == "/api/tables":
+            db = params.get("db", [None])[0]
+            self.serve_tables(db)
+        elif path == "/api/data":
+            db = params.get("db", [None])[0]
+            table = params.get("table", [None])[0]
+            page = int(params.get("page", [1])[0])
+            limit = int(params.get("limit", [50])[0])
+            self.serve_data(db, table, page, limit)
+        elif path == "/api/csv":
+            db = params.get("db", [None])[0]
+            table = params.get("table", [None])[0]
+            self.serve_csv(db, table)
         else:
             self.send_error(404)
+
+    def send_json(self, data, status=200):
+        """Send JSON response."""
+        response = json.dumps(data).encode()
+        self.send_response(status)
+        self.send_header("Content-type", "application/json")
+        self.send_header("Content-Length", str(len(response)))
+        self.end_headers()
+        self.wfile.write(response)
+
+    def serve_databases(self):
+        """List all .db files in data directory."""
+        try:
+            dbs = sorted([f.name for f in DATA_DIR.glob("*.db")])
+            self.send_json({"databases": dbs})
+        except Exception as e:
+            self.send_json({"error": str(e)}, 500)
+
+    def serve_tables(self, db_name):
+        """List tables in a database."""
+        if not db_name:
+            self.send_json({"error": "No database specified"}, 400)
+            return
+        try:
+            db_path = DATA_DIR / db_name
+            if not db_path.exists():
+                self.send_json({"error": "Database not found"}, 404)
+                return
+            conn = sqlite3.connect(str(db_path))
+            cursor = conn.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+            tables = []
+            for (name,) in cursor.fetchall():
+                cursor.execute(f"SELECT COUNT(*) FROM [{name}];")
+                count = cursor.fetchone()[0]
+                tables.append({"name": name, "rowCount": count})
+            conn.close()
+            self.send_json({"tables": tables})
+        except Exception as e:
+            self.send_json({"error": str(e)}, 500)
+
+    def serve_data(self, db_name, table_name, page, limit):
+        """Serve paginated table data."""
+        if not db_name or not table_name:
+            self.send_json({"error": "Database and table required"}, 400)
+            return
+        try:
+            db_path = DATA_DIR / db_name
+            conn = sqlite3.connect(str(db_path))
+            cursor = conn.cursor()
+
+            # Get columns
+            cursor.execute(f"PRAGMA table_info([{table_name}]);")
+            columns = []
+            for col_id, name, type_, notnull, dflt_value, pk in cursor.fetchall():
+                flags = []
+                if pk:
+                    flags.append("PK")
+                if notnull:
+                    flags.append("NOT NULL")
+                columns.append({"name": name, "type": type_, "flags": " ".join(flags)})
+
+            # Get total count
+            cursor.execute(f"SELECT COUNT(*) FROM [{table_name}];")
+            total = cursor.fetchone()[0]
+
+            # Get paginated rows
+            offset = (page - 1) * limit
+            cursor.execute(f"SELECT * FROM [{table_name}] LIMIT ? OFFSET ?;", (limit, offset))
+            rows = cursor.fetchall()
+            conn.close()
+
+            self.send_json({
+                "columns": columns,
+                "rows": rows,
+                "total": total,
+                "page": page,
+                "limit": limit,
+                "totalPages": (total + limit - 1) // limit if total > 0 else 1
+            })
+        except Exception as e:
+            self.send_json({"error": str(e)}, 500)
+
+    def serve_csv(self, db_name, table_name):
+        """Serve full table as CSV."""
+        if not db_name or not table_name:
+            self.send_error(400)
+            return
+        try:
+            db_path = DATA_DIR / db_name
+            conn = sqlite3.connect(str(db_path))
+            cursor = conn.cursor()
+
+            cursor.execute(f"PRAGMA table_info([{table_name}]);")
+            columns = [row[1] for row in cursor.fetchall()]
+
+            cursor.execute(f"SELECT * FROM [{table_name}];")
+            rows = cursor.fetchall()
+            conn.close()
+
+            output = io.StringIO()
+            output.write(','.join(f'"{col}"' for col in columns) + '\n')
+            for row in rows:
+                output.write(','.join(f'"{str(cell or "").replace(chr(34), chr(34)+chr(34))}"' for cell in row) + '\n')
+
+            csv_data = output.getvalue().encode()
+            self.send_response(200)
+            self.send_header("Content-type", "text/csv")
+            self.send_header("Content-Disposition", f'attachment; filename="{table_name}.csv"')
+            self.send_header("Content-Length", str(len(csv_data)))
+            self.end_headers()
+            self.wfile.write(csv_data)
+        except Exception as e:
+            self.send_error(500)
 
     def serve_html(self):
         """Serve the HTML page."""
@@ -34,132 +163,80 @@ class DBViewHandler(BaseHTTPRequestHandler):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQLite Database Viewer</title>
+    <title>Database Viewer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fafafa;
             color: #333;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 260px;
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar-header {
             padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+            font-size: 15px;
+            color: #444;
         }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
         }
-        h1 {
-            color: #222;
-            margin-bottom: 30px;
-            font-size: 28px;
+        .db-item, .table-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.15s;
         }
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 18px;
-            color: #666;
+        .db-item:hover, .table-item:hover { background: #f5f5f5; }
+        .db-item.active { background: #e8f0fe; color: #1a73e8; font-weight: 500; }
+        .table-item.active { background: #e8f0fe; color: #1a73e8; }
+        .table-item { padding-left: 36px; }
+        .table-count {
+            float: right;
+            font-size: 12px;
+            color: #888;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 10px;
         }
-        .table-section {
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
-        .table-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+        .main-header {
+            padding: 20px 24px;
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .table-header h2 {
-            font-size: 20px;
-            margin: 0;
-        }
-        .table-stats {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        .table-content {
-            padding: 20px;
-        }
-        .schema {
-            margin-bottom: 20px;
-        }
-        .schema h3 {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .column-item {
-            background: #f9f9f9;
-            padding: 10px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            border-left: 3px solid #667eea;
-        }
-        .column-name {
+        .main-header h1 {
+            font-size: 18px;
             font-weight: 600;
             color: #333;
         }
-        .column-type {
+        .main-header .info {
+            font-size: 13px;
             color: #666;
-            font-size: 12px;
         }
-        .column-flags {
-            color: #888;
-            font-size: 11px;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 13px;
-            overflow-x: auto;
-        }
-        .data-table thead {
-            background: #f0f0f0;
-            border-bottom: 2px solid #ddd;
-        }
-        .data-table th {
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            color: #333;
-            white-space: nowrap;
-        }
-        .data-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #eee;
-            word-break: break-word;
-            white-space: normal;
-            vertical-align: top;
-        }
-        .data-table tbody tr:hover {
-            background: #f9f9f9;
-        }
-        .table-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-        .btn-download {
-            background: #667eea;
-            color: white;
+        .btn {
+            background: #1a73e8;
+            color: #fff;
             border: none;
             padding: 8px 16px;
             border-radius: 4px;
@@ -167,294 +244,213 @@ class DBViewHandler(BaseHTTPRequestHandler):
             cursor: pointer;
             font-weight: 500;
         }
-        .btn-download:hover {
-            background: #5568d3;
+        .btn:hover { background: #1557b0; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .table-container {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
         }
-        .row-count {
+        table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 13px;
-            color: #666;
         }
+        thead {
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            z-index: 1;
+        }
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #444;
+            border-bottom: 2px solid #e0e0e0;
+            white-space: nowrap;
+        }
+        td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #eee;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        td:hover { white-space: normal; word-break: break-word; }
+        tr:hover { background: #f8f9fa; }
+        .pagination {
+            padding: 16px 24px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pagination-btns { display: flex; gap: 8px; }
+        .pagination-info { font-size: 13px; color: #666; }
         .empty {
-            color: #999;
-            font-style: italic;
-            padding: 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #888;
+            font-size: 15px;
         }
+        .loading { color: #666; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📊 SQLite Database Viewer</h1>
-        <div id="content" class="loading">Loading database...</div>
+    <div class="sidebar">
+        <div class="sidebar-header">Databases</div>
+        <div class="sidebar-content" id="sidebar"></div>
+    </div>
+    <div class="main">
+        <div class="main-header">
+            <div>
+                <h1 id="title">Select a table</h1>
+                <div class="info" id="info"></div>
+            </div>
+            <button class="btn" id="downloadBtn" style="display:none">Download CSV</button>
+        </div>
+        <div class="table-container" id="content">
+            <div class="empty">Select a database and table from the sidebar</div>
+        </div>
+        <div class="pagination" id="pagination" style="display:none">
+            <div class="pagination-info" id="pageInfo"></div>
+            <div class="pagination-btns">
+                <button class="btn" id="prevBtn">Previous</button>
+                <button class="btn" id="nextBtn">Next</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        async function loadData() {
-            console.log('loadData called');
-            try {
-                console.log('Fetching /api/data...');
-                const response = await fetch('/api/data');
-                console.log('Response status:', response.status);
-                const dbData = await response.json();
-                console.log('Data received:', dbData.tables ? dbData.tables.length + ' tables' : 'error');
-                renderTables(dbData);
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('content').innerHTML = '<div class="empty">Error loading database: ' + error.message + '</div>';
-            }
-        }
+        var state = { db: null, table: null, page: 1, limit: 50, total: 0, totalPages: 1 };
 
-        function downloadCSV(tableName, columns, rows) {
-            // Build CSV content
-            var csv = columns.map(function(col) { return '"' + col.name + '"'; }).join(',') + '\\n';
-            rows.forEach(function(row) {
-                csv += row.map(function(cell) {
-                    var val = String(cell || '');
-                    // Escape quotes and wrap in quotes
-                    return '"' + val.split('"').join('""') + '"';
-                }).join(',') + '\\n';
+        async function loadDatabases() {
+            var res = await fetch('/api/databases');
+            var data = await res.json();
+            var sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = '';
+            data.databases.forEach(function(db) {
+                var div = document.createElement('div');
+                div.className = 'db-item';
+                div.textContent = db;
+                div.onclick = function() { selectDatabase(db); };
+                sidebar.appendChild(div);
             });
-
-            // Create blob and download
-            var blob = new Blob([csv], { type: 'text/csv' });
-            var url = window.URL.createObjectURL(blob);
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = tableName + '.csv';
-            document.body.appendChild(link);
-            link.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(link);
         }
 
-        function renderTables(dbData) {
-            var container = document.getElementById('content');
-            container.innerHTML = '<p style="color: #666; margin-bottom: 30px;">Database: ' + dbData.path + '</p>';
+        async function selectDatabase(db) {
+            state.db = db;
+            state.table = null;
+            document.querySelectorAll('.db-item').forEach(function(el) {
+                el.className = 'db-item' + (el.textContent === db ? ' active' : '');
+            });
+            var res = await fetch('/api/tables?db=' + encodeURIComponent(db));
+            var data = await res.json();
+            var sidebar = document.getElementById('sidebar');
+            var dbItems = sidebar.querySelectorAll('.db-item');
+            sidebar.innerHTML = '';
+            dbItems.forEach(function(el) { sidebar.appendChild(el); });
 
-            dbData.tables.forEach(function(table) {
-                var section = document.createElement('div');
-                section.className = 'table-section';
-
-                // Header
-                var header = document.createElement('div');
-                header.className = 'table-header';
-                header.innerHTML = '<h2>' + table.name + '</h2><div class="table-stats">' + table.rowCount + ' rows</div>';
-                section.appendChild(header);
-
-                // Content
-                var content = document.createElement('div');
-                content.className = 'table-content';
-
-                // Schema
-                var schemaDiv = document.createElement('div');
-                schemaDiv.className = 'schema';
-                schemaDiv.innerHTML = '<h3>Schema</h3>';
-
-                var columnsDiv = document.createElement('div');
-                columnsDiv.className = 'columns';
-
-                table.columns.forEach(function(col) {
-                    var item = document.createElement('div');
-                    item.className = 'column-item';
-                    var flagsHtml = col.flags ? '<div class="column-flags">' + col.flags + '</div>' : '';
-                    item.innerHTML = '<div class="column-name">' + col.name + '</div><div class="column-type">' + col.type + '</div>' + flagsHtml;
-                    columnsDiv.appendChild(item);
+            var activeDb = sidebar.querySelector('.db-item.active');
+            if (activeDb) {
+                data.tables.forEach(function(t) {
+                    var div = document.createElement('div');
+                    div.className = 'table-item';
+                    div.innerHTML = t.name + '<span class="table-count">' + t.rowCount + '</span>';
+                    div.onclick = function() { selectTable(t.name); };
+                    activeDb.insertAdjacentElement('afterend', div);
                 });
-
-                schemaDiv.appendChild(columnsDiv);
-                content.appendChild(schemaDiv);
-
-                // Controls
-                if (table.rowCount > 0) {
-                    var controls = document.createElement('div');
-                    controls.className = 'table-controls';
-                    var downloadBtn = document.createElement('button');
-                    downloadBtn.className = 'btn-download';
-                    downloadBtn.textContent = 'Download as CSV';
-                    downloadBtn.onclick = function() { downloadCSV(table.name, table.columns, table.rows); };
-                    controls.appendChild(downloadBtn);
-                    var rowInfo = document.createElement('span');
-                    rowInfo.className = 'row-count';
-                    rowInfo.textContent = 'Showing ' + table.rows.length + ' of ' + table.rowCount + ' rows';
-                    controls.appendChild(rowInfo);
-                    content.appendChild(controls);
-                }
-
-                // Data
-                if (table.rowCount > 0) {
-                    var table_elem = document.createElement('table');
-                    table_elem.className = 'data-table';
-
-                    // Header
-                    var thead = document.createElement('thead');
-                    var headerRow = document.createElement('tr');
-                    table.columns.forEach(function(col) {
-                        var th = document.createElement('th');
-                        th.textContent = col.name;
-                        headerRow.appendChild(th);
-                    });
-                    thead.appendChild(headerRow);
-                    table_elem.appendChild(thead);
-
-                    // Body
-                    var tbody = document.createElement('tbody');
-                    if (table.rows.length > 0) {
-                        table.rows.forEach(function(row) {
-                            var tr = document.createElement('tr');
-                            row.forEach(function(cell) {
-                                var td = document.createElement('td');
-                                td.textContent = String(cell || '');
-                                tr.appendChild(td);
-                            });
-                            tbody.appendChild(tr);
-                        });
-                    }
-                    table_elem.appendChild(tbody);
-                    content.appendChild(table_elem);
-                } else {
-                    var empty = document.createElement('div');
-                    empty.className = 'empty';
-                    empty.textContent = 'No rows in this table';
-                    content.appendChild(empty);
-                }
-
-                section.appendChild(content);
-                container.appendChild(section);
-            });
+            }
+            document.getElementById('title').textContent = db;
+            document.getElementById('info').textContent = data.tables.length + ' tables';
+            document.getElementById('content').innerHTML = '<div class="empty">Select a table</div>';
+            document.getElementById('pagination').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
         }
 
-        // Load data when page loads
-        console.log('Script loaded, calling loadData...');
-        window.onload = function() {
-            console.log('Window loaded');
-            loadData();
+        async function selectTable(table) {
+            state.table = table;
+            state.page = 1;
+            document.querySelectorAll('.table-item').forEach(function(el) {
+                el.className = 'table-item' + (el.textContent.split(/\\d/)[0].trim() === table ? ' active' : '');
+            });
+            await loadData();
+        }
+
+        async function loadData() {
+            var url = '/api/data?db=' + encodeURIComponent(state.db) + '&table=' + encodeURIComponent(state.table) + '&page=' + state.page + '&limit=' + state.limit;
+            var res = await fetch(url);
+            var data = await res.json();
+
+            state.total = data.total;
+            state.totalPages = data.totalPages;
+
+            document.getElementById('title').textContent = state.table;
+            document.getElementById('info').textContent = data.total + ' rows';
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+            document.getElementById('downloadBtn').onclick = function() {
+                window.location.href = '/api/csv?db=' + encodeURIComponent(state.db) + '&table=' + encodeURIComponent(state.table);
+            };
+
+            var content = document.getElementById('content');
+            if (data.rows.length === 0) {
+                content.innerHTML = '<div class="empty">No data</div>';
+                document.getElementById('pagination').style.display = 'none';
+                return;
+            }
+
+            var html = '<table><thead><tr>';
+            data.columns.forEach(function(col) {
+                html += '<th>' + col.name + '</th>';
+            });
+            html += '</tr></thead><tbody>';
+            data.rows.forEach(function(row) {
+                html += '<tr>';
+                row.forEach(function(cell) {
+                    var val = cell === null ? '' : String(cell);
+                    html += '<td title="' + val.replace(/"/g, '&quot;') + '">' + val + '</td>';
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            content.innerHTML = html;
+
+            var pagination = document.getElementById('pagination');
+            pagination.style.display = 'flex';
+            var start = (state.page - 1) * state.limit + 1;
+            var end = Math.min(state.page * state.limit, state.total);
+            document.getElementById('pageInfo').textContent = 'Showing ' + start + '-' + end + ' of ' + state.total;
+            document.getElementById('prevBtn').disabled = state.page <= 1;
+            document.getElementById('nextBtn').disabled = state.page >= state.totalPages;
+        }
+
+        document.getElementById('prevBtn').onclick = function() {
+            if (state.page > 1) { state.page--; loadData(); }
         };
+        document.getElementById('nextBtn').onclick = function() {
+            if (state.page < state.totalPages) { state.page++; loadData(); }
+        };
+
+        loadDatabases();
     </script>
 </body>
 </html>"""
-
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
         self.wfile.write(html.encode())
-
-    def serve_data(self):
-        """Serve database data as JSON."""
-        try:
-            conn = sqlite3.connect(str(DB_PATH))
-            cursor = conn.cursor()
-
-            # Get all tables
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-            tables = [t[0] for t in cursor.fetchall()]
-
-            db_data = {"path": str(DB_PATH), "tables": []}
-
-            for table_name in tables:
-                # Get schema
-                cursor.execute(f"PRAGMA table_info({table_name});")
-                columns = []
-                for col_id, name, type_, notnull, dflt_value, pk in cursor.fetchall():
-                    flags = []
-                    if pk:
-                        flags.append("PK")
-                    if notnull:
-                        flags.append("NOT NULL")
-                    columns.append({
-                        "name": name,
-                        "type": type_,
-                        "flags": " ".join(flags)
-                    })
-
-                # Get row count
-                cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
-                row_count = cursor.fetchone()[0]
-
-                # Get first 100 rows for display (large tables would be too much JSON)
-                cursor.execute(f"SELECT * FROM {table_name} LIMIT 100;")
-                rows = cursor.fetchall()
-
-                db_data["tables"].append({
-                    "name": table_name,
-                    "columns": columns,
-                    "rowCount": row_count,
-                    "rows": rows
-                })
-
-            conn.close()
-
-            response = json.dumps(db_data).encode()
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.send_header("Content-Length", str(len(response)))
-            self.end_headers()
-            self.wfile.write(response)
-        except Exception as e:
-            error_response = json.dumps({"error": str(e)}).encode()
-            self.send_response(500)
-            self.send_header("Content-type", "application/json")
-            self.send_header("Content-Length", str(len(error_response)))
-            self.end_headers()
-            self.wfile.write(error_response)
-            print(f"Error in serve_data: {e}")
-
-    def serve_csv(self, table_name):
-        """Serve table data as CSV file."""
-        try:
-            conn = sqlite3.connect(DB_PATH)
-            cursor = conn.cursor()
-
-            # Verify table exists
-            cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?;", (table_name,))
-            if not cursor.fetchone():
-                self.send_error(404)
-                conn.close()
-                return
-
-            # Get schema
-            cursor.execute(f"PRAGMA table_info({table_name});")
-            columns = [row[1] for row in cursor.fetchall()]
-
-            # Get all data
-            cursor.execute(f"SELECT * FROM {table_name};")
-            rows = cursor.fetchall()
-
-            conn.close()
-
-            # Build CSV
-            output = io.StringIO()
-            # Write header
-            output.write(','.join(f'"{col}"' for col in columns) + '\n')
-            # Write rows
-            for row in rows:
-                output.write(','.join(f'"{str(cell or "").replace('"', '""')}"' for cell in row) + '\n')
-
-            csv_data = output.getvalue().encode()
-
-            self.send_response(200)
-            self.send_header("Content-type", "text/csv")
-            self.send_header("Content-Disposition", f'attachment; filename="{table_name}.csv"')
-            self.end_headers()
-            self.wfile.write(csv_data)
-        except Exception as e:
-            self.send_error(500)
 
     def log_message(self, format, *args):
         """Log HTTP requests."""
         print(f"  {args[0]} {args[1]} {args[2]}")
 
 
-def open_browser():
-    """Open browser after a short delay."""
-    webbrowser.open("http://localhost:8000")
-
-
 if __name__ == "__main__":
-    if not DB_PATH.exists():
-        print(f"Database not found: {DB_PATH}")
-        exit(1)
-
-    # Find a free port
     import socket
     port = 8000
     while port < 8010:
@@ -468,14 +464,10 @@ if __name__ == "__main__":
         exit(1)
 
     url = f"http://localhost:{port}"
-    print(f"📊 Database viewer running at {url}")
+    print(f"Database viewer running at {url}")
     print("Press Ctrl+C to stop")
 
-    # Open browser automatically with correct port
-    def open_browser_with_url():
-        webbrowser.open(url)
-
-    timer = Timer(1.0, open_browser_with_url)
+    timer = Timer(1.0, lambda: webbrowser.open(url))
     timer.daemon = True
     timer.start()
 
