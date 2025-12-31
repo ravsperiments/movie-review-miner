@@ -55,6 +55,8 @@ from review_aggregator.eval.db import (
     get_batch,
     get_samples,
     save_llm_output,
+    create_eval_run,
+    complete_eval_run,
 )
 
 logger = setup_eval_logging()
@@ -183,6 +185,10 @@ async def run_eval(
 
     logger.info(f"Processing {len(samples)} samples on {len(models)} models")
 
+    # Create eval run
+    eval_run_id = create_eval_run(batch_id, models, sample_count=len(samples))
+    logger.info(f"Eval run: {eval_run_id[:8]}")
+
     # Load prompts for each critic
     critic_prompts = {}
     for sample in samples:
@@ -212,6 +218,7 @@ async def run_eval(
                     sample_id=sample["id"],
                     model=model,
                     prompt_version="unknown",
+                    eval_run_id=eval_run_id,
                     error=f"No prompt for critic {sample['critic_id']}",
                     latency_ms=0,
                 )
@@ -226,6 +233,7 @@ async def run_eval(
                     sample_id=result["sample_id"],
                     model=result["model"],
                     prompt_version="unknown",
+                    eval_run_id=eval_run_id,
                     error=result["error"],
                     latency_ms=result["latency_ms"],
                 )
@@ -238,6 +246,7 @@ async def run_eval(
                     sample_id=result["sample_id"],
                     model=result["model"],
                     prompt_version=prompt_version,
+                    eval_run_id=eval_run_id,
                     output_is_film_review=output.is_film_review,
                     output_movie_names=json.dumps(output.movie_names),
                     output_sentiment=output.sentiment,
@@ -254,9 +263,12 @@ async def run_eval(
         total_success += model_success
         total_errors += model_errors
 
+    # Complete eval run
+    complete_eval_run(eval_run_id, total_success, total_errors)
     logger.info(f"Eval complete: {total_success} successes, {total_errors} errors")
 
     return {
+        "eval_run_id": eval_run_id,
         "batch_id": batch_id,
         "models": models,
         "sample_count": len(samples),

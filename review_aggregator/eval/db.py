@@ -74,10 +74,27 @@ class EvalDB:
             )
             """)
 
+            # eval_runs table - tracks each evaluation run
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS eval_runs (
+                id TEXT PRIMARY KEY,
+                batch_id TEXT NOT NULL,
+                models TEXT NOT NULL,
+                status TEXT DEFAULT 'running',
+                sample_count INTEGER,
+                success_count INTEGER,
+                error_count INTEGER,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                completed_at TIMESTAMP,
+                FOREIGN KEY (batch_id) REFERENCES sample_batches(id)
+            )
+            """)
+
             # llm_outputs table - model outputs for samples
             cursor.execute("""
             CREATE TABLE IF NOT EXISTS llm_outputs (
                 id TEXT PRIMARY KEY,
+                eval_run_id TEXT,
                 sample_id TEXT NOT NULL,
                 model TEXT NOT NULL,
                 prompt_version TEXT NOT NULL,
@@ -92,7 +109,8 @@ class EvalDB:
                 latency_ms REAL,
                 error TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (sample_id) REFERENCES samples(id)
+                FOREIGN KEY (sample_id) REFERENCES samples(id),
+                FOREIGN KEY (eval_run_id) REFERENCES eval_runs(id)
             )
             """)
 
@@ -116,6 +134,8 @@ class EvalDB:
             # Create indexes
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_samples_batch_id ON samples(batch_id)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_samples_page_id ON samples(page_id)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_eval_runs_batch_id ON eval_runs(batch_id)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_llm_outputs_eval_run_id ON llm_outputs(eval_run_id)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_llm_outputs_sample_id ON llm_outputs(sample_id)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_llm_outputs_model ON llm_outputs(model)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_judge_scores_llm_output_id ON judge_scores(llm_output_id)")
@@ -264,6 +284,7 @@ def save_llm_output(
     sample_id: str,
     model: str,
     prompt_version: str,
+    eval_run_id: str = None,
     output_is_film_review: bool = None,
     output_movie_names: str = None,
     output_sentiment: str = None,
@@ -281,6 +302,7 @@ def save_llm_output(
 
     db.insert("llm_outputs", {
         "id": output_id,
+        "eval_run_id": eval_run_id,
         "sample_id": sample_id,
         "model": model,
         "prompt_version": prompt_version,
@@ -326,6 +348,68 @@ def save_judge_score(
     })
 
     return score_id
+
+
+# Eval run functions
+
+def create_eval_run(batch_id: str, models: list[str], sample_count: int = None) -> str:
+    """Create a new eval run and return its ID."""
+    import json
+    run_id = str(uuid.uuid4())
+    db = get_eval_db()
+
+    db.insert("eval_runs", {
+        "id": run_id,
+        "batch_id": batch_id,
+        "models": json.dumps(models),
+        "status": "running",
+        "sample_count": sample_count,
+    })
+
+    return run_id
+
+
+def complete_eval_run(run_id: str, success_count: int, error_count: int) -> None:
+    """Mark an eval run as completed."""
+    db = get_eval_db()
+    db.update(
+        "eval_runs",
+        {
+            "status": "completed",
+            "success_count": success_count,
+            "error_count": error_count,
+            "completed_at": datetime.utcnow().isoformat(),
+        },
+        where="id = ?",
+        params=(run_id,),
+    )
+
+
+def get_eval_run(run_id: str) -> dict | None:
+    """Get a specific eval run by ID."""
+    db = get_eval_db()
+    results = db.select("eval_runs", where="id = ?", params=(run_id,), limit=1)
+    return results[0] if results else None
+
+
+def get_latest_eval_run(batch_id: str = None) -> dict | None:
+    """Get the most recent eval run, optionally filtered by batch."""
+    db = get_eval_db()
+
+    if batch_id:
+        query = "SELECT * FROM eval_runs WHERE batch_id = ? ORDER BY created_at DESC LIMIT 1"
+        results = db.execute_query(query, (batch_id,), fetch=True)
+    else:
+        query = "SELECT * FROM eval_runs ORDER BY created_at DESC LIMIT 1"
+        results = db.execute_query(query, fetch=True)
+
+    return results[0] if results else None
+
+
+def get_llm_outputs_by_run(eval_run_id: str) -> list[dict]:
+    """Get all LLM outputs for a specific eval run."""
+    db = get_eval_db()
+    return db.select("llm_outputs", where="eval_run_id = ?", params=(eval_run_id,))
 
 
 def get_latest_batch(critic_id: str = None) -> dict | None:
