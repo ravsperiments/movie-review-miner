@@ -1,4 +1,5 @@
 """Unified LLM client using Instructor for structured outputs."""
+import asyncio
 import os
 import logging
 from typing import TypeVar
@@ -85,7 +86,8 @@ async def process_with_llm(
     system_prompt: str,
     user_prompt: str,
     response_model: type[T],
-    max_retries: int = 3,
+    max_retries: int = 1,
+    timeout: float = 30.0,
 ) -> T:
     """
     Call any LLM with structured output.
@@ -105,31 +107,36 @@ async def process_with_llm(
 
     logger.debug(f"Calling {provider}/{model_name}")
 
-    if provider == "anthropic":
-        return await client.messages.create(
-            model=model_name,
-            max_tokens=1024,
-            messages=[{"role": "user", "content": user_prompt}],
-            system=system_prompt,
-            response_model=response_model,
-            max_retries=max_retries,
-        )
-    elif provider == "google":
-        # Gemini uses generate_content with combined prompt
-        combined_prompt = f"{system_prompt}\n\n{user_prompt}"
-        return client.messages.create(
-            messages=[{"role": "user", "content": combined_prompt}],
-            response_model=response_model,
-            max_retries=max_retries,
-        )
-    else:
-        # OpenAI-compatible (OpenAI, Groq, Ollama)
-        return await client.chat.completions.create(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            response_model=response_model,
-            max_retries=max_retries,
-        )
+    async def _call():
+        if provider == "anthropic":
+            return await client.messages.create(
+                model=model_name,
+                max_tokens=1024,
+                messages=[{"role": "user", "content": user_prompt}],
+                system=system_prompt,
+                response_model=response_model,
+                max_retries=max_retries,
+            )
+        elif provider == "google":
+            # Gemini uses generate_content with combined prompt
+            combined_prompt = f"{system_prompt}\n\n{user_prompt}"
+            # Gemini client is sync, run in thread
+            return await asyncio.to_thread(
+                client.messages.create,
+                messages=[{"role": "user", "content": combined_prompt}],
+                response_model=response_model,
+                max_retries=max_retries,
+            )
+        else:
+            # OpenAI-compatible (OpenAI, Groq, Ollama)
+            return await client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                response_model=response_model,
+                max_retries=max_retries,
+            )
+
+    return await asyncio.wait_for(_call(), timeout=timeout)
