@@ -457,13 +457,11 @@ if __name__ == "__main__":
     print(f"📊 Database viewer running at {url}")
     print("Press Ctrl+C to stop")
 
-    # Update browser opener with correct port
-    global open_browser
-    def open_browser():
+    # Open browser automatically with correct port
+    def open_browser_with_url():
         webbrowser.open(url)
 
-    # Open browser automatically
-    timer = Timer(1.0, open_browser)
+    timer = Timer(1.0, open_browser_with_url)
     timer.daemon = True
     timer.start()
 
