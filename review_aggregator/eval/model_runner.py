@@ -6,7 +6,11 @@ import importlib
 import json
 import logging
 import time
+import warnings
 from pathlib import Path
+
+# Suppress Gemini deprecation warning
+warnings.filterwarnings("ignore", message=".*google.generativeai.*")
 
 import yaml
 from dotenv import load_dotenv
@@ -226,15 +230,16 @@ async def run_eval(
 
             result = await run_sample_with_model(sample, model, prompt)
 
-            if result["error"]:
+            if result["error"] or result["output"] is None:
                 model_errors += 1
-                logger.debug(f"  [{sample_idx}/{len(samples)}] ERROR: {result['error'][:50]}")
+                error_msg = result["error"] or "Empty output from model"
+                logger.debug(f"  [{sample_idx}/{len(samples)}] ERROR: {error_msg[:50]}")
                 save_llm_output(
                     sample_id=result["sample_id"],
                     model=result["model"],
                     prompt_version="unknown",
                     eval_run_id=eval_run_id,
-                    error=result["error"],
+                    error=error_msg,
                     latency_ms=result["latency_ms"],
                 )
             else:
