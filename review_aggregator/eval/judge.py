@@ -25,21 +25,29 @@ logger = get_logger(__name__)
 
 
 class JudgeOutput(BaseModel):
-    """Judge's evaluation of an LLM output. All scores are 0 or 1."""
+    """Judge's evaluation of an LLM output.
+
+    All scores are 0 or 1. When is_film_review output is false,
+    other scores should be null (not evaluated).
+    """
     score_is_film_review: int = Field(
-        description="1 if is_film_review classification is correct, 0 if incorrect"
+        description="1 if is_film_review classification is correct, 0 if incorrect. Always scored."
     )
-    score_movie_names: int = Field(
-        description="1 if movie_names extraction is correct, 0 if incorrect"
+    score_movie_names: int | None = Field(
+        default=None,
+        description="1 if movie_names extraction is correct, 0 if incorrect. Null if is_film_review=false."
     )
-    score_sentiment: int = Field(
-        description="1 if sentiment classification is correct, 0 if incorrect"
+    score_sentiment: int | None = Field(
+        default=None,
+        description="1 if sentiment classification is correct, 0 if incorrect. Null if is_film_review=false."
     )
-    score_cleaned_title: int = Field(
-        description="1 if cleaned_title is good quality, 0 if poor quality"
+    score_cleaned_title: int | None = Field(
+        default=None,
+        description="1 if cleaned_title is good quality, 0 if poor quality. Null if is_film_review=false."
     )
-    score_cleaned_short_review: int = Field(
-        description="1 if cleaned_short_review is good quality, 0 if poor quality"
+    score_cleaned_short_review: int | None = Field(
+        default=None,
+        description="1 if cleaned_short_review is good quality, 0 if poor quality. Null if is_film_review=false."
     )
     reasoning: str = Field(
         default="",
@@ -51,36 +59,54 @@ def get_judge_prompt(judge_model: str) -> tuple[str, str]:
     """Get system and user prompt templates for judge."""
     system_prompt = """You are an expert evaluator of movie review analysis systems.
 
-Your task: Evaluate the quality of extracted fields from a movie review.
+Your task: Evaluate how well a model followed its task instructions and produced quality output.
 
-## Scoring Guidelines
+## Conditional Scoring Rules
 
-Score 1 if: The extracted field is accurate, complete, and of high quality.
-Score 0 if: The extracted field is inaccurate, incomplete, or of poor quality.
+**IMPORTANT: If is_film_review output is FALSE:**
+- Score is_film_review based on whether the classification is CORRECT (did model correctly identify non-review?)
+- Set ALL other scores to null (do not evaluate movie_names, sentiment, title, summary)
 
-### is_film_review
+**If is_film_review output is TRUE:**
+- Score all fields normally
+
+## Scoring Guidelines (when applicable)
+
+### is_film_review (ALWAYS score this)
 - Score 1: Correctly identifies whether content is a film review (true/false)
 - Score 0: Misclassifies the review type
 
-### movie_names
+### movie_names (skip if is_film_review=false)
 - Score 1: Correctly extracts all relevant film titles mentioned
 - Score 0: Missing important films or includes irrelevant titles
 
-### sentiment
+### sentiment (skip if is_film_review=false)
 - Score 1: Sentiment (Positive/Negative/Neutral) accurately reflects reviewer's opinion
 - Score 0: Sentiment misrepresents the review's tone
 
-### cleaned_title
-- Score 1: Title is clean, readable, and accurately represents the review topic
-- Score 0: Title is unclear, contains artifacts, or misrepresents content
+### cleaned_title (skip if is_film_review=false)
+- Score 1 if: Output matches original AND original was already good, OR output improved a problematic original
+- Score 0 if: Output unnecessarily changed a good original, OR failed to fix a problematic original
 
-### cleaned_short_review
-- Score 1: Summary captures key points, is well-written, and under 280 characters
-- Score 0: Summary is unclear, incomplete, or poorly written
+### cleaned_short_review (skip if is_film_review=false)
+- Score 1 if: Output matches original AND original was already good, OR output improved a problematic original
+- Score 0 if: Output unnecessarily changed a good original, OR failed to fix a problematic original
 
-Provide brief reasoning for each score."""
+Provide brief reasoning for your scores."""
 
-    user_prompt_template = """Evaluate this LLM output:
+    user_prompt_template = """Evaluate this LLM output against the task it was given.
+
+## Original Task Given to Model
+
+### System Prompt:
+{system_prompt}
+
+### User Prompt:
+{user_prompt}
+
+---
+
+## Input Data (for reference)
 
 **Input Title:** {input_title}
 
@@ -88,14 +114,20 @@ Provide brief reasoning for each score."""
 
 **Input Full Review (first 500 chars):** {input_full_review_preview}
 
-**LLM Output:**
+---
+
+## Model Output to Evaluate
+
 - is_film_review: {output_is_film_review}
 - movie_names: {output_movie_names}
 - sentiment: {output_sentiment}
 - cleaned_title: {output_cleaned_title}
 - cleaned_short_review: {output_cleaned_short_review}
 
-Score each field as 1 (pass) or 0 (fail) with brief reasoning."""
+---
+
+Score each field based on whether the model correctly followed the task instructions.
+Remember: If is_film_review is false, only score is_film_review and set other scores to null."""
 
     return system_prompt, user_prompt_template
 
@@ -114,12 +146,18 @@ async def score_output_with_judge(
     start_time = time.time()
 
     try:
-        system_prompt, user_prompt_template = get_judge_prompt(judge_model)
+        judge_system_prompt, user_prompt_template = get_judge_prompt(judge_model)
 
         # Preview of full review (first 500 chars)
         full_review_preview = (sample.get("input_full_review") or "")[:500]
 
+        # Get original task prompts from llm_output (may be None for older outputs)
+        original_system_prompt = llm_output.get("system_prompt") or "(Original system prompt not available)"
+        original_user_prompt = llm_output.get("user_prompt") or "(Original user prompt not available)"
+
         user_prompt = user_prompt_template.format(
+            system_prompt=original_system_prompt,
+            user_prompt=original_user_prompt,
             input_title=sample.get("input_title", ""),
             input_summary=sample.get("input_summary", ""),
             input_full_review_preview=full_review_preview,
@@ -132,7 +170,7 @@ async def score_output_with_judge(
 
         judge_output = await process_with_llm(
             model=judge_model,
-            system_prompt=system_prompt,
+            system_prompt=judge_system_prompt,
             user_prompt=user_prompt,
             response_model=JudgeOutput,
         )

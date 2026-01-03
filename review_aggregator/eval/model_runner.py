@@ -109,21 +109,23 @@ async def run_sample_with_model(sample: dict, model: str, prompt_module) -> dict
     """
     Run a single sample through a model.
 
-    Returns dict with output or error.
+    Returns dict with output, prompts used, or error.
     """
     sample_id = sample["id"]
     start_time = time.time()
 
-    try:
-        user_prompt = prompt_module.USER_PROMPT_TEMPLATE.format(
-            title=sample.get("input_title", ""),
-            summary=sample.get("input_summary", ""),
-            full_review=sample.get("input_full_review", ""),
-        )
+    # Capture prompts for audit trail
+    system_prompt = prompt_module.SYSTEM_PROMPT
+    user_prompt = prompt_module.USER_PROMPT_TEMPLATE.format(
+        title=sample.get("input_title", ""),
+        summary=sample.get("input_summary", ""),
+        full_review=sample.get("input_full_review", ""),
+    )
 
+    try:
         output = await process_with_llm(
             model=model,
-            system_prompt=prompt_module.SYSTEM_PROMPT,
+            system_prompt=system_prompt,
             user_prompt=user_prompt,
             response_model=ProcessedReview,
         )
@@ -136,6 +138,8 @@ async def run_sample_with_model(sample: dict, model: str, prompt_module) -> dict
             "error": None,
             "latency_ms": latency_ms,
             "output": output,
+            "system_prompt": system_prompt,
+            "user_prompt": user_prompt,
         }
 
     except Exception as e:
@@ -148,6 +152,8 @@ async def run_sample_with_model(sample: dict, model: str, prompt_module) -> dict
             "error": str(e),
             "latency_ms": latency_ms,
             "output": None,
+            "system_prompt": system_prompt,
+            "user_prompt": user_prompt,
         }
 
 
@@ -239,6 +245,8 @@ async def run_eval(
                     model=result["model"],
                     prompt_version="unknown",
                     eval_run_id=eval_run_id,
+                    system_prompt=result.get("system_prompt"),
+                    user_prompt=result.get("user_prompt"),
                     error=error_msg,
                     latency_ms=result["latency_ms"],
                 )
@@ -252,6 +260,8 @@ async def run_eval(
                     model=result["model"],
                     prompt_version=prompt_version,
                     eval_run_id=eval_run_id,
+                    system_prompt=result.get("system_prompt"),
+                    user_prompt=result.get("user_prompt"),
                     output_is_film_review=output.is_film_review,
                     output_movie_names=json.dumps(output.movie_names),
                     output_sentiment=output.sentiment,

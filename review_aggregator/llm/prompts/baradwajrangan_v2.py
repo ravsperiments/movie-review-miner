@@ -107,7 +107,12 @@ Title: 25 Greatest Tamil Films Of The Decade
 
 ## 4. Title Cleaning
 
-**Remove:**
+**Preserve vs Edit:**
+- If the original title is already clean and informative, return it AS-IS
+- Only edit if it contains: dates, boilerplate, artifacts, or is unclear
+- Do NOT rephrase a good title just to make it different
+
+**Remove (only if present):**
 - Dates ("January 15, 2024", "(2024)")
 - WordPress boilerplate
 - "Spoilers ahead" / "The rest of this review may contain spoilers"
@@ -135,7 +140,12 @@ If title is missing or just a date, generate a descriptive title from the conten
 
 ## 5. Summary Cleaning (max 280 chars)
 
-**Remove:**
+**Preserve vs Edit:**
+- If the original summary is already clean and substantive, return it AS-IS
+- Only edit if it contains: boilerplate, links, truncation artifacts, or is too brief
+- Do NOT rewrite a good summary just to make it different
+
+**Remove (only if present):**
 - "Read more...", "Continue reading...", "The rest of this review may contain spoilers"
 - "Copyright ©2025 GALATTA" or similar boilerplate
 - "You can read the rest of the review here:"
@@ -183,12 +193,24 @@ If summary is missing or inadequate, generate from full review content.
 ---
 
 ## Output Format
-Return structured JSON with all five fields:
-- is_film_review: boolean
-- movie_names: array of strings
+
+**IMPORTANT: Conditional fields based on is_film_review**
+
+If `is_film_review` is **true**, return all fields:
+- is_film_review: true
+- movie_names: array of film titles
 - sentiment: "Positive" | "Negative" | "Neutral"
-- cleaned_title: string
-- cleaned_short_review: string (max 280 chars)"""
+- cleaned_title: string (the title, cleaned only if necessary)
+- cleaned_short_review: string (max 280 chars, cleaned only if necessary)
+
+If `is_film_review` is **false**, return:
+- is_film_review: false
+- movie_names: []
+- sentiment: null
+- cleaned_title: ""
+- cleaned_short_review: ""
+
+Do NOT fill in movie_names, sentiment, title, or summary for non-reviews."""
 
 USER_PROMPT_TEMPLATE = """Analyze this blog post from Baradwaj Rangan:
 

@@ -98,6 +98,8 @@ class EvalDB:
                 sample_id TEXT NOT NULL,
                 model TEXT NOT NULL,
                 prompt_version TEXT NOT NULL,
+                system_prompt TEXT,
+                user_prompt TEXT,
                 output_is_film_review BOOLEAN,
                 output_movie_names TEXT,
                 output_sentiment TEXT,
@@ -130,6 +132,16 @@ class EvalDB:
                 FOREIGN KEY (llm_output_id) REFERENCES llm_outputs(id)
             )
             """)
+
+            # Migration: add new columns to existing tables (safe to run multiple times)
+            try:
+                cursor.execute("ALTER TABLE llm_outputs ADD COLUMN system_prompt TEXT")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
+            try:
+                cursor.execute("ALTER TABLE llm_outputs ADD COLUMN user_prompt TEXT")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
 
             # Create indexes
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_samples_batch_id ON samples(batch_id)")
@@ -285,6 +297,8 @@ def save_llm_output(
     model: str,
     prompt_version: str,
     eval_run_id: str = None,
+    system_prompt: str = None,
+    user_prompt: str = None,
     output_is_film_review: bool = None,
     output_movie_names: str = None,
     output_sentiment: str = None,
@@ -306,6 +320,8 @@ def save_llm_output(
         "sample_id": sample_id,
         "model": model,
         "prompt_version": prompt_version,
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
         "output_is_film_review": output_is_film_review,
         "output_movie_names": output_movie_names,
         "output_sentiment": output_sentiment,
