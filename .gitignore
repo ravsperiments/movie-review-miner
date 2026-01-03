@@ -32,3 +32,10 @@ crawler/debug_*.html
 # Env
 .env
 .env.local
+
+# Claude Code local settings
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Misc
+utput
