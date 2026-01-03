@@ -4,7 +4,6 @@ models:
   - anthropic/claude-haiku-4-5
   - openai/gpt-5-mini
   - openai/gpt-5-nano
-  - google/gemini-2.0-flash
   - groq/qwen/qwen3-32b
   - groq/moonshotai/kimi-k2-instruct-0905
 

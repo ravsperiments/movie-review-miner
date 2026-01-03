@@ -18,6 +18,7 @@ from review_aggregator.eval.db import (
     get_unscored_outputs,
     get_sample,
     save_judge_score,
+    get_eval_db,
 )
 
 logger = get_logger(__name__)
@@ -271,6 +272,193 @@ async def score_outputs(
     }
 
 
+SCORE_FIELDS = [
+    "is_film_review",
+    "movie_names",
+    "sentiment",
+    "cleaned_title",
+    "cleaned_short_review",
+]
+
+
+def get_model_scores(batch_id: str = None) -> dict:
+    """
+    Aggregate judge scores by model.
+
+    Returns:
+        {
+            "models": {
+                "model_name": {
+                    "field_scores": {"is_film_review": 0.85, ...},
+                    "overall_score": 0.82,
+                    "sample_count": 100,
+                },
+                ...
+            },
+            "field_averages": {"is_film_review": 0.80, ...},
+        }
+    """
+    db = get_eval_db()
+
+    # Query: join llm_outputs with judge_scores, grouped by model
+    if batch_id:
+        query = """
+            SELECT
+                lo.model,
+                js.score_is_film_review,
+                js.score_movie_names,
+                js.score_sentiment,
+                js.score_cleaned_title,
+                js.score_cleaned_short_review
+            FROM llm_outputs lo
+            JOIN judge_scores js ON js.llm_output_id = lo.id
+            JOIN samples s ON lo.sample_id = s.id
+            WHERE s.batch_id = ?
+        """
+        rows = db.execute_query(query, (batch_id,), fetch=True)
+    else:
+        query = """
+            SELECT
+                lo.model,
+                js.score_is_film_review,
+                js.score_movie_names,
+                js.score_sentiment,
+                js.score_cleaned_title,
+                js.score_cleaned_short_review
+            FROM llm_outputs lo
+            JOIN judge_scores js ON js.llm_output_id = lo.id
+        """
+        rows = db.execute_query(query, fetch=True)
+
+    if not rows:
+        return {"models": {}, "field_averages": {}}
+
+    # Aggregate by model
+    model_data = {}
+    for row in rows:
+        model = row["model"]
+        if model not in model_data:
+            model_data[model] = {field: [] for field in SCORE_FIELDS}
+
+        for field in SCORE_FIELDS:
+            score = row[f"score_{field}"]
+            if score is not None:
+                model_data[model][field].append(score)
+
+    # Calculate averages per model
+    models = {}
+    for model, field_scores in model_data.items():
+        field_avgs = {}
+        all_scores = []
+        for field in SCORE_FIELDS:
+            scores = field_scores[field]
+            if scores:
+                avg = sum(scores) / len(scores)
+                field_avgs[field] = avg
+                all_scores.extend(scores)
+            else:
+                field_avgs[field] = None
+
+        models[model] = {
+            "field_scores": field_avgs,
+            "overall_score": sum(all_scores) / len(all_scores) if all_scores else None,
+            "sample_count": len(field_scores[SCORE_FIELDS[0]]),
+        }
+
+    # Calculate field averages across all models
+    field_averages = {}
+    for field in SCORE_FIELDS:
+        all_field_scores = []
+        for row in rows:
+            score = row[f"score_{field}"]
+            if score is not None:
+                all_field_scores.append(score)
+        field_averages[field] = sum(all_field_scores) / len(all_field_scores) if all_field_scores else None
+
+    return {
+        "models": models,
+        "field_averages": field_averages,
+    }
+
+
+def print_model_comparison(batch_id: str = None) -> None:
+    """Print a comparison table of model scores."""
+    scores = get_model_scores(batch_id)
+
+    if not scores["models"]:
+        print("No scores found.")
+        return
+
+    # Header
+    print("\n" + "=" * 100)
+    print("MODEL COMPARISON")
+    print("=" * 100)
+
+    # Field headers (shortened)
+    field_labels = {
+        "is_film_review": "is_review",
+        "movie_names": "movies",
+        "sentiment": "sentiment",
+        "cleaned_title": "title",
+        "cleaned_short_review": "summary",
+    }
+
+    # Print header row
+    header = f"{'Model':<45} | "
+    header += " | ".join(f"{field_labels[f]:>8}" for f in SCORE_FIELDS)
+    header += f" | {'Overall':>8} | {'N':>4}"
+    print(header)
+    print("-" * 100)
+
+    # Sort by overall score descending
+    sorted_models = sorted(
+        scores["models"].items(),
+        key=lambda x: x[1]["overall_score"] or 0,
+        reverse=True,
+    )
+
+    # Print each model row
+    for model, data in sorted_models:
+        # Truncate model name if too long
+        model_display = model[:43] + ".." if len(model) > 45 else model
+        row = f"{model_display:<45} | "
+
+        for field in SCORE_FIELDS:
+            val = data["field_scores"].get(field)
+            if val is not None:
+                row += f"{val * 100:>7.1f}% | "
+            else:
+                row += f"{'N/A':>8} | "
+
+        overall = data["overall_score"]
+        if overall is not None:
+            row += f"{overall * 100:>7.1f}% | "
+        else:
+            row += f"{'N/A':>8} | "
+
+        row += f"{data['sample_count']:>4}"
+        print(row)
+
+    # Print field averages
+    print("-" * 100)
+    avg_row = f"{'AVERAGE':<45} | "
+    overall_scores = []
+    for field in SCORE_FIELDS:
+        val = scores["field_averages"].get(field)
+        if val is not None:
+            avg_row += f"{val * 100:>7.1f}% | "
+            overall_scores.append(val)
+        else:
+            avg_row += f"{'N/A':>8} | "
+
+    if overall_scores:
+        avg_row += f"{sum(overall_scores) / len(overall_scores) * 100:>7.1f}% |"
+    else:
+        avg_row += f"{'N/A':>8} |"
+    print(avg_row)
+    print("=" * 100 + "\n")
+
+
 def main():
     """CLI entry point."""
     parser = argparse.ArgumentParser(description="Score LLM outputs with judge panel")
@@ -278,7 +466,24 @@ def main():
     parser.add_argument("--judges", nargs="+", default=["anthropic/claude-sonnet-4-20250514"],
                        help="Judge models (e.g., anthropic/claude-sonnet-4-20250514)")
     parser.add_argument("--concurrency", type=int, default=2, help="Max concurrent judges")
+    parser.add_argument("--scores-only", action="store_true",
+                       help="Only print model comparison (skip judging)")
     args = parser.parse_args()
+
+    # Resolve batch ID
+    if args.batch == "latest":
+        batch = get_latest_batch()
+        if not batch:
+            print("No batches found")
+            return
+        batch_id = batch["id"]
+    else:
+        batch_id = args.batch
+
+    if args.scores_only:
+        # Just print scores without running judge
+        print_model_comparison(batch_id)
+        return
 
     stats = asyncio.run(score_outputs(
         batch_id=args.batch,
@@ -287,6 +492,9 @@ def main():
     ))
 
     print(json.dumps(stats, indent=2))
+
+    # Print model comparison after judging
+    print_model_comparison(batch_id)
 
 
 if __name__ == "__main__":
