@@ -24,32 +24,26 @@ from review_aggregator.eval.db import (
 logger = get_logger(__name__)
 
 
-class FieldScore(BaseModel):
-    """Score for a single field."""
-    score: int = Field(
-        description="Score: 1 for pass/correct, 0 for fail/incorrect"
+class JudgeOutput(BaseModel):
+    """Judge's evaluation of an LLM output. All scores are 0 or 1."""
+    score_is_film_review: int = Field(
+        description="1 if is_film_review classification is correct, 0 if incorrect"
+    )
+    score_movie_names: int = Field(
+        description="1 if movie_names extraction is correct, 0 if incorrect"
+    )
+    score_sentiment: int = Field(
+        description="1 if sentiment classification is correct, 0 if incorrect"
+    )
+    score_cleaned_title: int = Field(
+        description="1 if cleaned_title is good quality, 0 if poor quality"
+    )
+    score_cleaned_short_review: int = Field(
+        description="1 if cleaned_short_review is good quality, 0 if poor quality"
     )
     reasoning: str = Field(
-        description="Brief explanation for the score (1-2 sentences)"
-    )
-
-
-class JudgeOutput(BaseModel):
-    """Judge's evaluation of an LLM output."""
-    score_is_film_review: FieldScore = Field(
-        description="Judgment on is_film_review classification correctness"
-    )
-    score_movie_names: FieldScore = Field(
-        description="Judgment on movie_names extraction quality"
-    )
-    score_sentiment: FieldScore = Field(
-        description="Judgment on sentiment classification correctness"
-    )
-    score_cleaned_title: FieldScore = Field(
-        description="Judgment on cleaned_title quality and accuracy"
-    )
-    score_cleaned_short_review: FieldScore = Field(
-        description="Judgment on cleaned_short_review quality and accuracy"
+        default="",
+        description="Brief explanation for the scores"
     )
 
 
@@ -241,22 +235,16 @@ async def score_outputs(
             success_count += 1
             scores = result["scores"]
 
-            # Extract scores
+            # Extract scores (now flat integers)
             save_judge_score(
                 llm_output_id=result["llm_output_id"],
                 judge_model=result["judge_model"],
-                score_is_film_review=scores.score_is_film_review.score,
-                score_movie_names=scores.score_movie_names.score,
-                score_sentiment=scores.score_sentiment.score,
-                score_cleaned_title=scores.score_cleaned_title.score,
-                score_cleaned_short_review=scores.score_cleaned_short_review.score,
-                reasoning=json.dumps({
-                    "is_film_review": scores.score_is_film_review.reasoning,
-                    "movie_names": scores.score_movie_names.reasoning,
-                    "sentiment": scores.score_sentiment.reasoning,
-                    "cleaned_title": scores.score_cleaned_title.reasoning,
-                    "cleaned_short_review": scores.score_cleaned_short_review.reasoning,
-                }),
+                score_is_film_review=scores.score_is_film_review,
+                score_movie_names=scores.score_movie_names,
+                score_sentiment=scores.score_sentiment,
+                score_cleaned_title=scores.score_cleaned_title,
+                score_cleaned_short_review=scores.score_cleaned_short_review,
+                reasoning=scores.reasoning,
             )
 
     logger.info(f"Scoring complete: {success_count} successes, {error_count} errors")
