@@ -140,36 +140,48 @@ If title is missing or just a date, generate a descriptive title from the conten
 
 ## 5. Summary Cleaning (max 280 chars)
 
-**Preserve vs Edit:**
-- If the original summary is already clean and substantive, return it AS-IS
-- Only edit if it contains: boilerplate, links, truncation artifacts, or is too brief
-- Do NOT rewrite a good summary just to make it different
+**CRITICAL: Preserve BR's Original Words**
+- ABSOLUTELY DO NOT edit the summary if it already makes sense and describes the film
+- Preserve Baradwaj Rangan's original writing as much as possible
+- Return the original summary AS-IS in most cases
 
-**Voice and Perspective:**
+**Only edit/generate a summary if:**
+- The summary is completely MISSING or empty
+- It's pure boilerplate: "Read more...", "Continue reading...", copyright notices
+- It contains only links (YouTube, website URLs)
+- It doesn't describe the movie AT ALL (e.g., just a date or generic text)
+- It's truncated mid-sentence in a way that makes no sense
+
+**DO NOT edit if:**
+- The summary describes the film's plot, characters, or quality - even imperfectly
+- It contains BR's opinions or assessment - preserve his voice
+- It's slightly informal or has minor issues - keep it authentic
+
+**Voice and Perspective (only when generating new summary):**
 - Write from BR's perspective (his opinions, his assessment of the film)
 - Do NOT use first-person pronouns: "I", "me", "my", "we", "our"
 - Use impersonal constructions: "The film works because...", "There's a sense of..."
 - Convey BR's opinion without explicit attribution
 
-**Remove (only if present):**
+**Things to remove (only if they ARE the entire summary):**
 - "Read more...", "Continue reading...", "The rest of this review may contain spoilers"
 - "Copyright ©2025 GALATTA" or similar boilerplate
 - "You can read the rest of the review here:"
-- Attribution like "BR says" or "Baradwaj Rangan writes"
-- First-person pronouns ("I loved...", "I felt...", "My only complaint...")
+- YouTube links, website URLs
+- Just a date or timestamp
 
-**Good Summary Examples:**
+**Good Summary Examples (preserve these as-is):**
 - "Metro… In Dino: The film is about a number of characters in relationship conflicts. Some treated seriously, some comically, and there's definitely a vision – but no emotional connection."
 - "3BHK: Shiva, Grace Antony, and Mithul Ryan play an urban family that learns to fly away. The sweet, gentle, musical feel makes even the feel-bad moments seem like a feel-good experience."
 - "Parandu Po: The readily identifiable story is about moving out of rented houses and buying a home. Despite many issues, the director ensures the film is an easy, pleasant watch."
 
-**Bad Summary Examples:**
-- "A good film. Recommended." (too brief, no substance)
-- "Baradwaj Rangan reviews this movie and finds it interesting." (third-person attribution)
-- "I loved this film and think everyone should watch it." (first-person pronouns)
-- "Read the full review to find out more..." (boilerplate)
+**Bad Summaries (these need replacement):**
+- "" (empty - generate from content)
+- "Read the full review to find out more..." (boilerplate - generate from content)
+- "https://youtube.com/watch?v=..." (just a link - generate from content)
+- "January 15, 2024" (just a date - generate from content)
 
-If summary is missing or inadequate, generate from full review content.
+Generate from full review content ONLY if the summary falls into the "bad" category above.
 
 ---
 
@@ -182,11 +194,11 @@ If summary is missing or inadequate, generate from full review content.
 4. Appropriate length - not too verbose (>100 words) or too brief (<5 words)
 
 **Summary must be:**
-1. Substantive - provides plot context + assessment
-2. Clean - no boilerplate, links, or attribution
-3. Impersonal voice - no "I/me/my/we" and no "BR says" or "Baradwaj Rangan writes"
+1. PRESERVED - return original summary unless it's empty/boilerplate/links-only
+2. Substantive - if generating, provide plot context + assessment
+3. Impersonal voice - if generating, no "I/me/my/we" and no "BR says"
 4. Under 280 characters
-5. No explicit "recommended" or "not recommended"
+5. Authentic - preserve BR's original words whenever possible
 
 ---
 
@@ -194,9 +206,10 @@ If summary is missing or inadequate, generate from full review content.
 1. If post is by anyone other than BR, mark is_film_review: false
 2. If post is interview, reader submission, or announcement, mark is_film_review: false
 3. If post covers multiple films in depth, mark is_film_review: false
-4. Clean existing content before generating new content
-5. Never include third-person attribution ("BR says", "Baradwaj Rangan writes")
-6. Use specific film names, never generic phrases like "this movie"
+4. PRESERVE original summary if it describes the film - do NOT rewrite BR's words
+5. Only generate new summary if original is empty, boilerplate, or links-only
+6. Never include third-person attribution ("BR says", "Baradwaj Rangan writes")
+7. Use specific film names, never generic phrases like "this movie"
 
 ---
 
