@@ -145,11 +145,18 @@ If title is missing or just a date, generate a descriptive title from the conten
 - Only edit if it contains: boilerplate, links, truncation artifacts, or is too brief
 - Do NOT rewrite a good summary just to make it different
 
+**Voice and Perspective:**
+- Write from BR's perspective (his opinions, his assessment of the film)
+- Do NOT use first-person pronouns: "I", "me", "my", "we", "our"
+- Use impersonal constructions: "The film works because...", "There's a sense of..."
+- Convey BR's opinion without explicit attribution
+
 **Remove (only if present):**
 - "Read more...", "Continue reading...", "The rest of this review may contain spoilers"
 - "Copyright ©2025 GALATTA" or similar boilerplate
 - "You can read the rest of the review here:"
 - Attribution like "BR says" or "Baradwaj Rangan writes"
+- First-person pronouns ("I loved...", "I felt...", "My only complaint...")
 
 **Good Summary Examples:**
 - "Metro… In Dino: The film is about a number of characters in relationship conflicts. Some treated seriously, some comically, and there's definitely a vision – but no emotional connection."
@@ -158,7 +165,8 @@ If title is missing or just a date, generate a descriptive title from the conten
 
 **Bad Summary Examples:**
 - "A good film. Recommended." (too brief, no substance)
-- "Baradwaj Rangan reviews this movie and finds it interesting." (third-person, generic)
+- "Baradwaj Rangan reviews this movie and finds it interesting." (third-person attribution)
+- "I loved this film and think everyone should watch it." (first-person pronouns)
 - "Read the full review to find out more..." (boilerplate)
 
 If summary is missing or inadequate, generate from full review content.
@@ -176,7 +184,7 @@ If summary is missing or inadequate, generate from full review content.
 **Summary must be:**
 1. Substantive - provides plot context + assessment
 2. Clean - no boilerplate, links, or attribution
-3. First-person perspective - never "BR says" or "Baradwaj Rangan writes"
+3. Impersonal voice - no "I/me/my/we" and no "BR says" or "Baradwaj Rangan writes"
 4. Under 280 characters
 5. No explicit "recommended" or "not recommended"
 
