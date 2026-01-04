@@ -71,7 +71,9 @@ class DBViewHandler(BaseHTTPRequestHandler):
                 return
             conn = sqlite3.connect(str(db_path))
             cursor = conn.cursor()
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+            cursor.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"
+            )
             tables = []
             for (name,) in cursor.fetchall():
                 cursor.execute(f"SELECT COUNT(*) FROM [{name}];")
@@ -95,6 +97,7 @@ class DBViewHandler(BaseHTTPRequestHandler):
             # Get columns
             cursor.execute(f"PRAGMA table_info([{table_name}]);")
             columns = []
+            column_names = []
             for col_id, name, type_, notnull, dflt_value, pk in cursor.fetchall():
                 flags = []
                 if pk:
@@ -102,25 +105,37 @@ class DBViewHandler(BaseHTTPRequestHandler):
                 if notnull:
                     flags.append("NOT NULL")
                 columns.append({"name": name, "type": type_, "flags": " ".join(flags)})
+                column_names.append(name)
+
+            # Determine sort column (prefer date columns)
+            sort_clause = ""
+            for date_col in ["created_at", "created_date", "updated_at"]:
+                if date_col in column_names:
+                    sort_clause = f"ORDER BY [{date_col}] DESC"
+                    break
 
             # Get total count
             cursor.execute(f"SELECT COUNT(*) FROM [{table_name}];")
             total = cursor.fetchone()[0]
 
-            # Get paginated rows
+            # Get paginated rows (sorted by date desc if available)
             offset = (page - 1) * limit
-            cursor.execute(f"SELECT * FROM [{table_name}] LIMIT ? OFFSET ?;", (limit, offset))
+            cursor.execute(
+                f"SELECT * FROM [{table_name}] {sort_clause} LIMIT ? OFFSET ?;", (limit, offset)
+            )
             rows = cursor.fetchall()
             conn.close()
 
-            self.send_json({
-                "columns": columns,
-                "rows": rows,
-                "total": total,
-                "page": page,
-                "limit": limit,
-                "totalPages": (total + limit - 1) // limit if total > 0 else 1
-            })
+            self.send_json(
+                {
+                    "columns": columns,
+                    "rows": rows,
+                    "total": total,
+                    "page": page,
+                    "limit": limit,
+                    "totalPages": (total + limit - 1) // limit if total > 0 else 1,
+                }
+            )
         except Exception as e:
             self.send_json({"error": str(e)}, 500)
 
@@ -135,21 +150,37 @@ class DBViewHandler(BaseHTTPRequestHandler):
             cursor = conn.cursor()
 
             cursor.execute(f"PRAGMA table_info([{table_name}]);")
-            columns = [row[1] for row in cursor.fetchall()]
+            col_info = cursor.fetchall()
+            columns = [row[1] for row in col_info]
 
-            cursor.execute(f"SELECT * FROM [{table_name}];")
+            # Determine sort column (prefer date columns)
+            sort_clause = ""
+            for date_col in ["created_at", "created_date", "updated_at"]:
+                if date_col in columns:
+                    sort_clause = f"ORDER BY [{date_col}] DESC"
+                    break
+
+            cursor.execute(f"SELECT * FROM [{table_name}] {sort_clause};")
             rows = cursor.fetchall()
             conn.close()
 
             output = io.StringIO()
-            output.write(','.join(f'"{col}"' for col in columns) + '\n')
+            output.write(",".join(f'"{col}"' for col in columns) + "\n")
             for row in rows:
-                output.write(','.join(f'"{str(cell or "").replace(chr(34), chr(34)+chr(34))}"' for cell in row) + '\n')
+                output.write(
+                    ",".join(
+                        f'"{str(cell or "").replace(chr(34), chr(34) + chr(34))}"'
+                        for cell in row
+                    )
+                    + "\n"
+                )
 
             csv_data = output.getvalue().encode()
             self.send_response(200)
             self.send_header("Content-type", "text/csv")
-            self.send_header("Content-Disposition", f'attachment; filename="{table_name}.csv"')
+            self.send_header(
+                "Content-Disposition", f'attachment; filename="{table_name}.csv"'
+            )
             self.send_header("Content-Length", str(len(csv_data)))
             self.end_headers()
             self.wfile.write(csv_data)
@@ -452,6 +483,7 @@ class DBViewHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     import socket
+
     port = 8000
     while port < 8010:
         try:
